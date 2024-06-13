@@ -290,7 +290,7 @@ void Design::AdminLogin(int cursor)
             H::setcolor(7);H::cls();
             break;
         }
-        if(strcmpi(AdminUsername,"Cyber")!=0 && strcmpi(AdminPassword,"168")!=0)
+        if(strcmpi(AdminUsername,"Cyber")!=0 || strcmpi(AdminPassword,"168")!=0)
         {
             H::setcolor(140);
             H::gotoxy(x+22,y+23);cout<<"Incorrect Username or Password";
