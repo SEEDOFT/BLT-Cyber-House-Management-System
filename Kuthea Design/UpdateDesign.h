@@ -43,21 +43,13 @@ void UpdateDesign::updateDesign(){
     H::gotoxy(40,20); H::foreColor(3); cout<<"ID\t\t\t Name \t\t\t QTY \t\t\t      Price";
     H::HLine(30,21,100,7,196);
     H::gotoxy(40,22); H::foreColor(3); cout<<"1\t\t\t Thea \t\t\t 5 \t\t\t      1200";
-       for(int i=0; i<7; i++){
-        H::VLine(70,24,3,i+1,221); H::delay(100);
-        H::VLine(90,24,3,i+1,221); H::delay(100);
-    }
-    H::drawBoxSingleLineWithBG(65,28,28,1,4);
-    H::foreColor(199); H::gotoxy(75,29); cout<<"New DATA";
-    for(int i=0; i<9; i++){
-        H::VLine(35,24,i+1,i+1,221); H::delay(100);
-        H::VLine(125,24,i+1,i+1,221); H::delay(100);
-    }
-    H::drawBoxDoubleLine(20,33,120,4,3);
-    H::gotoxy(40,34); H::foreColor(3); cout<<"ID\t\t\t Name \t\t\t QTY \t\t\t      Price";
-    H::HLine(30,35,100,7,196);
-    H::gotoxy(40,36); H::foreColor(3); cout<<"New\t\t\t New \t\t\t New \t\t\t      New";
-
 }
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-#endif
+
+int main(){
+    system("mode con cols=160 lines=40");
+    H::setFont(20,700); 
+    UpdateDesign::updateAscii();
+    UpdateDesign::updateDesign();
+    H::gotoxy(1,1000);
+    getch();
+}
