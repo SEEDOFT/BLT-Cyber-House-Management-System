@@ -1,21 +1,20 @@
 #ifndef _________DesignConsole____________
 #define _________DesignConsole____________
-#include<iostream>
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #include"../ANT_Header/HinsyOOPV2"
-using namespace std;
 using namespace HinsyOOP;
-
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 class Design{
     private:
-        static const int x = 10;
-        static const int y = 5;
-    public:
+        static int x;
+        static int y;
+    protected:
     //////////////////////////////////////////////////////////////
     //BOTH Design
         static void tp(int colorCode,int width,int height);
         static void InterfaceDesign();
         static void sub_interface();//clear box and animation to LOG IN Interface
-        static void sub_interface2(int i);//Font
+        static void interfaceTxt(int i);//Font
         
     //////////////////////////////////////////////////////////////
         static void AdminLogin(int cursor);//Admin account
@@ -31,12 +30,15 @@ class Design{
 
 };
 ////////////////////////////////////////////////////////////////////////////////////////
+int Design::x = 10;
+int Design::y = 5;
+
 void Design::tp(int colorCode, int width, int height)
 {
     H::setcolor(colorCode);H::gotoxy(width,height);
 }
 ////////////////////////////////////////////////////////////////////////////////////////
-void Design::sub_interface2(int i)
+void Design::interfaceTxt(int i)
 {
     int both = 7, thea = 4, leng = 1, cyber = 3;
 
@@ -61,7 +63,7 @@ void Design::InterfaceDesign()
     H::setConsoleTitle(TEXT("BLT Cyber House Management System"));
     H::setcursor(0,0);
 //BLUE LEFT BOX
-    H::drawBoxSingleLineWithBG(x+5,y-1,28,30,153);
+    // H::drawBoxSingleLineWithBG(x+5,y-1,28,30,153);
 //Info
     H::setcolor(151);
     H::gotoxy(x+6,y);cout<<"Welcome to our";
@@ -82,9 +84,7 @@ void Design::InterfaceDesign()
     H::gotoxy(x+6,y+29);cout<<"+Google Map: ";
     H::gotoxy(x+6,y+30);cout<<"www.map.google.com";
 
-/////////////////////////////////////////////////
-    sub_interface2(0);//apply text
-   
+////////////////////////////////////////////////
     int monitor = 3, Case = 2, keyboard = 4, wire = 8;
 
     tp(monitor,x+49,y+12);cout<<R"(  ___ )";H::setcolor(Case);cout<<R"(  _   )";H::setcolor(monitor);cout<<R"(   ___ )";H::setcolor(Case);cout<<R"(  _  )";H::setcolor(monitor);cout<<R"(    ___ )";H::setcolor(Case);cout<<R"(  _  )";H::setcolor(monitor);cout<<R"(    ___ )";H::setcolor(Case);cout<<R"(  _  )";H::setcolor(monitor);cout<<R"(    ___  )";H::setcolor(Case);cout<<R"( _  )";
@@ -198,11 +198,6 @@ void Design::InterfaceDesign()
         }
         
     }
-    
-    ////////////////
-    sub_interface();
-    ////////////////
-
     H::setcolor(7);
 
 }
@@ -419,15 +414,6 @@ void Design::choiceBoxes()
         }
 
     }while(press != 13);
-
-    if(num == 1 )
-    {
-        AdminLogin(1);
-    }
-    if(num == 2)
-    {
-        
-    }
 
     H::setcolor(7);
 }
