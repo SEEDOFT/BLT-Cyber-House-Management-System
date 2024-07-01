@@ -3,7 +3,7 @@
 
 #include<iostream>
 #include<conio.h>
-#include "HinsyOOPV2"
+#include "../ANT_Header/HinsyOOPV2"
 
 using namespace std;
 using namespace HinsyOOP;
@@ -85,7 +85,7 @@ void Menu::header(){
             case 75:
                 y--;
                 if(y<1){
-                    y=6;
+                    y=5;
                 }
                 break;
             case 77:
@@ -100,14 +100,14 @@ void Menu::header(){
 }
 
 void Menu::ascii(){
-    H::foreColor(4); H::gotoxy(43,1); cout<<R"(___________               .___    _____                       )";
-    H::foreColor(4); H::gotoxy(43,2); cout<<R"(\_   _____/___   ____   __| _/   /     \   ____   ____  __ __ )";
-    H::foreColor(4); H::gotoxy(43,3); cout<<R"( |    __)/  _ \ /  _ \ / __ |   /  \ /  \_/ __ \ /    \|  |  \)";
-    H::foreColor(2); H::gotoxy(43,4); cout<<R"( |     \(  <_> |  <_> ) /_/ |  /    Y    \  ___/|   |  \  |  /)";
-    H::foreColor(2); H::gotoxy(43,5); cout<<R"( \___  / \____/ \____/\____ |  \____|__  /\___  >___|  /____/ )";
-    H::foreColor(2); H::gotoxy(43,6); cout<<R"(     \/                    \/          \/     \/     \/       )";
+    H::foreColor(3); H::gotoxy(43,1); cout<<R"(___________               .___    _____                       )";
+    H::foreColor(3); H::gotoxy(43,2); cout<<R"(\_   _____/___   ____   __| _/   /     \   ____   ____  __ __ )";
+    H::foreColor(3); H::gotoxy(43,3); cout<<R"( |    __)/  _ \ /  _ \ / __ |   /  \ /  \_/ __ \ /    \|  |  \)";
+    H::foreColor(4); H::gotoxy(43,4); cout<<R"( |     \(  <_> |  <_> ) /_/ |  /    Y    \  ___/|   |  \  |  /)";
+    H::foreColor(4); H::gotoxy(43,5); cout<<R"( \___  / \____/ \____/\____ |  \____|__  /\___  >___|  /____/ )";
+    H::foreColor(4); H::gotoxy(43,6); cout<<R"(     \/                    \/          \/     \/     \/       )";
 
-    H::HLine(40,8,70,4,178);
+    H::HLine(40,8,70,7,178);
 }
 
 

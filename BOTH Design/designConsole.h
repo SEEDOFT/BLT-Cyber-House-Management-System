@@ -1,7 +1,7 @@
 #ifndef _________DesignConsole____________
 #define _________DesignConsole____________
 #include<iostream>
-#include"HinsyOOPV2"
+#include"../ANT_Header/HinsyOOPV2"
 using namespace std;
 using namespace HinsyOOP;
 
@@ -58,7 +58,7 @@ void Design::InterfaceDesign()
 {
     //Available middle space : 120 spaces
     //Space around computer Lab : w = 62, h = 11
-    H::setConsoleTitle("BLT Cyber House Management System");
+    H::setConsoleTitle(TEXT("BLT Cyber House Management System"));
     H::setcursor(0,0);
 //BLUE LEFT BOX
     H::drawBoxSingleLineWithBG(x+5,y-1,28,30,153);
@@ -326,7 +326,7 @@ void Design::AdminLogin(int cursor)
 ////////////////////////////////////////////////////////////////////////////////////////
 void Design::login_design()
 {
-    H::setConsoleTitle("LOG IN PANEL");
+    H::setConsoleTitle(TEXT("LOG IN PANEL"));
 
     H::drawBoxSingleLineWithBG(x+12, y+1, 114, 25, 145);
     H::drawBoxSingleLineWithBG(x+14, y+2, 50, 23, 136);
@@ -461,7 +461,7 @@ void Design::sub_loginDesign(int choice)
 ////////////////////////////////////////////////////////////////////////////////////////
 void Design::AdminMenuDesign()
 {
-    H::setConsoleTitle("ADMIN MENU");
+    H::setConsoleTitle(TEXT("ADMIN MENU"));
 
     int lineColor = 4; 
     H::setcursor(0,0);
