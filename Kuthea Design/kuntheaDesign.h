@@ -17,11 +17,11 @@ class Kunthea
 };
 void Kunthea::Main()
 {
-    UpdateDesign::updateAscii();
-    UpdateDesign::updateDesign();
+    // UpdateDesign::updateAscii();
+    // UpdateDesign::updateDesign();
 
-    // SearchDesign::searchAscii();
-    // SearchDesign::searchDesign();
+    SearchDesign::searchAscii();
+    SearchDesign::searchDesign();
 
     // InputDesign::Design();
 

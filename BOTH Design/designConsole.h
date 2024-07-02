@@ -5,23 +5,18 @@
 using namespace HinsyOOP;
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 class Design{
-    private:
+    protected:
         static int x;
         static int y;
-    protected:
-    //////////////////////////////////////////////////////////////
+    public:
     //BOTH Design
         static void tp(int colorCode,int width,int height);
-        static void InterfaceDesign();
-        static void sub_interface();//clear box and animation to LOG IN Interface
-        static void interfaceTxt(int i);//Font
+        static void interface_design();
         
     //////////////////////////////////////////////////////////////
-        static void AdminLogin(int cursor);//Admin account
-        static void choiceBoxes();//Admin and User
-    //Bun Leng
+        static void loginAs_Admin_User();//Admin and User
         static void login_design();
-        static void sub_loginDesign(int choice);//user and Admin
+        static void loginAs_Admin_UserTxt(int choice);//user and Admin
     ///////////////////////////////////////////////////////////////
         static void AdminMenuDesign();
         static void sub_Admin();
@@ -29,296 +24,28 @@ class Design{
         static void UserMenuDesign();
 
 };
-////////////////////////////////////////////////////////////////////////////////////////
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 int Design::x = 10;
 int Design::y = 5;
-
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Design::tp(int colorCode, int width, int height)
 {
     H::setcolor(colorCode);H::gotoxy(width,height);
 }
-////////////////////////////////////////////////////////////////////////////////////////
-void Design::interfaceTxt(int i)
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void Design::interface_design()
 {
-    int both = 7, thea = 4, leng = 1, cyber = 3;
-
-    tp(both,x+43-i,y-2);cout<<R"( ____ )";H::setcolor(leng);cout<<R"( __  )";H::setcolor(thea);cout<<R"( ____ )";H::setcolor(cyber);cout<<R"(    ___  _  _  ____  ____  ____   )";H::setcolor(6);cout<<R"( _   _  _____  __  __  ___  ____ )";
-    tp(both,x+43-i,y-1);cout<<R"((  _ \)";H::setcolor(leng);cout<<R"((  ) )";H::setcolor(thea);cout<<R"((_  _))";H::setcolor(cyber);cout<<R"(   / __)( \/ )(  _ \( ___)(  _ \  )";H::setcolor(6);cout<<R"(( )_( )(  _  )(  )(  )/ __)( ___))";H::clearBox(x+128-i,y-1,1,1,7);
-    tp(both,x+43-i,y  );cout<<R"( ) _ <)";H::setcolor(leng);cout<<R"( )(__ )";H::setcolor(thea);cout<<R"( )(  )";H::setcolor(cyber);cout<<R"(  ( (__  \  /  ) _ < )__)  )   /  )";H::setcolor(6);cout<<R"( ) _ (  )(_)(  )(__)( \__ \ )__) )";H::clearBox(x+128-i,y,1,1,7);
-    tp(both,x+43-i,y+1);cout<<R"((____/)";H::setcolor(leng);cout<<R"((____))";H::setcolor(thea);cout<<R"((__) )";H::setcolor(cyber);cout<<R"(   \___) (__) (____/(____)(_)\_)  )";H::setcolor(6);cout<<R"((_) (_)(_____)(______)(___/(____))";H::clearBox(x+128-i,y+1,1,1,7);
-
-    tp(3,x+36-i,y+3);cout<<R"( _  _   __   __ _   __    ___  ____  _  _  ____  __ _  ____    ____  _  _  ____  ____  ____  _  _ )";H::clearBox(x+135-i,y+3,1,1,7);
-    tp(3,x+36-i,y+4);cout<<R"(( \/ ) / _\ (  ( \ / _\  / __)(  __)( \/ )(  __)(  ( \(_  _)  / ___)( \/ )/ ___)(_  _)(  __)( \/ ))";H::clearBox(x+135-i,y+4,i,1,7);
-    tp(3,x+36-i,y+5);cout<<R"(/ \/ \/    \/    //    \( (_ \ ) _) / \/ \ ) _) /    /  )(    \___ \ )  / \___ \  )(   ) _) / \/ \)";H::clearBox(x+135-i,y+5,i,1,7);
-    tp(3,x+36-i,y+6);cout<<R"(\_)(_/\_/\_/\_)__)\_/\_/ \___/(____)\_)(_/(____)\_)__) (__)   (____/(__/  (____/ (__) (____)\_)(_/)";H::clearBox(x+135-i,y+6,i,1,7);
-
-    H::setcolor(7);
-}
-////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////
-void Design::InterfaceDesign()
-{
-    //Available middle space : 120 spaces
-    //Space around computer Lab : w = 62, h = 11
     H::setConsoleTitle(TEXT("BLT Cyber House Management System"));
     H::setcursor(0,0);
-//BLUE LEFT BOX
-    // H::drawBoxSingleLineWithBG(x+5,y-1,28,30,153);
-//Info
-    H::setcolor(151);
-    H::gotoxy(x+6,y);cout<<"Welcome to our";
-    H::gotoxy(x+6,y+1);cout<<"internet cafe";
-    H::gotoxy(x+6,y+2);cout<<"...BLT Cyber House...";
-    H::gotoxy(x+6,y+3);cout<<"We open from";
-    H::gotoxy(x+6,y+4);cout<<"07:00 am to 10:00 pm";
-
-    H::gotoxy(x+6,y+20);cout<<"Contact us by: ";
-    H::gotoxy(x+6,y+21);cout<<"+Phone number:";
-    H::gotoxy(x+6,y+22);cout<<"+855 10 878 743";
-    H::gotoxy(x+6,y+23);cout<<"+Email:";
-    H::gotoxy(x+6,y+24);cout<<"bltcyber@yahoo.com";
-    H::gotoxy(x+6,y+25);cout<<"+Facebook:";
-    H::gotoxy(x+6,y+26);cout<<"BLT Cyber House";
-    H::gotoxy(x+6,y+27);cout<<"+Instagram:";
-    H::gotoxy(x+6,y+28);cout<<"BLT Cyber House";
-    H::gotoxy(x+6,y+29);cout<<"+Google Map: ";
-    H::gotoxy(x+6,y+30);cout<<"www.map.google.com";
-
-////////////////////////////////////////////////
-    int monitor = 3, Case = 2, keyboard = 4, wire = 8;
-
-    tp(monitor,x+49,y+12);cout<<R"(  ___ )";H::setcolor(Case);cout<<R"(  _   )";H::setcolor(monitor);cout<<R"(   ___ )";H::setcolor(Case);cout<<R"(  _  )";H::setcolor(monitor);cout<<R"(    ___ )";H::setcolor(Case);cout<<R"(  _  )";H::setcolor(monitor);cout<<R"(    ___ )";H::setcolor(Case);cout<<R"(  _  )";H::setcolor(monitor);cout<<R"(    ___  )";H::setcolor(Case);cout<<R"( _  )";
-    tp(monitor,x+49,y+13);cout<<R"( [(_)])";H::setcolor(Case);cout<<R"( |=|  )";H::setcolor(monitor);cout<<R"(  [(_)])";H::setcolor(Case);cout<<R"( |=| )";H::setcolor(monitor);cout<<R"(   [(_)])";H::setcolor(Case);cout<<R"( |=| )";H::setcolor(monitor);cout<<R"(   [(_)])";H::setcolor(Case);cout<<R"( |=| )";H::setcolor(monitor);cout<<R"(   [(_)] )";H::setcolor(Case);cout<<R"(|=|  )";
-    tp(monitor,x+49,y+14);cout<<R"(  '-` )";H::setcolor(Case);cout<<R"( |_|  )";H::setcolor(monitor);cout<<R"(   '-` )";H::setcolor(Case);cout<<R"( |_| )";H::setcolor(monitor);cout<<R"(    '-` )";H::setcolor(Case);cout<<R"( |_| )";H::setcolor(monitor);cout<<R"(    '-` )";H::setcolor(Case);cout<<R"( |_| )";H::setcolor(monitor);cout<<R"(    '-`  )";H::setcolor(Case);cout<<R"(|_| )";
-    tp(keyboard,x+49,y+15);cout<<R"( /mmm/)";H::setcolor(wire);cout<<R"(  /   )";H::setcolor(keyboard);cout<<R"(  /mmm/)";H::setcolor(wire);cout<<R"(  /  )";H::setcolor(keyboard);cout<<R"(   /mmm/)";H::setcolor(wire);cout<<R"(  /  )";H::setcolor(keyboard);cout<<R"(   /mmm/)";H::setcolor(wire);cout<<R"(  /  )";H::setcolor(keyboard);cout<<R"(   /mmm/ )";H::setcolor(wire);cout<<R"( /  )";
-    tp(wire,x+49,y+16);cout<<R"(       |____________|____________|____________|____________|   )";
-    tp(wire,x+49,y+17);cout<<R"(                             |            |            |       )";
-    tp(wire,x+49,y+18);cout<<R"(                             \            \            \     )";
-    tp(monitor,x+49,y+19);cout<<R"(                         ___ )";H::setcolor(Case);cout<<R"(  _   )";H::setcolor(monitor);cout<<R"(   ___ )";H::setcolor(Case);cout<<R"(  _  )";H::setcolor(monitor);cout<<R"(    ___ )";H::setcolor(Case);cout<<R"(  _   )";
-    tp(monitor,x+49,y+20);cout<<R"(                        [(_)])";H::setcolor(Case);cout<<R"( |=|  )";H::setcolor(monitor);cout<<R"(  [(_)])";H::setcolor(Case);cout<<R"( |=| )";H::setcolor(monitor);cout<<R"(   [(_)])";H::setcolor(Case);cout<<R"( |=|    )";
-    tp(monitor,x+49,y+21);cout<<R"(                         '-` )";H::setcolor(Case);cout<<R"( |_|  )";H::setcolor(monitor);cout<<R"(   '-` )";H::setcolor(Case);cout<<R"( |_| )";H::setcolor(monitor);cout<<R"(    '-` )";H::setcolor(Case);cout<<R"( |_|    )";
-    tp(keyboard,x+49,y+22);cout<<R"(                        /mmm/)";H::setcolor(keyboard);cout<<R"(      )";H::setcolor(keyboard);cout<<R"(  /mmm/)";H::setcolor(keyboard);cout<<R"(     )";H::setcolor(keyboard);cout<<R"(   /mmm/)";H::setcolor(keyboard);cout<<R"(        )";
-//////////////////////////////////////
-    int asciiChar = 219, asciiColorOne = 4, asciiColorTwo = 7, asciiColorThree = 9;
-    int d_time = 1;
-//////////////////////////////////////
-
-    //left line one
-    tp(asciiColorOne,x-8,y-5);cout<<char(201)<<char(205);
-    H::VLine(x-7,y-5,38,asciiColorOne,186);
-    tp(asciiColorOne,x-8,y+34);cout<<char(200)<<char(205);
-    //left line two
-    tp(asciiColorTwo,x-4,y-4);cout<<char(201)<<char(205);
-    H::VLine(x-3,y-4,37,asciiColorTwo,186);
-    tp(asciiColorTwo,x-4,y+33);cout<<char(200)<<char(205);
-    //left line three
-    tp(asciiColorThree,x,y-3);cout<<char(201)<<char(205);
-    H::VLine(x+1,y-3,36,asciiColorThree,186);
-    tp(asciiColorThree,x,y+32);cout<<char(200)<<char(205);
-
-    //right line one
-    tp(asciiColorOne,x+146,y-5);cout<<char(205)<<char(187);
-    H::VLine(x+148,y-5,38,asciiColorOne,186);
-    tp(asciiColorOne,x+146,y+34);cout<<char(205)<<char(188);
-    //right line two
-    tp(asciiColorTwo,x+142,y-4);cout<<char(205)<<char(187);
-    H::VLine(x+144,y-4,37,asciiColorTwo,186);
-    tp(asciiColorTwo,x+142,y+33);cout<<char(205)<<char(188);
-    //right line three
-    tp(asciiColorThree,x+138,y-3);cout<<char(205)<<char(187);
-    H::VLine(x+140,y-3,36,asciiColorThree,186);
-    tp(asciiColorThree,x+138,y+32);cout<<char(205)<<char(188);
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    //middle meet ascii line (top)
-    //Line three (left top)
-    H::HLine(x+49,y-3,12,asciiColorThree,205);cout<<char(188);
-    //Line two                                                                                          //symbol and color
-    H::HLine(x+45,y-4,16,asciiColorTwo,205);cout<<char(206);H::HLine(x+62,y-4,6,asciiColorTwo,205);H::setcolor(4);cout<<" \4\4"; 
-    //Line one
-    H::HLine(x+41,y-5,20,asciiColorOne,205);cout<<char(187);
-
-    //Line three (right top)
-    tp(asciiColorThree,x+78,y-3);cout<<char(200);H::HLine(x+79,y-3,12,asciiColorThree,205);
-    //Line two
-    H::HLine(x+72,y-4,6,asciiColorTwo,205);tp(asciiColorTwo,x+78,y-4);cout<<char(206);H::HLine(x+79,y-4,20,asciiColorTwo,205);
-    //Line one
-    tp(asciiColorOne,x+78,y-5);cout<<char(201);H::HLine(x+79,y-5,24,asciiColorOne,205);
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    //middle meet ascii line (buttom)
-    //Line three (left buttom)
-    H::HLine(x+49,y+32,12,asciiColorThree,205);cout<<char(187);
-    //Line two                                                                                          //symbol and color
-    H::HLine(x+45,y+33,16,asciiColorTwo,205);cout<<char(206);H::HLine(x+62,y+33,6,asciiColorTwo,205);H::setcolor(4);cout<<" \4\4"; 
-    //Line two
-    H::HLine(x+41,y+34,20,asciiColorOne,205);cout<<char(188);
-    //Line three (right buttom)
-    tp(asciiColorThree,x+78,y+32);cout<<char(201);H::HLine(x+79,y+32,12,asciiColorThree,205);
-    //Line two
-    H::HLine(x+72,y+33,6,asciiColorTwo,205);tp(asciiColorTwo,x+78,y+33);cout<<char(206);H::HLine(x+79,y+33,20,asciiColorTwo,205);
-    //Line two
-    tp(asciiColorOne,x+78,y+34);cout<<char(200);H::HLine(x+79,y+34,24,asciiColorOne,205);
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    for(int i = 4 ; i <= 50 ; i++)
-    {
-        H::setcolor(asciiColorOne);H::gotoxy(i,y-5);cout<<char(asciiChar);H::delay(d_time);
-        H::setcolor(asciiColorTwo);H::gotoxy(i+4,y-4);cout<<char(asciiChar);H::delay(d_time);
-        H::setcolor(asciiColorThree);H::gotoxy(i+8,y-3);cout<<char(asciiChar);H::delay(d_time);
-
-        if(i == 50)
-        {
-            for(int i = 155 ; i >= 109 ; i--)
-            {
-                H::setcolor(asciiColorOne);H::gotoxy(i,y+34);cout<<char(asciiChar);H::delay(d_time);
-                H::setcolor(asciiColorTwo);H::gotoxy(i-4,y+33);cout<<char(asciiChar);H::delay(d_time);
-                H::setcolor(asciiColorThree);H::gotoxy(i-8,y+32);cout<<char(asciiChar);H::delay(d_time);
-            }
-           
-        }
-        
-    }
-
-    for(int i = 4 ; i <= 50 ; i++)
-    {
-        H::setcolor(asciiColorOne);H::gotoxy(i,y+34);cout<<char(asciiChar);H::delay(d_time);
-        H::setcolor(asciiColorTwo);H::gotoxy(i+4,y+33);cout<<char(asciiChar);H::delay(d_time);
-        H::setcolor(asciiColorThree);H::gotoxy(i+8,y+32);cout<<char(asciiChar);H::delay(d_time);
-
-        if(i == 50)
-        {
-            for(int i = 155 ; i >= 109 ; i--)
-            {
-                H::setcolor(asciiColorOne);H::gotoxy(i,y-5);cout<<char(asciiChar);H::delay(d_time);
-                H::setcolor(asciiColorTwo);H::gotoxy(i-4,y-4);cout<<char(asciiChar);H::delay(d_time);
-                H::setcolor(asciiColorThree);H::gotoxy(i-8,y-3);cout<<char(asciiChar);H::delay(d_time);
-            }
-           
-        }
-        
-    }
-    H::setcolor(7);
 
 }
-void Design::sub_interface()
-{
-    getch();
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-    int d_Time = 1;
-    int loding_color = 2;
-    int clsBox = 7, asciiCode = 221;
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-    //clear left blue box
-    //clear as height (y)
-    for(int i = 1 ; i <= 32 ; i ++)
-    {
-        H::clearBox(x+5,y-1,28,i,clsBox);H::delay(d_Time);
-
-        if(i == 32)
-        {
-            //clear pc lab
-            //clear as width
-            for(int i = 1 ; i <= 62 ; i ++)
-            {
-                H::clearBox(x+49,y+12,i,11,clsBox);H::delay(d_Time);
-            }
-        }
-
-    }
-
-    //loading
-    int newLoopDelay = 10;
-//
-    H::gotoxy(x+29,y+10);cout<<"LOADING...";
-    H::drawBoxDoubleLine(x+29,y+11,82,3,5);
-//
-    for(int i = 1 ; i <= 80 ; i ++)
-    {
-        H::gotoxy(x+106,y+10);H::setcolor(2);cout<<i+20<<" %";
-
-        if(i == 1)
-        {
-            for(int i = 1 ; i <= 15 ; i ++ )
-            {
-                sub_interface2(i);H::delay(d_Time);
-            }
-        }
-
-        H::HLine(x+30,y+12,i,loding_color+=1,asciiCode);H::delay(newLoopDelay);
-        H::HLine(x+30,y+13,i,loding_color+=1,asciiCode);H::delay(newLoopDelay);
-        H::HLine(x+30,y+14,i,loding_color+=1,asciiCode);H::delay(newLoopDelay);
-
-    }
-
-     //Default Color
-    H::setcolor(7);
-
-    //clear from the middle screen
-    H::cls();H::delay(newLoopDelay);
-
-    H::setcolor(7);
-
-}
-////////////////////////////////////////////////////////////////////////////////////////
-void Design::AdminLogin(int cursor)
-{
-    char AdminUsername[6];
-    char AdminPassword[6];
-    int chance = 3;
-
-    back:
-    do{
-
-        H::setcursor(cursor,20);
-
-        //username
-        H::setcolor(249); 
-        H::gotoxy(x+20, y+14);H::inputLetter(AdminUsername,6);
-
-        //password
-        H::setcolor(249); //137
-        H::gotoxy(x+20, y+20);H::hidePassword(AdminPassword,6);
-
-        if(strcmpi(AdminUsername,"Cyber")==0 && strcmpi(AdminPassword,"168")==0)
-        {
-            H::setcolor(7);H::cls();
-            break;
-        }
-        if(strcmpi(AdminUsername,"Cyber")!=0 || strcmpi(AdminPassword,"168")!=0)
-        {
-            H::setcolor(140);
-            H::gotoxy(x+22,y+23);cout<<"Incorrect Username or Password";
-            H::gotoxy(x+29,y+24);cout<<"Please try again";
-            getch();
-
-            H::clearBox(x+18, y+14, 42, 0,247);//Clear username and password boxes
-            H::clearBox(x+18, y+20, 42, 0,247);//Clear username and password boxes
-            H::clearBox(x+20, y+24, 34, 0,136);//Clear message
-            chance -- ;
-        }
-
-    }while(chance != 0);
-
-    if(chance == 0)
-    {
-        for(int i = 1 ; i <= 16 ; i++)
-        {   
-            H::setcursor(0,0);
-            H::setcolor(140);
-            H::gotoxy(x+12,y+23);cout<<16-i;H::delay(999);
-
-            H::clearBox(x+13,y+23,16-i,0,136);
-            H::setcolor(7);
-        }
-
-        goto back;
-    }
-
-    H::setcolor(7);
-    
-}
-////////////////////////////////////////////////////////////////////////////////////////
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Design::login_design()
 {
     H::setConsoleTitle(TEXT("LOG IN PANEL"));
@@ -356,17 +83,14 @@ void Design::login_design()
     tp(233,x+70,y+21);cout << R"( \________________________________________________/)";
     tp(233,x+70,y+22);cout << R"(        \_________________________________/)";
 
-    choiceBoxes();
-
     H::setcolor(7);
 }
-
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Design::choiceBoxes()
 {
-    //up = 72 , down = 80
     char press;
     int num = 1;
-    //24 space box
+
     H::setcursor(0,0);
 
     do{
@@ -378,13 +102,13 @@ void Design::choiceBoxes()
         {
             H::drawBoxSingleLineWithBG(x+83,y+10,25,1,204);H::setcolor(201);H::gotoxy(x+84,y+11);cout<<"==>> Administrator <<==";
             H::clearBox(x+22,y+4,34,5,136);
-            sub_loginDesign(1);
+            loginAs_Admin_UserTxt(1);
         }
         if(num==2)
         {
             H::drawBoxSingleLineWithBG(x+83,y+14,25,1,204);H::setcolor(201);H::gotoxy(x+84,y+15);cout<<"==>>     User      <<==";
             H::clearBox(x+22,y+4,34,5,136);
-            sub_loginDesign(2);
+            loginAs_Admin_UserTxt(2);
         }
 
         press = getch();
@@ -417,7 +141,8 @@ void Design::choiceBoxes()
 
     H::setcolor(7);
 }
-void Design::sub_loginDesign(int choice)
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void Design::loginAs_Admin_UserTxt(int choice)
 {
     if(choice == 2)
     {
@@ -440,11 +165,8 @@ void Design::sub_loginDesign(int choice)
 
     }
 
-    H::setcolor(7);
-
 }
-////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Design::AdminMenuDesign()
 {
     H::setConsoleTitle(TEXT("ADMIN MENU"));
@@ -492,17 +214,6 @@ void Design::AdminMenuDesign()
     /*three to four*/H::HLine(x+60,y+17,5,lineColor,205);tp(lineColor,x+64,y+17);cout<<char(185);H::VLine(x+65,y+17,2,lineColor,186);tp(lineColor,x+64,y+16);cout<<char(201)<<char(205)<<char(205)<<char(188);tp(lineColor,x+67,y+15);cout<<char(203);
     /*four to five*/H::HLine(x+70,y+21,5,lineColor,205);tp(lineColor,x+74,y+21);cout<<char(187);H::VLine(x+75,y+21,2,lineColor,186);
 
-
-    /*              output host computer's name              */
-    DWORD size = MAX_COMPUTERNAME_LENGTH + 1;
-    wchar_t hostname[MAX_COMPUTERNAME_LENGTH + 1];
-
-    if (GetComputerNameW(hostname, &size)) {
-       tp(lineColor,x+90,y+13);wcout << L" WELCOME BACK : " << hostname << endl;
-    } else {
-        cerr << "Error: Could not retrieve hostname." << endl;
-    }
-
     //result of selection line
     H::drawBoxDoubleLine(x+90,y+12,33,4,3);
     /////////
@@ -511,6 +222,7 @@ void Design::AdminMenuDesign()
 
     H::setcolor(7);
 }
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Design::sub_Admin()
 {
     char press;
@@ -594,6 +306,7 @@ void Design::sub_Admin()
     H::setcolor(7);
 
 }
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Design::sub_Admin2(int choice)
 {
     char one[26] = "Admin Profile Information";
@@ -682,10 +395,14 @@ void Design::sub_Admin2(int choice)
     H::setcolor(7);
 
 }
-
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Design::UserMenuDesign()
 {
     
 }
-
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+/*
+                                END OF DESIGN HEADER FILE
+*/
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif
