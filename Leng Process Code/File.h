@@ -6,10 +6,6 @@
 #include "MgUserInfo.h"
 #include <sys/stat.h>
 #include <vector>
-#include <fstream>
-#include <iostream>
-
-using namespace std;
 
 class File {
 private:
@@ -500,7 +496,8 @@ void File::deleteFile(int n)
     bool isfound = false;
     char press = ' ';
 
-    switch(n)
+    // Set the current file based on the input 'n'
+    switch (n)
     {
         case 1:
             currentFile = FoodnDrinkFile;
@@ -513,164 +510,168 @@ void File::deleteFile(int n)
             break;
     }
 
+    // Open the file to check its status
     file.open(currentFile, ios::in | ios::binary);
     if (!file.is_open())
     {
         cout << "File Corrupted" << endl;
-        return;
     }
-
-    if (check_file(currentFile))
+    else if (check_file(currentFile))
     {
         cout << "File has no data" << endl;
         file.close();
-        return;
     }
-
-    switch (n)
+    else
     {
-        case 1:
-        {
-            fndVector.clear();
-            while (file.read((char*)&fnd, sizeof(FoodnDrink)))
-            {
-                fndVector.push_back(fnd);
-            }
-            break;
-        }
-        case 2:
-        {
-            gameVector.clear();
-            while (file.read((char*)&game, sizeof(Game)))
-            {
-                gameVector.push_back(game);
-            }
-            break;
-        }
-        case 3:
-        {
-            muiVector.clear();
-            while (file.read((char*)&mui, sizeof(MgUserInfo)))
-            {
-                muiVector.push_back(mui);
-            }
-            break;
-        }
-    }
-
-    file.close();
-
-    while (1)
-    {
-        isfound = false;
-        cout << "Enter ID to delete: "; H::inputNumber(deleteID, sizeof(deleteID)); cout << endl;
-        int deleteIDInt = atoi(deleteID);
-
+        // Read the contents of the file into the respective vectors
         switch (n)
         {
             case 1:
             {
-                for (auto it = fndVector.begin(); it != fndVector.end(); )
+                fndVector.clear();
+                while (file.read((char*)&fnd, sizeof(FoodnDrink)))
                 {
-                    if (it->getID() == deleteIDInt)
-                    {
-                        it = fndVector.erase(it);
-                        isfound = true;
-                    }
-                    else
-                    {
-                        ++it;
-                    }
+                    fndVector.push_back(fnd);
                 }
                 break;
             }
             case 2:
             {
-                for (auto it = gameVector.begin(); it != gameVector.end(); )
+                gameVector.clear();
+                while (file.read((char*)&game, sizeof(Game)))
                 {
-                    if (it->getID() == deleteIDInt)
-                    {
-                        it = gameVector.erase(it);
-                        isfound = true;
-                    }
-                    else
-                    {
-                        ++it;
-                    }
+                    gameVector.push_back(game);
                 }
                 break;
             }
             case 3:
             {
-                for (auto it = muiVector.begin(); it != muiVector.end(); )
+                muiVector.clear();
+                while (file.read((char*)&mui, sizeof(MgUserInfo)))
                 {
-                    if (it->getID() == deleteIDInt)
-                    {
-                        it = muiVector.erase(it);
-                        isfound = true;
-                    }
-                    else
-                    {
-                        ++it;
-                    }
+                    muiVector.push_back(mui);
                 }
                 break;
             }
         }
 
-        if (isfound == false)
+        file.close();
+
+        // Main loop to handle deletion of records
+        while (true)
         {
-            cout << "ID not found" << endl;
+            isfound = false;
+            cout << "Enter ID to delete: "; H::inputNumber(deleteID, sizeof(deleteID)); cout << endl;
+            int deleteIDInt = atoi(deleteID);
+
+            switch (n)
+            {
+                case 1:
+                {
+                    for (auto it = fndVector.begin(); it != fndVector.end(); )
+                    {
+                        if (it->getID() == deleteIDInt)
+                        {
+                            it = fndVector.erase(it);
+                            isfound = true;
+                        }
+                        else
+                        {
+                            ++it;
+                        }
+                    }
+                    break;
+                }
+                case 2:
+                {
+                    for (auto it = gameVector.begin(); it != gameVector.end(); )
+                    {
+                        if (it->getID() == deleteIDInt)
+                        {
+                            it = gameVector.erase(it);
+                            isfound = true;
+                        }
+                        else
+                        {
+                            ++it;
+                        }
+                    }
+                    break;
+                }
+                case 3:
+                {
+                    for (auto it = muiVector.begin(); it != muiVector.end(); )
+                    {
+                        if (it->getID() == deleteIDInt)
+                        {
+                            it = muiVector.erase(it);
+                            isfound = true;
+                        }
+                        else
+                        {
+                            ++it;
+                        }
+                    }
+                    break;
+                }
+            }
+
+            if (!isfound)
+            {
+                cout << "ID not found" << endl;
+            }
+            else
+            {
+                cout << "Deleted Successfully" << endl;
+            }
+
+            cout << "Press any key to delete again or [Enter] to stop" << endl;
+            press = getch();
+            if (press == 13)
+            {
+                break;
+            }
+        }
+
+        // Open the file for writing and update its contents
+        file.open(currentFile, ios::out | ios::binary | ios::trunc); // when the file is opened, the old contents are immediately removed.
+        if (!file.is_open())
+        {
+            cout << "Error opening file for writing" << endl;
         }
         else
         {
-            cout << "Deleted Successfully" << endl;
-        }
-
-        cout << "Press any key to delete again or [Enter] to stop" << endl;
-        press = getch();
-        if (press == 13)
-        {
-            break;
-        }
-    }
-
-    file.open(currentFile, ios::out | ios::binary | ios::trunc);
-    if (!file.is_open())
-    {
-        cout << "Error opening file for writing" << endl;
-        return;
-    }
-
-    switch (n)
-    {
-        case 1:
-        {
-            for (const auto& fnd : fndVector)
+            switch (n)
             {
-                file.write((char*)&fnd, sizeof(FoodnDrink));
+                case 1:
+                {
+                    for (const auto& fnd : fndVector)
+                    {
+                        file.write((char*)&fnd, sizeof(FoodnDrink));
+                    }
+                    break;
+                }
+                case 2:
+                {
+                    for (const auto& game : gameVector)
+                    {
+                        file.write((char*)&game, sizeof(Game));
+                    }
+                    break;
+                }
+                case 3:
+                {
+                    for (const auto& mui : muiVector)
+                    {
+                        file.write((char*)&mui, sizeof(MgUserInfo));
+                    }
+                    break;
+                }
             }
-            break;
         }
-        case 2:
-        {
-            for (const auto& game : gameVector)
-            {
-                file.write((char*)&game, sizeof(Game));
-            }
-            break;
-        }
-        case 3:
-        {
-            for (const auto& mui : muiVector)
-            {
-                file.write((char*)&mui, sizeof(MgUserInfo));
-            }
-            break;
-        }
-    }
 
-    file.close();
+        file.close();
+    }
 }
 
 
