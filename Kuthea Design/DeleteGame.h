@@ -1,15 +1,9 @@
-//#ifndef __DELETEGAMEDESIGN_H__
-//#define __DELETEGAMEDESIGN_H__
-#include "./Header/HinsyOOPV2"
-using namespace std;
-using namespace HinsyOOP;
-class DeleteGameDesign{
-    public:
-        static void deleteDesign();
-        static void deleteAscii();
-};
-
-void DeleteGameDesign::deleteAscii(){
+#ifndef __DELETEGAMEDESIGN_H__
+#define __DELETEGAMEDESIGN_H__
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#include"kuntheaDesign.h"
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void THEA::DeleteGameDesign::DeleteTxt(){
     H::foreColor(3); H::gotoxy(40,1); cout<<R"(________         .__          __           ________          __          )";
     H::foreColor(3); H::gotoxy(40,2); cout<<R"(\______ \   ____ |  |   _____/  |_  ____   \______ \ _____ _/  |______   )";
     H::foreColor(3); H::gotoxy(40,3); cout<<R"( |    |  \_/ __ \|  | _/ __ \   __\/ __ \   |    |  \\__  \\   __\__  \  )";
@@ -18,8 +12,8 @@ void DeleteGameDesign::deleteAscii(){
     H::foreColor(6); H::gotoxy(40,6); cout<<R"(        \/     \/          \/          \/          \/     \/          \/ )";
     H::HLine(25,8,100,7,196);
 }
-
-void DeleteGameDesign::deleteDesign(){
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void THEA::DeleteGameDesign::Delete_Design(){
     H::drawBoxSingleLineWithBG(20,10,120,1,179);
     H::VLine(70,12,3,7,221);
     H::VLine(90,12,3,7,221);
@@ -49,4 +43,5 @@ void DeleteGameDesign::deleteDesign(){
     H::gotoxy(58,34); H::foreColor(3); cout<<"Press [ENTER] To Continues Or [ESC] To Exit";
     H::foreColor(7);
 }
-//#endif
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#endif

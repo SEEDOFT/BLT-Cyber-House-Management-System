@@ -1,16 +1,9 @@
 #ifndef __MANAGEUSERINFO_H__
 #define __MANAGEUSERINFO_H__
-
-#include "./Header/HinsyOOPV2"
-using namespace HinsyOOP;
-
-class ManageUserInfo{
-    public:
-        static void ascii();
-        static void DesignBox();
-};
-
-void ManageUserInfo::ascii(){
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#include "kuntheaDesign.h"
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void THEA::ManageUserInfo::ManageUserInfoTxt(){
     H::foreColor(3); H::gotoxy(26,1); cout<<R"(   _____                                         ____ ___                     .___        _____       )";
     H::foreColor(3); H::gotoxy(26,2); cout<<R"(  /     \ _____    ____ _____     ____   ____   |    |   \______ ___________  |   | _____/ ____\____  )";
     H::foreColor(3); H::gotoxy(26,3); cout<<R"( /  \ /  \\__  \  /    \\__  \   / ___\_/ __ \  |    |   /  ___// __ \_  __ \ |   |/    \   __\/  _ \ )";
@@ -20,8 +13,8 @@ void ManageUserInfo::ascii(){
 
     H::HLine(15,8,125,7,196);
 }
-
-void ManageUserInfo::DesignBox(){
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void THEA::ManageUserInfo::ManageUserInfo_Design(){
     H::drawBoxDoubleLineWithBG(20,10,115,1,179);
     for(int i=0; i<3; i++){
         H::VLine(70,12,i+1,7,221); H::delay(100);
@@ -51,12 +44,12 @@ void ManageUserInfo::DesignBox(){
         if(y==1){
             H::drawBoxDoubleLineWithBG(30,17,30,1,135);
             H::foreColor(135);
-			H::gotoxy(38,18); cout <<"SIGN UP USER";
+            H::gotoxy(38,18); cout <<"SIGN UP USER";
         }
         else if(y==2){
             H::drawBoxDoubleLineWithBG(30,25,30,1,135);
             H::foreColor(135);
-			H::gotoxy(38,26); cout <<"VIEW USER INFO";
+            H::gotoxy(38,26); cout <<"VIEW USER INFO";
         }
         else if(y==3){
             H::drawBoxDoubleLineWithBG(30,33,30,1,135);
@@ -66,17 +59,17 @@ void ManageUserInfo::DesignBox(){
         else if(y==4){
             H::drawBoxDoubleLineWithBG(96,17,30,1,135);
             H::foreColor(135);
-			H::gotoxy(103,18); cout <<"DELETE USER INFO";
+            H::gotoxy(103,18); cout <<"DELETE USER INFO";
         }
         else if(y==5){
             H::drawBoxDoubleLineWithBG(96,25,30,1,135);
             H::foreColor(135);
-			H::gotoxy(102,26); cout <<"SORTING USER HOUR";
+            H::gotoxy(102,26); cout <<"SORTING USER HOUR";
         }
         else if(y==6){
             H::drawBoxDoubleLineWithBG(96,33,30,1,135);
             H::foreColor(135);
-			H::gotoxy(109,34); cout <<"BACK";
+            H::gotoxy(109,34); cout <<"BACK";
         }
         press = getch();
         
@@ -84,6 +77,7 @@ void ManageUserInfo::DesignBox(){
             case 72:
                 y--;
                 if(y<1){
+
                     y=6;
                 }
                 break;
@@ -96,5 +90,9 @@ void ManageUserInfo::DesignBox(){
         }
     }while(press!='6');
 }
-
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+/*
+                        END OF HEADER FILE              
+*/
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif

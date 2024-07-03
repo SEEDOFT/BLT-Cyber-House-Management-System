@@ -1,16 +1,10 @@
 #ifndef __SEARCHDESIGN_H__
 #define __SEARCHDESIGN_H__
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-#include "../ANT_Header/HinsyOOPV2"
-using namespace HinsyOOP;
+#include "kuntheaDesign.h"
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-class SearchDesign{
-    public:
-        static void searchDesign();
-        static void searchAscii();
-};
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void SearchDesign::searchAscii(){
+void THEA::SearchDesign::SearchTxt()
+{
     H::foreColor(3); H::gotoxy(40,1); cout<<R"(  _________                           .__      ________          __          )";
     H::foreColor(3); H::gotoxy(40,2); cout<<R"( /   _____/ ____ _____ _______   ____ |  |__   \______ \ _____ _/  |______   )";
     H::foreColor(3); H::gotoxy(40,3); cout<<R"( \_____  \_/ __ \\__  \\_  __ \_/ ___\|  |  \   |    |  \\__  \\   __\__  \  )";
@@ -20,7 +14,8 @@ void SearchDesign::searchAscii(){
     H::HLine(30,8,100,7,196);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void SearchDesign::searchDesign(){
+void THEA::SearchDesign::Search_Design()
+{
     H::drawBoxSingleLineWithBG(20,10,120,1,179);
     H::VLine(70,12,3,7,221);
     H::VLine(90,12,3,7,221);

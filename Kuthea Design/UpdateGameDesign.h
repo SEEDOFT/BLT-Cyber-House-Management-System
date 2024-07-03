@@ -1,17 +1,9 @@
 #ifndef __UPDATEGAMEDESIGN_H__
 #define __UPDATEGAMEDESIGN_H__
-
-
-#include "./Header/HinsyOOPV2"
-using namespace std;
-using namespace HinsyOOP;
-class UpdateGamDesign{
-    public:
-        static void updateAscii();
-        static void updateDesign();
-};
-
-void UpdateGamDesign::updateAscii(){
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#include "kuntheaDesign.h"
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void THEA::UpdateGameDesign::UpdateTxt(){
     H::foreColor(3); H::gotoxy(40,1); cout<<R"( ____ ___            .___       __           ________          __          )";
     H::foreColor(3); H::gotoxy(40,2); cout<<R"(|    |   \______   __| _/____ _/  |_  ____   \______ \ _____ _/  |______   )";
     H::foreColor(3); H::gotoxy(40,3); cout<<R"(|    |   /\____ \ / __ |\__  \\   __\/ __ \   |    |  \\__  \\   __\__  \  )";
@@ -20,8 +12,8 @@ void UpdateGamDesign::updateAscii(){
     H::foreColor(4); H::gotoxy(40,6); cout<<R"(          |__|        \/     \/          \/          \/     \/          \/ )";
     H::HLine(30,8,100,7,196);
 }
-
-void UpdateGamDesign::updateDesign(){
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void THEA::UpdateGameDesign::Update_Design(){
     H::drawBoxSingleLineWithBG(20,10,120,1,179);
     H::VLine(70,12,3,7,221);
     H::VLine(90,12,3,7,221);
@@ -59,4 +51,5 @@ void UpdateGamDesign::updateDesign(){
     H::HLine(30,35,100,7,196);
     H::gotoxy(40,36); H::foreColor(3); cout<<"New\t\t\tNew\t\t\tNew\t\t\tNew";
 }
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif

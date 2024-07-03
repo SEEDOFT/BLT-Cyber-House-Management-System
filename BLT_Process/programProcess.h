@@ -14,6 +14,7 @@ class Process: public Design{
         static void login_As_Admin_And_User();
         static void LogIn_AsAdmin(int cursor);
         static void DisableMaximizeButton();
+        static void DisableMinimizeButton();
         static void DisableCloseButton();
         static void OutputHostName();
         static void UrlOpenner(const string& url);
@@ -49,6 +50,19 @@ void Process::runURL(int argc, char* argv[], string URL)
     UrlOpenner(url);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void Process::DisableCloseButton()
+{
+    HWND consoleWindow = GetConsoleWindow();
+
+    if (consoleWindow != NULL) {
+        HMENU hMenu = GetSystemMenu(consoleWindow, FALSE);
+        if (hMenu != NULL) {
+            RemoveMenu(hMenu, SC_CLOSE, MF_BYCOMMAND);
+            DrawMenuBar(consoleWindow);
+        }
+    }
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Process::DisableMaximizeButton()
 {
     HWND consoleWindow = GetConsoleWindow();
@@ -57,28 +71,21 @@ void Process::DisableMaximizeButton()
     SetWindowLong(consoleWindow, GWL_STYLE, style);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void Process::DisableCloseButton()
+void Process::DisableMinimizeButton()
 {
     HWND consoleWindow = GetConsoleWindow();
+    
     if (consoleWindow != NULL) {
-        // Disable maximize button
         DWORD style = GetWindowLong(consoleWindow, GWL_STYLE);
-        // style = style & ~WS_MAXIMIZEBOX;
-        // SetWindowLong(consoleWindow, GWL_STYLE, style);
-
-        // Disable minimize button
-        // style = style & ~WS_MINIMIZEBOX;
-        // SetWindowLong(consoleWindow, GWL_STYLE, style);
-        style = style & ~WS_SYSMENU;
-        // Apply the new style
-        // Disable clse button
+        style &= ~WS_MINIMIZEBOX;
         SetWindowLong(consoleWindow, GWL_STYLE, style);
+        SetWindowPos(consoleWindow, NULL, 0, 0, 0, 0,
+        SWP_NOZORDER | SWP_NOMOVE | SWP_NOSIZE | SWP_FRAMECHANGED);
     }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Process::OutputHostName()
 {
-     /*              output host computer's name              */
     DWORD size = MAX_COMPUTERNAME_LENGTH + 1;
     wchar_t hostname[MAX_COMPUTERNAME_LENGTH + 1];
 
@@ -99,19 +106,19 @@ void Process::login_As_Admin_And_User()
     while(press != 13)
     {
         //choice box
-        H::drawBoxSingleLineWithBG(x+90,y+10,25,1,153);H::setcolor(151);H::gotoxy(x+90,y+11);cout<<"     Administrator     ";
-        H::drawBoxSingleLineWithBG(x+90,y+14,25,1,153);H::setcolor(151);H::gotoxy(x+90,y+15);cout<<"         User          ";
+        H::drawBoxSingleLineWithBG(x+92,y+10,25,1,153);H::setcolor(151);H::gotoxy(x+92,y+11);cout<<"     Administrator     ";
+        H::drawBoxSingleLineWithBG(x+92,y+14,25,1,153);H::setcolor(151);H::gotoxy(x+92,y+15);cout<<"         User          ";
 
         if(x==1)
         {
-            H::drawBoxSingleLineWithBG(x+90,y+10,25,1,204);H::setcolor(201);H::gotoxy(x+90,y+11);cout<<"==>> Administrator <<==";
-            H::clearBox(x+23,y+4,36,5,136);//Cls text
+            H::drawBoxSingleLineWithBG(x+92,y+10,25,1,204);H::setcolor(201);H::gotoxy(x+92,y+11);cout<<"==>> Administrator <<==";
+            H::clearBox(x+24,y+4,36,5,136);//Cls text
             loginAs_Admin_UserTxt(1);
         }
         if(x==2)
         {
-            H::drawBoxSingleLineWithBG(x+90,y+14,25,1,204);H::setcolor(201);H::gotoxy(x+90,y+15);cout<<"==>>     User      <<==";
-            H::clearBox(x+23,y+4,36,5,136);//Cls text
+            H::drawBoxSingleLineWithBG(x+92,y+14,25,1,204);H::setcolor(201);H::gotoxy(x+92,y+15);cout<<"==>>     User      <<==";
+            H::clearBox(x+24,y+4,36,5,136);//Cls text
             loginAs_Admin_UserTxt(2);
         }
 
@@ -212,6 +219,11 @@ void Process::LogIn_AsAdmin(int cursor)
 }
 void Process::GROUP1_ASSIGNMENT()
 {
+    // DisableMinimizeButton();
+    DisableMaximizeButton();
+    DisableCloseButton();
+
+
     interface_design();//Interface Design
 
     login_design();//Design of LOG IN

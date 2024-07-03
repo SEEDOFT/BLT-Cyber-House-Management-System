@@ -1,16 +1,9 @@
 #ifndef __UPDATEDESIGN_H__
 #define __UPDATEDESIGN_H__
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-#include "../ANT_Header/HinsyOOPV2"
-using namespace HinsyOOP;
+#include"kuntheaDesign.h"
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-class UpdateDesign{
-    public:
-        static void updateAscii();
-        static void updateDesign();
-};
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void UpdateDesign::updateAscii(){
+void THEA::UpdateDesign::UpdateTxt(){
     H::foreColor(3); H::gotoxy(40,1); cout<<R"( ____ ___            .___       __           ________          __          )";
     H::foreColor(3); H::gotoxy(40,2); cout<<R"(|    |   \______   __| _/____ _/  |_  ____   \______ \ _____ _/  |______   )";
     H::foreColor(3); H::gotoxy(40,3); cout<<R"(|    |   /\____ \ / __ |\__  \\   __\/ __ \   |    |  \\__  \\   __\__  \  )";
@@ -20,7 +13,7 @@ void UpdateDesign::updateAscii(){
     H::HLine(30,8,100,7,196);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void UpdateDesign::updateDesign(){
+void THEA::UpdateDesign::Update_Design(){
     H::drawBoxSingleLineWithBG(20,10,120,1,179);
     H::VLine(70,12,3,7,221);
     H::VLine(90,12,3,7,221);

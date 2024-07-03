@@ -1,22 +1,19 @@
 #ifndef __INPUTDESIGN_H__
 #define __INPUTDESIGN_H__
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-#include "../ANT_Header/HinsyOOPV2"
-using namespace HinsyOOP;
+#include "kuntheaDesign.h"
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-class InputDesign{
-    public:
-        static void Design();
-};
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void InputDesign::Design(){
+void THEA::InputDesign::InputTxt(){
     H::foreColor(3); H::gotoxy(40,1); cout<<R"(.___                      __    ________          __          )";
     H::foreColor(3); H::gotoxy(40,2); cout<<R"(|   | ____ ______  __ ___/  |_  \______ \ _____ _/  |______   )";
     H::foreColor(3); H::gotoxy(40,3); cout<<R"(|   |/    \\____ \|  |  \   __\  |    |  \\__  \\   __\__  \  )";
     H::foreColor(4); H::gotoxy(40,4); cout<<R"(|   |   |  \  |_> >  |  /|  |    |    `   \/ __ \|  |  / __ \_)";
     H::foreColor(4); H::gotoxy(40,5); cout<<R"(|___|___|  /   __/|____/ |__|   /_______  (____  /__| (____  /)";
     H::foreColor(4); H::gotoxy(40,6); cout<<R"(         \/|__|                         \/     \/          \/ )";
-
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void THEA::InputDesign::Input_Design()
+{
     H::HLine(30,8,83,7,196);
 
     //header

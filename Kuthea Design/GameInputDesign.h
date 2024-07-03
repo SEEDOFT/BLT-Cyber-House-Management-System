@@ -1,17 +1,9 @@
 #ifndef __GAMEINPUTDESIGN_H__
 #define __GAMEINPUTDESIGN_H__
-
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-#include "./Header/HinsyOOPV2"
-using namespace HinsyOOP;
+#include "kuntheaDesign.h"
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-class GameInputDesign{
-    public:
-        static void InputAscii();
-        static void InputDesign();
-};
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void GameInputDesign::InputAscii(){
+void THEA::GameInputDesign::InputGameTxt(){
     H::foreColor(3); H::gotoxy(50,1); cout<<R"(.___                      __    ________          __          )";
     H::foreColor(3); H::gotoxy(50,2); cout<<R"(|   | ____ ______  __ ___/  |_  \______ \ _____ _/  |______   )";
     H::foreColor(3); H::gotoxy(50,3); cout<<R"(|   |/    \\____ \|  |  \   __\  |    |  \\__  \\   __\__  \  )";
@@ -22,8 +14,7 @@ void GameInputDesign::InputAscii(){
     H::HLine(40,8,83,7,196);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-void GameInputDesign::InputDesign(){
+void THEA::GameInputDesign::InputGame_Design(){
     H::drawBoxDoubleLineWithBG(30,10,100,1,196);
     for(int i=0; i<3; i++){
         H::VLine(70,12,i+1,7,221); H::delay(100);

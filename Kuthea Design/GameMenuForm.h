@@ -1,18 +1,10 @@
 #ifndef __GAMEMENUFORM_H__
 #define __GAMEMENUFORM_H__
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-#include "../ANT_Header/HinsyOOPV2"
-using namespace HinsyOOP;
+#include "kuntheaDesign.h"
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-class GameMenu{
-    public:
-        static void ascii();
-        static void header(); 
-        static void AssciiBox();
-        static void Boxoption();
-};
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void GameMenu::ascii(){
+void THEA::GameMenu::GameMenuTxt()
+{
     H::foreColor(4); H::gotoxy(38,1); cout<<R"(  ________                           _____                       )";
     H::foreColor(4); H::gotoxy(38,2); cout<<R"( /  _____/_____    _____   ____     /     \   ____   ____  __ __ )";
     H::foreColor(4); H::gotoxy(38,3); cout<<R"(/   \  ___\__  \  /     \_/ __ \   /  \ /  \_/ __ \ /    \|  |  \)";
@@ -23,7 +15,8 @@ void GameMenu::ascii(){
     H::HLine(35,8,70,4,178);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void GameMenu::AssciiBox(){
+void THEA::GameMenu::CyberTxt()
+{
     H::foreColor(199); H::gotoxy(52,21); cout<<R"(_________        ___.                 )";
     H::foreColor(199); H::gotoxy(52,22); cout<<R"(\_   ___ \___.__.\_ |__   ___________ )";
     H::foreColor(199); H::gotoxy(52,23); cout<<R"(/    \  \<   |  | | __ \_/ __ \_  __ \)";
@@ -32,7 +25,8 @@ void GameMenu::AssciiBox(){
     H::foreColor(199); H::gotoxy(52,26); cout<<R"(        \/\/          \/     \/       )";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void GameMenu::header(){
+void THEA::GameMenu::Header_Design()
+{
     H:: drawBoxDoubleLineWithBG(20,10,100,1,196);
     H::VLine(30,12,3,7,219);
     H::VLine(110,12,3,7,219);
@@ -43,7 +37,8 @@ void GameMenu::header(){
     H::drawBoxDoubleLineWithBG(30,35,80,1,196);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void GameMenu::Boxoption(){
+void THEA::GameMenu::GameMenu_Design()
+{
     int y=1;
     char press;
     do{

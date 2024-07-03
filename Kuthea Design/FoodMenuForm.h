@@ -1,16 +1,22 @@
 #ifndef __FOODMENUFORM_H__
 #define __FOODMENUFORM_H__
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-#include "../ANT_Header/HinsyOOPV2"
-using namespace HinsyOOP;
+#include"kuntheaDesign.h"
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-class Menu{
-    public:
-        static void header();
-        static void ascii();
-};
+void THEA::FoodMenu::Cyber99Txt()
+{
+    H::foreColor(103); H::gotoxy(48,21); cout<<R"(_________        ___.                 ________  ________ )";
+    H::foreColor(103); H::gotoxy(48,22); cout<<R"(\_   ___ \___.__.\_ |__   ___________/   __   \/   __   \)";
+    H::foreColor(103); H::gotoxy(48,23); cout<<R"(/    \  \<   |  | | __ \_/ __ \_  __ \____    /\____    /)";
+    H::foreColor(103); H::gotoxy(48,24); cout<<R"(\     \___\___  | | \_\ \  ___/|  | \/  /    /    /    / )";
+    H::foreColor(103); H::gotoxy(48,25); cout<<R"( \______  / ____| |___  /\___  >__|    /____/    /____/  )";
+    H::foreColor(103); H::gotoxy(48,26); cout<<R"(        \/\/          \/     \/                          )";
+}
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void Menu::header(){
+void THEA::FoodMenu::FoodMenu_Design()
+{
+    int y=1;
+    char press;
      //box
     H::drawBoxDoubleLineWithBG(33,10,85,25,71);
     H::drawBoxDoubleLineWithBG(35,11,81,23,55);
@@ -22,17 +28,7 @@ void Menu::header(){
     H::VLine(39,18,10,23,178);
     H::VLine(113,18,10,23,178);
 
-    H::foreColor(103); H::gotoxy(48,21); cout<<R"(_________        ___.                 ________  ________ )";
-    H::foreColor(103); H::gotoxy(48,22); cout<<R"(\_   ___ \___.__.\_ |__   ___________/   __   \/   __   \)";
-    H::foreColor(103); H::gotoxy(48,23); cout<<R"(/    \  \<   |  | | __ \_/ __ \_  __ \____    /\____    /)";
-    H::foreColor(103); H::gotoxy(48,24); cout<<R"(\     \___\___  | | \_\ \  ___/|  | \/  /    /    /    / )";
-    H::foreColor(103); H::gotoxy(48,25); cout<<R"( \______  / ____| |___  /\___  >__|    /____/    /____/  )";
-    H::foreColor(103); H::gotoxy(48,26); cout<<R"(        \/\/          \/     \/                          )";
-
-
-    int y=1;
-    char press;
-    do
+    while(press!='5')
     {
         //option
         H::drawBoxDoubleLineWithBG(37,13,20,1,23);
@@ -92,11 +88,12 @@ void Menu::header(){
                 }
                 break;
         }
-    } while (press!='5');
+    }
     
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void Menu::ascii(){
+void THEA::FoodMenu::FoodMenuTxt()
+{
     H::foreColor(3); H::gotoxy(43,1); cout<<R"(___________               .___    _____                       )";
     H::foreColor(3); H::gotoxy(43,2); cout<<R"(\_   _____/___   ____   __| _/   /     \   ____   ____  __ __ )";
     H::foreColor(3); H::gotoxy(43,3); cout<<R"( |    __)/  _ \ /  _ \ / __ |   /  \ /  \_/ __ \ /    \|  |  \)";

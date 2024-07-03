@@ -1,10 +1,9 @@
-#ifndef __VIEWDESIGN_H__
-#define __VIEWDESIGN_H__
+#ifndef __VIEWGAMEDESIGN_H__
+#define __VIEWGAMEDESIGN_H__
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #include"kuntheaDesign.h"
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void THEA::ViewDesign::ViewTxt()
-{
+void THEA::ViewGameListDesign::ViewGameTxt(){
     H::foreColor(3); H::gotoxy(50,1); cout<<R"(____   ____.__                ________          __          )";
     H::foreColor(3); H::gotoxy(50,2); cout<<R"(\   \ /   /|__| ______  _  __ \______ \ _____ _/  |______   )";
     H::foreColor(3); H::gotoxy(50,3); cout<<R"( \   Y   / |  |/ __ \ \/ \/ /  |    |  \\__  \\   __\__  \  )";
@@ -14,8 +13,7 @@ void THEA::ViewDesign::ViewTxt()
     H::HLine(40,8,83,7,196);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void THEA::ViewDesign::View_Design()
-{
+void THEA::ViewGameListDesign::ViewGame_Design(){
     H::drawBoxSingleLine(20,10,120,1,4);
     H::drawBoxDoubleLineWithBG(16,11,1,25,196);
     H::VLine(17,11,25,199,219);
@@ -23,7 +21,7 @@ void THEA::ViewDesign::View_Design()
     H::VLine(144,11,25,199,219);
     H::foreColor(7);
     //laebel
-    H::gotoxy(40,11); cout<<"ID\t\t\t Name \t\t\t QTY \t\t\t      Price";
+    H::gotoxy(40,11); cout<<"ID\t\t\tName\t\t\tTYPE\t\t\tRELEASE DATE";
     
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

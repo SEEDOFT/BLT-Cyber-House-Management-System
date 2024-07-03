@@ -1,15 +1,8 @@
 #ifndef __SEARCHGAMEDESIGN_H__
 #define __SEARCHGAMEDESIGN_H__
-#include "./Header/HinsyOOPV2"
-using namespace std;
-using namespace HinsyOOP;
-class SearchGameDesign{
-    public:
-        static void searchDesign();
-        static void searchAscii();
-};
-
-void SearchGameDesign::searchAscii(){
+#include"kuntheaDesign.h"
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void THEA::SearchGameDesign::SearchGameTxt(){
     H::foreColor(3); H::gotoxy(40,1); cout<<R"(  _________                           .__      ________          __          )";
     H::foreColor(3); H::gotoxy(40,2); cout<<R"( /   _____/ ____ _____ _______   ____ |  |__   \______ \ _____ _/  |______   )";
     H::foreColor(3); H::gotoxy(40,3); cout<<R"( \_____  \_/ __ \\__  \\_  __ \_/ ___\|  |  \   |    |  \\__  \\   __\__  \  )";
@@ -18,8 +11,8 @@ void SearchGameDesign::searchAscii(){
     H::foreColor(6); H::gotoxy(40,6); cout<<R"(        \/     \/     \/            \/     \/          \/     \/          \/ )";
     H::HLine(30,8,100,7,196);
 }
-
-void SearchGameDesign::searchDesign(){
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void THEA::SearchGameDesign::SearchGame_Design(){
     H::drawBoxSingleLineWithBG(20,10,120,1,179);
     H::VLine(70,12,3,7,221);
     H::VLine(90,12,3,7,221);
@@ -48,5 +41,5 @@ void SearchGameDesign::searchDesign(){
     H::gotoxy(58,34); H::foreColor(3); cout<<"Press [ENTER] To Continues Or [ESC] To Exit";
     H::foreColor(7);
 }
-
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif

@@ -1,15 +1,9 @@
 #ifndef __INVOICE_H__
 #define __INVOICE_H__
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-#include "../ANT_Header/HinsyOOPV2"
-using namespace HinsyOOP;
-class Invoice{
-    public:
-        static void InvoiceAscii();
-        static void InvoiceDesign();
-};
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void Invoice::InvoiceDesign()
+#include"kuntheaDesign.h"
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void THEA::Invoice::Invoice_Design()
 {
     H::drawBoxDoubleLine(50,5,55,30,3);
 	H::drawBoxSingleLine(52,19,51,15,3);
@@ -32,7 +26,8 @@ void Invoice::InvoiceDesign()
 	H::gotoxy(55,33); cout<<"TOTAL: ";
 	
 }
-void Invoice::InvoiceAscii()
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void THEA::Invoice::InvoiceTxt()
 {
 	H::gotoxy(60,6); cout<<R"(              ___.                 )";
 	H::gotoxy(60,7); cout<<R"(  ____ ___.__.\_ |__   ___________ )";
@@ -41,6 +36,5 @@ void Invoice::InvoiceAscii()
 	H::gotoxy(60,10); cout<<R"( \___  > ____| |___  /\___  >__|   )";
 	H::gotoxy(60,11); cout<<R"(     \/\/          \/     \/       )";
 }
-
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif
