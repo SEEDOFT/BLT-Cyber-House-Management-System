@@ -29,11 +29,11 @@ void Invoice::InvoiceDesign()
 	H::gotoxy(70,21); cout<<"Time";
 	H::gotoxy(90,21); cout<<"Total";
 	H::gotoxy(80,21); cout<<"Price";
-	
-	
 	H::gotoxy(55,33); cout<<"TOTAL: ";
 	
-	
+}
+void Invoice::InvoiceAscii()
+{
 	H::gotoxy(60,6); cout<<R"(              ___.                 )";
 	H::gotoxy(60,7); cout<<R"(  ____ ___.__.\_ |__   ___________ )";
 	H::gotoxy(60,8); cout<<R"(_/ ___<   |  | | __ \_/ __ \_  __ \)";
@@ -41,5 +41,6 @@ void Invoice::InvoiceDesign()
 	H::gotoxy(60,10); cout<<R"( \___  > ____| |___  /\___  >__|   )";
 	H::gotoxy(60,11); cout<<R"(     \/\/          \/     \/       )";
 }
+
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif

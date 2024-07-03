@@ -9,8 +9,9 @@ class Process: public Design{
     private:
         static const char* getOpenCommand();
     public:
-        static void interface_to_UserAndAdmin(); 
-        static void loginAs_Admin_User();
+        static void GROUP1_ASSIGNMENT();
+
+        static void login_As_Admin_And_User();
         static void LogIn_AsAdmin(int cursor);
         static void DisableMaximizeButton();
         static void DisableCloseButton();
@@ -88,34 +89,29 @@ void Process::OutputHostName()
     }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void Process::interface_to_UserAndAdmin()
-{
-    interface_design();
-
-}
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void Process::loginAs_Admin_User()
+void Process::login_As_Admin_And_User()
 {
     char press;
-    int num = 1;
+    int x = 1;
 
     H::setcursor(0,0);
 
-    do{
+    while(press != 13)
+    {
         //choice box
-        H::drawBoxSingleLineWithBG(x+83,y+10,25,1,153);H::setcolor(151);H::gotoxy(x+84,y+11);cout<<"     Administrator     ";
-        H::drawBoxSingleLineWithBG(x+83,y+14,25,1,153);H::setcolor(151);H::gotoxy(x+84,y+15);cout<<"         User          ";
+        H::drawBoxSingleLineWithBG(x+90,y+10,25,1,153);H::setcolor(151);H::gotoxy(x+90,y+11);cout<<"     Administrator     ";
+        H::drawBoxSingleLineWithBG(x+90,y+14,25,1,153);H::setcolor(151);H::gotoxy(x+90,y+15);cout<<"         User          ";
 
-        if(num==1)
+        if(x==1)
         {
-            H::drawBoxSingleLineWithBG(x+83,y+10,25,1,204);H::setcolor(201);H::gotoxy(x+84,y+11);cout<<"==>> Administrator <<==";
-            H::clearBox(x+22,y+4,34,5,136);
+            H::drawBoxSingleLineWithBG(x+90,y+10,25,1,204);H::setcolor(201);H::gotoxy(x+90,y+11);cout<<"==>> Administrator <<==";
+            H::clearBox(x+23,y+4,36,5,136);//Cls text
             loginAs_Admin_UserTxt(1);
         }
-        if(num==2)
+        if(x==2)
         {
-            H::drawBoxSingleLineWithBG(x+83,y+14,25,1,204);H::setcolor(201);H::gotoxy(x+84,y+15);cout<<"==>>     User      <<==";
-            H::clearBox(x+22,y+4,34,5,136);
+            H::drawBoxSingleLineWithBG(x+90,y+14,25,1,204);H::setcolor(201);H::gotoxy(x+90,y+15);cout<<"==>>     User      <<==";
+            H::clearBox(x+23,y+4,36,5,136);//Cls text
             loginAs_Admin_UserTxt(2);
         }
 
@@ -125,37 +121,43 @@ void Process::loginAs_Admin_User()
         {
             case 72://up
             {
-                num--;
-                if(num<1)
+                x--;
+                if(x<1)
                 {
-                    num=2;
+                    x=2;
                 }
                 break;
             }
             
             case 80://down
             {
-                num++;
-                if(num>2)
+                x++;
+                if(x>2)
                 {
-                    num=1;
+                    x=1;
                 }
                 break;
             }
 
         }
 
-    }while(press != 13);
+    }
+    //condition
+    if(x == 1)
+    {
+        LogIn_AsAdmin(1);
+    }
+    else
+    {
 
-    H::setcolor(7);
+    }
+
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Process::LogIn_AsAdmin(int cursor)
 {
     char AdminUsername[10];
     char AdminPassword[10];
-
-    login_design();
     
     while(true){
 
@@ -175,6 +177,7 @@ void Process::LogIn_AsAdmin(int cursor)
 
             if(strcmpi(AdminUsername,"Cyber")==0 && strcmpi(AdminPassword,"168")==0)
             {
+                AdminMenuDesign(); //Admin Option
                 break;
             }
             if(strcmpi(AdminUsername,"Cyber")!=0 || strcmpi(AdminPassword,"168")!=0)
@@ -207,6 +210,15 @@ void Process::LogIn_AsAdmin(int cursor)
     }
     H::setcolor(7);
 }
+void Process::GROUP1_ASSIGNMENT()
+{
+    interface_design();//Interface Design
+
+    login_design();//Design of LOG IN
+
+    login_As_Admin_And_User();//login with user and admin
+}
+
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 /*

@@ -36,7 +36,6 @@ void Design::tp(int colorCode, int width, int height)
 void Design::interface_design()
 {
     H::setConsoleTitle(TEXT("BLT Cyber House Management System"));
-    H::setcursor(0,0);
 
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

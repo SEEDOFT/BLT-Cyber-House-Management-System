@@ -7,7 +7,7 @@ int main()
     H::setFont(20,700);
    
     // Kunthea::Main();
-    Process::login_design();
+    Process::GROUP1_ASSIGNMENT();
 
     return 0;
 }
