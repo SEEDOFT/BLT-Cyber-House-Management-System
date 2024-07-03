@@ -13,8 +13,6 @@ class Design{
         static void tp(int colorCode,int width,int height);
         static void interface_design();
         
-    //////////////////////////////////////////////////////////////
-        static void loginAs_Admin_User();//Admin and User
         static void login_design();
         static void loginAs_Admin_UserTxt(int choice);//user and Admin
     ///////////////////////////////////////////////////////////////
@@ -82,62 +80,6 @@ void Design::login_design()
     tp(233,x+70,y+20);cout << R"(|                                                  |)";
     tp(233,x+70,y+21);cout << R"( \________________________________________________/)";
     tp(233,x+70,y+22);cout << R"(        \_________________________________/)";
-
-    H::setcolor(7);
-}
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void Design::choiceBoxes()
-{
-    char press;
-    int num = 1;
-
-    H::setcursor(0,0);
-
-    do{
-        //choice box
-        H::drawBoxSingleLineWithBG(x+83,y+10,25,1,153);H::setcolor(151);H::gotoxy(x+84,y+11);cout<<"     Administrator     ";
-        H::drawBoxSingleLineWithBG(x+83,y+14,25,1,153);H::setcolor(151);H::gotoxy(x+84,y+15);cout<<"         User          ";
-
-        if(num==1)
-        {
-            H::drawBoxSingleLineWithBG(x+83,y+10,25,1,204);H::setcolor(201);H::gotoxy(x+84,y+11);cout<<"==>> Administrator <<==";
-            H::clearBox(x+22,y+4,34,5,136);
-            loginAs_Admin_UserTxt(1);
-        }
-        if(num==2)
-        {
-            H::drawBoxSingleLineWithBG(x+83,y+14,25,1,204);H::setcolor(201);H::gotoxy(x+84,y+15);cout<<"==>>     User      <<==";
-            H::clearBox(x+22,y+4,34,5,136);
-            loginAs_Admin_UserTxt(2);
-        }
-
-        press = getch();
-
-        switch(press) 
-        {
-            case 72://up
-            {
-                num--;
-                if(num<1)
-                {
-                    num=2;
-                }
-                break;
-            }
-            
-            case 80://down
-            {
-                num++;
-                if(num>2)
-                {
-                    num=1;
-                }
-                break;
-            }
-
-        }
-
-    }while(press != 13);
 
     H::setcolor(7);
 }

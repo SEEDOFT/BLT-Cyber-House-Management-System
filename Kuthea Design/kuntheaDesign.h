@@ -9,6 +9,7 @@
 #include"FoodMenuForm.h"
 #include"DeleteDesign.h"
 #include"ViewDesign.h"
+#include"Invoice.h"
 
 class Kunthea
 {
@@ -20,8 +21,8 @@ void Kunthea::Main()
     // UpdateDesign::updateAscii();
     // UpdateDesign::updateDesign();
 
-    SearchDesign::searchAscii();
-    SearchDesign::searchDesign();
+    // SearchDesign::searchAscii();
+    // SearchDesign::searchDesign();
 
     // InputDesign::Design();
 
@@ -38,6 +39,10 @@ void Kunthea::Main()
 
     // ViewDesign::viewAscii();
     // ViewDesign::viewDesignBox();
+
+    Invoice::InvoiceAscii();
+    Invoice::InvoiceDesign();
+
 }
 
 

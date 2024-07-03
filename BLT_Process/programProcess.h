@@ -10,6 +10,7 @@ class Process: public Design{
         static const char* getOpenCommand();
     public:
         static void interface_to_UserAndAdmin(); 
+        static void loginAs_Admin_User();
         static void LogIn_AsAdmin(int cursor);
         static void DisableMaximizeButton();
         static void DisableCloseButton();
@@ -91,6 +92,62 @@ void Process::interface_to_UserAndAdmin()
 {
     interface_design();
 
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void Process::loginAs_Admin_User()
+{
+    char press;
+    int num = 1;
+
+    H::setcursor(0,0);
+
+    do{
+        //choice box
+        H::drawBoxSingleLineWithBG(x+83,y+10,25,1,153);H::setcolor(151);H::gotoxy(x+84,y+11);cout<<"     Administrator     ";
+        H::drawBoxSingleLineWithBG(x+83,y+14,25,1,153);H::setcolor(151);H::gotoxy(x+84,y+15);cout<<"         User          ";
+
+        if(num==1)
+        {
+            H::drawBoxSingleLineWithBG(x+83,y+10,25,1,204);H::setcolor(201);H::gotoxy(x+84,y+11);cout<<"==>> Administrator <<==";
+            H::clearBox(x+22,y+4,34,5,136);
+            loginAs_Admin_UserTxt(1);
+        }
+        if(num==2)
+        {
+            H::drawBoxSingleLineWithBG(x+83,y+14,25,1,204);H::setcolor(201);H::gotoxy(x+84,y+15);cout<<"==>>     User      <<==";
+            H::clearBox(x+22,y+4,34,5,136);
+            loginAs_Admin_UserTxt(2);
+        }
+
+        press = getch();
+
+        switch(press) 
+        {
+            case 72://up
+            {
+                num--;
+                if(num<1)
+                {
+                    num=2;
+                }
+                break;
+            }
+            
+            case 80://down
+            {
+                num++;
+                if(num>2)
+                {
+                    num=1;
+                }
+                break;
+            }
+
+        }
+
+    }while(press != 13);
+
+    H::setcolor(7);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Process::LogIn_AsAdmin(int cursor)

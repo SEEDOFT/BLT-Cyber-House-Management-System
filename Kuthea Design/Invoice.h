@@ -1,6 +1,6 @@
 #ifndef __INVOICE_H__
 #define __INVOICE_H__
-#include "./Header/HinsyOOPV2"
+#include "../ANT_Header/HinsyOOPV2"
 using namespace HinsyOOP;
 class Invoice{
     public:
@@ -8,7 +8,8 @@ class Invoice{
         static void InvoiceDesign();
 };
 
-void Invoice::InvoiceDesign(){
+void Invoice::InvoiceDesign()
+{
     H::drawBoxDoubleLine(50,5,55,30,3);
 	H::drawBoxSingleLine(52,19,51,15,3);
 	H::drawBoxSingleLine(54,20,47,1,3);
