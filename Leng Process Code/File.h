@@ -1,12 +1,12 @@
 #ifndef ___File_H___
 #define ___File_H___
-
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #include "Food.h"
 #include "Game.h"
 #include "MgUserInfo.h"
 #include <sys/stat.h>
 #include <vector>
-
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 class File {
 private:
     static string dir;
@@ -41,7 +41,7 @@ public:
     static void deleteFile(int n);
     static bool check_file(const string& fileName);
 };
-
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 vector<FoodnDrink> File::fndVector;
 vector<Game> File::gameVector;
 vector<MgUserInfo> File::muiVector;
@@ -64,12 +64,12 @@ string File::UserInfoFile = dir + "/UserInfo.ant";
 //string File::UserInfoBackupFile = dir + "/UserInfoBackup.ant";
 
 string File::currentFile = "";
-
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //bool sortByPriceDesc(const PhoneInfo& a, const PhoneInfo& b)
 //{
 //    return a.getPrice() > b.getPrice();
 //}
-
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 bool File::check_file(const string& fileName) 
 {
     ifstream file(fileName, ios::binary | ios::ate);
@@ -82,7 +82,7 @@ bool File::check_file(const string& fileName)
     file.close();
     return fileSize == 0;
 }
-
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 int File::getMaxID(const string& fileName, int type) 
 {
     ifstream file(fileName, ios::in | ios::binary);
@@ -127,7 +127,7 @@ int File::getMaxID(const string& fileName, int type)
 }
 
 //int maxID = getMaxID(currentFile, n);
-
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void File::insertFile(int n)
 {
 	char press = ' ';
@@ -213,6 +213,7 @@ void File::insertFile(int n)
 	}
 	file.close();
 }
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void File::viewFile(int n)
 {
 	switch(n)
@@ -286,7 +287,7 @@ void File::viewFile(int n)
 	
 	file.close();
 }
-
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void File::searchFile(int n)
 {
     char searchID[5];
@@ -384,7 +385,7 @@ void File::searchFile(int n)
         }
     }
 }
-
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void File::updateFile(int n)
 {
 	char updateID[5];
@@ -489,7 +490,7 @@ void File::updateFile(int n)
 		}
 	}
 }
-
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void File::deleteFile(int n)
 {
     char deleteID[5];
@@ -673,7 +674,7 @@ void File::deleteFile(int n)
         file.close();
     }
 }
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-
-
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif
