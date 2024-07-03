@@ -1,14 +1,9 @@
 #ifndef __USERSIGNUP_H__
 #define __USERSIGNUP_H__
-#include "./Header/HinsyOOPV2"
-using namespace HinsyOOP;
-class UserSignUp{
-    public:
-        static void SignUpAscii();
-        static void SignUpDesign();
-};
-
-void UserSignUp::SignUpAscii(){
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#include"kuntheaDesign.h"
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void THEA::UserSignUp::SignUpTxt(){
     H::foreColor(3); H::gotoxy(40,1); cout<<R"( ____ ___                       _________.__                 ____ ___         )";
     H::foreColor(3); H::gotoxy(40,2); cout<<R"(|    |   \______ ___________   /   _____/|__| ____   ____   |    |   \______  )";
     H::foreColor(3); H::gotoxy(40,3); cout<<R"(|    |   /  ___// __ \_  __ \  \_____  \ |  |/ ___\ /    \  |    |   /\____ \ )";
@@ -18,8 +13,8 @@ void UserSignUp::SignUpAscii(){
 
     H::HLine(30,8,100,7,196);
 }
-
-void UserSignUp::SignUpDesign(){
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void THEA::UserSignUp::SignUp_Design(){
     H::drawBoxDoubleLineWithBG(30,10,100,1,179);
     H::drawBoxDoubleLineWithBG(35,13,90,25,196);
     H::drawBoxDoubleLineWithBG(30,38,100,1,179);
@@ -51,5 +46,5 @@ void UserSignUp::SignUpDesign(){
     H::VLine(112,14,20,199,219);
     H::VLine(117,14,20,199,219);
 }
-
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif

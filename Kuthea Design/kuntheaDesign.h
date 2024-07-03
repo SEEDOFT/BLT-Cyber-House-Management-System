@@ -96,16 +96,26 @@ namespace THEA
         static void Cyber99Txt();
     };
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    class UserSignUp{
+    public:
+        static void SignUpTxt();
+        static void SignUp_Design();
+    };
+    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     /*
                 MAIN CLASS
     */
    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-   class T: public FoodMenu, public DeleteDesign, public GameInputDesign, public ViewGameListDesign, 
-   public ViewDesign, public UpdateDesign, public UpdateGameDesign, public GameMenu, 
-   public SearchGameDesign, public SearchDesign, public InputDesign, public Invoice, public ManageUserInfo, public DeleteGameDesign
-   {
+    class T: 
+
+    public FoodMenu, public DeleteDesign, public GameInputDesign, public ViewGameListDesign, 
+    public ViewDesign, public UpdateDesign, public UpdateGameDesign, public GameMenu, 
+    public SearchGameDesign, public SearchDesign, public InputDesign, public Invoice, public ManageUserInfo, public DeleteGameDesign,
+    public UserSignUp
+
+    {
         public:
-   };
+    };
     
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
