@@ -1,47 +1,54 @@
 #ifndef ___File_H___
 #define ___File_H___
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-#include "Food.h"
-#include "Game.h"
-#include "MgUserInfo.h"
+
+#include "MgUserPayment.h"
 #include <sys/stat.h>
 #include <vector>
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-class File {
-private:
-    static string dir;
+#include <ctime>
+#include <cmath>
 
-    static string FoodnDrinkFile;
-    static string Backup;
-
-    static string GameFile;
-//    static string GameBackupFile;
-
-    static string UserInfoFile;
-//    static string UserInfoBackupFile;
-
-    static int getMaxID(const string& fileName, int type);
-    
-    static vector<FoodnDrink> fndVector;
-    static vector<Game> gameVector;
-    static vector<MgUserInfo> muiVector;
-
-    static FoodnDrink fnd;
-    static Game game;
-    static MgUserInfo mui;
-    
-    static fstream file;
-    static string  currentFile;
-
-public:
-    static void insertFile(int n);
-    static void viewFile(int n);
-    static void searchFile(int n);
-    static void updateFile(int n);
-    static void deleteFile(int n);
-    static bool check_file(const string& fileName);
+class File{
+	private:
+	    static string dir;
+	    static string FoodnDrinkFile;
+	    static string Backup;
+	    static string GameFile;
+	    static string UserInfoFile;
+		static string MgUserPaymentFile;
+	
+	    static int getMaxID(const string& fileName, int type);
+	    
+	    
+	    static vector<FoodnDrink> fndVector;
+	    static vector<Game> gameVector;
+	    static vector<MgUserInfo> muiVector;
+	
+	    static FoodnDrink fnd;
+	    static Game game;
+	    static MgUserInfo mui;
+	    
+	    static fstream file;
+	    static string  currentFile;
+	
+	public:
+	    static void insertFile(int n);
+	    static void viewFile(int n);
+	    static void searchFile(int n);
+	    static void updateFile(int n);
+	    static void deleteFile(int n);
+	    static bool check_file(const string& fileName);
+	    static void viewProfile(const char * username, const char* password);
+	    
+	    static void loginTimeToFile(const char* username, const char* password);
+	    static void logoutTimeToFile(const char* username, const char* password);
+	    static void readLogin(const char* username, const char* password);
+	    static void readLogout(const char* username, const char* password);
+	    static void user_login();
+	    static void buyMoreTime(const char* username, const char* password);
+	    static void invoice(const char* username, const char* password);
+	    static void calculateTime(const char* username, const char* password);
 };
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
 vector<FoodnDrink> File::fndVector;
 vector<Game> File::gameVector;
 vector<MgUserInfo> File::muiVector;
@@ -53,23 +60,18 @@ MgUserInfo File::mui;
 fstream File::file;
 
 string File::dir = "Data";
-
 string File::FoodnDrinkFile = dir + "/FoodnDrink.ant";
 string File::Backup = dir + "/BackUpFile.ant";
-
 string File::GameFile = dir + "/Game.ant";
-//string File::GameBackupFile = dir + "/GameBackupFile.ant";
-
 string File::UserInfoFile = dir + "/UserInfo.ant";
-//string File::UserInfoBackupFile = dir + "/UserInfoBackup.ant";
-
+string File::MgUserPaymentFile = dir + "/MgUserPayment.ant";
 string File::currentFile = "";
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
 //bool sortByPriceDesc(const PhoneInfo& a, const PhoneInfo& b)
 //{
 //    return a.getPrice() > b.getPrice();
 //}
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
 bool File::check_file(const string& fileName) 
 {
     ifstream file(fileName, ios::binary | ios::ate);
@@ -82,7 +84,7 @@ bool File::check_file(const string& fileName)
     file.close();
     return fileSize == 0;
 }
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
 int File::getMaxID(const string& fileName, int type) 
 {
     ifstream file(fileName, ios::in | ios::binary);
@@ -90,7 +92,6 @@ int File::getMaxID(const string& fileName, int type)
 
     if (type == 1) 
 	{
-//        FoodnDrink fnd;
         while (file.read((char*)&fnd, sizeof(fnd))) 
 		{
             if (fnd.getID() > maxID) 
@@ -101,7 +102,6 @@ int File::getMaxID(const string& fileName, int type)
     }
     else if (type == 2) 
 	{
-//        Game game;
         while (file.read((char*)&game, sizeof(game))) 
 		{
             if (game.getID() > maxID) 
@@ -112,7 +112,6 @@ int File::getMaxID(const string& fileName, int type)
     }
     else if (type == 3) 
 	{
-//        MgUserInfo mui;
         while (file.read((char*)&mui, sizeof(mui))) 
 		{
             if (mui.getID() > maxID) 
@@ -126,8 +125,6 @@ int File::getMaxID(const string& fileName, int type)
     return maxID;
 }
 
-//int maxID = getMaxID(currentFile, n);
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void File::insertFile(int n)
 {
 	char press = ' ';
@@ -165,14 +162,14 @@ void File::insertFile(int n)
 		}
 		else if(n == 2)
 		{
-			game.setID(maxID + 1);
+			game.setID(maxID + i);
 			cout << "ID : " << game.getID() << endl;
 			game.input();
 			gameVector.push_back(game);
 		}
 		else if(n == 3)
 		{
-			mui.setID(maxID + 1);
+			mui.setID(maxID + i);
 			cout << "ID : " << mui.getID() << endl;
 			mui.input();
 			muiVector.push_back(mui);
@@ -213,7 +210,6 @@ void File::insertFile(int n)
 	}
 	file.close();
 }
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void File::viewFile(int n)
 {
 	switch(n)
@@ -262,19 +258,6 @@ void File::viewFile(int n)
 			}
 			else if(n == 3)
 			{
-		//		file.open(currentFile, ios::in | ios::binary);
-		//		if(!file.is_open())
-		//		{
-		//			cout << "File Curropted" << endl;
-		//		}
-//				if(!check_file(currentFile))
-//				{
-//					
-//				}	
-//				else
-//				{
-//					cout << "File has no data" << endl;
-//				}
 				file.read((char*)&mui,sizeof(mui));
 				while(file.eof() == false)
 				{
@@ -287,7 +270,7 @@ void File::viewFile(int n)
 	
 	file.close();
 }
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
 void File::searchFile(int n)
 {
     char searchID[5];
@@ -319,12 +302,17 @@ void File::searchFile(int n)
         }
         else
         {
+        	file.close();
             while(1)
             {
+            	file.open(currentFile, ios::in | ios::binary);
                 isfound = false;
                 cout << "Enter Food ID : "; H::inputNumber(searchID, sizeof(searchID)); cout << endl;
-                file.clear();  // Clear any potential eof or fail flags
-                file.seekg(0, ios::beg);  // Reset file pointer to beginning
+                // can  use this instread of open again
+//                ---------------------------------------------------------
+//                file.clear();  // Clear any potential eof or fail flags
+//                file.seekg(0);  // Reset file pointer to beginning
+//                ---------------------------------------------------------
                 
                 if(n == 1)
                 {
@@ -381,11 +369,25 @@ void File::searchFile(int n)
                     file.close();
                     break;
                 }
+                file.close();
             }
         }
     }
 }
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+void File::viewProfile(const char * username, const char* password)
+{
+	file.open(UserInfoFile, ios::in | ios::binary);
+	while(file.read((char*)&mui,sizeof(mui)))
+	{
+		if(strcmp(username, mui.getUsername()) == 0 && strcmp(password, mui.getPassword()) == 0)
+		{
+			mui.output();
+		}
+	}
+	file.close();
+}
+
 void File::updateFile(int n)
 {
 	char updateID[5];
@@ -490,14 +492,13 @@ void File::updateFile(int n)
 		}
 	}
 }
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
 void File::deleteFile(int n)
 {
     char deleteID[5];
     bool isfound = false;
     char press = ' ';
 
-    // Set the current file based on the input 'n'
     switch (n)
     {
         case 1:
@@ -511,7 +512,6 @@ void File::deleteFile(int n)
             break;
     }
 
-    // Open the file to check its status
     file.open(currentFile, ios::in | ios::binary);
     if (!file.is_open())
     {
@@ -524,7 +524,6 @@ void File::deleteFile(int n)
     }
     else
     {
-        // Read the contents of the file into the respective vectors
         switch (n)
         {
             case 1:
@@ -558,7 +557,6 @@ void File::deleteFile(int n)
 
         file.close();
 
-        // Main loop to handle deletion of records
         while (true)
         {
             isfound = false;
@@ -634,11 +632,10 @@ void File::deleteFile(int n)
             }
         }
 
-        // Open the file for writing and update its contents
         file.open(currentFile, ios::out | ios::binary | ios::trunc); // when the file is opened, the old contents are immediately removed.
         if (!file.is_open())
         {
-            cout << "Error opening file for writing" << endl;
+            cout << "File Curropted" << endl;
         }
         else
         {
@@ -674,7 +671,336 @@ void File::deleteFile(int n)
         file.close();
     }
 }
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void File::loginTimeToFile(const char* username, const char* password)
+{
+    time_t now = time(0);
+    tm *ltm = localtime(&now);
+    string tempFileName = "Data/temp.ant";
+
+    file.open(UserInfoFile, ios::in | ios::binary);
+    fstream tempFile(tempFileName, ios::out | ios::binary);
+    if (file.is_open()) 
+    {
+        while (file.read((char*)&mui, sizeof(mui)))
+        {
+            if (strcmp(username, mui.getUsername()) == 0 && strcmp(password, mui.getPassword()) == 0)
+            {
+                mui.setLoginHour(ltm->tm_hour);
+                mui.setLoginMn(ltm->tm_min);
+                tempFile.write((char*)&mui, sizeof(mui));
+                break;
+            }
+        }
+        file.close();
+    }
+    else 
+    {
+        cout << "Unable to open file" << endl;
+    }
+    file.close();
+    tempFile.close();
+    remove(UserInfoFile.c_str());
+    rename(tempFileName.c_str(), UserInfoFile.c_str());
+}
+
+void File::logoutTimeToFile(const char* username, const char* password)
+{
+    time_t now = time(0);
+    tm *ltm = localtime(&now);
+    string tempFileName = "Data/temp.ant";
+
+    file.open(UserInfoFile, ios::in | ios::binary);
+    fstream tempFile(tempFileName, ios::out | ios::binary);
+    if (!file.is_open() || !tempFile.is_open())
+    {
+        cout << "File Corrupted" << endl;
+    }
+	else
+    {
+        while (file.read((char*)&mui, sizeof(mui)))
+        {
+            if (strcmp(username, mui.getUsername()) == 0 && strcmp(password, mui.getPassword()) == 0)
+            {
+                mui.setLogoutHour(ltm->tm_hour);
+                mui.setLogoutMn(ltm->tm_min);
+//                file.seekp(-static_cast<int>(sizeof(mui)), ios::cur);  // Move the write pointer back to overwrite the current record
+                tempFile.write((char*)&mui, sizeof(mui));
+                break;
+            }
+        }
+    }
+
+    file.close();
+    tempFile.close();
+    remove(UserInfoFile.c_str());
+    rename(tempFileName.c_str(), UserInfoFile.c_str());
+}
+
+void File::readLogin(const char* username, const char* password) 
+{
+    file.open("Data/LoginTime.bin", ios::in | ios::binary);
+    if (file.is_open()) 
+    {
+        while (file.read((char*)&mui, sizeof(mui)))
+        {
+            if (strcmp(username, mui.getUsername()) == 0 && strcmp(password, mui.getPassword()) == 0)
+            {
+                cout << "Login Hour: " << mui.getLoginHour() << endl;
+                cout << "Login Minute: " << mui.getLoginMn() << endl;
+                break;
+            }
+        }
+        file.close();
+    } 
+    else 
+    {
+        cout << "Unable to open file" << endl;
+    }
+}
+
+void File::readLogout(const char* username, const char* password) 
+{
+    file.open("Data/LogoutTime.bin", ios::in | ios::binary);
+    if (file.is_open()) 
+    {
+        while (file.read((char*)&mui, sizeof(mui)))
+        {
+            if (strcmp(username, mui.getUsername()) == 0 && strcmp(password, mui.getPassword()) == 0)
+            {
+                cout << "Logout Hour: " << mui.getLogoutHour() << endl;
+                cout << "Logout Minute: " << mui.getLogoutMn() << endl;
+                break;
+            }
+        }
+        file.close();
+    } 
+    else 
+    {
+        cout << "Unable to open file" << endl;
+    }
+}
+
+void File::user_login()
+{
+    char username[20];
+    char password[20];
+    bool islogin = false;
+    char press;
+    
+    time_t now = time(0);
+    tm *ltm = localtime(&now);
+
+    while (true)
+    {
+        cout << "Enter Username: "; H::inputLetter(username,sizeof(username)); cout << endl;
+        cout << "Enter Password: "; H::hidePassword(password,sizeof(password)); cout << endl;
+
+        file.open(UserInfoFile, ios::in | ios::binary);
+        if (!file.is_open())
+        {
+            cout << "File Corrupted" << endl;
+        }
+		else
+		{
+			muiVector.clear();
+	        while (file.read((char*)&mui, sizeof(MgUserInfo))) 
+			{
+	            muiVector.push_back(mui);
+	        }
+			file.close();
+	
+	        for (const auto& user : muiVector) 
+			{
+	            if (strcmp(username, user.getUsername()) == 0 && strcmp(password, user.getPassword()) == 0) 
+				{
+	                islogin = true;
+	                break;
+	            }
+	        }
+
+	        if (islogin) 
+			{
+				loginTimeToFile(username,password);
+	            cout << "Login successful." << endl;
+	            break;
+	        } 
+			else 
+			{
+	            cout << "Login failed. Incorrect username or password." << endl;
+	            cout << "Press [Any Key] to login again or [ESC] to return" << endl;
+	            press = getch();
+	            if (press == 27) 
+				{
+	                break;
+	            }
+	        }
+		}
+    }
+    cout << "[ 1 ] . VIEW PROFILE" << endl;
+    cout << "[ 2 ] . BUY TIME" << endl;
+    cout << "[ 3 ] . BUY SNACK" << endl;
+    cout << "[ 4 ] . INVOICE" << endl;
+    cout << "[ 5 ] . LOGOUT" << endl;
+    cout << "[ 6 ] . EXIT" << endl;
+    cout << "Choose option" << endl;
+    press = getch();
+    switch(press)
+    {
+    	case '1':
+    		viewProfile(username, password);
+    		break;
+    	case '2':
+    		buyMoreTime(username, password);
+    		break;
+    	case '3':
+    		break;
+    	case '4':
+    		invoice(username, password);
+    		break;
+    	case '5':
+            logoutTimeToFile(username, password);
+            calculateTime(username, password);
+			user_login();
+			break;
+		case '6':
+			logoutTimeToFile(username, password);
+			calculateTime(username, password);
+            exit(0);                          
+            break;
+	}
+}
+
+void File::buyMoreTime(const char* username, const char* password)
+{
+    char hours[5];
+    char creditCard[17];
+    bool isfound = false;
+    string tempFileName = "Data/temp.ant";
+
+    file.open(UserInfoFile, ios::in | ios::binary);
+    fstream tempFile(tempFileName, ios::out | ios::binary);
+
+    if (!file.is_open() || !tempFile.is_open())
+    {
+        cout << "File Corrupted" << endl;
+    }
+    else
+    {
+    	cout << "Enter hours you want to buy: "; H::inputNumber(hours, sizeof(hours)); cout << endl;
+
+	    while (file.read((char*)&mui, sizeof(MgUserInfo)))
+	    {
+	        if (strcmp(username, mui.getUsername()) == 0 && strcmp(password, mui.getPassword()) == 0)
+	        {
+	            isfound = true;
+	            mui.setTime(atof(hours));
+	            mui.setBuyingTime(atof(hours));
+	        }
+	        tempFile.write((char*)&mui, sizeof(MgUserInfo));
+	    }
+	
+	    cout << "Enter credit card: "; H::inputNumber(creditCard, sizeof(creditCard)); cout << endl;
+	
+	    if (isfound)
+	    {
+	        cout << "Purchase successful" << endl;
+	    }
+	}
+
+    file.close();
+    tempFile.close();
+    remove(UserInfoFile.c_str());
+    rename(tempFileName.c_str(), UserInfoFile.c_str());
+}
+
+void File::invoice(const char* username, const char* password) 
+{
+    file.open(UserInfoFile, ios::in | ios::binary);
+
+    if (!file.is_open()) 
+	{
+        cout << "File Corrupted" << endl;
+    }
+	else
+	{
+		while (file.read((char*)&mui, sizeof(MgUserInfo))) 
+		{
+	        if (strcmp(username, mui.getUsername()) == 0 && strcmp(password, mui.getPassword()) == 0) 
+			{
+	            cout << "Added Time: " << mui.getBuyedTime() << endl;
+	        }
+	    }
+	}
+
+    file.close();
+}
+
+void File::calculateTime(const char* username, const char* password)
+{
+    bool isfound = false;
+    string tempFileName = "Data/temp.ant";
+
+    file.open(UserInfoFile, ios::in | ios::binary);
+    fstream tempFile(tempFileName, ios::out | ios::binary);
+
+    if (!file.is_open() || !tempFile.is_open())
+    {
+        cout << "File Corrupted" << endl;
+        return;
+    }
+
+    while (file.read((char*)&mui, sizeof(MgUserInfo)))
+    {
+        if (strcmp(username, mui.getUsername()) == 0 && strcmp(password, mui.getPassword()) == 0)
+        {
+            isfound = true;
+
+            double loginHour = mui.getLoginHour();
+            double loginMn = mui.getLoginMn();
+            double logoutHour = mui.getLogoutHour();
+            double logoutMn = mui.getLogoutMn();
+
+            double loginTime = loginHour * 60 + loginMn;
+            double logoutTime = logoutHour * 60 + logoutMn;
+            
+            double usedTimeMinutes = logoutTime - loginTime;
+
+            if (usedTimeMinutes < 0)
+            {
+                usedTimeMinutes += 24 * 60;
+            }
+            double remainingTime = mui.getTime() - usedTimeMinutes;
+
+            if (remainingTime < 0)
+            {
+                remainingTime = 0;
+            }
+            mui.setnTime(remainingTime);
+            cout << "Debug Output:" << endl;
+            cout << "loginHour: " << loginHour << ", loginMn: " << loginMn << endl;
+            cout << "logoutHour: " << logoutHour << ", logoutMn: " << logoutMn << endl;
+            cout << "loginTime (minutes): " << loginTime << ", logoutTime (minutes): " << logoutTime << endl;
+            cout << "usedTime (minutes): " << usedTimeMinutes << endl;
+            cout << "remainingTime: " << remainingTime << endl;
+        }
+        tempFile.write((char*)&mui, sizeof(MgUserInfo));
+    }
+
+    if (isfound)
+    {
+        cout << "Time calculation successful" << endl;
+    }
+    else
+    {
+        cout << "User not found" << endl;
+    }
+
+    file.close();
+    tempFile.close();
+    remove(UserInfoFile.c_str());
+    rename(tempFileName.c_str(), UserInfoFile.c_str());
+}
+
+
 #endif
