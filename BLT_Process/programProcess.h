@@ -857,14 +857,14 @@ void Process::ManageUserPayment()
     outline();
 }
 /*********************************************************/
-void Process::SubManageUserPayment(int num)
-{
-    H::setcolor(7);
-    H::cls();
-    H::setcursor(0,0);
-    outline();
+// void Process::SubManageUserPayment(int num)
+// {
+//     H::setcolor(7);
+//     H::cls();
+//     H::setcursor(0,0);
+//     outline();
 
-}
+// }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Process::FoodAndDrinkLst()
