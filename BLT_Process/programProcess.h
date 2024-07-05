@@ -12,8 +12,6 @@ class Process: public Design{
     private:
         static const char* getOpenCommand();
     public:
-        static void GROUP1_ASSIGNMENT();
-
         static void Admin_And_User();
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         static void LogIn_AsAdmin(int cursor);
@@ -387,11 +385,11 @@ void Process::Admin_ChoosingOpt(int num)
             break;
 
         case 4:
-            ManageUserPayment();
+            ManageUserInfo();
             break;
 
         case 5:
-            ManageUserInfo();
+           ManageUserPayment();
             break;
 
         case 6:
@@ -509,7 +507,9 @@ void Process::SubGameLst(int num)
     {
         //input case
         case 1:
-        {
+        {   
+            B::InputGameTxt();
+            B::InputGame_Design();
 
             while(1)
             {
@@ -720,6 +720,8 @@ void Process::SubManageUserInfo(int num)
         //input case
         case 1:
         {
+            B::SignUpTxt();
+            B::SignUp_Design();
 
             while(1)
             {
@@ -743,6 +745,8 @@ void Process::SubManageUserInfo(int num)
         //Display
         case 2:
         {
+            B::ViewUserInfoTxt();
+            B::ViewUserInfo_Design();
 
             while(1)
             {
@@ -762,7 +766,7 @@ void Process::SubManageUserInfo(int num)
         }
         break;
 
-        //Search
+        //Edit
         case 3:
         {
 
@@ -806,7 +810,7 @@ void Process::SubManageUserInfo(int num)
         }
         break;
 
-        //back
+        //short
         case 5:
         {
             while(1)
@@ -1064,18 +1068,8 @@ void Process::SubFoodAndDrink(int num)
 
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void Process::GROUP1_ASSIGNMENT()
-{
-    // DisableMinimizeButton();
-    DisableMaximizeButton();
-    // DisableCloseButton();
 
-    interface_design();//Interface Design
 
-    Admin_And_User();
-  
-}
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 /*
 

@@ -1,14 +1,9 @@
 #ifndef __DELETEUSERINFO_H__
 #define __DELETEUSERINFO_H__
-#include "./Header/HinsyOOPV2"
-using namespace HinsyOOP;
-class DeleteUserInfo{
-    public:
-        static void deleteUserInfoAscii();
-        static void deleteUserDesign();
-};
-
-void DeleteUserInfo::deleteUserInfoAscii(){
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#include "kuntheaDesign.h"
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void BLT::DeleteUserInfo::DeleteUserInfoTxt(){
     H::foreColor(3); H::gotoxy(35,1); cout<<R"(________         .__          __            ____ ___                     .___        _____       )";
     H::foreColor(3); H::gotoxy(35,2); cout<<R"(\______ \   ____ |  |   _____/  |_  ____   |    |   \______ ___________  |   | _____/ ____\____  )";
     H::foreColor(3); H::gotoxy(35,3); cout<<R"( |    |  \_/ __ \|  | _/ __ \   __\/ __ \  |    |   /  ___// __ \_  __ \ |   |/    \   __\/  _ \ )";
@@ -17,8 +12,8 @@ void DeleteUserInfo::deleteUserInfoAscii(){
     H::foreColor(4); H::gotoxy(35,6); cout<<R"(        \/     \/          \/          \/               \/     \/                 \/             )";
     H::HLine(25,8,115,7,196);
 }
-
-void DeleteUserInfo::deleteUserDesign(){
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void BLT::DeleteUserInfo::DeleteUser_Design(){
     H::drawBoxSingleLineWithBG(20,10,120,1,179);
     H::VLine(70,12,3,7,221);
     H::VLine(90,12,3,7,221);
@@ -48,5 +43,5 @@ void DeleteUserInfo::deleteUserDesign(){
     H::gotoxy(58,34); H::foreColor(3); cout<<"Press [ENTER] To Continues Or [ESC] To Exit";
     H::foreColor(7);
 }
-
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif

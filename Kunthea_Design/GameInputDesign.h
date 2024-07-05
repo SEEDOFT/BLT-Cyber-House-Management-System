@@ -18,10 +18,12 @@ void BLT::GameInputDesign::InputGameTxt()
 void BLT::GameInputDesign::InputGame_Design()
 {
     H::drawBoxDoubleLineWithBG(30,10,100,1,196);
+
     for(int i=0; i<3; i++){
         H::VLine(70,12,i+1,7,221); H::delay(100);
         H::VLine(90,12,i+1,7,221); H::delay(100);
     }
+    
     H::drawBoxDoubleLineWithBG(30,16,100,20,187);
     H::drawBoxDoubleLineWithBG(35,19,30,15,196);
     H::drawBoxDoubleLineWithBG(89,19,30,15,196);

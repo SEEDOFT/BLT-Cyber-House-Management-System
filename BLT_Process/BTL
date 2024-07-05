@@ -17,6 +17,8 @@
 #include"../Kunthea_Design/UserSignUp.h"
 #include"../Kunthea_Design/ViewDesign.h"
 #include"../Kunthea_Design/ViewGameList.h"
+#include"../Kunthea_Design/ViewUserInfoDesign.h"
+#include"../Kunthea_Design/DeleteUserInfo.h"
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 namespace BLT
 {
@@ -26,7 +28,7 @@ namespace BLT
     public ViewDesign, public UpdateDesign, public UpdateGameDesign, public GameMenu, 
     public SearchGameDesign, public SearchDesign, public InputDesign, public Invoice, 
     public ManageUserInfo, public DeleteGameDesign,
-    public UserSignUp
+    public UserSignUp, public ViewUserInfoDesign, public DeleteUserInfo
 
     {
         public:
