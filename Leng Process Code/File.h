@@ -886,10 +886,10 @@ void File::buyMoreTime(const char *username, const char *password)
     char hours[5];
     char creditCard[17];
     bool isfound = false;
-    string tempFileName = "Data/temp.ant";
+    // string tempFileName = "Data/temp.ant";
 
     file.open(UserInfoFile, ios::in | ios::binary);
-    fstream tempFile(tempFileName, ios::out | ios::binary);
+    fstream tempFile(Backup, ios::out | ios::binary);
 
     if (!file.is_open() || !tempFile.is_open())
     {
@@ -956,7 +956,7 @@ void File::calculateTime(const char *username, const char *password)
     // string tempFileName = "Data/temp.ant";
 
     file.open(UserInfoFile, ios::in | ios::binary);
-    fstream tempFile(backupFile, ios::out | ios::binary);
+    fstream tempFile(Backup, ios::out | ios::binary);
 
     if (!file.is_open() || !tempFile.is_open())
     {
@@ -1013,7 +1013,7 @@ void File::calculateTime(const char *username, const char *password)
     file.close();
     tempFile.close();
     remove(UserInfoFile.c_str());
-    rename(backupFile.c_str(), UserInfoFile.c_str());
+    rename(Backup.c_str(), UserInfoFile.c_str());
 }
 
 #endif
