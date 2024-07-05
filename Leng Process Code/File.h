@@ -7,46 +7,46 @@
 #include <ctime>
 #include <cmath>
 
-class File{
-	private:
-	    static string dir;
-	    static string FoodnDrinkFile;
-	    static string Backup;
-	    static string GameFile;
-	    static string UserInfoFile;
-		static string MgUserPaymentFile;
-	
-	    static int getMaxID(const string& fileName, int type);
-	    
-	    
-	    static vector<FoodnDrink> fndVector;
-	    static vector<Game> gameVector;
-	    static vector<MgUserInfo> muiVector;
-	
-	    static FoodnDrink fnd;
-	    static Game game;
-	    static MgUserInfo mui;
-	    
-	    static fstream file;
-	    static string  currentFile;
-	
-	public:
-	    static void insertFile(int n);
-	    static void viewFile(int n);
-	    static void searchFile(int n);
-	    static void updateFile(int n);
-	    static void deleteFile(int n);
-	    static bool check_file(const string& fileName);
-	    static void viewProfile(const char * username, const char* password);
-	    
-	    static void loginTimeToFile(const char* username, const char* password);
-	    static void logoutTimeToFile(const char* username, const char* password);
-	    static void readLogin(const char* username, const char* password);
-	    static void readLogout(const char* username, const char* password);
-	    static void user_login();
-	    static void buyMoreTime(const char* username, const char* password);
-	    static void invoice(const char* username, const char* password);
-	    static void calculateTime(const char* username, const char* password);
+class File
+{
+private:
+    static string dir;
+    static string FoodnDrinkFile;
+    static string Backup;
+    static string GameFile;
+    static string UserInfoFile;
+    static string MgUserPaymentFile;
+
+    static int getMaxID(const string &fileName, int type);
+
+    static vector<FoodnDrink> fndVector;
+    static vector<Game> gameVector;
+    static vector<MgUserInfo> muiVector;
+
+    static FoodnDrink fnd;
+    static Game game;
+    static MgUserInfo mui;
+
+    static fstream file;
+    static string currentFile;
+
+public:
+    static void insertFile(int n);
+    static void viewFile(int n);
+    static void searchFile(int n);
+    static void updateFile(int n);
+    static void deleteFile(int n);
+    static bool check_file(const string &fileName);
+    static void viewProfile(const char *username, const char *password);
+
+    static void loginTimeToFile(const char *username, const char *password);
+    static void logoutTimeToFile(const char *username, const char *password);
+    static void readLogin(const char *username, const char *password);
+    static void readLogout(const char *username, const char *password);
+    static void user_login();
+    static void buyMoreTime(const char *username, const char *password);
+    static void invoice(const char *username, const char *password);
+    static void calculateTime(const char *username, const char *password);
 };
 
 vector<FoodnDrink> File::fndVector;
@@ -67,16 +67,16 @@ string File::UserInfoFile = dir + "/UserInfo.ant";
 string File::MgUserPaymentFile = dir + "/MgUserPayment.ant";
 string File::currentFile = "";
 
-//bool sortByPriceDesc(const PhoneInfo& a, const PhoneInfo& b)
+// bool sortByPriceDesc(const PhoneInfo& a, const PhoneInfo& b)
 //{
-//    return a.getPrice() > b.getPrice();
-//}
+//     return a.getPrice() > b.getPrice();
+// }
 
-bool File::check_file(const string& fileName) 
+bool File::check_file(const string &fileName)
 {
     ifstream file(fileName, ios::binary | ios::ate);
-    if (!file) 
-	{
+    if (!file)
+    {
         return false;
     }
 
@@ -85,37 +85,37 @@ bool File::check_file(const string& fileName)
     return fileSize == 0;
 }
 
-int File::getMaxID(const string& fileName, int type) 
+int File::getMaxID(const string &fileName, int type)
 {
     ifstream file(fileName, ios::in | ios::binary);
     int maxID = 999;
 
-    if (type == 1) 
-	{
-        while (file.read((char*)&fnd, sizeof(fnd))) 
-		{
-            if (fnd.getID() > maxID) 
-			{
+    if (type == 1)
+    {
+        while (file.read((char *)&fnd, sizeof(fnd)))
+        {
+            if (fnd.getID() > maxID)
+            {
                 maxID = fnd.getID();
             }
         }
     }
-    else if (type == 2) 
-	{
-        while (file.read((char*)&game, sizeof(game))) 
-		{
-            if (game.getID() > maxID) 
-			{
+    else if (type == 2)
+    {
+        while (file.read((char *)&game, sizeof(game)))
+        {
+            if (game.getID() > maxID)
+            {
                 maxID = game.getID();
             }
         }
     }
-    else if (type == 3) 
-	{
-        while (file.read((char*)&mui, sizeof(mui))) 
-		{
-            if (mui.getID() > maxID) 
-			{
+    else if (type == 3)
+    {
+        while (file.read((char *)&mui, sizeof(mui)))
+        {
+            if (mui.getID() > maxID)
+            {
                 maxID = mui.getID();
             }
         }
@@ -127,148 +127,148 @@ int File::getMaxID(const string& fileName, int type)
 
 void File::insertFile(int n)
 {
-	char press = ' ';
-	int i = 1;
-	
-	struct stat sb;
-	if(stat(dir.c_str(), &sb) != 0)
-	{
-		mkdir(dir.c_str());
-	}
-	
-	switch(n)
-	{
-		case 1:
-			currentFile = FoodnDrinkFile;
-			break;
-		case 2:
-			currentFile = GameFile;
-			break;
-		case 3:
-			currentFile = UserInfoFile;
-			break;
-	}
-	
-	while(1)
-	{
-		int maxID = getMaxID(currentFile, n);
-		
-		if(n == 1)
-		{
-			fnd.setID(maxID + i);
-	        cout << "ID : " << fnd.getID() << endl;
-	        fnd.input();
-			fndVector.push_back(fnd);
-		}
-		else if(n == 2)
-		{
-			game.setID(maxID + i);
-			cout << "ID : " << game.getID() << endl;
-			game.input();
-			gameVector.push_back(game);
-		}
-		else if(n == 3)
-		{
-			mui.setID(maxID + i);
-			cout << "ID : " << mui.getID() << endl;
-			mui.input();
-			muiVector.push_back(mui);
-		}
-		cout << "press any key to input again and [Enter] to stop" << endl;
-		press = getch();
-		if(press == 13)
-		{
-			break;
-		}
-		i++;
-	}
-	
-	file.open(currentFile, ios::out | ios::app | ios::binary);
-	if(n == 1)
-	{
-		for(const auto & insert : fndVector)
-		{
-			file.write((char*)&insert, sizeof(FoodnDrink));
-		}
-		fndVector.clear();
-	}
-	else if(n == 2)
-	{
-		for(const auto & insert : gameVector)
-		{
-			file.write((char*)&insert, sizeof(Game));
-		}
-		gameVector.clear();
-	}
-	else if(n == 3)
-	{
-		for(const auto & insert : muiVector)
-		{
-			file.write((char*)&insert, sizeof(MgUserInfo));
-		}
-		muiVector.clear();
-	}
-	file.close();
+    char press = ' ';
+    int i = 1;
+
+    struct stat sb;
+    if (stat(dir.c_str(), &sb) != 0)
+    {
+        mkdir(dir.c_str());
+    }
+
+    switch (n)
+    {
+    case 1:
+        currentFile = FoodnDrinkFile;
+        break;
+    case 2:
+        currentFile = GameFile;
+        break;
+    case 3:
+        currentFile = UserInfoFile;
+        break;
+    }
+
+    while (1)
+    {
+        int maxID = getMaxID(currentFile, n);
+
+        if (n == 1)
+        {
+            fnd.setID(maxID + i);
+            cout << "ID : " << fnd.getID() << endl;
+            fnd.input();
+            fndVector.push_back(fnd);
+        }
+        else if (n == 2)
+        {
+            game.setID(maxID + i);
+            cout << "ID : " << game.getID() << endl;
+            game.input();
+            gameVector.push_back(game);
+        }
+        else if (n == 3)
+        {
+            mui.setID(maxID + i);
+            cout << "ID : " << mui.getID() << endl;
+            mui.input();
+            muiVector.push_back(mui);
+        }
+        cout << "press any key to input again and [Enter] to stop" << endl;
+        press = getch();
+        if (press == 13)
+        {
+            break;
+        }
+        i++;
+    }
+
+    file.open(currentFile, ios::out | ios::app | ios::binary);
+    if (n == 1)
+    {
+        for (const auto &insert : fndVector)
+        {
+            file.write((char *)&insert, sizeof(FoodnDrink));
+        }
+        fndVector.clear();
+    }
+    else if (n == 2)
+    {
+        for (const auto &insert : gameVector)
+        {
+            file.write((char *)&insert, sizeof(Game));
+        }
+        gameVector.clear();
+    }
+    else if (n == 3)
+    {
+        for (const auto &insert : muiVector)
+        {
+            file.write((char *)&insert, sizeof(MgUserInfo));
+        }
+        muiVector.clear();
+    }
+    file.close();
 }
 void File::viewFile(int n)
 {
-	switch(n)
-	{
-		case 1:
-			currentFile = FoodnDrinkFile;
-			break;
-		case 2:
-			currentFile = GameFile;
-			break;
-		case 3:
-			currentFile = UserInfoFile;
-			break;
-	}
-	
-	file.open(currentFile, ios::in | ios::binary);
-	if(!file.is_open())
-	{
-		cout << "File Curropted" << endl;
-	}
-	else
-	{
-		if(check_file(currentFile))
-		{
-			cout << "File has no data" << endl;
-		}
-		else
-		{
-			if(n == 1)
-			{
-				file.read((char*)&fnd,sizeof(fnd));
-				while(file.eof() == false)
-				{
-					fnd.output();
-					file.read((char*)&fnd,sizeof(fnd));
-				}
-			}
-			else if(n == 2)
-			{
-				file.read((char*)&game,sizeof(game));
-				while(file.eof() == false)
-				{
-					game.output();
-					file.read((char*)&game,sizeof(game));
-				}
-			}
-			else if(n == 3)
-			{
-				file.read((char*)&mui,sizeof(mui));
-				while(file.eof() == false)
-				{
-					mui.output();
-					file.read((char*)&mui,sizeof(mui));
-				}
-			}	
-		}
-	}
-	
-	file.close();
+    switch (n)
+    {
+    case 1:
+        currentFile = FoodnDrinkFile;
+        break;
+    case 2:
+        currentFile = GameFile;
+        break;
+    case 3:
+        currentFile = UserInfoFile;
+        break;
+    }
+
+    file.open(currentFile, ios::in | ios::binary);
+    if (!file.is_open())
+    {
+        cout << "File Curropted" << endl;
+    }
+    else
+    {
+        if (check_file(currentFile))
+        {
+            cout << "File has no data" << endl;
+        }
+        else
+        {
+            if (n == 1)
+            {
+                file.read((char *)&fnd, sizeof(fnd));
+                while (file.eof() == false)
+                {
+                    fnd.output();
+                    file.read((char *)&fnd, sizeof(fnd));
+                }
+            }
+            else if (n == 2)
+            {
+                file.read((char *)&game, sizeof(game));
+                while (file.eof() == false)
+                {
+                    game.output();
+                    file.read((char *)&game, sizeof(game));
+                }
+            }
+            else if (n == 3)
+            {
+                file.read((char *)&mui, sizeof(mui));
+                while (file.eof() == false)
+                {
+                    mui.output();
+                    file.read((char *)&mui, sizeof(mui));
+                }
+            }
+        }
+    }
+
+    file.close();
 }
 
 void File::searchFile(int n)
@@ -276,95 +276,97 @@ void File::searchFile(int n)
     char searchID[5];
     bool isfound = false;
     char press = ' ';
-    
-    switch(n)
+
+    switch (n)
     {
-        case 1:
-            currentFile = FoodnDrinkFile;
-            break;
-        case 2:
-            currentFile = GameFile;
-            break;
-        case 3:
-            currentFile = UserInfoFile;
-            break;
+    case 1:
+        currentFile = FoodnDrinkFile;
+        break;
+    case 2:
+        currentFile = GameFile;
+        break;
+    case 3:
+        currentFile = UserInfoFile;
+        break;
     }
     file.open(currentFile, ios::in | ios::binary);
-    if(!file.is_open())
+    if (!file.is_open())
     {
         cout << "File Corrupted" << endl;
     }
     else
     {
-        if(check_file(currentFile))
+        if (check_file(currentFile))
         {
-            cout << "File has no data" << endl; 
+            cout << "File has no data" << endl;
         }
         else
         {
-        	file.close();
-            while(1)
+            file.close();
+            while (1)
             {
-            	file.open(currentFile, ios::in | ios::binary);
+                file.open(currentFile, ios::in | ios::binary);
                 isfound = false;
-                cout << "Enter Food ID : "; H::inputNumber(searchID, sizeof(searchID)); cout << endl;
+                cout << "Enter Food ID : ";
+                H::inputNumber(searchID, sizeof(searchID));
+                cout << endl;
                 // can  use this instread of open again
-//                ---------------------------------------------------------
-//                file.clear();  // Clear any potential eof or fail flags
-//                file.seekg(0);  // Reset file pointer to beginning
-//                ---------------------------------------------------------
-                
-                if(n == 1)
+                //                ---------------------------------------------------------
+                //                file.clear();  // Clear any potential eof or fail flags
+                //                file.seekg(0);  // Reset file pointer to beginning
+                //                ---------------------------------------------------------
+
+                if (n == 1)
                 {
-                    file.read((char*)&fnd, sizeof(FoodnDrink));
-                    while(file.eof() == false)
+                    file.read((char *)&fnd, sizeof(FoodnDrink));
+                    while (file.eof() == false)
                     {
-                        if(atoi(searchID) == fnd.getID())
+                        if (atoi(searchID) == fnd.getID())
                         {
                             fnd.output();
                             isfound = true;
                         }
-                        file.read((char*)&fnd, sizeof(FoodnDrink));
+                        file.read((char *)&fnd, sizeof(FoodnDrink));
                     }
                 }
-                else if(n == 2)
+                else if (n == 2)
                 {
-                    file.read((char*)&game, sizeof(Game));
-                    while(file.eof() == false)
+                    file.read((char *)&game, sizeof(Game));
+                    while (file.eof() == false)
                     {
-                        if(atoi(searchID) == game.getID())
+                        if (atoi(searchID) == game.getID())
                         {
                             game.output();
                             isfound = true;
                         }
-                        file.read((char*)&game, sizeof(Game));
+                        file.read((char *)&game, sizeof(Game));
                     }
                 }
-                else if(n == 3)
+                else if (n == 3)
                 {
-                    file.read((char*)&mui, sizeof(MgUserInfo));
-                    while(file.eof() == false)
+                    file.read((char *)&mui, sizeof(MgUserInfo));
+                    while (file.eof() == false)
                     {
-                        if(atoi(searchID) == mui.getID())
+                        if (atoi(searchID) == mui.getID())
                         {
                             mui.output();
                             isfound = true;
                         }
-                        file.read((char*)&mui, sizeof(MgUserInfo));
+                        file.read((char *)&mui, sizeof(MgUserInfo));
                     }
                 }
-                
-                if(isfound == false)
+
+                if (isfound == false)
                 {
                     cout << "ID not found" << endl;
                 }
-                else 
+                else
                 {
                     cout << "ID found" << endl;
                 }
                 cout << "Press any key to search again or [Enter] to stop" << endl;
                 press = getch();
-                if(press == 13)
+                if (press == 13)
                 {
                     file.close();
                     break;
@@ -375,122 +377,124 @@ void File::searchFile(int n)
     }
 }
 
-void File::viewProfile(const char * username, const char* password)
+void File::viewProfile(const char *username, const char *password)
 {
-	file.open(UserInfoFile, ios::in | ios::binary);
-	while(file.read((char*)&mui,sizeof(mui)))
-	{
-		if(strcmp(username, mui.getUsername()) == 0 && strcmp(password, mui.getPassword()) == 0)
-		{
-			mui.output();
-		}
-	}
-	file.close();
+    file.open(UserInfoFile, ios::in | ios::binary);
+    while (file.read((char *)&mui, sizeof(mui)))
+    {
+        if (strcmp(username, mui.getUsername()) == 0 && strcmp(password, mui.getPassword()) == 0)
+        {
+            mui.output();
+        }
+    }
+    file.close();
 }
 
 void File::updateFile(int n)
 {
-	char updateID[5];
-	bool isfound = false;
-	char press = ' ';
-	
-	switch(n)
-	{
-		case 1:
-			currentFile = FoodnDrinkFile;
-			break;
-		case 2:
-			currentFile = GameFile;
-			break;
-		case 3:
-			currentFile = UserInfoFile;
-			break;
-	}
-	file.open(currentFile, ios::out | ios::in | ios::binary);
-	
-	if(!file.is_open())
-	{
-		cout << "File Curropted" << endl;
-	}
-	else
-	{
-		if(check_file(currentFile))
-		{
-			cout << "File has no data" << endl; 
-		}
-		else
-		{
-			while(1)
-			{
-				isfound = false;
-				cout << "Enter Food ID : "; H::inputNumber(updateID,sizeof(updateID)); cout << endl;
-				file.clear();  // Clear any potential eof or fail flags
-	            file.seekg(0, ios::beg);  // Reset file pointer to beginning
-	            
-				if(n == 1)
-				{
-					file.read((char*)&fnd,sizeof(FoodnDrink));
-					while(file.eof() == false)
-					{
-						if(atoi(updateID) == fnd.getID())
-						{
-							fnd.input();
-							file.seekp((int)file.tellg()-sizeof(FoodnDrink));
-							file.write((char*)&fnd,sizeof(FoodnDrink));
-							isfound = true;
-						}
-						file.read((char*)&fnd,sizeof(FoodnDrink));
-					}
-				}
-				else if(n == 2)
-				{
-					file.read((char*)&game,sizeof(Game));
-					while(file.eof() == false)
-					{
-						if(atoi(updateID) == game.getID())
-						{
-							game.input();
-							file.seekp((int)file.tellg()-sizeof(Game));
-							file.write((char*)&game,sizeof(Game));
-							isfound = true;
-						}
-						file.read((char*)&game,sizeof(Game));
-					}
-				}
-				else if(n == 3)
-				{
-					file.read((char*)&mui,sizeof(MgUserInfo));
-					while(file.eof() == false)
-					{
-						if(atoi(updateID) == mui.getID())
-						{
-							mui.input();
-							file.seekp((int)file.tellg()-sizeof(MgUserInfo));
-							file.write((char*)&mui,sizeof(MgUserInfo));
-							isfound = true;
-						}
-						file.read((char*)&mui,sizeof(MgUserInfo));
-					}
-				}
-				
-				if(isfound == false)
-				{
-					cout << "...Incorrect Invoice ID..." << endl;
-				}
-				else 
-				{
-					cout << "...Update Successfully..." << endl;
-				}
-				cout << "Press any key to update again or [Enter] to stop" << endl;
+    char updateID[5];
+    bool isfound = false;
+    char press = ' ';
+
+    switch (n)
+    {
+    case 1:
+        currentFile = FoodnDrinkFile;
+        break;
+    case 2:
+        currentFile = GameFile;
+        break;
+    case 3:
+        currentFile = UserInfoFile;
+        break;
+    }
+    file.open(currentFile, ios::out | ios::in | ios::binary);
+
+    if (!file.is_open())
+    {
+        cout << "File Curropted" << endl;
+    }
+    else
+    {
+        if (check_file(currentFile))
+        {
+            cout << "File has no data" << endl;
+        }
+        else
+        {
+            while (1)
+            {
+                isfound = false;
+                cout << "Enter Food ID : ";
+                H::inputNumber(updateID, sizeof(updateID));
+                cout << endl;
+                file.clear();            // Clear any potential eof or fail flags
+                file.seekg(0, ios::beg); // Reset file pointer to beginning
+
+                if (n == 1)
+                {
+                    file.read((char *)&fnd, sizeof(FoodnDrink));
+                    while (file.eof() == false)
+                    {
+                        if (atoi(updateID) == fnd.getID())
+                        {
+                            fnd.input();
+                            file.seekp((int)file.tellg() - sizeof(FoodnDrink));
+                            file.write((char *)&fnd, sizeof(FoodnDrink));
+                            isfound = true;
+                        }
+                        file.read((char *)&fnd, sizeof(FoodnDrink));
+                    }
+                }
+                else if (n == 2)
+                {
+                    file.read((char *)&game, sizeof(Game));
+                    while (file.eof() == false)
+                    {
+                        if (atoi(updateID) == game.getID())
+                        {
+                            game.input();
+                            file.seekp((int)file.tellg() - sizeof(Game));
+                            file.write((char *)&game, sizeof(Game));
+                            isfound = true;
+                        }
+                        file.read((char *)&game, sizeof(Game));
+                    }
+                }
+                else if (n == 3)
+                {
+                    file.read((char *)&mui, sizeof(MgUserInfo));
+                    while (file.eof() == false)
+                    {
+                        if (atoi(updateID) == mui.getID())
+                        {
+                            mui.input();
+                            file.seekp((int)file.tellg() - sizeof(MgUserInfo));
+                            file.write((char *)&mui, sizeof(MgUserInfo));
+                            isfound = true;
+                        }
+                        file.read((char *)&mui, sizeof(MgUserInfo));
+                    }
+                }
+
+                if (isfound == false)
+                {
+                    cout << "...Incorrect Invoice ID..." << endl;
+                }
+                else
+                {
+                    cout << "...Update Successfully..." << endl;
+                }
+                cout << "Press any key to update again or [Enter] to stop" << endl;
                 press = getch();
-                if(press == 13)
+                if (press == 13)
                 {
                     file.close();
                     break;
                 }
-			}
-		}
-	}
+            }
+        }
+    }
 }
 
 void File::deleteFile(int n)
@@ -501,15 +505,15 @@ void File::deleteFile(int n)
 
     switch (n)
     {
-        case 1:
-            currentFile = FoodnDrinkFile;
-            break;
-        case 2:
-            currentFile = GameFile;
-            break;
-        case 3:
-            currentFile = UserInfoFile;
-            break;
+    case 1:
+        currentFile = FoodnDrinkFile;
+        break;
+    case 2:
+        currentFile = GameFile;
+        break;
+    case 3:
+        currentFile = UserInfoFile;
+        break;
     }
 
     file.open(currentFile, ios::in | ios::binary);
@@ -526,33 +530,33 @@ void File::deleteFile(int n)
     {
         switch (n)
         {
-            case 1:
+        case 1:
+        {
+            fndVector.clear();
+            while (file.read((char *)&fnd, sizeof(FoodnDrink)))
             {
-                fndVector.clear();
-                while (file.read((char*)&fnd, sizeof(FoodnDrink)))
-                {
-                    fndVector.push_back(fnd);
-                }
-                break;
+                fndVector.push_back(fnd);
             }
-            case 2:
+            break;
+        }
+        case 2:
+        {
+            gameVector.clear();
+            while (file.read((char *)&game, sizeof(Game)))
             {
-                gameVector.clear();
-                while (file.read((char*)&game, sizeof(Game)))
-                {
-                    gameVector.push_back(game);
-                }
-                break;
+                gameVector.push_back(game);
             }
-            case 3:
+            break;
+        }
+        case 3:
+        {
+            muiVector.clear();
+            while (file.read((char *)&mui, sizeof(MgUserInfo)))
             {
-                muiVector.clear();
-                while (file.read((char*)&mui, sizeof(MgUserInfo)))
-                {
-                    muiVector.push_back(mui);
-                }
-                break;
+                muiVector.push_back(mui);
             }
+            break;
+        }
         }
 
         file.close();
@@ -560,59 +564,61 @@ void File::deleteFile(int n)
         while (true)
         {
             isfound = false;
-            cout << "Enter ID to delete: "; H::inputNumber(deleteID, sizeof(deleteID)); cout << endl;
+            cout << "Enter ID to delete: ";
+            H::inputNumber(deleteID, sizeof(deleteID));
+            cout << endl;
             int deleteIDInt = atoi(deleteID);
 
             switch (n)
             {
-                case 1:
+            case 1:
+            {
+                for (auto it = fndVector.begin(); it != fndVector.end();)
                 {
-                    for (auto it = fndVector.begin(); it != fndVector.end(); )
+                    if (it->getID() == deleteIDInt)
                     {
-                        if (it->getID() == deleteIDInt)
-                        {
-                            it = fndVector.erase(it);
-                            isfound = true;
-                        }
-                        else
-                        {
-                            ++it;
-                        }
+                        it = fndVector.erase(it);
+                        isfound = true;
                     }
-                    break;
+                    else
+                    {
+                        ++it;
+                    }
                 }
-                case 2:
+                break;
+            }
+            case 2:
+            {
+                for (auto it = gameVector.begin(); it != gameVector.end();)
                 {
-                    for (auto it = gameVector.begin(); it != gameVector.end(); )
+                    if (it->getID() == deleteIDInt)
                     {
-                        if (it->getID() == deleteIDInt)
-                        {
-                            it = gameVector.erase(it);
-                            isfound = true;
-                        }
-                        else
-                        {
-                            ++it;
-                        }
+                        it = gameVector.erase(it);
+                        isfound = true;
                     }
-                    break;
+                    else
+                    {
+                        ++it;
+                    }
                 }
-                case 3:
+                break;
+            }
+            case 3:
+            {
+                for (auto it = muiVector.begin(); it != muiVector.end();)
                 {
-                    for (auto it = muiVector.begin(); it != muiVector.end(); )
+                    if (it->getID() == deleteIDInt)
                     {
-                        if (it->getID() == deleteIDInt)
-                        {
-                            it = muiVector.erase(it);
-                            isfound = true;
-                        }
-                        else
-                        {
-                            ++it;
-                        }
+                        it = muiVector.erase(it);
+                        isfound = true;
                     }
-                    break;
+                    else
+                    {
+                        ++it;
+                    }
                 }
+                break;
+            }
             }
 
             if (!isfound)
@@ -641,30 +647,30 @@ void File::deleteFile(int n)
         {
             switch (n)
             {
-                case 1:
+            case 1:
+            {
+                for (const auto &fnd : fndVector)
                 {
-                    for (const auto& fnd : fndVector)
-                    {
-                        file.write((char*)&fnd, sizeof(FoodnDrink));
-                    }
-                    break;
+                    file.write((char *)&fnd, sizeof(FoodnDrink));
                 }
-                case 2:
+                break;
+            }
+            case 2:
+            {
+                for (const auto &game : gameVector)
                 {
-                    for (const auto& game : gameVector)
-                    {
-                        file.write((char*)&game, sizeof(Game));
-                    }
-                    break;
+                    file.write((char *)&game, sizeof(Game));
                 }
-                case 3:
+                break;
+            }
+            case 3:
+            {
+                for (const auto &mui : muiVector)
                 {
-                    for (const auto& mui : muiVector)
-                    {
-                        file.write((char*)&mui, sizeof(MgUserInfo));
-                    }
-                    break;
+                    file.write((char *)&mui, sizeof(MgUserInfo));
                 }
+                break;
+            }
             }
         }
 
@@ -672,7 +678,7 @@ void File::deleteFile(int n)
     }
 }
 
-void File::loginTimeToFile(const char* username, const char* password)
+void File::loginTimeToFile(const char *username, const char *password)
 {
     time_t now = time(0);
     tm *ltm = localtime(&now);
@@ -680,21 +686,21 @@ void File::loginTimeToFile(const char* username, const char* password)
 
     file.open(UserInfoFile, ios::in | ios::binary);
     fstream tempFile(tempFileName, ios::out | ios::binary);
-    if (file.is_open()) 
+    if (file.is_open())
     {
-        while (file.read((char*)&mui, sizeof(mui)))
+        while (file.read((char *)&mui, sizeof(mui)))
         {
             if (strcmp(username, mui.getUsername()) == 0 && strcmp(password, mui.getPassword()) == 0)
             {
                 mui.setLoginHour(ltm->tm_hour);
                 mui.setLoginMn(ltm->tm_min);
-                tempFile.write((char*)&mui, sizeof(mui));
+                tempFile.write((char *)&mui, sizeof(mui));
                 break;
             }
         }
         file.close();
     }
-    else 
+    else
     {
         cout << "Unable to open file" << endl;
     }
@@ -704,7 +710,7 @@ void File::loginTimeToFile(const char* username, const char* password)
     rename(tempFileName.c_str(), UserInfoFile.c_str());
 }
 
-void File::logoutTimeToFile(const char* username, const char* password)
+void File::logoutTimeToFile(const char *username, const char *password)
 {
     time_t now = time(0);
     tm *ltm = localtime(&now);
@@ -716,16 +722,16 @@ void File::logoutTimeToFile(const char* username, const char* password)
     {
         cout << "File Corrupted" << endl;
     }
-	else
+    else
     {
-        while (file.read((char*)&mui, sizeof(mui)))
+        while (file.read((char *)&mui, sizeof(mui)))
         {
             if (strcmp(username, mui.getUsername()) == 0 && strcmp(password, mui.getPassword()) == 0)
             {
                 mui.setLogoutHour(ltm->tm_hour);
                 mui.setLogoutMn(ltm->tm_min);
-//                file.seekp(-static_cast<int>(sizeof(mui)), ios::cur);  // Move the write pointer back to overwrite the current record
-                tempFile.write((char*)&mui, sizeof(mui));
+                //                file.seekp(-static_cast<int>(sizeof(mui)), ios::cur);  // Move the write pointer back to overwrite the current record
+                tempFile.write((char *)&mui, sizeof(mui));
                 break;
             }
         }
@@ -737,12 +743,12 @@ void File::logoutTimeToFile(const char* username, const char* password)
     rename(tempFileName.c_str(), UserInfoFile.c_str());
 }
 
-void File::readLogin(const char* username, const char* password) 
+void File::readLogin(const char *username, const char *password)
 {
     file.open("Data/LoginTime.bin", ios::in | ios::binary);
-    if (file.is_open()) 
+    if (file.is_open())
     {
-        while (file.read((char*)&mui, sizeof(mui)))
+        while (file.read((char *)&mui, sizeof(mui)))
         {
             if (strcmp(username, mui.getUsername()) == 0 && strcmp(password, mui.getPassword()) == 0)
             {
@@ -752,19 +758,19 @@ void File::readLogin(const char* username, const char* password)
             }
         }
         file.close();
-    } 
-    else 
+    }
+    else
     {
         cout << "Unable to open file" << endl;
     }
 }
 
-void File::readLogout(const char* username, const char* password) 
+void File::readLogout(const char *username, const char *password)
 {
     file.open("Data/LogoutTime.bin", ios::in | ios::binary);
-    if (file.is_open()) 
+    if (file.is_open())
     {
-        while (file.read((char*)&mui, sizeof(mui)))
+        while (file.read((char *)&mui, sizeof(mui)))
         {
             if (strcmp(username, mui.getUsername()) == 0 && strcmp(password, mui.getPassword()) == 0)
             {
@@ -774,8 +780,8 @@ void File::readLogout(const char* username, const char* password)
             }
         }
         file.close();
-    } 
-    else 
+    }
+    else
     {
         cout << "Unable to open file" << endl;
     }
@@ -787,55 +793,59 @@ void File::user_login()
     char password[20];
     bool islogin = false;
     char press;
-    
+
     time_t now = time(0);
     tm *ltm = localtime(&now);
 
     while (true)
     {
-        cout << "Enter Username: "; H::inputLetter(username,sizeof(username)); cout << endl;
-        cout << "Enter Password: "; H::hidePassword(password,sizeof(password)); cout << endl;
+        cout << "Enter Username: ";
+        H::inputLetter(username, sizeof(username));
+        cout << endl;
+        cout << "Enter Password: ";
+        H::hidePassword(password, sizeof(password));
+        cout << endl;
 
         file.open(UserInfoFile, ios::in | ios::binary);
         if (!file.is_open())
         {
             cout << "File Corrupted" << endl;
         }
-		else
-		{
-			muiVector.clear();
-	        while (file.read((char*)&mui, sizeof(MgUserInfo))) 
-			{
-	            muiVector.push_back(mui);
-	        }
-			file.close();
-	
-	        for (const auto& user : muiVector) 
-			{
-	            if (strcmp(username, user.getUsername()) == 0 && strcmp(password, user.getPassword()) == 0) 
-				{
-	                islogin = true;
-	                break;
-	            }
-	        }
+        else
+        {
+            muiVector.clear();
+            while (file.read((char *)&mui, sizeof(MgUserInfo)))
+            {
+                muiVector.push_back(mui);
+            }
+            file.close();
 
-	        if (islogin) 
-			{
-				loginTimeToFile(username,password);
-	            cout << "Login successful." << endl;
-	            break;
-	        } 
-			else 
-			{
-	            cout << "Login failed. Incorrect username or password." << endl;
-	            cout << "Press [Any Key] to login again or [ESC] to return" << endl;
-	            press = getch();
-	            if (press == 27) 
-				{
-	                break;
-	            }
-	        }
-		}
+            for (const auto &user : muiVector)
+            {
+                if (strcmp(username, user.getUsername()) == 0 && strcmp(password, user.getPassword()) == 0)
+                {
+                    islogin = true;
+                    break;
+                }
+            }
+
+            if (islogin)
+            {
+                loginTimeToFile(username, password);
+                cout << "Login successful." << endl;
+                break;
+            }
+            else
+            {
+                cout << "Login failed. Incorrect username or password." << endl;
+                cout << "Press [Any Key] to login again or [ESC] to return" << endl;
+                press = getch();
+                if (press == 27)
+                {
+                    break;
+                }
+            }
+        }
     }
     cout << "[ 1 ] . VIEW PROFILE" << endl;
     cout << "[ 2 ] . BUY TIME" << endl;
@@ -845,33 +855,33 @@ void File::user_login()
     cout << "[ 6 ] . EXIT" << endl;
     cout << "Choose option" << endl;
     press = getch();
-    switch(press)
+    switch (press)
     {
-    	case '1':
-    		viewProfile(username, password);
-    		break;
-    	case '2':
-    		buyMoreTime(username, password);
-    		break;
-    	case '3':
-    		break;
-    	case '4':
-    		invoice(username, password);
-    		break;
-    	case '5':
-            logoutTimeToFile(username, password);
-            calculateTime(username, password);
-			user_login();
-			break;
-		case '6':
-			logoutTimeToFile(username, password);
-			calculateTime(username, password);
-            exit(0);                          
-            break;
-	}
+    case '1':
+        viewProfile(username, password);
+        break;
+    case '2':
+        buyMoreTime(username, password);
+        break;
+    case '3':
+        break;
+    case '4':
+        invoice(username, password);
+        break;
+    case '5':
+        logoutTimeToFile(username, password);
+        calculateTime(username, password);
+        user_login();
+        break;
+    case '6':
+        logoutTimeToFile(username, password);
+        calculateTime(username, password);
+        exit(0);
+        break;
+    }
 }
 
-void File::buyMoreTime(const char* username, const char* password)
+void File::buyMoreTime(const char *username, const char *password)
 {
     char hours[5];
     char creditCard[17];
@@ -887,26 +897,30 @@ void File::buyMoreTime(const char* username, const char* password)
     }
     else
     {
-    	cout << "Enter hours you want to buy: "; H::inputNumber(hours, sizeof(hours)); cout << endl;
+        cout << "Enter hours you want to buy: ";
+        H::inputNumber(hours, sizeof(hours));
+        cout << endl;
 
-	    while (file.read((char*)&mui, sizeof(MgUserInfo)))
-	    {
-	        if (strcmp(username, mui.getUsername()) == 0 && strcmp(password, mui.getPassword()) == 0)
-	        {
-	            isfound = true;
-	            mui.setTime(atof(hours));
-	            mui.setBuyingTime(atof(hours));
-	        }
-	        tempFile.write((char*)&mui, sizeof(MgUserInfo));
-	    }
-	
-	    cout << "Enter credit card: "; H::inputNumber(creditCard, sizeof(creditCard)); cout << endl;
-	
-	    if (isfound)
-	    {
-	        cout << "Purchase successful" << endl;
-	    }
-	}
+        while (file.read((char *)&mui, sizeof(MgUserInfo)))
+        {
+            if (strcmp(username, mui.getUsername()) == 0 && strcmp(password, mui.getPassword()) == 0)
+            {
+                isfound = true;
+                mui.setTime(atof(hours));
+                mui.setBuyingTime(atof(hours));
+            }
+            tempFile.write((char *)&mui, sizeof(MgUserInfo));
+        }
+
+        cout << "Enter credit card: ";
+        H::inputNumber(creditCard, sizeof(creditCard));
+        cout << endl;
+
+        if (isfound)
+        {
+            cout << "Purchase successful" << endl;
+        }
+    }
 
     file.close();
     tempFile.close();
@@ -914,35 +928,35 @@ void File::buyMoreTime(const char* username, const char* password)
     rename(tempFileName.c_str(), UserInfoFile.c_str());
 }
 
-void File::invoice(const char* username, const char* password) 
+void File::invoice(const char *username, const char *password)
 {
     file.open(UserInfoFile, ios::in | ios::binary);
 
-    if (!file.is_open()) 
-	{
+    if (!file.is_open())
+    {
         cout << "File Corrupted" << endl;
     }
-	else
-	{
-		while (file.read((char*)&mui, sizeof(MgUserInfo))) 
-		{
-	        if (strcmp(username, mui.getUsername()) == 0 && strcmp(password, mui.getPassword()) == 0) 
-			{
-	            cout << "Added Time: " << mui.getBuyedTime() << endl;
-	        }
-	    }
-	}
+    else
+    {
+        while (file.read((char *)&mui, sizeof(MgUserInfo)))
+        {
+            if (strcmp(username, mui.getUsername()) == 0 && strcmp(password, mui.getPassword()) == 0)
+            {
+                cout << "Added Time: " << mui.getBuyedTime() << endl;
+            }
+        }
+    }
 
     file.close();
 }
 
-void File::calculateTime(const char* username, const char* password)
+void File::calculateTime(const char *username, const char *password)
 {
     bool isfound = false;
-    string tempFileName = "Data/temp.ant";
+    // string tempFileName = "Data/temp.ant";
 
     file.open(UserInfoFile, ios::in | ios::binary);
-    fstream tempFile(tempFileName, ios::out | ios::binary);
+    fstream tempFile(backupFile, ios::out | ios::binary);
 
     if (!file.is_open() || !tempFile.is_open())
     {
@@ -950,7 +964,7 @@ void File::calculateTime(const char* username, const char* password)
         return;
     }
 
-    while (file.read((char*)&mui, sizeof(MgUserInfo)))
+    while (file.read((char *)&mui, sizeof(MgUserInfo)))
     {
         if (strcmp(username, mui.getUsername()) == 0 && strcmp(password, mui.getPassword()) == 0)
         {
@@ -963,7 +977,7 @@ void File::calculateTime(const char* username, const char* password)
 
             double loginTime = loginHour * 60 + loginMn;
             double logoutTime = logoutHour * 60 + logoutMn;
-            
+
             double usedTimeMinutes = logoutTime - loginTime;
 
             if (usedTimeMinutes < 0)
@@ -984,7 +998,7 @@ void File::calculateTime(const char* username, const char* password)
             cout << "usedTime (minutes): " << usedTimeMinutes << endl;
             cout << "remainingTime: " << remainingTime << endl;
         }
-        tempFile.write((char*)&mui, sizeof(MgUserInfo));
+        tempFile.write((char *)&mui, sizeof(MgUserInfo));
     }
 
     if (isfound)
@@ -999,8 +1013,7 @@ void File::calculateTime(const char* username, const char* password)
     file.close();
     tempFile.close();
     remove(UserInfoFile.c_str());
-    rename(tempFileName.c_str(), UserInfoFile.c_str());
+    rename(backupFile.c_str(), UserInfoFile.c_str());
 }
-
 
 #endif
