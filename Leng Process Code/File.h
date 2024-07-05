@@ -240,29 +240,23 @@ void File::viewFile(int n)
         {
             if (n == 1)
             {
-                file.read((char *)&fnd, sizeof(fnd));
-                while (file.eof() == false)
+                while (file.read((char *)&fnd, sizeof(fnd)))
                 {
                     fnd.output();
-                    file.read((char *)&fnd, sizeof(fnd));
                 }
             }
             else if (n == 2)
             {
-                file.read((char *)&game, sizeof(game));
-                while (file.eof() == false)
+                while (file.read((char *)&game, sizeof(game)))
                 {
                     game.output();
-                    file.read((char *)&game, sizeof(game));
                 }
             }
             else if (n == 3)
             {
-                file.read((char *)&mui, sizeof(mui));
-                while (file.eof() == false)
+                while (file.read((char *)&mui, sizeof(mui)))
                 {
                     mui.output();
-                    file.read((char *)&mui, sizeof(mui));
                 }
             }
         }
@@ -318,41 +312,35 @@ void File::searchFile(int n)
 
                 if (n == 1)
                 {
-                    file.read((char *)&fnd, sizeof(FoodnDrink));
-                    while (file.eof() == false)
+                    while (file.read((char *)&fnd, sizeof(FoodnDrink)))
                     {
                         if (atoi(searchID) == fnd.getID())
                         {
                             fnd.output();
                             isfound = true;
                         }
-                        file.read((char *)&fnd, sizeof(FoodnDrink));
                     }
                 }
                 else if (n == 2)
                 {
-                    file.read((char *)&game, sizeof(Game));
-                    while (file.eof() == false)
+                    while (file.read((char *)&game, sizeof(Game)))
                     {
                         if (atoi(searchID) == game.getID())
                         {
                             game.output();
                             isfound = true;
                         }
-                        file.read((char *)&game, sizeof(Game));
                     }
                 }
                 else if (n == 3)
                 {
-                    file.read((char *)&mui, sizeof(MgUserInfo));
-                    while (file.eof() == false)
+                    while (file.read((char *)&mui, sizeof(MgUserInfo)))
                     {
                         if (atoi(searchID) == mui.getID())
                         {
                             mui.output();
                             isfound = true;
                         }
-                        file.read((char *)&mui, sizeof(MgUserInfo));
                     }
                 }
 
@@ -433,8 +421,7 @@ void File::updateFile(int n)
 
                 if (n == 1)
                 {
-                    file.read((char *)&fnd, sizeof(FoodnDrink));
-                    while (file.eof() == false)
+                    while (file.read((char *)&fnd, sizeof(FoodnDrink)))
                     {
                         if (atoi(updateID) == fnd.getID())
                         {
@@ -443,13 +430,11 @@ void File::updateFile(int n)
                             file.write((char *)&fnd, sizeof(FoodnDrink));
                             isfound = true;
                         }
-                        file.read((char *)&fnd, sizeof(FoodnDrink));
                     }
                 }
                 else if (n == 2)
                 {
-                    file.read((char *)&game, sizeof(Game));
-                    while (file.eof() == false)
+                    while (file.read((char *)&game, sizeof(Game)))
                     {
                         if (atoi(updateID) == game.getID())
                         {
@@ -458,13 +443,11 @@ void File::updateFile(int n)
                             file.write((char *)&game, sizeof(Game));
                             isfound = true;
                         }
-                        file.read((char *)&game, sizeof(Game));
                     }
                 }
                 else if (n == 3)
                 {
-                    file.read((char *)&mui, sizeof(MgUserInfo));
-                    while (file.eof() == false)
+                    while (file.read((char *)&mui, sizeof(MgUserInfo)))
                     {
                         if (atoi(updateID) == mui.getID())
                         {
@@ -473,7 +456,6 @@ void File::updateFile(int n)
                             file.write((char *)&mui, sizeof(MgUserInfo));
                             isfound = true;
                         }
-                        file.read((char *)&mui, sizeof(MgUserInfo));
                     }
                 }
 
@@ -685,7 +667,7 @@ void File::loginTimeToFile(const char *username, const char *password)
     string tempFileName = "Data/temp.ant";
 
     file.open(UserInfoFile, ios::in | ios::binary);
-    fstream tempFile(tempFileName, ios::out | ios::binary);
+    fstream tempFile(Backup, ios::out | ios::binary);
     if (file.is_open())
     {
         while (file.read((char *)&mui, sizeof(mui)))
@@ -707,17 +689,17 @@ void File::loginTimeToFile(const char *username, const char *password)
     file.close();
     tempFile.close();
     remove(UserInfoFile.c_str());
-    rename(tempFileName.c_str(), UserInfoFile.c_str());
+    rename(Backup.c_str(), UserInfoFile.c_str());
 }
 
 void File::logoutTimeToFile(const char *username, const char *password)
 {
     time_t now = time(0);
     tm *ltm = localtime(&now);
-    string tempFileName = "Data/temp.ant";
+    // string tempFileName = "Data/temp.ant";
 
     file.open(UserInfoFile, ios::in | ios::binary);
-    fstream tempFile(tempFileName, ios::out | ios::binary);
+    fstream tempFile(Backup, ios::out | ios::binary);
     if (!file.is_open() || !tempFile.is_open())
     {
         cout << "File Corrupted" << endl;
@@ -740,51 +722,7 @@ void File::logoutTimeToFile(const char *username, const char *password)
     file.close();
     tempFile.close();
     remove(UserInfoFile.c_str());
-    rename(tempFileName.c_str(), UserInfoFile.c_str());
-}
-
-void File::readLogin(const char *username, const char *password)
-{
-    file.open("Data/LoginTime.bin", ios::in | ios::binary);
-    if (file.is_open())
-    {
-        while (file.read((char *)&mui, sizeof(mui)))
-        {
-            if (strcmp(username, mui.getUsername()) == 0 && strcmp(password, mui.getPassword()) == 0)
-            {
-                cout << "Login Hour: " << mui.getLoginHour() << endl;
-                cout << "Login Minute: " << mui.getLoginMn() << endl;
-                break;
-            }
-        }
-        file.close();
-    }
-    else
-    {
-        cout << "Unable to open file" << endl;
-    }
-}
-
-void File::readLogout(const char *username, const char *password)
-{
-    file.open("Data/LogoutTime.bin", ios::in | ios::binary);
-    if (file.is_open())
-    {
-        while (file.read((char *)&mui, sizeof(mui)))
-        {
-            if (strcmp(username, mui.getUsername()) == 0 && strcmp(password, mui.getPassword()) == 0)
-            {
-                cout << "Logout Hour: " << mui.getLogoutHour() << endl;
-                cout << "Logout Minute: " << mui.getLogoutMn() << endl;
-                break;
-            }
-        }
-        file.close();
-    }
-    else
-    {
-        cout << "Unable to open file" << endl;
-    }
+    rename(Backup.c_str(), UserInfoFile.c_str());
 }
 
 void File::user_login()
@@ -925,7 +863,7 @@ void File::buyMoreTime(const char *username, const char *password)
     file.close();
     tempFile.close();
     remove(UserInfoFile.c_str());
-    rename(tempFileName.c_str(), UserInfoFile.c_str());
+    rename(Backup.c_str(), UserInfoFile.c_str());
 }
 
 void File::invoice(const char *username, const char *password)
