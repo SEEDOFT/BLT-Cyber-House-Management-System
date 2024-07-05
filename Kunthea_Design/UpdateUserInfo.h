@@ -1,14 +1,10 @@
 #ifndef __UPDATEUSERINFO_H__
 #define __UPDATEUSERINFO_H__
-#include "./Header/HinsyOOPV2"
-using namespace HinsyOOP;
-class UpdateUserInfo{
-    public:
-        static void updateUserInfoascii();
-        static void updateUserInfoDesign();
-};
-
-void UpdateUserInfo::updateUserInfoascii(){
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#include"kuntheaDesign.h"
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void BLT::UpdateUserInfo::UpdateUserInfoTxt()
+{
     H::foreColor(3); H::gotoxy(30,1); cout<<R"( ____ ___            .___       __            ____ ___                     .___        _____       )";
     H::foreColor(3); H::gotoxy(30,2); cout<<R"(|    |   \______   __| _/____ _/  |_  ____   |    |   \______ ___________  |   | _____/ ____\____  )";
     H::foreColor(3); H::gotoxy(30,3); cout<<R"(|    |   /\____ \ / __ |\__  \\   __\/ __ \  |    |   /  ___// __ \_  __ \ |   |/    \   __\/  _ \ )";
@@ -17,8 +13,9 @@ void UpdateUserInfo::updateUserInfoascii(){
     H::foreColor(4); H::gotoxy(30,6); cout<<R"(          |__|        \/     \/          \/               \/     \/                 \/             )";
     H::HLine(20,8,120,7,196);
 }
-
-void UpdateUserInfo::updateUserInfoDesign(){
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void BLT::UpdateUserInfo::UpdateUserInfo_Design()
+{
     H::drawBoxSingleLineWithBG(20,10,120,1,179);
     H::VLine(70,12,3,7,221);
     H::VLine(90,12,3,7,221);
@@ -56,5 +53,5 @@ void UpdateUserInfo::updateUserInfoDesign(){
     H::HLine(30,35,100,7,196);
     H::gotoxy(30,36); H::foreColor(3); cout<<"New\t\tNew\t\tNew\t\t\tNew\t\t\tNew\t\tNew";
 }
-
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif

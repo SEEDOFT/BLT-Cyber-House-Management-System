@@ -769,6 +769,8 @@ void Process::SubManageUserInfo(int num)
         //Edit
         case 3:
         {
+            B::UpdateUserInfoTxt();
+            B::UpdateUserInfo_Design();
 
             while(1)
             {
@@ -791,6 +793,8 @@ void Process::SubManageUserInfo(int num)
         //Remove
         case 4:
         {
+            B::DeleteUserInfoTxt();
+            B::DeleteUser_Design();
 
             while(1)
             {
@@ -813,6 +817,9 @@ void Process::SubManageUserInfo(int num)
         //short
         case 5:
         {
+            B::SortUserTxt();
+            B::SortUser_Design();
+
             while(1)
             {
                 tp(2,x+70,y+33);cout<<"Press [ESC] to go back"; 
