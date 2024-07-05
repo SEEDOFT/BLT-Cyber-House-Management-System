@@ -15,8 +15,6 @@ void BLT::FoodMenu::Cyber99Txt()
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void BLT::FoodMenu::FoodMenu_Design()
 {
-    int y=1;
-    char press;
      //box
     H::drawBoxDoubleLineWithBG(33,10,85,25,71);
     H::drawBoxDoubleLineWithBG(35,11,81,23,55);
@@ -27,81 +25,19 @@ void BLT::FoodMenu::FoodMenu_Design()
 
     H::VLine(39,18,10,23,178);
     H::VLine(113,18,10,23,178);
-
-    while(press!='5')
-    {
-        //option
-        H::drawBoxDoubleLineWithBG(37,13,20,1,23);
-        H::drawBoxDoubleLineWithBG(65,13,20,1,23);
-        H::drawBoxDoubleLineWithBG(94,13,20,1,23);
-
-        H::drawBoxDoubleLineWithBG(37,31,20,1,23);
-        H::foreColor(55); H::gotoxy(63,32); cout<<"PRESS [<-] [->] TO SELECT";
-        H::drawBoxDoubleLineWithBG(94,31,20,1,23);
-        //label
-        H::foreColor(151);
-        H::foreColor(23); H::gotoxy(38,14); cout<<"INSERT FOOD N DRINK";
-        H::foreColor(23); H::gotoxy(66,14); cout<<"VIEW FOOD N DRINK";
-        H::foreColor(23); H::gotoxy(95,14); cout<<"SEARCH FOOD N DRINK";
-
-        
-        H::foreColor(23); H::gotoxy(37,32); cout<<"REMOVE FOOD N DRINK";
-        H::foreColor(23); H::gotoxy(102,32); cout<<"BACK";
-        if(y==1){
-            H::drawBoxDoubleLineWithBG(37,13,20,1,196);
-            H::foreColor(199);
-			H::gotoxy(38,14); cout <<"INSERT FOOD N DRINK";
-        }
-        else if(y==2){
-            H::drawBoxDoubleLineWithBG(65,13,20,1,196);
-            H::foreColor(199);
-			H::gotoxy(66,14); cout <<"VIEW FOOD N DRINK";
-        }
-        else if(y==3){
-            H::drawBoxDoubleLineWithBG(94,13,20,1,196);
-            H::foreColor(199);
-            H::gotoxy(95,14); cout <<"SEARCH FOOD N DRINK";
-        }
-        else if(y==4){
-            H::drawBoxDoubleLineWithBG(37,31,20,1,196);
-            H::foreColor(199);
-			H::gotoxy(37,32); cout <<"REMOVE FOOD N DRINK";
-        }
-        else if(y==5){
-            H::drawBoxDoubleLineWithBG(94,31,20,1,196);
-            H::foreColor(199);
-			H::gotoxy(102,32); cout <<"BACK";
-        }
-        press = getch();
-        
-        switch(press){
-            case 75:
-                y--;
-                if(y<1){
-                    y=5;
-                }
-                break;
-            case 77:
-                y++;
-                if(y>5){
-                    y=1;
-                }
-                break;
-        }
-    }
     
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void BLT::FoodMenu::FoodMenuTxt()
 {
-    H::foreColor(3); H::gotoxy(43,1); cout<<R"(___________               .___    _____                       )";
-    H::foreColor(3); H::gotoxy(43,2); cout<<R"(\_   _____/___   ____   __| _/   /     \   ____   ____  __ __ )";
-    H::foreColor(3); H::gotoxy(43,3); cout<<R"( |    __)/  _ \ /  _ \ / __ |   /  \ /  \_/ __ \ /    \|  |  \)";
-    H::foreColor(4); H::gotoxy(43,4); cout<<R"( |     \(  <_> |  <_> ) /_/ |  /    Y    \  ___/|   |  \  |  /)";
-    H::foreColor(4); H::gotoxy(43,5); cout<<R"( \___  / \____/ \____/\____ |  \____|__  /\___  >___|  /____/ )";
-    H::foreColor(4); H::gotoxy(43,6); cout<<R"(     \/                    \/          \/     \/     \/       )";
+    H::foreColor(3); H::gotoxy(10,1); cout<<R"(___________________   ________  ________      ____    ________ __________.___ _______   ____  __.    _____  ___________ _______   ____ ___ )";
+    H::foreColor(3); H::gotoxy(10,2); cout<<R"(\_   _____/\_____  \  \_____  \ \______ \    /  _ \   \______ \\______   \   |\      \ |    |/ _|   /     \ \_   _____/ \      \ |    |   \)";
+    H::foreColor(3); H::gotoxy(10,3); cout<<R"( |    __)   /   |   \  /   |   \ |    |  \   >  _ </\  |    |  \|       _/   |/   |   \|      <    /  \ /  \ |    __)_  /   |   \|    |   /)";
+    H::foreColor(4); H::gotoxy(10,4); cout<<R"( |     \   /    |    \/    |    \|    `   \ /  <_\ \/  |    `   \    |   \   /    |    \    |  \  /    Y    \|        \/    |    \    |  / )";
+    H::foreColor(4); H::gotoxy(10,5); cout<<R"( \___  /   \_______  /\_______  /_______  / \_____\ \ /_______  /____|_  /___\____|__  /____|__ \ \____|__  /_______  /\____|__  /______/  )";
+    H::foreColor(4); H::gotoxy(10,6); cout<<R"(    \/            \/         \/        \/         \/         \/       \/            \/        \/         \/        \/         \/          )";
 
-    H::HLine(40,8,70,7,178);
+    H::HLine(10,8,139,7,178);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif

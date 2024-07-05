@@ -3,7 +3,7 @@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #include"kuntheaDesign.h"
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void BLT::DeleteGameDesign::DeleteTxt(){
+void BLT::DeleteGameDesign::DeleteGameTxt(){
     H::foreColor(3); H::gotoxy(40,1); cout<<R"(________         .__          __           ________          __          )";
     H::foreColor(3); H::gotoxy(40,2); cout<<R"(\______ \   ____ |  |   _____/  |_  ____   \______ \ _____ _/  |______   )";
     H::foreColor(3); H::gotoxy(40,3); cout<<R"( |    |  \_/ __ \|  | _/ __ \   __\/ __ \   |    |  \\__  \\   __\__  \  )";
@@ -13,7 +13,7 @@ void BLT::DeleteGameDesign::DeleteTxt(){
     H::HLine(25,8,100,7,196);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void BLT::DeleteGameDesign::Delete_Design(){
+void BLT::DeleteGameDesign::DeleteGame_Design(){
     H::drawBoxSingleLineWithBG(20,10,120,1,179);
     H::VLine(70,12,3,7,221);
     H::VLine(90,12,3,7,221);

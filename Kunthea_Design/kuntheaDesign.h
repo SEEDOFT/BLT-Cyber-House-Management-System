@@ -28,7 +28,7 @@ namespace BLT
     };
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     class InputDesign{
-    protected:
+    public:
         static void InputTxt();
         static void Input_Design();
     };
@@ -85,8 +85,8 @@ namespace BLT
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     class DeleteGameDesign{
     public:
-        static void Delete_Design();
-        static void DeleteTxt();
+        static void DeleteGame_Design();
+        static void DeleteGameTxt();
     };
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     class FoodMenu{

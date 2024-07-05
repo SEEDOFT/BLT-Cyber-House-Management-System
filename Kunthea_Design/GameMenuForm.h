@@ -39,67 +39,21 @@ void BLT::GameMenu::Header_Design()
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void BLT::GameMenu::GameMenu_Design()
 {
-    int y=1;
-    char press;
-    do{
-        H::drawBoxDoubleLineWithBG(27,18,18,1,23);
-        H::drawBoxDoubleLineWithBG(27,23,18,1,23);
-        H::drawBoxDoubleLineWithBG(27,28,18,1,23);
+    H::drawBoxDoubleLineWithBG(27,18,18,1,23);
+    H::drawBoxDoubleLineWithBG(27,23,18,1,23);
+    H::drawBoxDoubleLineWithBG(27,28,18,1,23);
 
-        H::drawBoxDoubleLineWithBG(95,18,18,1,23);
-        H::drawBoxDoubleLineWithBG(95,23,18,1,23);
+    H::drawBoxDoubleLineWithBG(95,18,18,1,23);
+    H::drawBoxDoubleLineWithBG(95,23,18,1,23);
 
-        
-        H::foreColor(23); H::gotoxy(32,19); cout<<"ADD GAME";
-        H::foreColor(23); H::gotoxy(31,24); cout<<"VIEW GAME";
-        H::foreColor(23); H::gotoxy(31,29); cout<<"SEARCH GAME";
-
-        
-        H::foreColor(23); H::gotoxy(98,19); cout<<"REMOVE GAME";
-        H::foreColor(23); H::gotoxy(102,24); cout<<"BACK";
-        H::foreColor(151); H::gotoxy(94,29); cout<<"PRESS [UP] [DOWN] KEY";
-        if(y==1){
-            H::drawBoxDoubleLineWithBG(27,18,18,1,196);
-            H::foreColor(199);
-			H::gotoxy(32,19); cout <<"ADD GAME";
-        }
-        else if(y==2){
-            H::drawBoxDoubleLineWithBG(27,23,18,1,196);
-            H::foreColor(199);
-			H::gotoxy(31,24); cout <<"VIEW GAME";
-        }
-        else if(y==3){
-            H::drawBoxDoubleLineWithBG(27,28,18,1,196);
-            H::foreColor(199);
-            H::gotoxy(31,29); cout <<"SEARCH GAME";
-        }
-        else if(y==4){
-            H::drawBoxDoubleLineWithBG(95,18,18,1,196);
-            H::foreColor(199);
-			H::gotoxy(98,19); cout <<"REMOVE GAME";
-        }
-        else if(y==5){
-            H::drawBoxDoubleLineWithBG(95,23,18,1,196);
-            H::foreColor(199);
-			H::gotoxy(102,24); cout <<"BACK";
-        }
-        press=getch();
-        switch (press)
-        {
-            case 72:
-                y--;
-                if(y<1){
-                    y=5;
-                }
-                break;
-            case 80:
-                y++;
-                if(y>5){
-                    y=1;
-                }
-                break;
-        }
-    }while (press!='5');
+    H::foreColor(23); H::gotoxy(32,19); cout<<"ADD GAME";
+    H::foreColor(23); H::gotoxy(31,24); cout<<"VIEW GAME";
+    H::foreColor(23); H::gotoxy(31,29); cout<<"SEARCH GAME";
+    
+    H::foreColor(23); H::gotoxy(98,19); cout<<"REMOVE GAME";
+    H::foreColor(23); H::gotoxy(102,24); cout<<"BACK";
+    H::foreColor(151); H::gotoxy(94,29); cout<<"PRESS [UP] [DOWN] KEY";
+       
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif

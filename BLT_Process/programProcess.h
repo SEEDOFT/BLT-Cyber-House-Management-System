@@ -2,7 +2,10 @@
 #define  ______MainProgram_Process______
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #include"../BOTH Design/designConsole.h"
+#include"BTL"
 #include<cstdlib>
+
+using namespace BLT;
 //Inherite Design method to use in here
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 class Process: public Design{
@@ -11,8 +14,29 @@ class Process: public Design{
     public:
         static void GROUP1_ASSIGNMENT();
 
-        static void login_As_Admin_And_User();
+        static void Admin_And_User();
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         static void LogIn_AsAdmin(int cursor);
+        static void Admin_Option();
+        static void Admin_ChoosingOpt(int num);
+
+        static void AdminProfileInfo();
+
+        static void GamesLst();
+        static void SubGameLst(int num);
+
+        static void FoodAndDrinkLst();
+        static void SubFoodAndDrink(int num);
+
+        static void ManageUserPayment();
+        static void SubManageUserPayment(int num);
+
+        static void ManageUserInfo();
+        static void SubManageUserInfo(int num);
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        static void LogIn_AsUser(int cursor);
+
+
         static void DisableMaximizeButton();
         static void DisableMinimizeButton();
         static void DisableCloseButton();
@@ -96,77 +120,87 @@ void Process::OutputHostName()
     }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void Process::login_As_Admin_And_User()
+void Process::Admin_And_User()
 {
+    H::setcolor(7);
+    outline();
+    login_design();//Design of LOG IN
+
     char press;
-    int x = 1;
+    int num = 1;
 
     H::setcursor(0,0);
-
-    while(press != 13)
-    {
-        //choice box
-        H::drawBoxSingleLineWithBG(x+92,y+10,25,1,153);H::setcolor(151);H::gotoxy(x+92,y+11);cout<<"     Administrator     ";
-        H::drawBoxSingleLineWithBG(x+92,y+14,25,1,153);H::setcolor(151);H::gotoxy(x+92,y+15);cout<<"         User          ";
-
-        if(x==1)
+       do
         {
-            H::drawBoxSingleLineWithBG(x+92,y+10,25,1,204);H::setcolor(201);H::gotoxy(x+92,y+11);cout<<"==>> Administrator <<==";
-            H::clearBox(x+24,y+4,36,5,136);//Cls text
-            loginAs_Admin_UserTxt(1);
-        }
-        if(x==2)
-        {
-            H::drawBoxSingleLineWithBG(x+92,y+14,25,1,204);H::setcolor(201);H::gotoxy(x+92,y+15);cout<<"==>>     User      <<==";
-            H::clearBox(x+24,y+4,36,5,136);//Cls text
-            loginAs_Admin_UserTxt(2);
-        }
+            //choice box
+            H::drawBoxSingleLineWithBG(x+83,y+10,25,1,153);
+            H::drawBoxSingleLineWithBG(x+83,y+14,25,1,153);
 
-        press = getch();
+            H::setcolor(151);H::gotoxy(x+84,y+11);cout<<"     Administrator     ";
+            H::setcolor(151);H::gotoxy(x+84,y+15);cout<<"         User          ";
 
-        switch(press) 
-        {
-            case 72://up
+            if(num==1)
             {
-                x--;
-                if(x<1)
-                {
-                    x=2;
-                }
-                break;
+                H::drawBoxSingleLineWithBG(x+83,y+10,25,1,204);
+                H::setcolor(201);H::gotoxy(x+84,y+11);cout<<"  => Administrator <=  ";
+                H::clearBox(x+23,y+4,36,5,136);//Cls text
+                loginAs_Admin_UserTxt(1);
             }
-            
-            case 80://down
+            if(num==2)
             {
-                x++;
-                if(x>2)
-                {
-                    x=1;
-                }
-                break;
+                H::drawBoxSingleLineWithBG(x+83,y+14,25,1,204);
+                H::setcolor(201);H::gotoxy(x+84,y+15);cout<<"  =>     User      <=  ";
+                H::clearBox(x+23,y+4,36,5,136);//Cls text
+                loginAs_Admin_UserTxt(2);
             }
 
+            press = getch();
+
+            switch(press) 
+            {
+                case 72://up
+                {
+                    num--;
+                    if(num<1)
+                    {
+                        num=2;
+                    }
+                    break;
+                }
+                
+                case 80://down
+                {
+                    num++;
+                    if(num>2)
+                    {
+                        num=1;
+                    }
+                    break;
+                }
+
+            }
+
         }
+        while(press != 13);
 
-    }
-    //condition
-    if(x == 1)
-    {
-        LogIn_AsAdmin(1);
-    }
-    else
-    {
-
-    }
-
+        if(num == 1)
+        {
+            Admin_User_ClsBox(1);//cls box as choosing option
+            LogIn_AsAdmin(1);//Admin option        
+        }
+        else
+        {
+            Admin_User_ClsBox(2);//cls box as choosing option
+        }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Process::LogIn_AsAdmin(int cursor)
 {
     char AdminUsername[10];
     char AdminPassword[10];
+    char press;
     
-    while(true){
+    while(1){
 
         int chance = 3;
 
@@ -184,54 +218,864 @@ void Process::LogIn_AsAdmin(int cursor)
 
             if(strcmpi(AdminUsername,"Cyber")==0 && strcmpi(AdminPassword,"168")==0)
             {
-                AdminMenuDesign(); //Admin Option
+                Admin_Option(); //Admin Option
                 break;
             }
             if(strcmpi(AdminUsername,"Cyber")!=0 || strcmpi(AdminPassword,"168")!=0)
             {
-                H::setcolor(140);
-                H::gotoxy(x+22,y+23);cout<<"Incorrect Username or Password";
-                H::gotoxy(x+29,y+24);cout<<"Please try again";
+                H::setcursor(0,0);
+                H::setcolor(140);H::gotoxy(x+29,y+24);cout<<"You have "<<--chance<<" left";
+                loginMsg(1);//input msg
+
                 getch();
 
                 H::clearBox(x+18, y+14, 42, 0,247);//Clear username and password boxes
                 H::clearBox(x+18, y+20, 42, 0,247);//Clear username and password boxes
-                H::clearBox(x+20, y+24, 34, 0,136);//Clear message
-                chance -- ;
+                H::clearBox(x+20, y+24, 34, 1,136);//Clear message
             }
 
         }
 
         if(chance == 0)
         {
-            for(int i = 1 ; i <= 16 ; i++)
+            for(int i = 1 ; i <= 6 ; i++)
             {   
                 H::setcursor(0,0);
                 H::setcolor(140);
-                H::gotoxy(x+12,y+23);cout<<16-i;H::delay(999);
+                H::gotoxy(x+16,y+23);cout<<"You ran out chances! Please wait for   seconds";
+                H::setcolor(137);H::gotoxy(x+53,y+23);cout<<6-i;H::delay(999);
 
-                H::clearBox(x+13,y+23,16-i,0,136);
+                H::clearBox(x+16,y+23,45,0,136);//cls chance msg
                 H::setcolor(7);
+            }
+            
+            loginMsg(2);//esc or continue
+
+            press = getch();
+
+            H::clearBox(x+38,y+29,60,0,7);//cls msg
+
+            if(press == 27)
+            {
+                Admin_And_User();
+                break;
             }
         }
     }
     H::setcolor(7);
 }
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// void Process::LogIn_AsUser(int cursor)
+// {
+
+// }
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void Process::Admin_Option()
+{
+    H::setConsoleTitle(TEXT("Admin MENU"));
+    H::setcursor(0,0);
+    while(true)
+    {
+        H::setcolor(7);
+        H::cls();
+        outline();
+        AdminMenuDesign();
+        admin_design();
+
+        char press;
+        int num = 1;
+        int choice = 0;
+
+        do
+        {
+            H::drawBoxSingleLineWithBG(x+10,y+8,30,1,153);     
+            H::drawBoxSingleLineWithBG(x+15,y+12,30,1,153);      
+            H::drawBoxSingleLineWithBG(x+10,y+16,30,1,153);
+            H::drawBoxSingleLineWithBG(x+15,y+20,30,1,153);
+            H::drawBoxSingleLineWithBG(x+10,y+24,30,1,153);
+            H::drawBoxSingleLineWithBG(x+15,y+28,30,1,153);
+
+            tp(151,x+12,y+9);cout<<"Admin Profile Information";
+            tp(151,x+25,y+13);cout<<"Games List";
+            tp(151,x+15,y+17);cout<<"Food and Drink List";
+            tp(151,x+17,y+21);cout<<"Manage User's Information";
+            tp(151,x+14,y+25);cout<<"Manage User's Payment";
+            tp(151,x+21,y+29);cout<<"Log Out of Account";
+            
+            if(num == 1)
+            {
+                H::drawBoxSingleLineWithBG(x+10,y+8,30,1,187);
+                tp(188,x+12,y+9);cout<<"Admin Profile Information";
+                choice=1;
+            }
+            if(num == 2)
+            {
+                H::drawBoxSingleLineWithBG(x+15,y+12,30,1,187);
+                tp(188,x+25,y+13);cout<<"Games List";
+                choice=2;
+            }
+            if(num == 3)
+            {
+                H::drawBoxSingleLineWithBG(x+10,y+16,30,1,187);
+                tp(188,x+15,y+17);cout<<"Food and Drink List";
+                choice=3;
+            }
+            if(num == 4)
+            {
+                H::drawBoxSingleLineWithBG(x+15,y+20,30,1,187);
+                tp(188,x+17,y+21);cout<<"Manage User's Information";
+                choice=4;
+            }   
+            if(num == 5)
+            {
+                H::drawBoxSingleLineWithBG(x+10,y+24,30,1,187);
+                tp(188,x+14,y+25);cout<<"Manage User's Payment";
+                choice=5;
+            }
+            if(num == 6)
+            {
+                H::drawBoxSingleLineWithBG(x+15,y+28,30,1,187);
+                tp(188,x+21,y+29);cout<<"Log Out of Account";
+                choice=6;
+            }
+
+            press = getch();
+
+            switch(press) 
+            {
+                case 72://up
+                {
+                    num--;
+                    if(num<1)
+                    {
+                        num=6;
+                    }
+                    break;
+                }
+                
+                case 80://down
+                {
+                    num++;
+                    if(num>6)
+                    {
+                        num=1;
+                    }
+                    break;
+                }
+            }
+        }
+        while(press != 13);
+        Admin_ChoosingOpt(choice);
+    }
+}
+/******************************************************** */
+void Process::Admin_ChoosingOpt(int num)
+{
+    switch(num)
+    {
+        case 1:
+            AdminProfileInfo();
+            break;
+
+        case 2:
+            GamesLst();
+            break;
+
+        case 3:
+            FoodAndDrinkLst();
+            break;
+
+        case 4:
+            ManageUserPayment();
+            break;
+
+        case 5:
+            ManageUserInfo();
+            break;
+
+        case 6:
+            H::setcolor(7);
+            H::cls();
+            Admin_And_User();
+            break;
+        
+        default:
+            break;
+    }
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void Process::AdminProfileInfo()
+{
+    H::setConsoleTitle(TEXT("Admin Profile Information"));
+    H::setcolor(7);
+    H::cls();
+    H::setcursor(0,0);
+    outline();
+
+    //not yet
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void Process::GamesLst()
+{
+    H::setConsoleTitle(TEXT("Games List Menu"));
+    
+    while(true)
+    {
+        H::setcolor(7);
+        H::cls();
+        H::setcursor(0,0);
+        outline();
+
+        int y=1;
+        int x=0;
+        char press;
+
+        B::Header_Design();
+        B::GameMenuTxt();
+        B::CyberTxt();
+        
+        do
+        {
+            B::GameMenu_Design();
+
+            if(y==1)
+            {
+                H::drawBoxDoubleLineWithBG(27,18,18,1,196);
+                H::foreColor(199);
+                H::gotoxy(32,19); cout <<"ADD GAME";
+                x=1;
+            }
+                if(y==2){
+                H::drawBoxDoubleLineWithBG(27,23,18,1,196);
+                H::foreColor(199);
+                H::gotoxy(31,24); cout <<"VIEW GAME";
+                x=2;
+            }
+                if(y==3){
+                H::drawBoxDoubleLineWithBG(27,28,18,1,196);
+                H::foreColor(199);
+                H::gotoxy(31,29); cout <<"SEARCH GAME";
+                x=3;
+            }
+                if(y==4){
+                H::drawBoxDoubleLineWithBG(95,18,18,1,196);
+                H::foreColor(199);
+                H::gotoxy(98,19); cout <<"REMOVE GAME";
+                x=4;
+            }
+                if(y==5){
+                H::drawBoxDoubleLineWithBG(95,23,18,1,196);
+                H::foreColor(199);
+                H::gotoxy(102,24); cout <<"BACK";
+                x=5;
+            
+            }
+            press=getch();
+
+            switch (press)
+            {
+                case 72:
+                    y--;
+                    if(y<1){
+                        y=5;
+                    }
+                    break;
+                case 80:
+                    y++;
+                    if(y>5){
+                        y=1;
+                    }
+                    break;
+            }
+        }
+        while (press!=13);
+
+        SubGameLst(x);
+    }
+}
+/******************************************************** */
+void Process::SubGameLst(int num)
+{   
+    H::setcolor(7);
+    H::cls();
+    H::setcursor(0,0);
+    outline();
+
+    char press;
+    switch(num)
+    {
+        //input case
+        case 1:
+        {
+
+            while(1)
+            {
+                tp(2,x+70,y+33);cout<<"Press [ESC] to go back";
+                
+                press = getch();
+                
+                if(press == 27)
+                {
+                    break;
+                }
+                else if(press == 13)
+                {
+                    //for inputting again
+                    break;
+                }
+            }
+        }
+        break;
+        
+        //Display
+        case 2:
+        {
+            B::ViewGameTxt();
+            B::ViewGame_Design();
+
+            while(1)
+            {
+                tp(2,x+70,y+33);cout<<"Press [ESC] to go back"; 
+
+                press = getch();
+                
+                if(press == 27)
+                {
+                    break;
+                }
+                else if(press == 13)
+                {
+                    break;
+                }
+            }
+        }
+        break;
+
+        //Search
+        case 3:
+        {
+            B::SearchGameTxt();
+            B::SearchGame_Design();
+
+            while(1)
+            {
+                tp(2,x+70,y+33);cout<<"Press [ESC] to go back"; 
+
+                press = getch();
+                
+                if(press == 27)
+                {
+                    break;
+                }
+                else if(press == 13)
+                {
+                    break;
+                }
+            }
+        }
+        break;
+
+        //Remove
+        case 4:
+        {
+            B::DeleteGameTxt();
+            B::DeleteGame_Design();
+
+            while(1)
+            {
+                tp(2,x+70,y+33);cout<<"Press [ESC] to go back"; 
+
+                press = getch();
+                
+                if(press == 27)
+                {
+                    break;
+                }
+                else if(press == 13)
+                {
+                    break;
+                }
+            }
+        }
+        break;
+
+        //back
+        case 5:
+        {
+            Admin_Option();
+        }
+        break;
+
+    }
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void Process::ManageUserInfo()
+{
+    H::setConsoleTitle(TEXT("Manage User Information"));
+
+    while(true)
+    {
+        H::setcolor(7);
+        H::cls();
+        H::setcursor(0,0);
+        outline();
+
+        B::ManageUserInfoTxt();
+        B::ManageUserInfo_Design();
+
+        int y=1;
+        char press;
+        int choice=0;
+
+        do
+        {
+            H::drawBoxDoubleLineWithBG(30,17,30,1,183);
+            H::drawBoxDoubleLineWithBG(30,25,30,1,183);
+            H::drawBoxDoubleLineWithBG(30,33,30,1,183);
+            H::drawBoxDoubleLineWithBG(96,17,30,1,183);
+            H::drawBoxDoubleLineWithBG(96,25,30,1,183);
+            H::drawBoxDoubleLineWithBG(96,33,30,1,183);
+
+            H::foreColor(183); H::gotoxy(38,18); cout<<"SIGN UP USER";
+            H::foreColor(183); H::gotoxy(38,26); cout<<"VIEW USER INFO";
+            H::foreColor(183); H::gotoxy(38,34); cout<<"EDIT USER INFO";
+            H::foreColor(183); H::gotoxy(103,18); cout<<"DELETE USER INFO";
+            H::foreColor(183); H::gotoxy(102,26); cout<<"SORTING USER HOUR";
+            H::foreColor(183); H::gotoxy(109,34); cout<<"BACK";
+            if(y==1){
+                H::drawBoxDoubleLineWithBG(30,17,30,1,135);
+                H::foreColor(135);
+                H::gotoxy(38,18); cout <<"SIGN UP USER";
+                choice=1;
+            }
+            if(y==2){
+                H::drawBoxDoubleLineWithBG(30,25,30,1,135);
+                H::foreColor(135);
+                H::gotoxy(38,26); cout <<"VIEW USER INFO";
+                choice=2;
+            }
+            if(y==3){
+                H::drawBoxDoubleLineWithBG(30,33,30,1,135);
+                H::foreColor(135);
+                H::gotoxy(38,34); cout <<"EDIT USER INFO";
+                choice=3;
+            }
+            if(y==4){
+                H::drawBoxDoubleLineWithBG(96,17,30,1,135);
+                H::foreColor(135);
+                H::gotoxy(103,18); cout <<"DELETE USER INFO";
+                choice=4;
+            }
+            if(y==5){
+                H::drawBoxDoubleLineWithBG(96,25,30,1,135);
+                H::foreColor(135);
+                H::gotoxy(102,26); cout <<"SORTING USER HOUR";
+                choice=5;
+            }
+            if(y==6){
+                H::drawBoxDoubleLineWithBG(96,33,30,1,135);
+                H::foreColor(135);
+                H::gotoxy(109,34); cout <<"BACK";
+                choice=6;
+            }
+
+            press = getch();
+            
+            switch(press){
+                case 72:
+                    y--;
+                    if(y<1){
+
+                        y=6;
+                    }
+                    break;
+                case 80:
+                    y++;
+                    if(y>6){
+                        y=1;
+                    }
+                    break;
+            }
+        }
+        while(press!=13);
+
+        SubManageUserInfo(choice);
+    }
+}
+/*********************************************************/
+void Process::SubManageUserInfo(int num)
+{
+   H::setcolor(7);
+    H::cls();
+    H::setcursor(0,0);
+    outline();
+
+    char press;
+    switch(num)
+    {
+        //input case
+        case 1:
+        {
+
+            while(1)
+            {
+                tp(2,x+70,y+33);cout<<"Press [ESC] to go back";
+                
+                press = getch();
+                
+                if(press == 27)
+                {
+                    break;
+                }
+                else if(press == 13)
+                {
+                    //for inputting again
+                    break;
+                }
+            }
+        }
+        break;
+        
+        //Display
+        case 2:
+        {
+
+            while(1)
+            {
+                tp(2,x+70,y+33);cout<<"Press [ESC] to go back"; 
+
+                press = getch();
+                
+                if(press == 27)
+                {
+                    break;
+                }
+                else if(press == 13)
+                {
+                    break;
+                }
+            }
+        }
+        break;
+
+        //Search
+        case 3:
+        {
+
+            while(1)
+            {
+                tp(2,x+70,y+33);cout<<"Press [ESC] to go back"; 
+
+                press = getch();
+                
+                if(press == 27)
+                {
+                    break;
+                }
+                else if(press == 13)
+                {
+                    break;
+                }
+            }
+        }
+        break;
+
+        //Remove
+        case 4:
+        {
+
+            while(1)
+            {
+                tp(2,x+70,y+33);cout<<"Press [ESC] to go back"; 
+
+                press = getch();
+                
+                if(press == 27)
+                {
+                    break;
+                }
+                else if(press == 13)
+                {
+                    break;
+                }
+            }
+        }
+        break;
+
+        //back
+        case 5:
+        {
+            while(1)
+            {
+                tp(2,x+70,y+33);cout<<"Press [ESC] to go back"; 
+
+                press = getch();
+                
+                if(press == 27)
+                {
+                    break;
+                }
+                else if(press == 13)
+                {
+                    break;
+                }
+            }
+        }
+        break;
+
+        case 6:
+        {
+            Admin_Option();
+        }
+        break;
+
+    }
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void Process::ManageUserPayment()
+{
+    H::setConsoleTitle(TEXT("Manage User Payment"));
+    H::setcolor(7);
+    H::cls();
+    H::setcursor(0,0);
+    outline();
+}
+/*********************************************************/
+void Process::SubManageUserPayment(int num)
+{
+    H::setcolor(7);
+    H::cls();
+    H::setcursor(0,0);
+    outline();
+
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void Process::FoodAndDrinkLst()
+{
+    H::setConsoleTitle(TEXT("Food and Drink Menu"));
+    
+    while (true)
+    {
+        H::setcolor(7);
+        H::cls();
+        H::setcursor(0,0);
+        outline();
+
+        B::FoodMenuTxt();//txt
+        B::Cyber99Txt();
+        B::FoodMenu_Design();
+
+        int y=1;
+        int choice=0;
+        char press;
+
+        do
+        {
+            //option
+            H::drawBoxDoubleLineWithBG(37,13,20,1,23);
+            H::drawBoxDoubleLineWithBG(65,13,20,1,23);
+            H::drawBoxDoubleLineWithBG(94,13,20,1,23);
+
+            H::drawBoxDoubleLineWithBG(37,31,20,1,23);
+            H::foreColor(55); H::gotoxy(63,32); cout<<"PRESS [<-] [->] ARROW KEY TO SELECT";
+            H::drawBoxDoubleLineWithBG(94,31,20,1,23);
+            //label
+            H::foreColor(151);
+            H::foreColor(23); H::gotoxy(38,14); cout<<"INSERT FOOD N DRINK";
+            H::foreColor(23); H::gotoxy(66,14); cout<<"VIEW FOOD N DRINK";
+            H::foreColor(23); H::gotoxy(95,14); cout<<"SEARCH FOOD N DRINK";
+
+            
+            H::foreColor(23); H::gotoxy(37,32); cout<<"REMOVE FOOD N DRINK";
+            H::foreColor(23); H::gotoxy(102,32); cout<<"BACK";
+            if(y==1){
+                H::drawBoxDoubleLineWithBG(37,13,20,1,196);
+                H::foreColor(199);
+                H::gotoxy(38,14); cout <<"INSERT FOOD N DRINK";
+                choice=1;
+            }
+            if(y==2){
+                H::drawBoxDoubleLineWithBG(65,13,20,1,196);
+                H::foreColor(199);
+                H::gotoxy(66,14); cout <<"VIEW FOOD N DRINK";
+                choice=2;
+            }
+            if(y==3){
+                H::drawBoxDoubleLineWithBG(94,13,20,1,196);
+                H::foreColor(199);
+                H::gotoxy(95,14); cout <<"SEARCH FOOD N DRINK";
+                choice=3;
+            }
+            if(y==4){
+                H::drawBoxDoubleLineWithBG(37,31,20,1,196);
+                H::foreColor(199);
+                H::gotoxy(37,32); cout <<"REMOVE FOOD N DRINK";
+                choice=4;
+            }
+            if(y==5){
+                H::drawBoxDoubleLineWithBG(94,31,20,1,196);
+                H::foreColor(199);
+                H::gotoxy(102,32); cout <<"BACK";
+                choice=5;
+            }
+            press = getch();
+            
+            switch(press){
+                case 75:
+                    y--;
+                    if(y<1){
+                        y=5;
+                    }
+                    break;
+                case 77:
+                    y++;
+                    if(y>5){
+                        y=1;
+                    }
+                    break;
+            }
+        }
+        while(press!=13);
+
+        SubFoodAndDrink(choice);
+    }
+}
+/*********************************************************/
+void Process::SubFoodAndDrink(int num)
+{
+    H::setcolor(7);
+    H::cls();
+    H::setcursor(0,0);
+    outline();
+
+    char press;
+    switch(num)
+    {
+        //input case
+        case 1:
+        {
+            B::InputTxt();
+            B::Input_Design();
+
+            while(1)
+            {
+                tp(2,x+70,y+33);cout<<"Press [ESC] to go back";
+                
+                press = getch();
+                
+                if(press == 27)
+                {
+                    break;
+                }
+                else if(press == 13)
+                {
+                    //for inputting again
+                    break;
+                }
+            }
+        }
+        break;
+        
+        //Display
+        case 2:
+        {
+            B::ViewTxt();
+            B::View_Design();
+
+            while(1)
+            {
+                tp(2,x+70,y+33);cout<<"Press [ESC] to go back"; 
+
+                press = getch();
+                
+                if(press == 27)
+                {
+                    break;
+                }
+                else if(press == 13)
+                {
+                    break;
+                }
+            }
+        }
+        break;
+
+        //Search
+        case 3:
+        {
+            B::SearchTxt();
+            B::Search_Design();
+
+            while(1)
+            {
+                tp(2,x+70,y+33);cout<<"Press [ESC] to go back"; 
+
+                press = getch();
+                
+                if(press == 27)
+                {
+                    break;
+                }
+                else if(press == 13)
+                {
+                    break;
+                }
+            }
+        }
+        break;
+
+        //Remove
+        case 4:
+        {
+            B::DeleteTxt();
+            B::Delete_Design();
+
+            while(1)
+            {
+                tp(2,x+70,y+33);cout<<"Press [ESC] to go back"; 
+
+                press = getch();
+                
+                if(press == 27)
+                {
+                    break;
+                }
+                else if(press == 13)
+                {
+                    break;
+                }
+            }
+        }
+        break;
+
+        //back
+        case 5:
+        {
+            Admin_Option();
+        }
+        break;
+    }
+
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Process::GROUP1_ASSIGNMENT()
 {
     // DisableMinimizeButton();
     DisableMaximizeButton();
-    DisableCloseButton();
-
+    // DisableCloseButton();
 
     interface_design();//Interface Design
 
-    login_design();//Design of LOG IN
-
-    login_As_Admin_And_User();//login with user and admin
+    Admin_And_User();
+  
 }
-
-
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 /*
 
