@@ -21,6 +21,8 @@ class Design{
         static void login_design();
         static void loginAs_Admin_UserTxt(int choice);//user and Admin
         static void AdminMenuTxt();
+        static void AdminMenuBoxes();
+        static void AdminMenu_Design();
         static void AdminMenu_Design();
         static void DesktopImg();
 
@@ -144,9 +146,9 @@ void Design::login_design()
     H::HLine(x+91,y-1,31,6,236);//msg
 
     tp(3,x+54,y-4);cout<<R"(   ______________  __  _____  __)";
-    tp(4,x+54,y-3);cout<<R"(  / __/  _/ ___/ |/ / /  _/ |/ /)";
-    tp(5,x+54,y-2);cout<<R"( _\ \_/ // (_ /    / _/ //    / )";
-    tp(6,x+54,y-1);cout<<R"(/___/___/\___/_/|_/ /___/_/|_/  )";
+    tp(3,x+54,y-3);cout<<R"(  / __/  _/ ___/ |/ / /  _/ |/ /)";
+    tp(4,x+54,y-2);cout<<R"( _\ \_/ // (_ /    / _/ //    / )";
+    tp(4,x+54,y-1);cout<<R"(/___/___/\___/_/|_/ /___/_/|_/  )";
 
     H::drawBoxSingleLineWithBG(x+12, y+1, 114, 25, 145);
     H::drawBoxSingleLineWithBG(x+14, y+2, 50, 23, 136);
@@ -188,6 +190,21 @@ void Design::login_design()
 
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void Design::AdminMenuBoxes()
+{
+    H::drawBoxSingleLineWithBG(x+10,y+8,30,1,153);     
+    H::drawBoxSingleLineWithBG(x+15,y+12,30,1,153);      
+    H::drawBoxSingleLineWithBG(x+10,y+16,30,1,153);
+    H::drawBoxSingleLineWithBG(x+15,y+20,30,1,153);
+    H::drawBoxSingleLineWithBG(x+10,y+24,30,1,153);
+    H::drawBoxSingleLineWithBG(x+15,y+28,30,1,153);
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void Design::AdminMenu_Design()
+{
+
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Design::loginAs_Admin_UserTxt(int choice)
 {
     if(choice == 2)
@@ -212,6 +229,7 @@ void Design::loginAs_Admin_UserTxt(int choice)
     }
 
 }
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Design::AdminMenu_Design()
 {
     //first
@@ -267,17 +285,19 @@ void Design::AdminMenuTxt()
     tp(5,x+33,y+1);cout<<R"(\____|__  /\____ |__|_|  /__|___|  /       \____|__  /\___  >___|  /____/ )";
     tp(6,x+33,y+2);cout<<R"(        \/      \/     \/        \/                \/     \/     \/       )";
     
-    H::VLine(x+18,y-5,8,1,219);
-    H::VLine(x+17,y-4,6,2,219);
+    H::VLine(x+18,y-5,8,3,219);
+    H::VLine(x+17,y-4,6,3,219);
     H::VLine(x+16 ,y-5,8,3,219);
     H::VLine(x+15 ,y-4,6,4,219);
-    H::VLine(x+14 ,y-5,8,5,219);
+    H::VLine(x+14 ,y-5,8,4,219);
+    H::VLine(x+13 ,y-4,6,4,219);
 
-    H::VLine(x+127,y-5,8,5,219);
+    H::VLine(x+128,y-4,6,4,219);
+    H::VLine(x+127,y-5,8,4,219);
     H::VLine(x+126,y-4,6,4,219);
     H::VLine(x+125,y-5,8,3,219);
-    H::VLine(x+124,y-4,6,2,219);
-    H::VLine(x+123,y-5,8,1,219);
+    H::VLine(x+124,y-4,6,3,219);
+    H::VLine(x+123,y-5,8,3,219);
 
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

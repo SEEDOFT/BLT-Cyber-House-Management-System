@@ -38,7 +38,7 @@ class Process: public Design{
         static void DisableMaximizeButton();
         static void DisableMinimizeButton();
         static void DisableCloseButton();
-        static void OutputHostName();
+        static void OutputHostName(int x, int y, int color);
         static void UrlOpenner(const string& url);
         static void runURL(int argc, char* argv[], string URL);
 };
@@ -106,13 +106,13 @@ void Process::DisableMinimizeButton()
     }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void Process::OutputHostName()
+void Process::OutputHostName(int x, int y, int color)
 {
     DWORD size = MAX_COMPUTERNAME_LENGTH + 1;
     wchar_t hostname[MAX_COMPUTERNAME_LENGTH + 1];
 
     if (GetComputerNameW(hostname, &size)) {
-        wcout << L" WELCOME BACK : " << hostname << endl;
+        tp(color, x, y);wcout << hostname << endl;
     } else {
         cerr << "Error: Could not retrieve hostname." << endl;
     }
@@ -297,12 +297,7 @@ void Process::Admin_Option()
 
         do
         {
-            H::drawBoxSingleLineWithBG(x+10,y+8,30,1,153);     
-            H::drawBoxSingleLineWithBG(x+15,y+12,30,1,153);      
-            H::drawBoxSingleLineWithBG(x+10,y+16,30,1,153);
-            H::drawBoxSingleLineWithBG(x+15,y+20,30,1,153);
-            H::drawBoxSingleLineWithBG(x+10,y+24,30,1,153);
-            H::drawBoxSingleLineWithBG(x+15,y+28,30,1,153);
+            AdminMenuBoxes();
 
             tp(151,x+12,y+9);cout<<"Admin Profile Information";
             tp(151,x+25,y+13);cout<<"Games List";
