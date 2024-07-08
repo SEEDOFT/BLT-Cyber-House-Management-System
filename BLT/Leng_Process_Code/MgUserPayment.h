@@ -6,6 +6,8 @@
 #include "MgUserInfo.h"
 
 class MgUserPayment : public FoodnDrink, public Game, public MgUserInfo{
+	private:
+		
 	public:
 		void viewAll();
 };

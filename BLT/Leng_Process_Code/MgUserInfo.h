@@ -16,6 +16,7 @@ class MgUserInfo{
 		char password[20];
 		double time;
 		double buyedTime = 0;
+		double remainTime = 0;
 		
 		static double loginHour;
 		static double loginMn;
@@ -47,16 +48,25 @@ class MgUserInfo{
         static void setLogoutMn(double minute);
         
         void setnTime(double time);
+        void setRemainTime(double time);
 };
 
 double MgUserInfo::loginHour = 0;
 double MgUserInfo::loginMn = 0;
 double MgUserInfo::logoutHour = 0;
 double MgUserInfo::logoutMn = 0;
+//double MgUserInfo::remainTime = MgUserInfo::time;
 
 void MgUserInfo::setnTime(double time)
 {
 	this->time = time;
+	remainTime = this->time;
+}
+
+void MgUserInfo::setRemainTime(double time)
+{
+//	remainTime = this->time - time;
+	remainTime = time;
 }
 
 double MgUserInfo::getLoginHour() 
@@ -102,6 +112,7 @@ void MgUserInfo::setBuyingTime(double hours)
 void MgUserInfo::setTime(double hours)
 {
 	time += hours;
+	remainTime = time;
 }
 int MgUserInfo::getBuyedTime()
 {
@@ -139,10 +150,11 @@ void MgUserInfo::input()
 	cout << "Enter Account password : "; H::inputAll(password,sizeof(password)); cout << endl;
 	cout << "Enter Account Hours : "; H::inputNumber(times,sizeof(times)); cout << endl;
 	time = atoi(times) * 60;
+	remainTime = time;
 }
 void MgUserInfo::output()
 {
-	cout << left << setw(10) << muId << setw(25) << guestName << setw(25) << username << setw(25) << password << fixed << setprecision(2) << setw(10) << time << totalPrice() << endl;
+	cout << left << setw(10) << muId << setw(25) << guestName << setw(25) << username << setw(25) << password << fixed << setprecision(2) << setw(10) << time << setw(10) << remainTime << totalPrice() << endl;
 }
 double MgUserInfo::totalPrice()
 {

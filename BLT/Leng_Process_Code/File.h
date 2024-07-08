@@ -39,6 +39,8 @@ public:
     static bool check_file(const string &fileName);
     static void viewProfile(const char *username, const char *password);
 
+	static void setCurrentFile(int n);
+	static void insertToVector(int n, string &fileName);
     static void loginTimeToFile(const char *username, const char *password);
     static void logoutTimeToFile(const char *username, const char *password);
     static void readLogin(const char *username, const char *password);
@@ -125,31 +127,27 @@ int File::getMaxID(const string &fileName, int type)
     return maxID;
 }
 
-void File::insertFile(int n)
+void File::setCurrentFile(int n)
 {
-    char press = ' ';
-    int i = 1;
-
-    struct stat sb;
-    if (stat(dir.c_str(), &sb) != 0)
+	switch (n)
     {
-        mkdir(dir.c_str());
+	    case 1:
+	        currentFile = FoodnDrinkFile;
+	        break;
+	    case 2:
+	        currentFile = GameFile;
+	        break;
+	    case 3:
+	        currentFile = UserInfoFile;
+	        break;
     }
+}
 
-    switch (n)
-    {
-    case 1:
-        currentFile = FoodnDrinkFile;
-        break;
-    case 2:
-        currentFile = GameFile;
-        break;
-    case 3:
-        currentFile = UserInfoFile;
-        break;
-    }
-
-    while (1)
+void File::insertToVector(int n, string &currentFile)
+{
+	int i = 1;
+	char press = ' ';
+	while (1)
     {
         int maxID = getMaxID(currentFile, n);
 
@@ -182,6 +180,22 @@ void File::insertFile(int n)
         }
         i++;
     }
+}
+
+void File::insertFile(int n)
+{
+//    char press = ' ';
+//    int i = 1;
+
+    struct stat sb;
+    if (stat(dir.c_str(), &sb) != 0)
+    {
+        mkdir(dir.c_str());
+    }
+
+	setCurrentFile(n);
+
+	insertToVector(n, currentFile);
 
     file.open(currentFile, ios::out | ios::app | ios::binary);
     if (n == 1)
@@ -212,19 +226,8 @@ void File::insertFile(int n)
 }
 void File::viewFile(int n)
 {
-    switch (n)
-    {
-    case 1:
-        currentFile = FoodnDrinkFile;
-        break;
-    case 2:
-        currentFile = GameFile;
-        break;
-    case 3:
-        currentFile = UserInfoFile;
-        break;
-    }
-
+    setCurrentFile(n);
+    
     file.open(currentFile, ios::in | ios::binary);
     if (!file.is_open())
     {
@@ -271,18 +274,8 @@ void File::searchFile(int n)
     bool isfound = false;
     char press = ' ';
 
-    switch (n)
-    {
-    case 1:
-        currentFile = FoodnDrinkFile;
-        break;
-    case 2:
-        currentFile = GameFile;
-        break;
-    case 3:
-        currentFile = UserInfoFile;
-        break;
-    }
+    setCurrentFile(n);
+    
     file.open(currentFile, ios::in | ios::binary);
     if (!file.is_open())
     {
@@ -384,18 +377,8 @@ void File::updateFile(int n)
     bool isfound = false;
     char press = ' ';
 
-    switch (n)
-    {
-    case 1:
-        currentFile = FoodnDrinkFile;
-        break;
-    case 2:
-        currentFile = GameFile;
-        break;
-    case 3:
-        currentFile = UserInfoFile;
-        break;
-    }
+    setCurrentFile(n);
+    
     file.open(currentFile, ios::out | ios::in | ios::binary);
 
     if (!file.is_open())
@@ -485,18 +468,7 @@ void File::deleteFile(int n)
     bool isfound = false;
     char press = ' ';
 
-    switch (n)
-    {
-    case 1:
-        currentFile = FoodnDrinkFile;
-        break;
-    case 2:
-        currentFile = GameFile;
-        break;
-    case 3:
-        currentFile = UserInfoFile;
-        break;
-    }
+    setCurrentFile(n);
 
     file.open(currentFile, ios::in | ios::binary);
     if (!file.is_open())
@@ -620,7 +592,7 @@ void File::deleteFile(int n)
             }
         }
 
-        file.open(currentFile, ios::out | ios::binary | ios::trunc); // when the file is opened, the old contents are immediately removed.
+        file.open(currentFile, ios::out | ios::binary | ios::trunc);
         if (!file.is_open())
         {
             cout << "File Curropted" << endl;
@@ -824,7 +796,6 @@ void File::buyMoreTime(const char *username, const char *password)
     char hours[5];
     char creditCard[17];
     bool isfound = false;
-    // string tempFileName = "Data/temp.ant";
 
     file.open(UserInfoFile, ios::in | ios::binary);
     fstream tempFile(Backup, ios::out | ios::binary);
@@ -929,6 +900,7 @@ void File::calculateTime(const char *username, const char *password)
                 remainingTime = 0;
             }
             mui.setnTime(remainingTime);
+            mui.setRemainTime(remainingTime);
             cout << "Debug Output:" << endl;
             cout << "loginHour: " << loginHour << ", loginMn: " << loginMn << endl;
             cout << "logoutHour: " << logoutHour << ", logoutMn: " << logoutMn << endl;
