@@ -176,10 +176,18 @@ void Process::Admin_And_User()
                     break;
                 }
 
+                case 8://delete key
+                {
+                    exit(0);
+                    break;
+                }
+
             }
 
         }
         while(press != 13);
+
+        H::clearBox(x+4,y+31,140,0,7);
 
         if(num == 1)
         {
@@ -222,7 +230,7 @@ void Process::LogIn_AsAdmin(int cursor)
             if(strcmpi(AdminUsername,"Cyber")!=0 || strcmpi(AdminPassword,"168")!=0)
             {
                 H::setcursor(0,0);
-                H::setcolor(140);H::gotoxy(x+29,y+24);cout<<"You have "<<--chance<<" left";
+                H::setcolor(140);H::gotoxy(x+29,y+24);cout<<"You have ";H::setcolor(137);cout<<--chance;H::setcolor(140);cout<<" left";
                 loginMsg(1);//input msg
 
                 getch();
@@ -251,7 +259,7 @@ void Process::LogIn_AsAdmin(int cursor)
 
             press = getch();
 
-            H::clearBox(x+38,y+29,60,0,7);//cls msg
+            H::clearBox(x+38,y+29,61,0,7);//cls msg
 
             if(press == 27)
             {
@@ -277,9 +285,11 @@ void Process::Admin_Option()
     {
         H::setcolor(7);
         H::cls();
+        
         outline();
-        AdminMenuDesign();
-        admin_design();
+        AdminMenuTxt();
+        AdminMenu_Design();
+        DesktopImg();
 
         char press;
         int num = 1;

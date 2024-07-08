@@ -20,8 +20,9 @@ class Design{
         
         static void login_design();
         static void loginAs_Admin_UserTxt(int choice);//user and Admin
-        static void AdminMenuDesign();
-        static void admin_design();
+        static void AdminMenuTxt();
+        static void AdminMenu_Design();
+        static void DesktopImg();
 
         static void UserMenuDesign();
 
@@ -122,6 +123,31 @@ void Design::login_design()
 {
     H::setConsoleTitle(TEXT("LOG IN PANEL"));
 
+    H::HLine(x+17,y-4,31,6,236);//msg
+
+    H::HLine(x+11,y-3,15,3,175);H::setcolor(7);cout<<"\4";H::setcolor(4);cout<<"\3";H::setcolor(7);cout<<"\4";H::setcolor(4);cout<<"\3";H::setcolor(7);cout<<"\4";//msg
+    H::setcolor(4);cout<<"\3";H::setcolor(7);cout<<"\4";H::setcolor(4);cout<<"\3";H::setcolor(7);cout<<"\4";H::setcolor(4);cout<<"\3";H::HLine(x+36,y-3,16,3,174);//msg
+
+    H::HLine(x+11,y-2,15,3,175);H::setcolor(4);cout<<"\3";H::setcolor(7);cout<<"\4";H::setcolor(4);cout<<"\3";H::setcolor(7);cout<<"\4";H::setcolor(4);cout<<"\3";//msg
+    H::setcolor(7);cout<<"\4";H::setcolor(4);cout<<"\3";H::setcolor(7);cout<<"\4";H::setcolor(4);cout<<"\3";H::setcolor(7);cout<<"\4";H::HLine(x+36,y-2,16,3,174);//msg
+
+    H::HLine(x+17,y-1,31,6,236);//msg
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    H::HLine(x+91,y-4,31,6,236);//msg
+
+    H::HLine(x+87,y-3,15,3,175);H::setcolor(7);cout<<"\4";H::setcolor(4);cout<<"\3";H::setcolor(7);cout<<"\4";H::setcolor(4);cout<<"\3";H::setcolor(7);cout<<"\4";//msg
+    H::setcolor(4);cout<<"\3";H::setcolor(7);cout<<"\4";H::setcolor(4);cout<<"\3";H::setcolor(7);cout<<"\4";H::setcolor(4);cout<<"\3";H::HLine(x+112,y-3,15,3,174);   //msg
+
+    H::HLine(x+87,y-2,15,3,175);H::setcolor(4);cout<<"\3";H::setcolor(7);cout<<"\4";H::setcolor(4);cout<<"\3";H::setcolor(7);cout<<"\4";H::setcolor(4);cout<<"\3";//msg
+    H::setcolor(7);cout<<"\4";H::setcolor(4);cout<<"\3";H::setcolor(7);cout<<"\4";H::setcolor(4);cout<<"\3";H::setcolor(7);cout<<"\4";H::HLine(x+112,y-2,15,3,174);//msg
+
+    H::HLine(x+91,y-1,31,6,236);//msg
+
+    tp(3,x+54,y-4);cout<<R"(   ______________  __  _____  __)";
+    tp(4,x+54,y-3);cout<<R"(  / __/  _/ ___/ |/ / /  _/ |/ /)";
+    tp(5,x+54,y-2);cout<<R"( _\ \_/ // (_ /    / _/ //    / )";
+    tp(6,x+54,y-1);cout<<R"(/___/___/\___/_/|_/ /___/_/|_/  )";
+
     H::drawBoxSingleLineWithBG(x+12, y+1, 114, 25, 145);
     H::drawBoxSingleLineWithBG(x+14, y+2, 50, 23, 136);
 
@@ -138,7 +164,7 @@ void Design::login_design()
     tp(233,x+70,y+4);cout  << R"( /                                                \)";
     tp(233,x+70,y+5);cout  << R"(|    _________________________________________     |)";
     tp(233,x+70,y+6);cout  << R"(|   |                                         |    |)";
-    tp(233,x+70,y+7);cout  << R"(|   |  C:\> Welcome to out Management system_ |    |)";
+    tp(233,x+70,y+7);cout  << R"(|   |  C:\>    Welcome to BLT Cyber House_    |    |)";
     tp(233,x+70,y+8);cout  << R"(|   |                                         |    |)";
     tp(233,x+70,y+9);cout  << R"(|   |                                         |    |)";
     tp(233,x+70,y+10);cout << R"(|   |                                         |    |)";
@@ -155,7 +181,11 @@ void Design::login_design()
     tp(233,x+70,y+21);cout << R"( \________________________________________________/)";
     tp(233,x+70,y+22);cout << R"(        \_________________________________/)";
 
-    H::setcolor(7);
+
+    tp(4,x+4,y+31);cout<<"To move between options, use ";H::setcolor(1);cout<<"[UP]";
+    H::setcolor(4);cout<<" and ";H::setcolor(1);cout<<"[DOWN]";H::setcolor(4);cout<<" arrow key and press ";
+    H::setcolor(1);cout<<"[ENTER]";H::setcolor(4);cout<<" key to select, or to leave the program, press ";H::setcolor(1);cout<<"[BACKSPACE]";
+
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Design::loginAs_Admin_UserTxt(int choice)
@@ -182,58 +212,107 @@ void Design::loginAs_Admin_UserTxt(int choice)
     }
 
 }
+void Design::AdminMenu_Design()
+{
+    //first
+    for(int i = 1 ; i <= 50 ; i ++)
+    {
+        //top
+        tp(191,x+69-i,y-4);cout<<char(204);H::HLine(x+70-i,y-4,1,191,205);
+        H::HLine(x+70,y-4,i,191,205);H::setcolor(191);cout<<char(185);
+        //bottom
+        tp(191,x+69-i,y+3);cout<<char(204);H::HLine(x+70-i,y+3,1,191,205);H::delay(1);
+        H::HLine(x+70,y+3,i,191,205);H::setcolor(191);cout<<char(185);
+    }
+    //second
+    for(int i = 1 ; i <= 40 ; i ++)
+    {
+        //top
+        tp(71,x+69-i,y-4);cout<<char(204);H::HLine(x+70-i,y-4,1,71,205);
+        H::HLine(x+70,y-4,i,71,205);H::setcolor(71);cout<<char(185);
+        //bottom
+        tp(71,x+69-i,y+3);cout<<char(204);H::HLine(x+70-i,y+3,1,71,205);H::delay(1);
+        H::HLine(x+70,y+3,i,71,205);H::setcolor(71);cout<<char(185);   
+    }
+    //third
+    for(int i = 1 ; i <= 28 ; i ++)
+    {
+        //top
+        tp(191,x+69-i,y-4);cout<<char(204);H::HLine(x+70-i,y-4,1,191,205);
+        H::HLine(x+70,y-4,i,191,205);H::setcolor(191);cout<<char(185);
+        //bottom
+        tp(191,x+69-i,y+3);cout<<char(204);H::HLine(x+70-i,y+3,1,191,205);H::delay(1);
+        H::HLine(x+70,y+3,i,191,205);H::setcolor(191);cout<<char(185);   
+    }
+    //fourth
+    for(int i = 1 ; i <= 17 ; i ++)
+    {
+        //top
+        tp(103,x+69-i,y-4);cout<<char(204);H::HLine(x+70-i,y-4,1,103,205);
+        H::HLine(x+70,y-4,i,103,205);H::setcolor(103);cout<<char(185);
+        //bottom
+        tp(103,x+69-i,y+3);cout<<char(204);H::HLine(x+70-i,y+3,1,103,205);H::delay(1);
+        H::HLine(x+70,y+3,i,103,205);H::setcolor(103);cout<<char(185);   
+    }
+}
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void Design::AdminMenuDesign()
+void Design::AdminMenuTxt()
 {
     H::setConsoleTitle(TEXT("ADMIN MENU"));
 
+    tp(3,x+33,y-3);cout<<R"(   _____       .___      .__                  _____                       )";
+    tp(3,x+33,y-2);cout<<R"(  /  _  \    __| _/_____ |__| ____           /     \   ____   ____  __ __ )";
+    tp(3,x+33,y-1);cout<<R"( /  /_\  \  / __ |/     \|  |/    \         /  \ /  \_/ __ \ /    \|  |  \)";
+    tp(4,x+33,y-0);cout<<R"(/    |    \/ /_/ |  Y Y  \  |   |  \       /    Y    \  ___/|   |  \  |  /)";
+    tp(5,x+33,y+1);cout<<R"(\____|__  /\____ |__|_|  /__|___|  /       \____|__  /\___  >___|  /____/ )";
+    tp(6,x+33,y+2);cout<<R"(        \/      \/     \/        \/                \/     \/     \/       )";
+    
+    H::VLine(x+18,y-5,8,1,219);
+    H::VLine(x+17,y-4,6,2,219);
+    H::VLine(x+16 ,y-5,8,3,219);
+    H::VLine(x+15 ,y-4,6,4,219);
+    H::VLine(x+14 ,y-5,8,5,219);
 
-    tp(1,x+13,y-4);cout<<R"(      __       ________   ___      ___   __    _____  ___       ___      ___   _______  _____  ___   ____  ____  )";
-    tp(1,x+13,y-3);cout<<R"(     /""\     |"      "\ |"  \    /"  | |" \  (\"   \|"  \     |"  \    /"  | /"     "|(\"   \|"  \ ("  _||_ " | )";
-    tp(1,x+13,y-2);cout<<R"(    /    \    (.  ___  :) \   \  //   | ||  | |.\\   \    |     \   \  //   |(: ______)|.\\   \    ||   (  ) : | )";
-    tp(1,x+13,y-1);cout<<R"(   /' /\  \   |: \   ) || /\\  \/.    | |:  | |: \.   \\  |     /\\  \/.    | \/    |  |: \.   \\  |(:  |  | . ) )";
-    tp(1,x+13,y-0);cout<<R"(  //  __'  \  (| (___\ |||: \.        | |.  | |.  \    \. |    |: \.        | // ___)_ |.  \    \. | \\ \__/ //  )";
-    tp(1,x+13,y+1);cout<<R"( /   /  \\  \ |:       :)|.  \    /:  | /\  |\|    \    \ |    |.  \    /:  |(:      "||    \    \ | /\\ __ //\  )";
-    tp(1,x+13,y+2);cout<<R"(___/    \___)(________/ |___|\__/|___|(__\_|_)\___|\____\)    |___|\__/|___| \_______) \___|\____\)(__________) )";
-                                                                                                                 
-
+    H::VLine(x+127,y-5,8,5,219);
+    H::VLine(x+126,y-4,6,4,219);
+    H::VLine(x+125,y-5,8,3,219);
+    H::VLine(x+124,y-4,6,2,219);
+    H::VLine(x+123,y-5,8,1,219);
 
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void Design::admin_design()
+void Design::DesktopImg()
 {
-
-    tp(2,x+55,y+3 );cout<<R"(                _________________                                            )";
-    tp(2,x+55,y+4 );cout<<R"(               /                /|                                           )";
-    tp(2,x+55,y+5 );cout<<R"(              /                / |                                           )";
-    tp(2,x+55,y+6 );cout<<R"(             /________________/ /|                                           )";
-    tp(2,x+55,y+7 );cout<<R"(          ###|      ____      |//|                                           )";
-    tp(2,x+55,y+8 );cout<<R"(         #   |     /   /|     |/.|                                           )";
-    tp(2,x+55,y+9 );cout<<R"(        #  __|___ /   /.|     |  |_______________                            )";
-    tp(2,x+55,y+10);cout<<R"(       #  /      /   //||     |  /              /|                  ___      )";
-    tp(2,x+55,y+11);cout<<R"(      #  /      /___// ||     | /              / |                 / \ \     )";
-    tp(2,x+55,y+12);cout<<R"(      # /______/!   || ||_____|/              /  |                /   \ \    )";
-    tp(2,x+55,y+13);cout<<R"(      #| . . .  !   || ||                    /  _________________/     \ \   )";
-    tp(2,x+55,y+14);cout<<R"(      #|  . .   !   || //      ________     /  /\________________  {   /  }  )";
-    tp(2,x+55,y+15);cout<<R"(      /|   .    !   ||//~~~~~~/   0000/    /  / / ______________  {   /  /   )";
-    tp(2,x+55,y+16);cout<<R"(     / |        !   |'/      /9  0000/    /  / / /             / {   /  /    )";
-    tp(2,x+55,y+17);cout<<R"(    / #\________!___|/      /9  0000/    /  / / /_____________/___  /  /     )";
-    tp(2,x+55,y+18);cout<<R"(   / #     /_____\/        /9  0000/    /  / / /_  /\_____________\/  /      )";
-    tp(2,x+55,y+19);cout<<R"(  / #                      ``^^^^^^    /   \ \ . ./ / ____________   /       )";
-    tp(2,x+55,y+20);cout<<R"( +=#==================================/     \ \ ./ / /.  .  .  \ /  /        )";
-    tp(2,x+55,y+21);cout<<R"( |#                                   |      \ \/ / /___________/  /         )";
-    tp(2,x+55,y+22);cout<<R"( #                                    |_______\__/________________/          )";
-    tp(2,x+55,y+23);cout<<R"( |                                    |               |  |  / /              )";
-    tp(2,x+55,y+24);cout<<R"( |                                    |               |  | / /               )";
-    tp(2,x+55,y+25);cout<<R"( |                                    |       ________|  |/ /________        )";
-    tp(2,x+55,y+26);cout<<R"( |                                    |      /_______/    \_________/\       )";
-    tp(2,x+55,y+27);cout<<R"( |                                    |     /        /  /           \ )      )";
-    tp(2,x+55,y+28);cout<<R"( |                                    |    /OO^^^^^^/  / /^^^^^^^^^OO\)      )"; 
-    tp(2,x+55,y+29);cout<<R"( |                                    |            /  / /                    )";
-    tp(2,x+55,y+30);cout<<R"( |                                    |           /  / /                     )";
-    tp(2,x+55,y+31);cout<<R"( |                                    |          /___\/                      )";
-    tp(2,x+55,y+32);cout<<R"( |                                    |           oo                         )";
-    tp(2,x+55,y+33);cout<<R"( |____________________________________|                                      )";
+    tp(2,x+70,y+4 );cout<<R"(               )";H::setcolor(3);cout<<R"( _________________  )";
+    tp(2,x+70,y+5 );cout<<R"(               )";H::setcolor(3);cout<<R"(/                /| )";
+    tp(2,x+70,y+6 );cout<<R"(              )";H::setcolor(3);cout<<R"(/                / | )";
+    tp(2,x+70,y+7 );cout<<R"(             )";H::setcolor(3);cout<<R"(/________________/ /|                                           )";
+    tp(2,x+70,y+8 );cout<<R"(          ###)";H::setcolor(3);cout<<R"(|      ____      |//|                                           )";
+    tp(2,x+70,y+9 );cout<<R"(         #   )";H::setcolor(3);cout<<R"(|     /   /|     |/.|                                           )";
+    tp(2,x+70,y+10);cout<<R"(        #  )";H::setcolor(3);cout<<R"(__|___ /   /.|     |  |)";H::setcolor(8);cout<<R"(_______________                            )";
+    tp(2,x+70,y+11);cout<<R"(       #  )";H::setcolor(3);cout<<R"(/      /   //||     |  /             )";H::setcolor(8);cout<<R"( /|                 )";H::setcolor(6);cout<<R"( ___      )";
+    tp(2,x+70,y+12);cout<<R"(      #  )";H::setcolor(3);cout<<R"(/      /___// ||     | /              )";H::setcolor(8);cout<<R"(/ |                 )";H::setcolor(6);cout<<R"(/ \ \     )";
+    tp(2,x+70,y+13);cout<<R"(      # )";H::setcolor(3);cout<<R"(/______/!   || ||_____|/              )";H::setcolor(8);cout<<R"(/  |                )";H::setcolor(6);cout<<R"(/   \ \    )";
+    tp(2,x+70,y+14);cout<<R"(      #)";H::setcolor(3);cout<<R"(| . . .  !   || ||                    )";H::setcolor(8);cout<<R"(/  )";H::setcolor(6);cout<<R"(_________________/     \ \   )";
+    tp(2,x+70,y+15);cout<<R"(      #)";H::setcolor(3);cout<<R"(|  . .   !   || //      ________     )";H::setcolor(8);cout<<R"(/  )";H::setcolor(6);cout<<R"(/\________________  {   /  }  )";
+    tp(8,x+70,y+16);cout<<R"(      /)";H::setcolor(3);cout<<R"(|   .    !   ||//~~~~~~/   0000/    )";H::setcolor(8);cout<<R"(/  )";H::setcolor(6);cout<<R"(/ / ______________  {   /  /   )";
+    tp(8,x+70,y+17);cout<<R"(     / )";H::setcolor(3);cout<<R"(|        !   |'/      /9  0000/    )";H::setcolor(8);cout<<R"(/  )";H::setcolor(6);cout<<R"(/ / /             / {   /  /    )";
+    tp(8,x+70,y+18);cout<<R"(    / )";H::setcolor(2);cout<<R"(#)";H::setcolor(3);cout<<R"(\________!___|/      /9  0000/    )";H::setcolor(8);cout<<R"(/  )";H::setcolor(6);cout<<R"(/ / /_____________/___  /  /     )";
+    tp(8,x+70,y+19);cout<<R"(   / )";H::setcolor(2);cout<<R"(#)";H::setcolor(3);cout<<R"(     /_____\/        /9  0000/    )";H::setcolor(8);cout<<R"(/  )";H::setcolor(6);cout<<R"(/ / /_  /\_____________\/  /      )";
+    tp(8,x+70,y+20);cout<<R"(  / )";H::setcolor(2);cout<<R"(#)";H::setcolor(3);cout<<R"(                      ``^^^^^^    )";H::setcolor(8);cout<<R"(/   )";H::setcolor(6);cout<<R"(\ \ . ./ / ____________   /       )";
+    tp(8,x+70,y+21);cout<<R"( +=)";H::setcolor(2);cout<<R"(#)";H::setcolor(8);cout<<R"(==================================/     )";H::setcolor(6);cout<<R"(\ \ ./ / /.  .  .  \ /  /        )";
+    tp(8,x+70,y+22);cout<<R"( |)";H::setcolor(2);cout<<R"(#                                   )";H::setcolor(8);cout<<R"(|      )";H::setcolor(6);cout<<R"(\ \/ / /___________/  /         )";
+    tp(2,x+70,y+23);cout<<R"( #                                    )";H::setcolor(8);cout<<R"(|_______)";H::setcolor(6);cout<<R"(\__/________________/          )";
+    tp(8,x+70,y+24);cout<<R"( |                                    |               )";H::setcolor(6);cout<<R"(|  |  / /              )";
+    tp(8,x+70,y+25);cout<<R"( |                                    |               )";H::setcolor(6);cout<<R"(|  | / /               )";
+    tp(8,x+70,y+26);cout<<R"( |                                    |       )";H::setcolor(6);cout<<R"(________|  |/ /________        )";
+    tp(8,x+70,y+27);cout<<R"( |                                    |      )";H::setcolor(6);cout<<R"(/_______/    \_________/\       )";
+    tp(8,x+70,y+28);cout<<R"( |                                    |     )";H::setcolor(6);cout<<R"(/        /  /           \ )      )";
+    tp(8,x+70,y+29);cout<<R"( |                                    |    )";H::setcolor(6);cout<<R"(/)";H::setcolor(7);cout<<R"(OO)";H::setcolor(6);cout<<R"(^^^^^^/  / /^^^^^^^^^)";H::setcolor(7);cout<<R"(OO)";H::setcolor(6);cout<<R"(\)      )"; 
+    tp(8,x+70,y+30);cout<<R"( |                                    |            )";H::setcolor(6);cout<<R"(/  / /                    )";
+    tp(8,x+70,y+31);cout<<R"( |                                    |           )";H::setcolor(6);cout<<R"(/  / /                     )";
+    tp(8,x+70,y+32);cout<<R"( |                                    |          )";H::setcolor(6);cout<<R"(/___\/                      )";
+    tp(8,x+70,y+33);cout<<R"( |____________________________________|          )";H::setcolor(7);cout<<R"( oo                         )";
 
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
