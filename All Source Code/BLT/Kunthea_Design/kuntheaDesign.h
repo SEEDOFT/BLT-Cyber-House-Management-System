@@ -125,6 +125,12 @@ namespace BLT
         static void UpdateUserInfoTxt();
         static void UpdateUserInfo_Design();
     };  
+    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    class CalculateIncome{
+    public:
+        static void CalculateIncomeTxt();
+        static void CalculateIncome_Design();
+    };
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif

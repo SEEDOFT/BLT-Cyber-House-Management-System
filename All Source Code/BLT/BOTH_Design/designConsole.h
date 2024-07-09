@@ -23,7 +23,6 @@ class Design{
         static void AdminMenuTxt();
         static void AdminMenuBoxes();
         static void AdminMenu_Design();
-        static void AdminMenu_Design();
         static void DesktopImg();
 
         static void UserMenuDesign();
@@ -200,10 +199,7 @@ void Design::AdminMenuBoxes()
     H::drawBoxSingleLineWithBG(x+15,y+28,30,1,153);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void Design::AdminMenu_Design()
-{
 
-}
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Design::loginAs_Admin_UserTxt(int choice)
 {
@@ -286,10 +282,10 @@ void Design::AdminMenuTxt()
     tp(6,x+33,y+2);cout<<R"(        \/      \/     \/        \/                \/     \/     \/       )";
     
     H::VLine(x+18,y-5,8,3,219);
-    H::VLine(x+17,y-4,6,3,219);
+    H::VLine(x+17,y-4,6,4,219);
     H::VLine(x+16 ,y-5,8,3,219);
     H::VLine(x+15 ,y-4,6,4,219);
-    H::VLine(x+14 ,y-5,8,4,219);
+    H::VLine(x+14 ,y-5,8,3,219);
     H::VLine(x+13 ,y-4,6,4,219);
 
     H::VLine(x+128,y-4,6,4,219);

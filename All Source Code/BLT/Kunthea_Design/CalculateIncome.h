@@ -1,14 +1,8 @@
 #ifndef __VIEWUSERINFODESIGN_H__
 #define __VIEWUSERINFODESIGN_H__
-#include "./Header/HinsyOOPV2"
-using namespace HinsyOOP;
-class CalculateIncome{
-    public:
-        static void calculateIncomeAscii();
-        static void calculateIncomeDesign();
-};
-
-void CalculateIncome::calculateIncomeAscii(){
+#include "kuntheaDesign.h"
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void BLT::CalculateIncome::CalculateIncomeTxt(){
     H::foreColor(3); H::gotoxy(30,1); cout<<R"(_________        .__               .__          __           .___                                    )";
     H::foreColor(3); H::gotoxy(30,2); cout<<R"(\_   ___ \_____  |  |   ____  __ __|  | _____ _/  |_  ____   |   | ____   ____  ____   _____   ____  )";
     H::foreColor(3); H::gotoxy(30,3); cout<<R"(/    \  \/\__  \ |  | _/ ___\|  |  \  | \__  \\   __\/ __ \  |   |/    \_/ ___\/  _ \ /     \_/ __ \ )";
@@ -17,8 +11,8 @@ void CalculateIncome::calculateIncomeAscii(){
     H::foreColor(4); H::gotoxy(30,6); cout<<R"(        \/     \/          \/                \/          \/           \/     \/            \/     \/ )";
     H::HLine(20,8,120,7,196);
 }
-
-void CalculateIncome::calculateIncomeDesign(){
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void BLT::CalculateIncome::CalculateIncome_Design(){
     H::drawBoxSingleLine(20,10,120,1,4);
     H::drawBoxDoubleLineWithBG(16,11,1,25,196);
     H::VLine(17,11,25,199,3);
@@ -30,4 +24,5 @@ void CalculateIncome::calculateIncomeDesign(){
     H::drawBoxSingleLine(65,35,30,1,4);
     H::gotoxy(67,36); H::foreColor(199); cout<<"Total Income: "; 
 }
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif

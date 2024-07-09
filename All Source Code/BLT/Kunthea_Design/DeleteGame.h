@@ -4,13 +4,13 @@
 #include"kuntheaDesign.h"
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void BLT::DeleteGameDesign::DeleteGameTxt(){
-    H::foreColor(3); H::gotoxy(40,1); cout<<R"(________         .__          __           ________          __          )";
-    H::foreColor(3); H::gotoxy(40,2); cout<<R"(\______ \   ____ |  |   _____/  |_  ____   \______ \ _____ _/  |______   )";
-    H::foreColor(3); H::gotoxy(40,3); cout<<R"( |    |  \_/ __ \|  | _/ __ \   __\/ __ \   |    |  \\__  \\   __\__  \  )";
-    H::foreColor(4); H::gotoxy(40,4); cout<<R"( |    `   \  ___/|  |_\  ___/|  | \  ___/   |    `   \/ __ \|  |  / __ \_)";
-    H::foreColor(5); H::gotoxy(40,5); cout<<R"(/_______  /\___  >____/\___  >__|  \___  > /_______  (____  /__| (____  /)";
-    H::foreColor(6); H::gotoxy(40,6); cout<<R"(        \/     \/          \/          \/          \/     \/          \/ )";
-    H::HLine(25,8,100,7,196);
+    H::foreColor(3); H::gotoxy(43,1); cout<<R"(________         .__          __           ________          __          )";
+    H::foreColor(3); H::gotoxy(43,2); cout<<R"(\______ \   ____ |  |   _____/  |_  ____   \______ \ _____ _/  |______   )";
+    H::foreColor(3); H::gotoxy(43,3); cout<<R"( |    |  \_/ __ \|  | _/ __ \   __\/ __ \   |    |  \\__  \\   __\__  \  )";
+    H::foreColor(4); H::gotoxy(43,4); cout<<R"( |    `   \  ___/|  |_\  ___/|  | \  ___/   |    `   \/ __ \|  |  / __ \_)";
+    H::foreColor(4); H::gotoxy(43,5); cout<<R"(/_______  /\___  >____/\___  >__|  \___  > /_______  (____  /__| (____  /)";
+    H::foreColor(4); H::gotoxy(43,6); cout<<R"(        \/     \/          \/          \/          \/     \/          \/ )";
+    H::HLine(30,8,100,7,196);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void BLT::DeleteGameDesign::DeleteGame_Design(){
@@ -18,7 +18,7 @@ void BLT::DeleteGameDesign::DeleteGame_Design(){
     H::VLine(70,12,3,7,221);
     H::VLine(90,12,3,7,221);
     H::drawBoxSingleLineWithBG(65,16,28,1,4);
-    H::foreColor(199); H::gotoxy(73,17); cout<<"Delete ID: ";
+    H::foreColor(199); H::gotoxy(71,17); cout<<"Delete ID : ";
     H::foreColor(7);
     //loading while searching
     for(int i=0; i<25; i++){
@@ -40,7 +40,7 @@ void BLT::DeleteGameDesign::DeleteGame_Design(){
     H::drawBoxDoubleLine(20,19,120,1,3);
     H::drawBoxDoubleLine(20,33,120,1,3);
     H::gotoxy(40,20); cout<<"ID\t\t\tName\t\t\tTYPE\t\t\tRELEASE DATE";
-    H::gotoxy(58,34); H::foreColor(3); cout<<"Press [ENTER] To Continues Or [ESC] To Exit";
+    H::gotoxy(58,34); H::foreColor(3); cout<<"Press ";H::foreColor(4); cout<<"[ENTER]";H::foreColor(3); cout<<" To Continues Or ";H::foreColor(4); cout<<"[ESC]";H::foreColor(3); cout<<" To Exit";
     H::foreColor(7);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

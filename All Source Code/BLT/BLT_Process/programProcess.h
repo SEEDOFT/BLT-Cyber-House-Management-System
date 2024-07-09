@@ -884,8 +884,8 @@ void Process::FoodAndDrinkLst()
         outline();
 
         B::FoodMenuTxt();//txt
-        B::Cyber99Txt();
         B::FoodMenu_Design();
+        B::Cyber99Txt();
 
         int y=1;
         int choice=0;
@@ -894,50 +894,49 @@ void Process::FoodAndDrinkLst()
         do
         {
             //option
-            H::drawBoxDoubleLineWithBG(37,13,20,1,23);
-            H::drawBoxDoubleLineWithBG(65,13,20,1,23);
-            H::drawBoxDoubleLineWithBG(94,13,20,1,23);
+            H::drawBoxDoubleLineWithBG(41,13,20,1,23);
+            H::drawBoxDoubleLineWithBG(69,13,20,1,23);
+            H::drawBoxDoubleLineWithBG(98,13,20,1,23);
 
-            H::drawBoxDoubleLineWithBG(37,31,20,1,23);
-            H::foreColor(55); H::gotoxy(63,32); cout<<"PRESS [<-] [->] ARROW KEY TO SELECT";
-            H::drawBoxDoubleLineWithBG(94,31,20,1,23);
+            H::drawBoxDoubleLineWithBG(41,31,20,1,23);
+            H::foreColor(55); H::gotoxy(46,34); cout<<"use ";H::setcolor(52);cout<<" [<-] [->]";H::setcolor(55);cout<<" arrow key to move between option and ";H::setcolor(52);cout<<"[ENTER]";H::setcolor(55);cout<<" to select";
+            H::drawBoxDoubleLineWithBG(98,31,20,1,23);
             //label
             H::foreColor(151);
-            H::foreColor(23); H::gotoxy(38,14); cout<<"INSERT FOOD N DRINK";
-            H::foreColor(23); H::gotoxy(66,14); cout<<"VIEW FOOD N DRINK";
-            H::foreColor(23); H::gotoxy(95,14); cout<<"SEARCH FOOD N DRINK";
+            H::foreColor(23); H::gotoxy(41,14); cout<<"Insert Food & Drinks";
+            H::foreColor(23); H::gotoxy(70,14); cout<<"View Food & Drinks";
+            H::foreColor(23); H::gotoxy(98,14); cout<<"Search Food & Drinks";
 
-            
-            H::foreColor(23); H::gotoxy(37,32); cout<<"REMOVE FOOD N DRINK";
-            H::foreColor(23); H::gotoxy(102,32); cout<<"BACK";
+            H::foreColor(23); H::gotoxy(41,32); cout<<"Remove Food & Drinks";
+            H::foreColor(23); H::gotoxy(102,32); cout<<"Back to MENU";
             if(y==1){
                 H::drawBoxDoubleLineWithBG(37,13,20,1,196);
                 H::foreColor(199);
-                H::gotoxy(38,14); cout <<"INSERT FOOD N DRINK";
+                H::gotoxy(38,14); cout <<"Insert Food & Drinks";
                 choice=1;
             }
             if(y==2){
                 H::drawBoxDoubleLineWithBG(65,13,20,1,196);
                 H::foreColor(199);
-                H::gotoxy(66,14); cout <<"VIEW FOOD N DRINK";
+                H::gotoxy(66,14); cout <<"View Food & Drinks";
                 choice=2;
             }
             if(y==3){
                 H::drawBoxDoubleLineWithBG(94,13,20,1,196);
                 H::foreColor(199);
-                H::gotoxy(95,14); cout <<"SEARCH FOOD N DRINK";
+                H::gotoxy(95,14); cout <<"Search Food & Drinks";
                 choice=3;
             }
             if(y==4){
                 H::drawBoxDoubleLineWithBG(37,31,20,1,196);
                 H::foreColor(199);
-                H::gotoxy(37,32); cout <<"REMOVE FOOD N DRINK";
+                H::gotoxy(37,32); cout <<"Remove Food & Drinks";
                 choice=4;
             }
             if(y==5){
                 H::drawBoxDoubleLineWithBG(94,31,20,1,196);
                 H::foreColor(199);
-                H::gotoxy(102,32); cout <<"BACK";
+                H::gotoxy(102,32); cout <<"Back to MENU";
                 choice=5;
             }
             press = getch();

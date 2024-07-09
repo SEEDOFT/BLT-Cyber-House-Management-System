@@ -30,7 +30,7 @@ namespace BLT
     public ViewDesign, public UpdateDesign, public UpdateGameDesign, public GameMenu, 
     public SearchGameDesign, public SearchDesign, public InputDesign, public Invoice, 
     public ManageUserInfo, public DeleteGameDesign,public UserSignUp, public ViewUserInfoDesign, 
-    public DeleteUserInfo, public SortUserDesign, public UpdateUserInfo
+    public DeleteUserInfo, public SortUserDesign, public UpdateUserInfo, public CalculateIncome
 
     {
         public:
