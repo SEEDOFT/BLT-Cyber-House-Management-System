@@ -16,8 +16,8 @@ void BLT::FoodMenu::Cyber99Txt()
 void BLT::FoodMenu::FoodMenu_Design()
 {
      //box
-    H::drawBoxDoubleLineWithBG(37,10,85,25,71);
-    H::drawBoxDoubleLineWithBG(39,11,81,23,55);
+    H::drawBoxDoubleLineWithBG(37,10,85,26,71);
+    H::drawBoxDoubleLineWithBG(39,11,81,24,55);
     H::drawBoxDoubleLineWithBG(41,18,77,10,103);
 
     H::HLine(43,19,73,23,178);
