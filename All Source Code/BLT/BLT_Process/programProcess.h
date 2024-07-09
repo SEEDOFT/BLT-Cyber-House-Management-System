@@ -19,6 +19,7 @@ class Process: public Design{
         static void Admin_ChoosingOpt(int num);
 
         static void AdminProfileInfo();
+        static void AdminProfileInfo_Design();
 
         static void GamesLst();
         static void SubGameLst(int num);
@@ -118,11 +119,13 @@ void Process::OutputHostName(int x, int y, int color)
     }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//                              Login as Admin or User
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Process::Admin_And_User()
 {
     H::setcolor(7);
     outline();
-    login_design();//Design of LOG IN
+    Login_Design();//Design of LOG IN
 
     char press;
     int num = 1;
@@ -142,14 +145,14 @@ void Process::Admin_And_User()
                 H::drawBoxSingleLineWithBG(x+83,y+10,25,1,204);
                 H::setcolor(201);H::gotoxy(x+84,y+11);cout<<"  => Administrator <=  ";
                 H::clearBox(x+23,y+4,36,5,136);//Cls text
-                loginAs_Admin_UserTxt(1);
+                LoginAs_Admin_UserTxt(1);
             }
             if(num==2)
             {
                 H::drawBoxSingleLineWithBG(x+83,y+14,25,1,204);
                 H::setcolor(201);H::gotoxy(x+84,y+15);cout<<"  =>     User      <=  ";
                 H::clearBox(x+23,y+4,36,5,136);//Cls text
-                loginAs_Admin_UserTxt(2);
+                LoginAs_Admin_UserTxt(2);
             }
 
             press = getch();
@@ -199,6 +202,8 @@ void Process::Admin_And_User()
             Admin_User_ClsBox(2);//cls box as choosing option
         }
 }
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//                          Login As Administrator
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Process::LogIn_AsAdmin(int cursor)
 {
@@ -271,11 +276,14 @@ void Process::LogIn_AsAdmin(int cursor)
     H::setcolor(7);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//                              Login As User
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // void Process::LogIn_AsUser(int cursor)
 // {
 
 // }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//                          Admin Option
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Process::Admin_Option()
 {
@@ -408,6 +416,7 @@ void Process::Admin_ChoosingOpt(int num)
     }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//                          Admin Profile Option
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Process::AdminProfileInfo()
 {
@@ -419,6 +428,8 @@ void Process::AdminProfileInfo()
 
     //not yet
 }
+/******************************************************** */
+
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Process::GamesLst()

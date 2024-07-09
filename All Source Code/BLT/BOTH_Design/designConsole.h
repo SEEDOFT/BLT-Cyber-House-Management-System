@@ -18,12 +18,15 @@ class Design{
 
         static void Admin_User_ClsBox(int num);
         
-        static void login_design();
-        static void loginAs_Admin_UserTxt(int choice);//user and Admin
+        static void Login_Design();
+        static void LoginAs_Admin_UserTxt(int choice);//user and Admin
         static void AdminMenuTxt();
         static void AdminMenuBoxes();
         static void AdminMenu_Design();
         static void DesktopImg();
+        
+        static void AboutUsTxt();
+        static void AboutUs_Design();
 
         static void UserMenuDesign();
 
@@ -120,7 +123,7 @@ void Design::interface_design()
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void Design::login_design()
+void Design::Login_Design()
 {
     H::setConsoleTitle(TEXT("LOG IN PANEL"));
 
@@ -201,7 +204,7 @@ void Design::AdminMenuBoxes()
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void Design::loginAs_Admin_UserTxt(int choice)
+void Design::LoginAs_Admin_UserTxt(int choice)
 {
     if(choice == 2)
     {
@@ -278,8 +281,8 @@ void Design::AdminMenuTxt()
     tp(3,x+33,y-2);cout<<R"(  /  _  \    __| _/_____ |__| ____           /     \   ____   ____  __ __ )";
     tp(3,x+33,y-1);cout<<R"( /  /_\  \  / __ |/     \|  |/    \         /  \ /  \_/ __ \ /    \|  |  \)";
     tp(4,x+33,y-0);cout<<R"(/    |    \/ /_/ |  Y Y  \  |   |  \       /    Y    \  ___/|   |  \  |  /)";
-    tp(5,x+33,y+1);cout<<R"(\____|__  /\____ |__|_|  /__|___|  /       \____|__  /\___  >___|  /____/ )";
-    tp(6,x+33,y+2);cout<<R"(        \/      \/     \/        \/                \/     \/     \/       )";
+    tp(4,x+33,y+1);cout<<R"(\____|__  /\____ |__|_|  /__|___|  /       \____|__  /\___  >___|  /____/ )";
+    tp(4,x+33,y+2);cout<<R"(        \/      \/     \/        \/                \/     \/     \/       )";
     
     H::VLine(x+18,y-5,8,3,219);
     H::VLine(x+17,y-4,6,4,219);
@@ -332,7 +335,24 @@ void Design::DesktopImg()
 
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
+void Design::AboutUsTxt()
+{
+    tp(3,x+43,y-3);cout<<R"(   _____ ___.                  __     ____ ___       )";
+    tp(3,x+43,y-2);cout<<R"(  /  _  \\_ |__   ____  __ ___/  |_  |    |   \______)";
+    tp(3,x+43,y-1);cout<<R"( /  /_\  \| __ \ /  _ \|  |  \   __\ |    |   /  ___/)";
+    tp(4,x+43,y-0);cout<<R"(/    |    \ \_\ (  <_> )  |  /|  |   |    |  /\___ \ )";
+    tp(4,x+43,y+1);cout<<R"(\____|__  /___  /\____/|____/ |__|   |______//____  >)";
+    tp(4,x+43,y+2);cout<<R"(        \/    \/                                  \/ )";
+    H::HLine(x+20,y+3,100,7,220);
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void Design::AboutUs_Design()
+{
+    char one[]="We're the scholarship students at [1]ANT Technology Training Center, specialize in Mobile Application.";
+    char two[]="Study For 11 Months From 19 February 2024 To 20 December 2024.";
+    char three[]="Thanks to the generous support of the [2]Ministry of Post and Telecommunication.";
+    char fourth[]="This opportunity is allowing us to develop valuable skills in mobile app development and pursue exciting careers in the tech industry.";
+}
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 /*
                                 END OF DESIGN HEADER FILE
