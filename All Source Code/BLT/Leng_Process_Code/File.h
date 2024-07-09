@@ -6,49 +6,51 @@
 #include <vector>
 #include <ctime>
 #include <cmath>
+#include <sstream>
 
 class File
 {
-private:
-    static string dir;
-    static string FoodnDrinkFile;
-    static string Backup;
-    static string GameFile;
-    static string UserInfoFile;
-    static string MgUserPaymentFile;
-
-    static int getMaxID(const string &fileName, int type);
-
-    static vector<FoodnDrink> fndVector;
-    static vector<Game> gameVector;
-    static vector<MgUserInfo> muiVector;
-
-    static FoodnDrink fnd;
-    static Game game;
-    static MgUserInfo mui;
-
-    static fstream file;
-    static string currentFile;
-
-public:
-    static void insertFile(int n);
-    static void viewFile(int n);
-    static void searchFile(int n);
-    static void updateFile(int n);
-    static void deleteFile(int n);
-    static bool check_file(const string &fileName);
-    static void viewProfile(const char *username, const char *password);
-
-	static void setCurrentFile(int n);
-	static void insertToVector(int n, string &fileName);
-    static void loginTimeToFile(const char *username, const char *password);
-    static void logoutTimeToFile(const char *username, const char *password);
-    static void readLogin(const char *username, const char *password);
-    static void readLogout(const char *username, const char *password);
-    static void user_login();
-    static void buyMoreTime(const char *username, const char *password);
-    static void invoice(const char *username, const char *password);
-    static void calculateTime(const char *username, const char *password);
+	private:
+	    static string dir;
+	    static string FoodnDrinkFile;
+	    static string Backup;
+	    static string GameFile;
+	    static string UserInfoFile;
+	    static string MgUserPaymentFile;
+	
+	    static int getMaxID(const string &fileName, int type);
+	
+	    static vector<FoodnDrink> fndVector;
+	    static vector<Game> gameVector;
+	    static vector<MgUserInfo> muiVector;
+	
+	    static FoodnDrink fnd;
+	    static Game game;
+	    static MgUserInfo mui;
+	
+	    static fstream file;
+	    static string currentFile;
+	
+	public:
+	    static void insertFile(int n);
+	    static void viewFile(int n);
+	    static void searchFile(int n);
+	    static void updateFile(int n);
+	    static void deleteFile(int n);
+	    static bool check_file(const string &fileName);
+	    static void viewProfile(const char *username, const char *password);
+	
+		static void setCurrentFile(int n);
+		static void insertToVector(int n, string &fileName);
+	    static void loginTimeToFile(const char *username, const char *password);
+	    static void logoutTimeToFile(const char *username, const char *password);
+	    static void readLogin(const char *username, const char *password);
+	    static void readLogout(const char *username, const char *password);
+	    static void user_login();
+	    static void buyMoreTime(const char *username, const char *password);
+	    static void invoice(const char *username, const char *password);
+	    static void calculateTime(const char *username, const char *password);
+	    static void buyFood(const char *username, const char *password);
 };
 
 vector<FoodnDrink> File::fndVector;
@@ -757,38 +759,42 @@ void File::user_login()
             }
         }
     }
-    cout << "[ 1 ] . VIEW PROFILE" << endl;
-    cout << "[ 2 ] . BUY TIME" << endl;
-    cout << "[ 3 ] . BUY SNACK" << endl;
-    cout << "[ 4 ] . INVOICE" << endl;
-    cout << "[ 5 ] . LOGOUT" << endl;
-    cout << "[ 6 ] . EXIT" << endl;
-    cout << "Choose option" << endl;
-    press = getch();
-    switch (press)
+    while(1)
     {
-    case '1':
-        viewProfile(username, password);
-        break;
-    case '2':
-        buyMoreTime(username, password);
-        break;
-    case '3':
-        break;
-    case '4':
-        invoice(username, password);
-        break;
-    case '5':
-        logoutTimeToFile(username, password);
-        calculateTime(username, password);
-        user_login();
-        break;
-    case '6':
-        logoutTimeToFile(username, password);
-        calculateTime(username, password);
-        exit(0);
-        break;
-    }
+    	cout << "[ 1 ] . VIEW PROFILE" << endl;
+	    cout << "[ 2 ] . BUY TIME" << endl;
+	    cout << "[ 3 ] . BUY SNACK" << endl;
+	    cout << "[ 4 ] . INVOICE" << endl;
+	    cout << "[ 5 ] . LOGOUT" << endl;
+	    cout << "[ 6 ] . EXIT" << endl;
+	    cout << "Choose option" << endl;
+	    press = getch();
+	    switch (press)
+	    {
+		    case '1':
+		        viewProfile(username, password);
+		        break;
+		    case '2':
+		        buyMoreTime(username, password);
+		        break;
+		    case '3':
+		    	buyFood(username,password);
+		        break;
+		    case '4':
+		        invoice(username, password);
+		        break;
+		    case '5':
+		        logoutTimeToFile(username, password);
+		        calculateTime(username, password);
+		        user_login();
+		        break;
+		    case '6':
+		        logoutTimeToFile(username, password);
+		        calculateTime(username, password);
+		        exit(0);
+		        break;
+	    }
+	}
 }
 
 void File::buyMoreTime(const char *username, const char *password)
@@ -815,7 +821,9 @@ void File::buyMoreTime(const char *username, const char *password)
             if (strcmp(username, mui.getUsername()) == 0 && strcmp(password, mui.getPassword()) == 0)
             {
                 isfound = true;
-                mui.setTime(atof(hours));
+//                mui.setTime(atof(hours));
+//                mui.setRemainTime(remainingTime);
+				mui.setnTime(atof(hours));
                 mui.setBuyingTime(atof(hours));
             }
             tempFile.write((char *)&mui, sizeof(MgUserInfo));
@@ -852,6 +860,7 @@ void File::invoice(const char *username, const char *password)
             if (strcmp(username, mui.getUsername()) == 0 && strcmp(password, mui.getPassword()) == 0)
             {
                 cout << "Added Time: " << mui.getBuyedTime() << endl;
+                cout << "Buyed Snack " << setw(25) << mui.getFoodnDrink() << "Price " << setw(8) << mui.getPrice() << "Quantity " << setw(5) << mui.getQty() << "Total Price " << mui.getFndTotal() << endl;
             }
         }
     }
@@ -870,54 +879,109 @@ void File::calculateTime(const char *username, const char *password)
     if (!file.is_open() || !tempFile.is_open())
     {
         cout << "File Corrupted" << endl;
-        return;
-    }
-
-    while (file.read((char *)&mui, sizeof(MgUserInfo)))
-    {
-        if (strcmp(username, mui.getUsername()) == 0 && strcmp(password, mui.getPassword()) == 0)
-        {
-            isfound = true;
-
-            double loginHour = mui.getLoginHour();
-            double loginMn = mui.getLoginMn();
-            double logoutHour = mui.getLogoutHour();
-            double logoutMn = mui.getLogoutMn();
-
-            double loginTime = loginHour * 60 + loginMn;
-            double logoutTime = logoutHour * 60 + logoutMn;
-
-            double usedTimeMinutes = logoutTime - loginTime;
-
-            if (usedTimeMinutes < 0)
-            {
-                usedTimeMinutes += 24 * 60;
-            }
-            double remainingTime = mui.getTime() - usedTimeMinutes;
-
-            if (remainingTime < 0)
-            {
-                remainingTime = 0;
-            }
-            mui.setnTime(remainingTime);
-            mui.setRemainTime(remainingTime);
-            cout << "Debug Output:" << endl;
-            cout << "loginHour: " << loginHour << ", loginMn: " << loginMn << endl;
-            cout << "logoutHour: " << logoutHour << ", logoutMn: " << logoutMn << endl;
-            cout << "loginTime (minutes): " << loginTime << ", logoutTime (minutes): " << logoutTime << endl;
-            cout << "usedTime (minutes): " << usedTimeMinutes << endl;
-            cout << "remainingTime: " << remainingTime << endl;
-        }
-        tempFile.write((char *)&mui, sizeof(MgUserInfo));
-    }
-
-    if (isfound)
-    {
-        cout << "Time calculation successful" << endl;
     }
     else
     {
-        cout << "User not found" << endl;
+    	while (file.read((char *)&mui, sizeof(MgUserInfo)))
+	    {
+	        if (strcmp(username, mui.getUsername()) == 0 && strcmp(password, mui.getPassword()) == 0)
+	        {
+	            isfound = true;
+	
+	            double loginHour = mui.getLoginHour();
+	            double loginMn = mui.getLoginMn();
+	            double logoutHour = mui.getLogoutHour();
+	            double logoutMn = mui.getLogoutMn();
+	
+	            double loginTime = loginHour * 60 + loginMn;
+	            double logoutTime = logoutHour * 60 + logoutMn;
+	
+	            double usedTimeMinutes = logoutTime - loginTime;
+	
+	            if (usedTimeMinutes < 0)
+	            {
+	                usedTimeMinutes += 24 * 60;
+	            }
+	            double remainingTime = mui.getTime() - usedTimeMinutes;
+	
+	            if (remainingTime < 0)
+	            {
+	                remainingTime = 0;
+	            }
+//	            mui.setnTime(remainingTime);
+	            mui.setRemainTime(remainingTime);
+	            cout << "Debug Output:" << endl;
+	            cout << "loginHour: " << loginHour << ", loginMn: " << loginMn << endl;
+	            cout << "logoutHour: " << logoutHour << ", logoutMn: " << logoutMn << endl;
+	            cout << "loginTime (minutes): " << loginTime << ", logoutTime (minutes): " << logoutTime << endl;
+	            cout << "usedTime (minutes): " << usedTimeMinutes << endl;
+	            cout << "remainingTime: " << remainingTime << endl;
+	
+	            tempFile.write((char *)&mui, sizeof(mui));
+	        }
+	    }
+	
+	    file.close();
+	    tempFile.close();
+	    remove(UserInfoFile.c_str());
+	    rename(Backup.c_str(), UserInfoFile.c_str());
+	}
+}
+
+void File::buyFood(const char *username, const char *password)
+{
+    char foodID[5];
+    char quantity[5];
+    bool isfound = false;
+
+    file.open(UserInfoFile, ios::in | ios::binary);
+    fstream tempFile(Backup, ios::out | ios::binary);
+
+    if (!file.is_open() || !tempFile.is_open())
+    {
+        cout << "File Corrupted" << endl;
+    }
+    else
+    {
+        while (file.read((char *)&mui, sizeof(MgUserInfo)))
+        {
+            if (strcmp(username, mui.getUsername()) == 0 && strcmp(password, mui.getPassword()) == 0)
+            {
+                isfound = true;
+                cout << "Enter Food ID: ";
+                H::inputNumber(foodID, sizeof(foodID));
+                cout << endl;
+
+                cout << "Enter Quantity: ";
+                H::inputNumber(quantity, sizeof(quantity));
+                cout << endl;
+
+                int foodIDInt = atoi(foodID);
+                int quantityInt = atoi(quantity);
+
+                fstream foodFile(FoodnDrinkFile, ios::in | ios::binary);
+                FoodnDrink food;
+                while (foodFile.read((char *)&food, sizeof(FoodnDrink)))
+                {
+                    if (food.getID() == foodIDInt)
+                    {
+                        mui.setFnd(food.getName(), food.getPrice(), quantity);
+                        break;
+                    }
+                }
+                foodFile.close();
+            }
+            tempFile.write((char *)&mui, sizeof(MgUserInfo));
+        }
+
+        if (isfound)
+        {
+            cout << "Food purchase successful" << endl;
+        }
+        else
+        {
+            cout << "User not found" << endl;
+        }
     }
 
     file.close();
