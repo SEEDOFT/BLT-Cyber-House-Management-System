@@ -19,7 +19,7 @@ class Process: public Design{
         static void Admin_ChoosingOpt(int num);
 
         static void AdminProfileInfo();
-        static void AdminProfileInfo_Design();
+        static void SubAdminProfileInfo(int num);
 
         static void GamesLst();
         static void SubGameLst(int num);
@@ -426,10 +426,71 @@ void Process::AdminProfileInfo()
     H::setcursor(0,0);
     outline();
 
-    //not yet
+    while(true)
+    {
+        H::setcolor(7);
+        H::cls();
+        H::setcursor(0,0);
+        outline();
+
+        AdminProfileInfoTxt();
+        AdminProfileInfo_Design();
+
+        int y=1;
+        int x=0;
+        char press;
+
+        do
+        {
+
+
+            if(y == 1)
+            {
+                x=1;
+            }
+            if(y == 2)
+            {
+                x=2;
+            }
+            if(y == 3)
+            {
+                x=3;
+            }
+
+            press = getch();
+
+            switch(press)
+            {
+                case 72:
+                    y--;
+                    {
+                        if(y<1)
+                        {
+                            y=3;
+                        }
+                    }
+                    break;
+                
+                case 80:
+                    y++;
+                    {
+                        if(y>3)
+                        {
+                            y=1;
+                        }
+                    }
+                    break;
+            }
+            
+        } while (press != 13);
+        SubAdminProfileInfo(x);
+    }
 }
 /******************************************************** */
+void Process::SubAdminProfileInfo(int num)
+{
 
+}
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Process::GamesLst()
