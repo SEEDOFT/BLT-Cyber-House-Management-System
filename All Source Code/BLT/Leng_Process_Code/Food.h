@@ -11,9 +11,9 @@ class FoodnDrink {
     protected:
         char fdName[20];
         char fdPrice[5];
-        char fdQty[5];
+        char fdQty[13];
     public:
-        int getID();
+        int getFndID();
         const char* getName() const;
         const char* getPrice() const;
         const char* getQty() const;
@@ -23,7 +23,7 @@ class FoodnDrink {
         void setID(int id);
 };
 
-int FoodnDrink::getID() 
+int FoodnDrink::getFndID() 
 {
     return fdId;
 }
@@ -61,6 +61,10 @@ void FoodnDrink::input()
 
 void FoodnDrink::output() 
 {
+	if(strlen(fdQty) == 0)
+	{
+		strcpy(fdQty, "OUT OF STOCK");
+	}
     cout << left << setw(10) << fdId << setw(25) << fdName << setw(10) << fdPrice << fdQty << endl;
 }
 
