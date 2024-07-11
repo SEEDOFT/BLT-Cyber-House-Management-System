@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "iostream": "cpp",
+        "hinsyoopv2": "cpp",
+        "ostream": "cpp"
+    }
+}

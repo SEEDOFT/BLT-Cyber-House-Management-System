@@ -1,10 +1,9 @@
 #ifndef ___MG_USER_INFO_H___
 #define ___MG_USER_INFO_H___
-
-#include "HinsyOOPV2"
-
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#include"../ANT_Header/HinsyOOPV2"
 using namespace HinsyOOP;
-
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 class MgUserInfo {
     protected:
         int muId;
@@ -13,4 +12,5 @@ class MgUserInfo {
         char password[20];
         double time;
 };
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif

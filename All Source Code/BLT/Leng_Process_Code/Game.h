@@ -1,10 +1,9 @@
 #ifndef ___GAME_H___
 #define ___GAME_H___
-
-#include "HinsyOOPV2"
-
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#include"../ANT_Header/HinsyOOPV2"
 using namespace HinsyOOP;
-
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 class Game {
 	private:
 		int gId;
@@ -19,34 +18,34 @@ class Game {
 		void inputDate(char date[], int dateLength);
 		void setID(int id);
 };
-
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //int Game::gId = 0;
 //char Game::gName[20] = "";
 //char Game::gameType[20] = "";
 //char Game::releaseDate[11] = "";
-
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 int Game::getID()
 {
 	return gId;
 }
-
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Game::setID(int id)
 {
 	gId = id;
 }
-
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Game::input()
 {
 	cout << "Enter Game name : "; H::inputAll(gName,sizeof(gName)); cout << endl;
 	cout << "Enter Game type : "; H::inputLetter(gameType,sizeof(gameType)); cout << endl;
 	cout << "Enter Game release date : "; inputDate(releaseDate,sizeof(releaseDate)); cout << endl;
 }
-
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Game::output()
 {
 	cout << left << setw(10) << gId << setw(25) << gName << setw(25) << gameType << releaseDate << endl;
 }
-
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Game::inputDate(char date[], int dateLength)
 {
     int index = 0;
@@ -103,5 +102,5 @@ void Game::inputDate(char date[], int dateLength)
     date[index] = '\0';
     cout << endl;
 }
-
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif

@@ -21,6 +21,9 @@
 #include"../Kunthea_Design/DeleteUserInfo.h"
 #include"../Kunthea_Design/SortDesign.h"
 #include"../Kunthea_Design/UpdateUserInfo.h"
+#include"../Kunthea_Design/BuyFood&drink.h"
+#include"../Kunthea_Design/CalculateIncome.h"
+#include"../Kunthea_Design/BuyHour.h"
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 namespace BLT
 {
@@ -30,7 +33,8 @@ namespace BLT
     public ViewDesign, public UpdateDesign, public UpdateGameDesign, public GameMenu, 
     public SearchGameDesign, public SearchDesign, public InputDesign, public Invoice, 
     public ManageUserInfo, public DeleteGameDesign,public UserSignUp, public ViewUserInfoDesign, 
-    public DeleteUserInfo, public SortUserDesign, public UpdateUserInfo, public CalculateIncome
+    public DeleteUserInfo, public SortUserDesign, public UpdateUserInfo, public CalculateIncome,
+    public BuyFoodnDrink, public BuyHour
 
     {
         public:

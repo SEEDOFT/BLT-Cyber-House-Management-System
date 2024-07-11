@@ -117,7 +117,7 @@ namespace BLT
     class DeleteUserInfo{
     public:
         static void DeleteUserInfoTxt();
-        static void DeleteUser_Design();
+        static void DeleteUserInfo_Design();
     };
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     class UpdateUserInfo{
@@ -130,6 +130,18 @@ namespace BLT
     public:
         static void CalculateIncomeTxt();
         static void CalculateIncome_Design();
+    };
+    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    class BuyFoodnDrink{
+    public:
+        static void BuyFoodnDrinkTxt();
+        static void buyFoodnDrink_Design();
+    };
+    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    class BuyHour{
+    public:
+        static void buyHourTxt();
+        static void buyHour_Design();
     };
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

@@ -28,8 +28,10 @@ int main()
 
     // Process::AdminProfileInfoTxt();
     // Process::AdminProfileInfo_Design();
-    Process::AdminProfileInfo_Animation();
-    
+    // Process::AdminProfileInfo_Animation();
+
+    B::InputGameTxt();
+    B::InputGame_Design();
 
    getch(); return 0;
 }

@@ -871,7 +871,7 @@ void Process::SubManageUserInfo(int num)
         case 4:
         {
             B::DeleteUserInfoTxt();
-            B::DeleteUser_Design();
+            B::DeleteUserInfo_Design();
 
             while(1)
             {
