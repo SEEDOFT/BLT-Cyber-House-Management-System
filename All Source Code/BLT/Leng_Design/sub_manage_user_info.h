@@ -1,10 +1,10 @@
 #include "manage_user_info.h"
 
-void Design::tp(int colorCode, int width, int height)
+void LENG::tp(int colorCode, int width, int height)
 {
     H::setcolor(colorCode);H::gotoxy(width,height);
 }
-void Design::manage_user_info()
+void LENG::manage_user_info()
 {
 	H::setConsoleTitle(TEXT("Manage User's Information"));
 	int lineColor = 4; 
@@ -45,7 +45,6 @@ void Design::manage_user_info()
 	H::gotoxy(x+73,y+19); cout << "MANAGE USER'S INFORMAION!!" << endl;
 	
 	static char press;
-	static int selectedColor = 1;
 	static int n = 0;
 	static int posistion = x + 20;
 	
@@ -130,7 +129,7 @@ void Design::manage_user_info()
 	}
 	while(press != 13);
 }
-void Design::design(int a)
+void LENG::design(int a)
 {
 	if(a == 1)
 	{

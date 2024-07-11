@@ -27,7 +27,10 @@ void BLT::ManageUserInfo::ManageUserInfo_Design()
     H::drawBoxDoubleLineWithBG(70,17,19,18,179);
     H::VLine(75,18,16,183,219);
     H::VLine(85,18,16,183,219);
-    H::foreColor(183);H::gotoxy(35,11);cout<<"==========>\3\3\3 ";H::setcolor(180);cout<<"Press ";H::setcolor(185);cout<<"[UP]";H::setcolor(180);cout<<" & ";H::setcolor(185);cout<<"[DOWN]";H::setcolor(180);cout<<" arrow key to move, ";H::setcolor(185);cout<<"[ENTER]";H::setcolor(180);cout<<" key to select";H::setcolor(183);cout<<" \3\3\3<==========";
+    H::foreColor(183);H::gotoxy(35,11);cout<<"==========>\3\3\3 ";H::setcolor(180);cout<<"Press ";
+    H::setcolor(185);cout<<"[UP]";H::setcolor(180);cout<<" & ";H::setcolor(185);cout<<"[DOWN]";
+    H::setcolor(180);cout<<" arrow key to move, ";H::setcolor(185);cout<<"[ENTER]";H::setcolor(180);
+    cout<<" key to select";H::setcolor(183);cout<<" \3\3\3<==========";
    
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

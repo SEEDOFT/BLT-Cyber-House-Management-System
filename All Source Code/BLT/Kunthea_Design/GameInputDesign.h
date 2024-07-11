@@ -24,7 +24,7 @@ void BLT::GameInputDesign::InputGame_Design()
         H::VLine(90,12,i+1,7,221); H::delay(10);
     }
 
-    H::foreColor(199); H::gotoxy(58,11); cout<<"\3\3 ";H::setcolor(203);cout<<" Welcome to BTL Cyber Game Display ";H::setcolor(199);cout<<"\3\3";
+    H::foreColor(199); H::gotoxy(58,11); cout<<"\3\3";H::setcolor(203);cout<<" Welcome to BTL Cyber House Game Input ";H::setcolor(199);cout<<"\3\3";
 
     H::drawBoxDoubleLineWithBG(30,16,100,20,187);
     H::drawBoxDoubleLineWithBG(35,17,30,15,196);
@@ -61,7 +61,7 @@ void BLT::GameInputDesign::InputGame_Design()
     H::foreColor(183); H::gotoxy(99,26); cout<<">.<";
     H::foreColor(183); H::gotoxy(99,30); cout<<">.<";
 
-    
+    H::HLine(50,35,60,183,205);
     H::gotoxy(58,36); H::foreColor(185); cout<<"Press ";H::foreColor(180); cout<<"[ENTER]";H::foreColor(185); cout<<" To Continues Or ";H::foreColor(180); cout<<"[ESC]";H::foreColor(185); cout<<" To Exit";
     H::foreColor(7);
 }

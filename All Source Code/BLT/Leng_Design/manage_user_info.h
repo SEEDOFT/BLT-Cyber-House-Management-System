@@ -5,7 +5,7 @@
 
 using namespace HinsyOOP;
 
-class Design{
+class LENG{
 	private:
 		static const int x = 12;
         static const int y = 5;

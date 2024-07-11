@@ -61,8 +61,8 @@ namespace BLT
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     class UpdateGameDesign{
     public:
-        static void UpdateTxt();
-        static void Update_Design();
+        static void UpdateGameTxt();
+        static void UpdateGame_Design();
     };
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     class ViewDesign{
@@ -142,6 +142,24 @@ namespace BLT
     public:
         static void buyHourTxt();
         static void buyHour_Design();
+    };
+     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    class AllInvoice{
+    public:
+        static void AllInvoicesTxt();
+        static void AllInvoices_Design();
+    };
+    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    class ViewProfile{
+    public:
+        static void ViewProfileTxt();
+        static void ViewProfile_Design();
+    };
+    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    class ViewAllUserInvoice{
+    public: 
+        static void ViewAllUserInvoicesTxt();    
+        static void ViewAllUserInvoices_Design();           
     };
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
