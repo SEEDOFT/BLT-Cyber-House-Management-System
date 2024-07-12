@@ -12,7 +12,18 @@ int main()
     H::setcursor(0,0);
     Process::DisableMaximizeButton();
     
-    Process::Admin_And_User();
+    // Process::Admin_Option();
+    // Process::Admin_And_User();
+
+
+    // Process::AdminProfileInfo();
+    
+    // Process::GamesLst();
+    Process::FoodAndDrinkLst();
+    // /**/Process::ManageUserPayment();
+    // Process::ManageUserInfo();
+
+
 
     // LENG::manage_user_info();
 

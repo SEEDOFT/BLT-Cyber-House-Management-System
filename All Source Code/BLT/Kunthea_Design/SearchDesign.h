@@ -43,9 +43,7 @@ void BLT::SearchDesign::Search_Design()
     H::drawBoxDoubleLine(20,19,120,15,4);
     H::drawBoxDoubleLine(20,19,120,1,3);
     H::drawBoxDoubleLine(20,33,120,1,3);
-    H::gotoxy(40,20); H::foreColor(3); cout<<"|ID|\t\t\t |Name| \t\t\t |QTY| \t\t\t      |Price|";
-    H::gotoxy(58,34); H::foreColor(3); cout<<"Press";H::setcolor(4);cout<<" [ENTER]";H::setcolor(3);cout<<" To Continues Or ";H::setcolor(4);cout<<"[ESC]";H::setcolor(3);cout<<" To Exit";
-    H::foreColor(7);
+    H::gotoxy(35,20); H::foreColor(3); cout<<"|ID|\t\t\t|Name|\t\t\t\t|QTY|\t\t\t\t|Price|";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif

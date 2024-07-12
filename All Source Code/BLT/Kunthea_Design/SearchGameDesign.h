@@ -20,10 +20,11 @@ void BLT::SearchGameDesign::SearchGame_Design()
     H::VLine(70,12,3,7,221);
     H::VLine(90,12,3,7,221);
     H::drawBoxSingleLineWithBG(65,16,28,1,4);
-    H::foreColor(4); H::gotoxy(70,17); cout<<"Search By ID: ";
+    H::foreColor(4); H::gotoxy(70,17); cout<<"Search By ID : ";
     H::foreColor(7);
     //loading while searching
-    for(int i=0; i<25; i++){
+    for(int i=0; i<25; i++)
+    {
         H::setcursor(0,0);
         H::gotoxy(65,20); H::foreColor(3); cout<<"Searching..."; 
         H::drawBoxSingleLine(65,21,28,1,3);
@@ -32,7 +33,8 @@ void BLT::SearchGameDesign::SearchGame_Design()
         H::foreColor(7);
     }
     H::clearBox(60,21,36,2,7);
-    for(int i=0; i<7; i++){
+    for(int i=0; i<7; i++)
+    {
         H::VLine(25,12,i+1,i+1,221); H::delay(10);
         H::VLine(135,12,i+1,i+1,221); H::delay(10);
     }
@@ -40,9 +42,8 @@ void BLT::SearchGameDesign::SearchGame_Design()
     H::drawBoxDoubleLine(20,19,120,15,4);
     H::drawBoxDoubleLine(20,19,120,1,3);
     H::drawBoxDoubleLine(20,33,120,1,3);
-    H::gotoxy(40,20); cout<<"|ID|\t\t\t|Name|\t\t\t|TYPE|\t\t\t|RELEASE DATE|";
-    H::gotoxy(58,34); H::foreColor(3); cout<<"Press";H::setcolor(4);cout<<" [ENTER]";H::setcolor(3);cout<<" To Continues Or ";H::setcolor(4);cout<<"[ESC]";H::setcolor(3);cout<<" To Exit";
-    H::foreColor(7);
+
+    H::gotoxy(35,20); cout<<"|ID|\t\t\t|Name|\t\t\t\t|TYPE|\t\t\t|RELEASE DATE|";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif

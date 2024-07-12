@@ -14,7 +14,7 @@ class Game {
 	public:
 		int getID();
 		void input();
-		void output();
+		void output(int y);
 		void inputDate(char date[], int dateLength);
 		void setID(int id);
 };
@@ -36,14 +36,14 @@ void Game::setID(int id)
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Game::input()
 {
-	cout << "Enter Game name : "; H::inputAll(gName,sizeof(gName)); cout << endl;
-	cout << "Enter Game type : "; H::inputLetter(gameType,sizeof(gameType)); cout << endl;
-	cout << "Enter Game release date : "; inputDate(releaseDate,sizeof(releaseDate)); cout << endl;
+	H::foreColor(176); H::gotoxy(99,23); cout<<": "; H::inputAll(gName,sizeof(gName));//name
+	H::foreColor(176); H::gotoxy(99,27); cout<<": "; H::inputLetter(gameType,sizeof(gameType));//type
+	H::foreColor(176); H::gotoxy(99,31); cout<<": "; inputDate(releaseDate,sizeof(releaseDate));
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void Game::output()
+void Game::output(int y)
 {
-	cout << left << setw(10) << gId << setw(25) << gName << setw(25) << gameType << releaseDate << endl;
+    H::setcolor(1);H::gotoxy(35,14+y);cout << gId << "\t\t\t"<< gName << "\t\t\t\t" << gameType << "\t\t\t" << releaseDate ;
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Game::inputDate(char date[], int dateLength)

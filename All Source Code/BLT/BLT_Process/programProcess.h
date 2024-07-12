@@ -3,6 +3,7 @@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #include"../BOTH_Design/designConsole.h"
 #include"BLT.h"
+#include"../Leng_Process_Code/File.h";
 #include<cstdlib>
 
 using namespace BLT;
@@ -12,6 +13,7 @@ class Process: public Design{
     private:
         static const char* getOpenCommand();
     public:
+
         static void Admin_And_User();
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         static void LogIn_AsAdmin(int cursor);
@@ -20,21 +22,36 @@ class Process: public Design{
 
         static void AdminProfileInfo();
         static void SubAdminProfileInfo(int num);
+        static void AboutUs();
+        static void A_LetterFromUs();
 
         static void GamesLst();
         static void SubGameLst(int num);
+        static void InsertGame();
+        static void ViewGame();
+        static void SearchGame();
+        static void RemoveGame();
 
         static void FoodAndDrinkLst();
         static void SubFoodAndDrink(int num);
+        static void InsertFoodDrink();
+        static void ViewFoodDrink();
+        static void SearchFoodDrink();
+        static void UpdateFoodDrink();
+        static void RemoveFoodDrink();
 
         static void ManageUserPayment();
         static void SubManageUserPayment(int num);
 
         static void ManageUserInfo();
         static void SubManageUserInfo(int num);
+        static void InsertUser();
+        static void ViewUser();
+        static void EditUserInfo();
+        static void RemoveUser();
+        static void SortUser();
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         static void LogIn_AsUser(int cursor);
-
 
         static void DisableMaximizeButton();
         static void DisableMinimizeButton();
@@ -134,24 +151,24 @@ void Process::Admin_And_User()
        do
         {
             //choice box
-            H::drawBoxSingleLineWithBG(x+83,y+10,25,1,153);
-            H::drawBoxSingleLineWithBG(x+83,y+14,25,1,153);
+            H::drawBoxSingleLineWithBG(x+84,y+15,25,1,153);
+            H::drawBoxSingleLineWithBG(x+84,y+19,25,1,153);
 
-            H::setcolor(151);H::gotoxy(x+84,y+11);cout<<"     Administrator     ";
-            H::setcolor(151);H::gotoxy(x+84,y+15);cout<<"         User          ";
+            H::setcolor(151);H::gotoxy(x+84,y+16);cout<<"     Administrator     ";
+            H::setcolor(151);H::gotoxy(x+84,y+20);cout<<"         User          ";
 
             if(num==1)
             {
-                H::drawBoxSingleLineWithBG(x+83,y+10,25,1,204);
-                H::setcolor(201);H::gotoxy(x+84,y+11);cout<<"  => Administrator <=  ";
-                H::clearBox(x+23,y+4,36,5,136);//Cls text
+                H::drawBoxSingleLineWithBG(x+84,y+15,25,1,204);
+                H::setcolor(201);H::gotoxy(x+85,y+16);cout<<"  => Administrator <=  ";
+                H::clearBox(x+23,y+8,36,5,136);//Cls text
                 LoginAs_Admin_UserTxt(1);
             }
             if(num==2)
             {
-                H::drawBoxSingleLineWithBG(x+83,y+14,25,1,204);
-                H::setcolor(201);H::gotoxy(x+84,y+15);cout<<"  =>     User      <=  ";
-                H::clearBox(x+23,y+4,36,5,136);//Cls text
+                H::drawBoxSingleLineWithBG(x+84,y+19,25,1,204);
+                H::setcolor(201);H::gotoxy(x+85,y+20);cout<<"  =>     User      <=  ";
+                H::clearBox(x+23,y+8,36,5,136);//Cls text
                 LoginAs_Admin_UserTxt(2);
             }
 
@@ -190,7 +207,7 @@ void Process::Admin_And_User()
         }
         while(press != 13);
 
-        H::clearBox(x+4,y+31,140,0,7);
+        H::clearBox(x+4,38,140,0,7);
 
         if(num == 1)
         {
@@ -221,11 +238,11 @@ void Process::LogIn_AsAdmin(int cursor)
 
             //username
             H::setcolor(249); 
-            H::gotoxy(x+20, y+14);H::inputLetter(AdminUsername,10);
+            H::gotoxy(x+20, y+17);H::inputLetter(AdminUsername,10);
 
             //password
             H::setcolor(249); //137
-            H::gotoxy(x+20, y+20);H::hidePassword(AdminPassword,10);
+            H::gotoxy(x+20, y+23);H::hidePassword(AdminPassword,10);
 
             if(strcmpi(AdminUsername,"Cyber")==0 && strcmpi(AdminPassword,"168")==0)
             {
@@ -235,14 +252,14 @@ void Process::LogIn_AsAdmin(int cursor)
             if(strcmpi(AdminUsername,"Cyber")!=0 || strcmpi(AdminPassword,"168")!=0)
             {
                 H::setcursor(0,0);
-                H::setcolor(140);H::gotoxy(x+29,y+24);cout<<"You have ";H::setcolor(137);cout<<--chance;H::setcolor(140);cout<<" left";
+                H::setcolor(140);H::gotoxy(x+29,y+27);cout<<"You have ";H::setcolor(137);cout<<--chance;H::setcolor(140);cout<<" left";
                 loginMsg(1);//input msg
 
                 getch();
 
-                H::clearBox(x+18, y+14, 42, 0,247);//Clear username and password boxes
-                H::clearBox(x+18, y+20, 42, 0,247);//Clear username and password boxes
-                H::clearBox(x+20, y+24, 34, 1,136);//Clear message
+                H::clearBox(x+19, y+18, 42, 0,247);//Clear username and password boxes
+                H::clearBox(x+19, y+24, 42, 0,247);//Clear username and password boxes
+                H::clearBox(x+23, y+27, 34, 1,136);//Clear message
             }
 
         }
@@ -253,10 +270,10 @@ void Process::LogIn_AsAdmin(int cursor)
             {   
                 H::setcursor(0,0);
                 H::setcolor(140);
-                H::gotoxy(x+16,y+23);cout<<"You ran out chances! Please wait for   seconds";
-                H::setcolor(137);H::gotoxy(x+53,y+23);cout<<6-i;H::delay(999);
+                H::gotoxy(x+17,y+27);cout<<"You ran out chances! Please wait for   seconds";
+                H::setcolor(137);H::gotoxy(x+54,y+27);cout<<6-i;H::delay(999);
 
-                H::clearBox(x+16,y+23,45,0,136);//cls chance msg
+                H::clearBox(x+17,y+27,45,0,136);//cls chance msg
                 H::setcolor(7);
             }
             
@@ -264,7 +281,7 @@ void Process::LogIn_AsAdmin(int cursor)
 
             press = getch();
 
-            H::clearBox(x+38,y+29,61,0,7);//cls msg
+            H::clearBox(x+38,38,61,0,7);//cls msg
 
             if(press == 27)
             {
@@ -410,9 +427,6 @@ void Process::Admin_ChoosingOpt(int num)
             H::cls();
             Admin_And_User();
             break;
-        
-        default:
-            break;
     }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -437,24 +451,29 @@ void Process::AdminProfileInfo()
         AdminProfileInfo_Design();
 
         int y=1;
-        int x=0;
+        int choice=0;
         char press;
 
         do
-        {
-
+        {   
+            H::drawBoxDoubleLineWithBG(105,10,30,1,187);
+            H::drawBoxDoubleLineWithBG(105,16,30,1,187);
+            H::drawBoxDoubleLineWithBG(105,22,30,1,187);
 
             if(y == 1)
             {
-                x=1;
+                H::drawBoxDoubleLineWithBG(105,10,30,1,68);
+                choice=1;
             }
             if(y == 2)
             {
-                x=2;
+                H::drawBoxDoubleLineWithBG(105,16,30,1,68);
+                choice=2;
             }
             if(y == 3)
             {
-                x=3;
+                H::drawBoxDoubleLineWithBG(105,22,30,1,68);
+                choice=3;
             }
 
             press = getch();
@@ -483,13 +502,75 @@ void Process::AdminProfileInfo()
             }
             
         } while (press != 13);
-        SubAdminProfileInfo(x);
+        SubAdminProfileInfo(choice);
     }
 }
 /******************************************************** */
 void Process::SubAdminProfileInfo(int num)
 {
+    char press;
+    switch(num)
+    {
+        case 1:
+            while(1)
+            {
+                AboutUs();
 
+                press = getch();
+
+                if(press == 27)
+                {
+                    break;
+                }else
+                {
+                    continue;
+                }
+            }
+            break;
+        case 2:
+            while(1)
+                {
+                    A_LetterFromUs();
+
+                    press = getch();
+
+                    if(press == 27)
+                    {
+                        break;
+                    }else
+                    {
+                        continue;
+                    }
+                }
+            break;
+        case 3:
+            H::setcolor(7);
+            H::cls();
+            Admin_Option();
+            break;
+    }
+}
+/******************************************************** */
+void Process::AboutUs()
+{
+    H::setConsoleTitle(TEXT("About Us"));
+    H::setcolor(7);
+    H::cls();
+    outline();
+    AboutUsTxt();
+    AboutUs_Design();
+}
+/******************************************************** */
+void Process::A_LetterFromUs()
+{
+    H::setConsoleTitle(TEXT("A letter from Developers"));
+    H::setcolor(7);
+    H::cls();
+    outline();
+
+    A_Letter_from_UsTxt();
+    A_Letter_from_Us_Animation();
+    A_Letter_from_Us_Design();
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -518,33 +599,33 @@ void Process::GamesLst()
 
             if(y==1)
             {
-                H::drawBoxDoubleLineWithBG(27,18,18,1,196);
+                H::drawBoxDoubleLineWithBG(37,18,18,1,196);
                 H::foreColor(199);
-                H::gotoxy(32,19); cout <<"ADD GAME";
+                H::gotoxy(42,19); cout <<"ADD GAME";
                 x=1;
             }
                 if(y==2){
-                H::drawBoxDoubleLineWithBG(27,23,18,1,196);
+                H::drawBoxDoubleLineWithBG(37,23,18,1,196);
                 H::foreColor(199);
-                H::gotoxy(31,24); cout <<"VIEW GAME";
+                H::gotoxy(42,24); cout <<"VIEW GAME";
                 x=2;
             }
                 if(y==3){
-                H::drawBoxDoubleLineWithBG(27,28,18,1,196);
+                H::drawBoxDoubleLineWithBG(37,28,18,1,196);
                 H::foreColor(199);
-                H::gotoxy(31,29); cout <<"SEARCH GAME";
+                H::gotoxy(40,29); cout <<"SEARCH GAME";
                 x=3;
             }
                 if(y==4){
-                H::drawBoxDoubleLineWithBG(95,18,18,1,196);
+                H::drawBoxDoubleLineWithBG(105,18,18,1,196);
                 H::foreColor(199);
-                H::gotoxy(98,19); cout <<"REMOVE GAME";
+                H::gotoxy(108,19); cout <<"REMOVE GAME";
                 x=4;
             }
                 if(y==5){
-                H::drawBoxDoubleLineWithBG(95,23,18,1,196);
+                H::drawBoxDoubleLineWithBG(105,23,18,1,196);
                 H::foreColor(199);
-                H::gotoxy(102,24); cout <<"BACK";
+                H::gotoxy(112,24); cout <<"BACK";
                 x=5;
             
             }
@@ -574,118 +655,155 @@ void Process::GamesLst()
 /******************************************************** */
 void Process::SubGameLst(int num)
 {   
+    switch(num)
+    {
+        //input case
+        case 1:
+            InsertGame();
+            break;
+        
+        //Display
+        case 2:
+            ViewGame();
+            break;
+
+        //Search
+        case 3:
+            SearchGame();
+            break;
+
+        //Remove
+        case 4:  
+            RemoveGame();
+            break;
+
+        //back
+        case 5:
+            Admin_Option();
+            break;
+    }
+}
+/******************************************************** */
+void Process::InsertGame()
+{
+    H::setConsoleTitle(TEXT("Insert Game Data"));
     H::setcolor(7);
     H::cls();
     H::setcursor(0,0);
     outline();
 
-    char press;
-    switch(num)
+    char press = ' ';
+    B::InputGameTxt();
+    B::InputGame_Design();
+    H::setcursor(1,0);
+    File::insertFile(2);
+    H::setcursor(0,0);
+
+    while (1)
     {
-        //input case
-        case 1:
-        {   
-            B::InputGameTxt();
-            B::InputGame_Design();
+        message(1,0,36);
 
-            while(1)
-            {
-                tp(2,x+70,y+33);cout<<"Press [ESC] to go back";
-                
-                press = getch();
-                
-                if(press == 27)
-                {
-                    break;
-                }
-                else if(press == 13)
-                {
-                    //for inputting again
-                    break;
-                }
-            }
-        }
-        break;
-        
-        //Display
-        case 2:
+        press = getch();
+
+        if (press == 27)
         {
-            B::ViewGameTxt();
-            B::ViewGame_Design();
-
-            while(1)
-            {
-                tp(2,x+70,y+33);cout<<"Press [ESC] to go back"; 
-
-                press = getch();
-                
-                if(press == 27)
-                {
-                    break;
-                }
-                else if(press == 13)
-                {
-                    break;
-                }
-            }
+            break;
         }
-        break;
-
-        //Search
-        case 3:
+        else if(press == 13)
         {
-            B::SearchGameTxt();
-            B::SearchGame_Design();
-
-            while(1)
-            {
-                tp(2,x+70,y+33);cout<<"Press [ESC] to go back"; 
-
-                press = getch();
-                
-                if(press == 27)
-                {
-                    break;
-                }
-                else if(press == 13)
-                {
-                    break;
-                }
-            }
+            InsertGame();
+            break;
         }
-        break;
+    }
+}
+/******************************************************** */
+void Process::ViewGame()
+{
+    H::setConsoleTitle(TEXT("View Game Data"));
+    H::setcolor(7);
+    H::cls();
+    H::setcursor(0,0);
+    outline();
 
-        //Remove
-        case 4:
+    char press = ' ';
+    B::ViewGameTxt();
+    B::ViewGame_Design();
+    File::viewFile(2);
+
+    while (1)
+    {
+        message(2,0,36);
+
+        press = getch();
+
+        if (press == 27)
         {
-            B::DeleteGameTxt();
-            B::DeleteGame_Design();
-
-            while(1)
-            {
-                tp(2,x+70,y+33);cout<<"Press [ESC] to go back"; 
-
-                press = getch();
-                
-                if(press == 27)
-                {
-                    break;
-                }
-                else if(press == 13)
-                {
-                    break;
-                }
-            }
+            break;
         }
-        break;
+    }
+}
+/******************************************************** */
+void Process::SearchGame()
+{
+    H::setConsoleTitle(TEXT("Search Game Data"));
+    H::setcolor(7);
+    H::cls();
+    H::setcursor(0,0);
+    outline();
 
-        //back
-        case 5:
+    char press = ' ';
+    B::SearchGameTxt();
+    B::SearchGame_Design();
+    H::setcursor(1,0);
+    File::searchFile(2);
+    H::setcursor(0,0);
+    while (1)
+    {
+        message(1,0,11);
+
+        press = getch();
+
+        if (press == 27)
         {
-            Admin_Option();
+            break;
         }
-        break;
+        else if(press == 13)
+        {
+            SearchGame();
+            break;
+        }
+    }
+}
+/******************************************************** */
+void Process::RemoveGame()
+{
+    H::setConsoleTitle(TEXT("Remove Game Data"));
+    H::setcolor(7);
+    H::cls();
+    H::setcursor(0,0);
+    outline();
 
+    char press = ' ';
+    B::DeleteGameTxt();
+    B::DeleteGame_Design();
+    H::setcursor(1,0);
+    File::deleteFile(2);
+    H::setcursor(0,0);
+    while (1)
+    {
+        message(1,0,11);
+
+        press = getch();
+
+        if (press == 27)
+        {
+            break;
+        }
+        else if(press == 13)
+        {
+            RemoveGame();
+            break;
+        }
     }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -721,8 +839,9 @@ void Process::ManageUserInfo()
             H::foreColor(183); H::gotoxy(38,26); cout<<"VIEW USER INFO";
             H::foreColor(183); H::gotoxy(38,34); cout<<"EDIT USER INFO";
             H::foreColor(183); H::gotoxy(103,18); cout<<"DELETE USER INFO";
-            H::foreColor(183); H::gotoxy(102,26); cout<<"SORTING USER HOUR";
+            H::foreColor(183); H::gotoxy(104,26); cout<<"SORTING USER";
             H::foreColor(183); H::gotoxy(109,34); cout<<"BACK";
+
             if(y==1){
                 H::drawBoxDoubleLineWithBG(30,17,30,1,135);
                 H::foreColor(135);
@@ -750,7 +869,7 @@ void Process::ManageUserInfo()
             if(y==5){
                 H::drawBoxDoubleLineWithBG(96,25,30,1,135);
                 H::foreColor(135);
-                H::gotoxy(102,26); cout <<"SORTING USER HOUR";
+                H::gotoxy(104,26); cout <<"SORTING USER";
                 choice=5;
             }
             if(y==6){
@@ -786,141 +905,197 @@ void Process::ManageUserInfo()
 /*********************************************************/
 void Process::SubManageUserInfo(int num)
 {
-   H::setcolor(7);
-    H::cls();
-    H::setcursor(0,0);
-    outline();
-
-    char press;
     switch(num)
     {
         //input case
         case 1:
-        {
-            B::SignUpTxt();
-            B::SignUp_Design();
-
-            while(1)
-            {
-                tp(2,x+70,y+33);cout<<"Press [ESC] to go back";
-                
-                press = getch();
-                
-                if(press == 27)
-                {
-                    break;
-                }
-                else if(press == 13)
-                {
-                    //for inputting again
-                    break;
-                }
-            }
-        }
-        break;
+            InsertUser();
+            break;
         
         //Display
         case 2:
-        {
-            B::ViewUserInfoTxt();
-            B::ViewUserInfo_Design();
-
-            while(1)
-            {
-                tp(2,x+70,y+33);cout<<"Press [ESC] to go back"; 
-
-                press = getch();
-                
-                if(press == 27)
-                {
-                    break;
-                }
-                else if(press == 13)
-                {
-                    break;
-                }
-            }
-        }
-        break;
+            ViewUser();
+            break;
 
         //Edit
         case 3:
-        {
-            B::UpdateUserInfoTxt();
-            B::UpdateUserInfo_Design();
-
-            while(1)
-            {
-                tp(2,x+70,y+33);cout<<"Press [ESC] to go back"; 
-
-                press = getch();
-                
-                if(press == 27)
-                {
-                    break;
-                }
-                else if(press == 13)
-                {
-                    break;
-                }
-            }
-        }
-        break;
+            EditUserInfo();
+            break;
 
         //Remove
         case 4:
-        {
-            B::DeleteUserInfoTxt();
-            B::DeleteUserInfo_Design();
-
-            while(1)
-            {
-                tp(2,x+70,y+33);cout<<"Press [ESC] to go back"; 
-
-                press = getch();
-                
-                if(press == 27)
-                {
-                    break;
-                }
-                else if(press == 13)
-                {
-                    break;
-                }
-            }
-        }
-        break;
+            RemoveUser();
+            break;
 
         //short
         case 5:
-        {
-            B::SortUserTxt();
-            B::SortUser_Design();
-
-            while(1)
-            {
-                tp(2,x+70,y+33);cout<<"Press [ESC] to go back"; 
-
-                press = getch();
-                
-                if(press == 27)
-                {
-                    break;
-                }
-                else if(press == 13)
-                {
-                    break;
-                }
-            }
-        }
-        break;
+            SortUser();
+            break;
 
         case 6:
-        {
             Admin_Option();
-        }
-        break;
+            break;
 
+    }
+}
+/*********************************************************/
+void Process::InsertUser()
+{
+    H::setConsoleTitle(TEXT("Insert User Data"));
+    H::setcolor(7);
+    H::cls();
+    H::setcursor(0,0);
+    outline();
+
+    char press = ' ';
+    B::SignUpTxt();
+    B::SignUp_Design();
+    H::setcursor(1,0);
+    File::insertFile(3);
+    H::setcursor(0,0);
+
+    while (1)
+    {
+        message(1,0,38);
+
+        press = getch();
+
+        if (press == 27)
+        {
+            break;
+        }
+        else if(press == 13)
+        {
+            InsertUser();
+            break;
+        }
+    }
+}
+/*********************************************************/
+void Process::ViewUser()
+{
+    H::setConsoleTitle(TEXT("View User Data"));
+    H::setcolor(7);
+    H::cls();
+    H::setcursor(0,0);
+    outline();
+
+    char press = ' ';
+    B::ViewUserInfoTxt();
+    B::ViewUserInfo_Design();
+    File::viewFile(3);
+
+    while (1)
+    {
+        message(2,0,36);
+
+        press = getch();
+
+        if (press == 27)
+        {
+            break;
+        }
+        else if(press == 13)
+        {
+            ViewUser();
+            break;
+        }
+    }
+}
+/*********************************************************/
+void Process::EditUserInfo()
+{
+    H::setConsoleTitle(TEXT("Edit User Data"));
+    H::setcolor(7);
+    H::cls();
+    H::setcursor(0,0);
+    outline();
+
+    char press = ' ';
+    B::UpdateUserInfoTxt();
+    B::UpdateUserInfo_Design();
+    H::setcursor(1,0);
+    File::updateFile(3);
+    H::setcursor(0,0);
+
+    while (1)
+    {
+        message(1,0,11);
+
+        press = getch();
+
+        if (press == 27)
+        {
+            break;
+        }
+        else if(press == 13)
+        {
+            EditUserInfo();
+            break;
+        }
+    }
+}
+/*********************************************************/
+void Process::RemoveUser()
+{
+    H::setConsoleTitle(TEXT("Remove User Data"));
+    H::setcolor(7);
+    H::cls();
+    H::setcursor(0,0);
+    outline();
+
+    char press = ' ';
+    B::DeleteUserInfoTxt();
+    B::DeleteUserInfo_Design();
+    H::setcursor(1,0);
+    File::deleteFile(3);
+    H::setcursor(0,0);
+
+    while (1)
+    {
+        message(1,0,11);
+
+        press = getch();
+
+        if (press == 27)
+        {
+            break;
+        }
+        else if(press == 13)
+        {
+            RemoveUser();
+            break;
+        }
+    }
+}
+/*********************************************************/
+void Process::SortUser()
+{
+    H::setConsoleTitle(TEXT("Remove User Data"));
+    H::setcolor(7);
+    H::cls();
+    H::setcursor(0,0);
+    outline();
+
+    char press = ' ';
+    B::SortUserTxt();
+    B::SortUser_Design();
+
+    while (1)
+    {
+        message(2,0,36);
+
+        press = getch();
+
+        if (press == 27)
+        {
+            break;
+        }
+        else if(press == 13)
+        {
+            SortUser();
+            break;
+        }
     }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -958,6 +1133,7 @@ void Process::FoodAndDrinkLst()
         B::FoodMenuTxt();//txt
         B::FoodMenu_Design();
         B::Cyber99Txt();
+        H::foreColor(55); H::gotoxy(46,35); cout<<"use ";H::setcolor(52);cout<<" [<-] [->]";H::setcolor(55);cout<<" arrow key to move between option and ";H::setcolor(52);cout<<"[ENTER]";H::setcolor(55);cout<<" to select";
 
         int y=1;
         int choice=0;
@@ -971,19 +1147,18 @@ void Process::FoodAndDrinkLst()
             H::drawBoxDoubleLineWithBG(98,13,20,1,23);
 
             H::drawBoxDoubleLineWithBG(41,31,20,1,23);
-            H::foreColor(55); H::gotoxy(46,35); cout<<"use ";H::setcolor(52);cout<<" [<-] [->]";H::setcolor(55);cout<<" arrow key to move between option and ";H::setcolor(52);cout<<"[ENTER]";H::setcolor(55);cout<<" to select";
+            H::drawBoxDoubleLineWithBG(69,31,20,1,23);
             H::drawBoxDoubleLineWithBG(98,31,20,1,23);
             //label
-            H::foreColor(151);
             H::foreColor(23); H::gotoxy(41,14); cout<<"Insert Food & Drinks";
             H::foreColor(23); H::gotoxy(70,14); cout<<"View Food & Drinks";
             H::foreColor(23); H::gotoxy(98,14); cout<<"Search Food & Drinks";
-
-            H::foreColor(23); H::gotoxy(41,32); cout<<"Remove Food & Drinks";
+            H::foreColor(23); H::gotoxy(41,32); cout <<"Update Food & Drinks";
+            H::foreColor(23); H::gotoxy(69,32); cout<<"Remove Food & Drinks";
             H::foreColor(23); H::gotoxy(102,32); cout<<"Back to MENU";
             if(y==1)
             {
-                 H::drawBoxDoubleLineWithBG(41,13,20,1,199);
+                H::drawBoxDoubleLineWithBG(41,13,20,1,199);
                 H::foreColor(199);
                 H::gotoxy(41,14); cout <<"Insert Food & Drinks";
                 choice=1;
@@ -1006,15 +1181,22 @@ void Process::FoodAndDrinkLst()
             {
                 H::drawBoxDoubleLineWithBG(41,31,20,1,199);
                 H::foreColor(199);
-                H::gotoxy(41,32); cout <<"Remove Food & Drinks";
+                H::gotoxy(41,32); cout <<"Update Food & Drinks";
                 choice=4;
             }
             if(y==5)
             {
+                H::drawBoxDoubleLineWithBG(69,31,20,1,199);
+                H::foreColor(199);
+                H::gotoxy(69,32); cout <<"Remove Food & Drinks";
+                choice=5;
+            }
+            if(y==6)
+            {
                 H::drawBoxDoubleLineWithBG(98,31,20,1,199);
                 H::foreColor(199);
                 H::gotoxy(102,32); cout <<"Back to MENU";
-                choice=5;
+                choice=6;
             }
             press = getch();
             
@@ -1022,12 +1204,12 @@ void Process::FoodAndDrinkLst()
                 case 75:
                     y--;
                     if(y<1){
-                        y=5;
+                        y=6;
                     }
                     break;
                 case 77:
                     y++;
-                    if(y>5){
+                    if(y>6){
                         y=1;
                     }
                     break;
@@ -1041,119 +1223,200 @@ void Process::FoodAndDrinkLst()
 /*********************************************************/
 void Process::SubFoodAndDrink(int num)
 {
+    switch(num)
+    {
+        //input case
+        case 1: 
+            InsertFoodDrink();
+            break;
+        
+        //Display
+        case 2:
+            ViewFoodDrink();
+            break;
+
+        //Search
+        case 3:
+            SearchFoodDrink();
+            break;
+
+        //Update
+        case 4:
+            UpdateFoodDrink();
+            break;
+        //Remove
+        case 5:
+            RemoveFoodDrink();
+            break;
+
+        //back
+        case 6:
+            Admin_Option();
+            break;
+    }
+}
+/*********************************************************/
+void Process::InsertFoodDrink()
+{
+    H::setConsoleTitle(TEXT("Insert Food & Drink Data"));
     H::setcolor(7);
     H::cls();
     H::setcursor(0,0);
     outline();
 
-    char press;
-    switch(num)
+    char press = ' ';
+    B::InputTxt();
+    B::Input_Design();
+    H::setcursor(1,0);
+    File::insertFile(1);
+    H::setcursor(0,0);
+
+    while (1)
     {
-        //input case
-        case 1:
+        message(1,0,11);
+
+        press = getch();
+
+        if (press == 27)
         {
-            B::InputTxt();
-            B::Input_Design();
-
-            while(1)
-            {
-                tp(2,x+70,y+33);cout<<"Press [ESC] to go back";
-                
-                press = getch();
-                
-                if(press == 27)
-                {
-                    break;
-                }
-                else if(press == 13)
-                {
-                    //for inputting again
-                    break;
-                }
-            }
+            break;
         }
-        break;
-        
-        //Display
-        case 2:
+        else if(press == 13)
         {
-            B::ViewTxt();
-            B::View_Design();
-
-            while(1)
-            {
-                tp(2,x+70,y+33);cout<<"Press [ESC] to go back"; 
-
-                press = getch();
-                
-                if(press == 27)
-                {
-                    break;
-                }
-                else if(press == 13)
-                {
-                    break;
-                }
-            }
+            InsertFoodDrink();
+            break;
         }
-        break;
-
-        //Search
-        case 3:
-        {
-            B::SearchTxt();
-            B::Search_Design();
-
-            while(1)
-            {
-                tp(2,x+70,y+33);cout<<"Press [ESC] to go back"; 
-
-                press = getch();
-                
-                if(press == 27)
-                {
-                    break;
-                }
-                else if(press == 13)
-                {
-                    break;
-                }
-            }
-        }
-        break;
-
-        //Remove
-        case 4:
-        {
-            B::DeleteTxt();
-            B::Delete_Design();
-
-            while(1)
-            {
-                tp(2,x+70,y+33);cout<<"Press [ESC] to go back"; 
-
-                press = getch();
-                
-                if(press == 27)
-                {
-                    break;
-                }
-                else if(press == 13)
-                {
-                    break;
-                }
-            }
-        }
-        break;
-
-        //back
-        case 5:
-        {
-            Admin_Option();
-        }
-        break;
     }
+}
+/*********************************************************/
+void Process::ViewFoodDrink()
+{
+    H::setConsoleTitle(TEXT("View Food & Drink Data"));
+    H::setcolor(7);
+    H::cls();
+    H::setcursor(0,0);
+    outline();
 
+    char press = ' ';
+    B::ViewTxt();
+    B::View_Design();
+    File::viewFile(1);
+
+    while (1)
+    {
+        message(2,0,36);
+
+        press = getch();
+
+        if (press == 27)
+        {
+            break;
+        }
+        else if(press == 13)
+        {
+            ViewFoodDrink();
+            break;
+        }
+    }
+}
+/*********************************************************/
+void Process::SearchFoodDrink()
+{
+    H::setConsoleTitle(TEXT("Search Food & Drink Data"));
+    H::setcolor(7);
+    H::cls();
+    H::setcursor(0,0);
+    outline();
+
+    char press = ' ';
+    B::SearchTxt();
+    B::Search_Design();
+    H::setcursor(1,0);
+    File::searchFile(1);
+    H::setcursor(0,0);
+
+    while (1)
+    {
+        message(1,0,11);
+
+        press = getch();
+
+        if (press == 27)
+        {
+            break;
+        }
+        else if(press == 13)
+        {
+            SearchFoodDrink();
+            break;
+        }
+    }
+}
+/*********************************************************/
+void Process::UpdateFoodDrink()
+{
+    H::setConsoleTitle(TEXT("Update Food & Drink Data"));
+    H::setcolor(7);
+    H::cls();
+    H::setcursor(0,0);
+    outline();
+
+    char press = ' ';
+    B::UpdateTxt();
+    B::Update_Design();
+    H::setcursor(1,0);
+    File::updateFile(1);
+    H::setcursor(0,0);
+
+    while (1)
+    {
+        message(1,0,11);
+
+        press = getch();
+
+        if (press == 27)
+        {
+            break;
+        }
+        else if(press == 13)
+        {
+            UpdateFoodDrink();
+            break;
+        }
+    }
+}
+/*********************************************************/
+void Process::RemoveFoodDrink()
+{
+    H::setConsoleTitle(TEXT("Remove Food & Drink Data"));
+    H::setcolor(7);
+    H::cls();
+    H::setcursor(0,0);
+    outline();
+
+    char press = ' ';
+    B::DeleteTxt();
+    B::Delete_Design();
+    H::setcursor(1,0);
+    File::deleteFile(1);
+    H::setcursor(0,0);
+
+    while (1)
+    {
+        message(1,0,11);
+
+        press = getch();
+
+        if (press == 27)
+        {
+            break;
+        }
+        else if(press == 13)
+        {
+            RemoveFoodDrink();
+            break;
+        }
+    }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 

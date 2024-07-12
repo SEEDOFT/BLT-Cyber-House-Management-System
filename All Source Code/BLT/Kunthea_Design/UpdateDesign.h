@@ -17,11 +17,10 @@ void BLT::UpdateDesign::UpdateTxt()
 void BLT::UpdateDesign::Update_Design()
 {
     H::drawBoxSingleLineWithBG(20,10,120,1,179);
-    H::gotoxy(58,11); H::foreColor(185); cout<<"Press";H::setcolor(186);cout<<" [ENTER]";H::setcolor(185);cout<<" To Continues Or ";H::setcolor(186);cout<<"[ESC]";H::setcolor(185);cout<<" To Exit";
     H::VLine(70,12,3,7,221);
     H::VLine(90,12,3,7,221);
     H::drawBoxSingleLineWithBG(65,16,28,1,4);
-    H::foreColor(4); H::gotoxy(73,17); cout<<"Update By ID : ";
+    H::foreColor(4); H::gotoxy(70,17); cout<<"Update By ID : ";
     for(int i=0; i<25; i++)
     {
         H::setcursor(0,0);
@@ -38,9 +37,8 @@ void BLT::UpdateDesign::Update_Design()
         H::VLine(135,12,i+1,i+1,221); H::delay(10);
     }
     H::drawBoxDoubleLine(20,19,120,4,3);
-    H::gotoxy(40,20); H::foreColor(3); cout<<"|ID|\t\t\t |Name| \t\t\t |QTY| \t\t\t      |Price|";
+    H::gotoxy(35,20); H::foreColor(3); cout<<"|ID|\t\t\t|Name|\t\t\t\t|QTY|\t\t\t\t|Price|";
     H::HLine(30,21,100,7,196);
-    H::gotoxy(40,22); H::foreColor(3); cout<<"1\t\t\t  Thea \t\t\t\t 5 \t\t\t      1200";
     for(int i=0; i<7; i++)
     {
         H::VLine(70,24,3,i+1,221); H::delay(10);
@@ -54,9 +52,9 @@ void BLT::UpdateDesign::Update_Design()
         H::VLine(125,24,i+1,i+1,221); H::delay(10);
     }
     H::drawBoxDoubleLine(20,33,120,4,3);
-    H::gotoxy(40,34); H::foreColor(3); cout<<"|ID|\t\t\t |Name| \t\t\t |QTY| \t\t\t      |Price|";
+    H::gotoxy(35,34); H::foreColor(3); cout<<"|ID|\t\t\t|Name|\t\t\t\t|QTY|\t\t\t\t|Price|";
     H::HLine(30,35,100,7,196);
-    H::gotoxy(40,36); H::foreColor(3); cout<<"New\t\t\t  New \t\t\t\t New \t\t\t      New";
+   
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 /*

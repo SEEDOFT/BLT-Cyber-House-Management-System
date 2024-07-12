@@ -17,7 +17,6 @@ void BLT::UpdateUserInfo::UpdateUserInfoTxt()
 void BLT::UpdateUserInfo::UpdateUserInfo_Design()
 {
     H::drawBoxSingleLineWithBG(20,10,120,1,179);
-    H::gotoxy(58,11); H::foreColor(185); cout<<"Press";H::setcolor(186);cout<<" [ENTER]";H::setcolor(185);cout<<" To Continues Or ";H::setcolor(186);cout<<"[ESC]";H::setcolor(185);cout<<" To Exit";
     H::VLine(70,12,3,7,221);
     H::VLine(90,12,3,7,221);
     H::drawBoxSingleLineWithBG(65,16,28,1,4);
@@ -38,9 +37,9 @@ void BLT::UpdateUserInfo::UpdateUserInfo_Design()
         H::VLine(135,12,i+1,i+1,221); H::delay(10);
     }
     H::drawBoxDoubleLine(20,19,120,4,3);
-    H::gotoxy(30,20); H::foreColor(3); cout<<"|ID|\t\t|Name|\t\t|USERNAME|\t\t|PASSWORD|\t\t|TIME|\t\t|PRICE|";
+    H::foreColor(3);H::gotoxy(20,20); cout<<"|ID|\t|Name|\t\t|USERNAME|\t\t|PASSWORD|\t    |HOUR|\t   |REMAIN HOUR|   \t|PRICE|";
     H::HLine(30,21,100,7,196);
-    H::gotoxy(30,22); H::foreColor(3); cout<<"1\t\t\tThea\t\tScott\t\t\t123123\t\t\t5\t\t2.5$";
+    
     for(int i=0; i<7; i++)
     {
         H::VLine(70,24,3,i+1,221); H::delay(10);
@@ -54,9 +53,9 @@ void BLT::UpdateUserInfo::UpdateUserInfo_Design()
         H::VLine(125,24,i+1,i+1,221); H::delay(10);
     }
     H::drawBoxDoubleLine(20,33,120,4,3);
-    H::gotoxy(30,34); H::foreColor(3); cout<<"|ID|\t\t|Name|\t\t|USERNAME|\t\t|PASSWORD|\t\t|TIME|\t\t|PRICE|";
+    H::foreColor(3);H::gotoxy(20,34); cout<<"|ID|\t|Name|\t\t|USERNAME|\t\t|PASSWORD|\t    |HOUR|\t";
     H::HLine(30,35,100,7,196);
-    H::gotoxy(30,36); H::foreColor(3); cout<<"New\t\tNew\t\tNew\t\t\tNew\t\t\tNew\t\tNew";
+
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif

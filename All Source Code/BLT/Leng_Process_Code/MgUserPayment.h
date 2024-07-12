@@ -50,8 +50,9 @@ class MgUserPayment : public FoodnDrink, public Game, public MgUserInfo
         double totalPrice();
         ///////////////////////////////////////////////
 		void viewAll();
+        void update();
 		void input();
-		void output();
+		void output(int y);
 		void income();
 		////////////////////////////////////////////////
 		int getID() const;
@@ -94,8 +95,18 @@ double MgUserPayment::getFndTotal() const
 	return totalFnD;
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void MgUserPayment::update()
+{
+    char times[6];
 
+   cout << "\t\t"; H::inputAll(password, sizeof(password));
+
+    cout << "\t    "; H::inputNumber(times, sizeof(times));
+
+    time = atoi(times) * 60;
+    remainTime = time;
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void MgUserPayment::setnTime(double time) 
 {
     this->time += (time * 60);
@@ -186,10 +197,11 @@ void MgUserPayment::setUsername(const char * name)
 void MgUserPayment::input() 
 {
     char times[6];
-//    cout << "Enter Guest name : "; H::inputLetter(guestName, sizeof(guestName)); cout << endl;
-//    cout << "Enter Account username : "; H::inputAll(username, sizeof(username)); cout << endl;
-    cout << "Enter Account password : "; H::inputAll(password, sizeof(password)); cout << endl;
-    cout << "Enter Account Hours : "; H::inputNumber(times, sizeof(times)); cout << endl;
+
+    H::setcolor(135); H::gotoxy(65,25); H::inputAll(password, sizeof(password));
+
+    H::setcolor(135); H::gotoxy(65,29); H::inputNumber(times, sizeof(times));
+
     time = atoi(times) * 60;
     remainTime = time;
 }
@@ -219,9 +231,9 @@ double MgUserPayment::totalIncome()
 	return totalPrice() + getFndTotal();
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void MgUserPayment::output() 
+void MgUserPayment::output(int y) 
 {
-    cout << left << setw(10) << muId << setw(25) << guestName << setw(25) << username << setw(25) << password << fixed << setprecision(2) << setw(10) << time << setw(10) << remainTime << totalPrice() << endl;
+    H::foreColor(1);H::gotoxy(20,14+y); cout<<muId<<"\t"<<guestName<<"\t\t"<<username<<"\t\t"<<password<<"\t\t    "<< fixed << setprecision(2) <<time/60 <<"\t    " << remainTime/60 << "\t\t" <<totalPrice();
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void MgUserPayment::viewAll()

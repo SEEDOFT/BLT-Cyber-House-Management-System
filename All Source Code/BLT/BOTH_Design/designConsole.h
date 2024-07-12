@@ -13,6 +13,7 @@ class Design{
         static void outline();
         static void charLoop(int characters, int xAxis, int yAxis, int color, const char* text, int DelayTime);
         static void loginMsg(int opt);
+        static void message(int n, int width, int height);
 
         static void interface_design();
 
@@ -49,34 +50,60 @@ void Design::outline()
     H::drawBoxSingleLine(2,0,156,38,3);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void Design::message(int n, int width, int height)
+{
+    
+    if ( n == 1)
+    {
+        int color = 176 ;
+        while(!kbhit())
+        {
+            H::gotoxy(57+width,height); H::foreColor(185); cout<<"Press ";H::foreColor(color); cout<<"[ENTER]";
+            H::foreColor(185); cout<<" To Continues Or ";H::foreColor(color); cout<<"[ESC]";H::foreColor(185); cout<<" To Go Back";H::delay(999);
+            color ++ ; 
+            if(color > 191) color = 176 ;
+        }
+    }
+    if ( n == 2)
+    {
+        int color = 1 ;
+        while(!kbhit())
+        {
+            H::gotoxy(69+width,height); H::foreColor(1); cout<<"Press ";;H::foreColor(color); cout<<"[ESC]";H::foreColor(1); cout<<" To Go Back";H::delay(999);
+            color ++ ; 
+            if(color > 15) color = 1 ;
+        }
+    }
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Design::Admin_User_ClsBox(int num)
 {
     if(num == 1)
     {
         for(int i = 0 ; i < 15 ; i ++)
         {
-            tp(238,x+81+i,y+10);cout<<" ";H::delay(1);//cls left to right
-            tp(238,x+81+i,y+11);cout<<" ";H::delay(1);//cls left to right
-            tp(238,x+81+i,y+12);cout<<" ";H::delay(1);//cls left to right
+            tp(238,x+81+i,y+15);cout<<" ";//cls left to right
+            tp(238,x+81+i,y+16);cout<<" ";H::delay(1);//cls left to right
+            tp(238,x+81+i,y+17);cout<<" ";H::delay(1);//cls left to right
 
 
-            tp(238,x+109-i,y+10);cout<<" ";H::delay(1);//right to left
-            tp(238,x+109-i,y+11);cout<<" ";H::delay(1);//right to left
-            tp(238,x+109-i,y+12);cout<<" ";H::delay(1);//right to left
+            tp(238,x+1010-i,y+15);cout<<" ";H::delay(1);//right to left
+            tp(238,x+109-i,y+16);cout<<" ";H::delay(1);//right to left
+            tp(238,x+109-i,y+17);cout<<" ";H::delay(1);//right to left
         }
     }
     if(num == 2)
     {
         for(int i = 0 ; i < 15 ; i ++)
         {
-            tp(238,x+81+i,y+14);cout<<" ";H::delay(1);//cls left to right
-            tp(238,x+81+i,y+15);cout<<" ";H::delay(1);//cls left to right
-            tp(238,x+81+i,y+16);cout<<" ";H::delay(1);//cls left to right
+            tp(238,x+81+i,y+19);cout<<" ";H::delay(1);//cls left to right
+            tp(238,x+81+i,y+20);cout<<" ";H::delay(1);//cls left to right
+            tp(238,x+81+i,y+21);cout<<" ";H::delay(1);//cls left to right
 
 
-            tp(238,x+109-i,y+14);cout<<" ";H::delay(1);//right to left
-            tp(238,x+109-i,y+15);cout<<" ";H::delay(1);//right to left
-            tp(238,x+109-i,y+16);cout<<" ";H::delay(1);//right to left
+            tp(238,x+109-i,y+19);cout<<" ";H::delay(1);//right to left
+            tp(238,x+109-i,y+20);cout<<" ";H::delay(1);//right to left
+            tp(238,x+109-i,y+21);cout<<" ";H::delay(1);//right to left
         }
     }
 }
@@ -101,8 +128,8 @@ void Design::loginMsg(int opt)
     {
         while(!kbhit())
         {
-            H::setcolor(140);H::gotoxy(x+22,y+23);cout<<"Incorrect ";H::setcolor(color);cout<<"Username ";H::setcolor(140);cout<<"or ";H::setcolor(color);cout<<"Password";
-            H::setcolor(140);H::gotoxy(x+25,y+25);cout<<"Press any ";H::setcolor(color);cout<<"[key]";H::setcolor(140);cout<<" to continue";
+            H::setcolor(140);H::gotoxy(x+23,y+26);cout<<"Incorrect ";H::setcolor(color);cout<<"Username ";H::setcolor(140);cout<<"or ";H::setcolor(color);cout<<"Password";
+            H::setcolor(140);H::gotoxy(x+24,y+28);cout<<"Press any ";H::setcolor(color);cout<<"[key]";H::setcolor(140);cout<<" to continue";
 
             H::delay(999);
             
@@ -116,7 +143,7 @@ void Design::loginMsg(int opt)
         int i = 1;
         while(!kbhit())
         {
-            H::setcolor(4);H::gotoxy(x+38,y+29);cout<<"Press any ";H::setcolor(i);cout<<"[key]";H::setcolor(4);cout<<" to input again or ";H::setcolor(i);cout<<"[ESC]";H::setcolor(4);cout<<" to choose option again";H::delay(999);
+            H::setcolor(4);H::gotoxy(x+38,y+32);cout<<"Press any ";H::setcolor(i);cout<<"[key]";H::setcolor(4);cout<<" to input again or ";H::setcolor(i);cout<<"[ESC]";H::setcolor(4);cout<<" to choose option again";H::delay(999);
             i++;
             if(i > 15 ) i = 1;
         }
@@ -135,67 +162,51 @@ void Design::interface_design()
 void Design::Login_Design()
 {
     H::setConsoleTitle(TEXT("LOG IN PANEL"));
+    int n_x = 10 , n_y = 8;
 
-    H::HLine(x+17,y-4,31,6,236);//msg
+    tp(3,n_x+27,1);cout<<R"(  _________.__                    .___             __________                        )";
+    tp(3,n_x+27,2);cout<<R"( /   _____/|__| ____   ____       |   | ____       \______   \_____     ____   ____  )";
+    tp(3,n_x+27,3);cout<<R"( \_____  \ |  |/ ___\ /    \      |   |/    \       |     ___/\__  \   / ___\_/ __ \ )";
+    tp(4,n_x+27,4);cout<<R"( /        \|  / /_/  >   |  \     |   |   |  \      |    |     / __ \_/ /_/  >  ___/ )";
+    tp(4,n_x+27,5);cout<<R"(/_______  /|__\___  /|___|  /     |___|___|  /      |____|    (____  /\___  / \___  >)";
+    tp(4,n_x+27,6);cout<<R"(        \/   /_____/      \/               \/                      \//_____/      \/ )";
+    H::HLine(20,7,120,7,220);
 
-    H::HLine(x+11,y-3,15,3,175);H::setcolor(7);cout<<"\4";H::setcolor(4);cout<<"\3";H::setcolor(7);cout<<"\4";H::setcolor(4);cout<<"\3";H::setcolor(7);cout<<"\4";//msg
-    H::setcolor(4);cout<<"\3";H::setcolor(7);cout<<"\4";H::setcolor(4);cout<<"\3";H::setcolor(7);cout<<"\4";H::setcolor(4);cout<<"\3";H::HLine(x+36,y-3,16,3,174);//msg
-
-    H::HLine(x+11,y-2,15,3,175);H::setcolor(4);cout<<"\3";H::setcolor(7);cout<<"\4";H::setcolor(4);cout<<"\3";H::setcolor(7);cout<<"\4";H::setcolor(4);cout<<"\3";//msg
-    H::setcolor(7);cout<<"\4";H::setcolor(4);cout<<"\3";H::setcolor(7);cout<<"\4";H::setcolor(4);cout<<"\3";H::setcolor(7);cout<<"\4";H::HLine(x+36,y-2,16,3,174);//msg
-
-    H::HLine(x+17,y-1,31,6,236);//msg
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    H::HLine(x+91,y-4,31,6,236);//msg
-
-    H::HLine(x+87,y-3,15,3,175);H::setcolor(7);cout<<"\4";H::setcolor(4);cout<<"\3";H::setcolor(7);cout<<"\4";H::setcolor(4);cout<<"\3";H::setcolor(7);cout<<"\4";//msg
-    H::setcolor(4);cout<<"\3";H::setcolor(7);cout<<"\4";H::setcolor(4);cout<<"\3";H::setcolor(7);cout<<"\4";H::setcolor(4);cout<<"\3";H::HLine(x+112,y-3,15,3,174);   //msg
-
-    H::HLine(x+87,y-2,15,3,175);H::setcolor(4);cout<<"\3";H::setcolor(7);cout<<"\4";H::setcolor(4);cout<<"\3";H::setcolor(7);cout<<"\4";H::setcolor(4);cout<<"\3";//msg
-    H::setcolor(7);cout<<"\4";H::setcolor(4);cout<<"\3";H::setcolor(7);cout<<"\4";H::setcolor(4);cout<<"\3";H::setcolor(7);cout<<"\4";H::HLine(x+112,y-2,15,3,174);//msg
-
-    H::HLine(x+91,y-1,31,6,236);//msg
-
-    tp(3,x+54,y-4);cout<<R"(   ______________  __  _____  __)";
-    tp(3,x+54,y-3);cout<<R"(  / __/  _/ ___/ |/ / /  _/ |/ /)";
-    tp(4,x+54,y-2);cout<<R"( _\ \_/ // (_ /    / _/ //    / )";
-    tp(4,x+54,y-1);cout<<R"(/___/___/\___/_/|_/ /___/_/|_/  )";
-
-    H::drawBoxSingleLineWithBG(x+12, y+1, 114, 25, 145);
-    H::drawBoxSingleLineWithBG(x+14, y+2, 50, 23, 136);
+    H::drawBoxSingleLineWithBG(n_x+13, n_y+1, 114, 25, 145);
+    H::drawBoxSingleLineWithBG(n_x+15, n_y+2, 50, 23, 136);
 
     H::setcolor(135); 
-    H::gotoxy(x+17, y+12); cout << "USERNAME";
-    H::drawBoxDoubleLineWithBG(x+18, y+13, 42, 1,247);
+    H::gotoxy(n_x+18, n_y+12); cout << "USERNAME";
+    H::drawBoxDoubleLineWithBG(n_x+19, n_y+13, 42, 1,247);
     H::setcolor(135); 
-    H::gotoxy(x+17, y+18); cout << "PASSWORD";
-    H::drawBoxDoubleLineWithBG(x+18, y+19, 42, 1,247);
+    H::gotoxy(n_x+18, n_y+18); cout << "PASSWORD";
+    H::drawBoxDoubleLineWithBG(n_x+19, n_y+19, 42, 1,247);
 
-    H::drawBoxSingleLineWithBG(x + 68, y + 2, 56, 23, 230);
+    H::drawBoxSingleLineWithBG(n_x + 69, n_y + 2, 56, 23, 230);
 
-    tp(233,x+70,y+3);cout  << R"(  ________________________________________________)";
-    tp(233,x+70,y+4);cout  << R"( /                                                \)";
-    tp(233,x+70,y+5);cout  << R"(|    _________________________________________     |)";
-    tp(233,x+70,y+6);cout  << R"(|   |                                         |    |)";
-    tp(233,x+70,y+7);cout  << R"(|   |  C:\>    Welcome to BLT Cyber House_    |    |)";
-    tp(233,x+70,y+8);cout  << R"(|   |                                         |    |)";
-    tp(233,x+70,y+9);cout  << R"(|   |                                         |    |)";
-    tp(233,x+70,y+10);cout << R"(|   |                                         |    |)";
-    tp(233,x+70,y+11);cout << R"(|   |                                         |    |)";
-    tp(233,x+70,y+12);cout << R"(|   |                                         |    |)";
-    tp(233,x+70,y+13);cout << R"(|   |                                         |    |)";
-    tp(233,x+70,y+14);cout << R"(|   |                                         |    |)";
-    tp(233,x+70,y+15);cout << R"(|   |                                         |    |)";
-    tp(233,x+70,y+16);cout << R"(|   |                                         |    |)";
-    tp(233,x+70,y+17);cout << R"(|   |                                         |    |)";
-    tp(233,x+70,y+18);cout << R"(|   |                                         |    |)";
-    tp(233,x+70,y+19);cout << R"(|   |_________________________________________|    |)";
-    tp(233,x+70,y+20);cout << R"(|                                                  |)";
-    tp(233,x+70,y+21);cout << R"( \________________________________________________/)";
-    tp(233,x+70,y+22);cout << R"(        \_________________________________/)";
+    tp(233,n_x+71,n_y+4);cout  << R"(  ________________________________________________)";
+    tp(233,n_x+71,n_y+5);cout  << R"( /                                                \)";
+    tp(233,n_x+71,n_y+6);cout  << R"(|    _________________________________________     |)";
+    tp(233,n_x+71,n_y+7);cout  << R"(|   |                                         |    |)";
+    tp(233,n_x+71,n_y+8);cout  << R"(|   |  C:\>    Welcome to BLT Cyber House_    |    |)";
+    tp(233,n_x+71,n_y+9);cout  << R"(|   |                                         |    |)";
+    tp(233,n_x+71,n_y+10);cout << R"(|   |                                         |    |)";
+    tp(233,n_x+71,n_y+11);cout << R"(|   |                                         |    |)";
+    tp(233,n_x+71,n_y+12);cout << R"(|   |                                         |    |)";
+    tp(233,n_x+71,n_y+13);cout << R"(|   |                                         |    |)";
+    tp(233,n_x+71,n_y+14);cout << R"(|   |                                         |    |)";
+    tp(233,n_x+71,n_y+15);cout << R"(|   |                                         |    |)";
+    tp(233,n_x+71,n_y+16);cout << R"(|   |                                         |    |)";
+    tp(233,n_x+71,n_y+17);cout << R"(|   |                                         |    |)";
+    tp(233,n_x+71,n_y+18);cout << R"(|   |                                         |    |)";
+    tp(233,n_x+71,n_y+19);cout << R"(|   |                                         |    |)";
+    tp(233,n_x+71,n_y+20);cout << R"(|   |_________________________________________|    |)";
+    tp(233,n_x+71,n_y+21);cout << R"(|                                                  |)";
+    tp(233,n_x+71,n_y+22);cout << R"( \________________________________________________/)";
+    tp(233,n_x+71,n_y+23);cout << R"(        \_________________________________/)";
 
 
-    tp(4,x+4,y+31);cout<<"To move between options, use ";H::setcolor(1);cout<<"[UP]";
+    tp(4,n_x+4,38);cout<<"To move between options, use ";H::setcolor(1);cout<<"[UP]";
     H::setcolor(4);cout<<" and ";H::setcolor(1);cout<<"[DOWN]";H::setcolor(4);cout<<" arrow key and press ";
     H::setcolor(1);cout<<"[ENTER]";H::setcolor(4);cout<<" key to select, or to leave the program, press ";H::setcolor(1);cout<<"[BACKSPACE]";
 
@@ -215,6 +226,7 @@ void Design::AdminMenuBoxes()
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Design::LoginAs_Admin_UserTxt(int choice)
 {
+    int y = 8;
     if(choice == 2)
     {
         H::setcolor(135); 
@@ -247,7 +259,7 @@ void Design::AdminMenu_Design()
         tp(191,x+69-i,y-4);cout<<char(204);H::HLine(x+70-i,y-4,1,191,205);
         H::HLine(x+70,y-4,i,191,205);H::setcolor(191);cout<<char(185);
         //bottom
-        tp(191,x+69-i,y+3);cout<<char(204);H::HLine(x+70-i,y+3,1,191,205);H::delay(1);
+        tp(191,x+69-i,y+3);cout<<char(204);H::HLine(x+70-i,y+3,1,191,205);
         H::HLine(x+70,y+3,i,191,205);H::setcolor(191);cout<<char(185);
     }
     //second
@@ -257,7 +269,7 @@ void Design::AdminMenu_Design()
         tp(71,x+69-i,y-4);cout<<char(204);H::HLine(x+70-i,y-4,1,71,205);
         H::HLine(x+70,y-4,i,71,205);H::setcolor(71);cout<<char(185);
         //bottom
-        tp(71,x+69-i,y+3);cout<<char(204);H::HLine(x+70-i,y+3,1,71,205);H::delay(1);
+        tp(71,x+69-i,y+3);cout<<char(204);H::HLine(x+70-i,y+3,1,71,205);
         H::HLine(x+70,y+3,i,71,205);H::setcolor(71);cout<<char(185);   
     }
     //third
@@ -267,7 +279,7 @@ void Design::AdminMenu_Design()
         tp(191,x+69-i,y-4);cout<<char(204);H::HLine(x+70-i,y-4,1,191,205);
         H::HLine(x+70,y-4,i,191,205);H::setcolor(191);cout<<char(185);
         //bottom
-        tp(191,x+69-i,y+3);cout<<char(204);H::HLine(x+70-i,y+3,1,191,205);H::delay(1);
+        tp(191,x+69-i,y+3);cout<<char(204);H::HLine(x+70-i,y+3,1,191,205);
         H::HLine(x+70,y+3,i,191,205);H::setcolor(191);cout<<char(185);   
     }
     //fourth
@@ -277,7 +289,7 @@ void Design::AdminMenu_Design()
         tp(103,x+69-i,y-4);cout<<char(204);H::HLine(x+70-i,y-4,1,103,205);
         H::HLine(x+70,y-4,i,103,205);H::setcolor(103);cout<<char(185);
         //bottom
-        tp(103,x+69-i,y+3);cout<<char(204);H::HLine(x+70-i,y+3,1,103,205);H::delay(1);
+        tp(103,x+69-i,y+3);cout<<char(204);H::HLine(x+70-i,y+3,1,103,205);
         H::HLine(x+70,y+3,i,103,205);H::setcolor(103);cout<<char(185);   
     }
 }
@@ -424,27 +436,27 @@ void Design::A_Letter_from_Us_Animation()
     for(int i = 1 ; i <= 60 ; i ++)
     {
         //top
-        H::HLine(x+10,y+4,i,7,205);
-        H::HLine(x+130-i,y+4,1,7,205);
+        H::HLine(x+10,y+5,i,7,205);
+        H::HLine(x+130-i,y+5,1,7,205);
 
         //bot
-        H::HLine(x+10,y+18,i,7,205);
-        H::HLine(x+130-i,y+18,1,7,205);
+        H::HLine(x+10,y+19,i,7,205);
+        H::HLine(x+130-i,y+19,1,7,205);
     }
     //connect ascii code
-    H::gotoxy(x+10,y+4);cout<<char(201);//left to down
-    H::gotoxy(x+10,y+18);cout<<char(200);//down to right
-    H::gotoxy(x+130,y+4);cout<<char(187);//right to down
-    H::gotoxy(x+130,y+18);cout<<char(188);//down to left
+    H::gotoxy(x+10,y+5);cout<<char(201);//left to down
+    H::gotoxy(x+10,y+19);cout<<char(200);//down to right
+    H::gotoxy(x+130,y+5);cout<<char(187);//right to down
+    H::gotoxy(x+130,y+19);cout<<char(188);//down to left
     for(int i = 1 ; i <= 7 ; i ++)
     {
         //left
-        H::VLine(x+11,y+4,i,7,186);H::delay(10);
-        H::VLine(x+11,y+17-i,1,7,186);H::delay(10);
+        H::VLine(x+11,y+5,i,7,186);H::delay(10);
+        H::VLine(x+11,y+18-i,1,7,186);H::delay(10);
 
         //right
-        H::VLine(x+131,y+4,i,7,186);H::delay(10);
-        H::VLine(x+131,y+17-i,1,7,186);H::delay(10);
+        H::VLine(x+131,y+5,i,7,186);H::delay(10);
+        H::VLine(x+131,y+18-i,1,7,186);H::delay(10);
     }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -480,6 +492,7 @@ void Design::A_Letter_from_UsTxt()
     tp(4,x+20,y-0);cout<<R"(/    |    \ |    |__\  ___/|  |  |  | \  ___/|  | \/  |  |   |  | \(  <_> )  Y Y  \ |    |  /\___ \ )";
     tp(4,x+20,y+1);cout<<R"(\____|__  / |_______ \___  >__|  |__|  \___  >__|     |__|   |__|   \____/|__|_|  / |______//____  >)";
     tp(4,x+20,y+2);cout<<R"(        \/          \/   \/                \/                                   \/               \/ )";
+    H::HLine(20,8,120,7,220);
      
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -494,11 +507,11 @@ void Design::A_Letter_from_Us_Design()
     char seventh[]="This opportunity is allowing us to develop valuable skills in mobile app development and pursue ";
     char eighth[]="exciting careers in the tech industry.";
 
-    charLoop(sizeof(one), x+19, y+7, 3, one, 10);charLoop(sizeof(two), x+53, y+7, 4, two, 10);charLoop(sizeof(three), x+86, y+7, 3, three, 10);//first line
-    charLoop(sizeof(fourth), x+39, y+9, 71, fourth, 10);//Second line
-    charLoop(sizeof(fifth), x+30, y+11, 3, fifth, 10);charLoop(sizeof(sixth), x+68, y+11, 4, sixth, 10);//Third
-    charLoop(sizeof(seventh), x+22, y+13, 23, seventh, 10);//Fourth
-    charLoop(sizeof(eighth), x+51, y+15, 23, eighth, 10);//Fifth
+    charLoop(sizeof(one), x+19, y+8, 3, one, 10);charLoop(sizeof(two), x+53, y+8, 4, two, 10);charLoop(sizeof(three), x+86, y+8, 3, three, 10);//first line
+    charLoop(sizeof(fourth), x+39, y+10, 71, fourth, 10);//Second line
+    charLoop(sizeof(fifth), x+30, y+12, 3, fifth, 10);charLoop(sizeof(sixth), x+68, y+12, 4, sixth, 10);//Third
+    charLoop(sizeof(seventh), x+22, y+14, 23, seventh, 10);//Fourth
+    charLoop(sizeof(eighth), x+51, y+16, 23, eighth, 10);//Fifth
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 /*

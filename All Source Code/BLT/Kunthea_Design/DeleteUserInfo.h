@@ -20,10 +20,11 @@ void BLT::DeleteUserInfo::DeleteUserInfo_Design()
     H::VLine(70,12,3,7,221);
     H::VLine(90,12,3,7,221);
     H::drawBoxSingleLineWithBG(65,16,28,1,4);
-    H::foreColor(4); H::gotoxy(71,17); cout<<"Delete ID : ";
+    H::foreColor(4); H::gotoxy(70,17); cout<<"Delete By ID : ";
     H::foreColor(7);
     //loading while searching
-    for(int i=0; i<25; i++){
+    for(int i=0; i<25; i++)
+    {
         H::setcursor(0,0);
         H::gotoxy(65,20); H::foreColor(3); cout<<"Deleting..."; 
         H::drawBoxSingleLine(65,21,28,1,3);
@@ -33,7 +34,8 @@ void BLT::DeleteUserInfo::DeleteUserInfo_Design()
     }
     H::clearBox(60,21,36,2,7);
     
-    for(int i=0; i<7; i++){
+    for(int i=0; i<7; i++)
+    {
         H::VLine(25,12,i+1,i+1,221); H::delay(10);
         H::VLine(136,12,i+1,i+1,221); H::delay(10);
     }
@@ -41,9 +43,7 @@ void BLT::DeleteUserInfo::DeleteUserInfo_Design()
     H::drawBoxDoubleLine(20,19,120,15,4);
     H::drawBoxDoubleLine(20,19,120,1,3);
     H::drawBoxDoubleLine(20,33,120,1,3);
-    H::gotoxy(30,20); H::foreColor(3); cout<<"|ID|\t\t|Name|\t\t|USERNAME|\t\t|PASSWORD|\t\t|TIME|\t\t|PRICE|";
-    H::gotoxy(58,34); H::foreColor(3); cout<<"Press ";H::foreColor(4); cout<<"[ENTER]";H::foreColor(3); cout<<" To Continues Or ";H::foreColor(4); cout<<"[ESC]";H::foreColor(3); cout<<" To Exit";
-    H::foreColor(7);
+    H::foreColor(7);H::gotoxy(20,20); cout<<"|ID|\t|Name|\t\t|USERNAME|\t\t|PASSWORD|\t    |HOUR|\t   |REMAIN HOUR|   \t|PRICE|";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif

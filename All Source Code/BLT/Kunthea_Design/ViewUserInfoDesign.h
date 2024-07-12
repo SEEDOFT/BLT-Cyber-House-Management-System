@@ -22,7 +22,7 @@ void BLT::ViewUserInfoDesign::ViewUserInfo_Design()
     H::drawBoxDoubleLineWithBG(143,11,1,25,179);
     H::VLine(144,11,25,183,219);
     //laebel
-    H::foreColor(23);H::gotoxy(30,11); cout<<"|ID|\t\t|Name|\t\t|USERNAME|\t\t|PASSWORD|\t\t|HOUR|\t\t|PRICE|";
+    H::foreColor(23);H::gotoxy(20,11); cout<<"|ID|\t|Name|\t\t|USERNAME|\t\t|PASSWORD|\t    |HOUR|\t   |REMAIN HOUR|   \t|PRICE|";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif

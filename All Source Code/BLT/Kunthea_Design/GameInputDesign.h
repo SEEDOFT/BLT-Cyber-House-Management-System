@@ -41,15 +41,10 @@ void BLT::GameInputDesign::InputGame_Design()
     H::drawBoxDoubleLineWithBG(97,30,26,1,183);
 
     //label
-    H::foreColor(183); H::gotoxy(39,19); cout<<"ID    ";
-    H::foreColor(183); H::gotoxy(39,23); cout<<"Name  ";
-    H::foreColor(183); H::gotoxy(39,27); cout<<"Type   ";
-    H::foreColor(183); H::gotoxy(39,31); cout<<"Release Date ";
-
-    H::foreColor(183); H::gotoxy(99,19); cout<<": ";
-    H::foreColor(183); H::gotoxy(99,23); cout<<": ";
-    H::foreColor(183); H::gotoxy(99,27); cout<<": ";
-    H::foreColor(183); H::gotoxy(99,31); cout<<": ";
+    H::foreColor(185); H::gotoxy(39,19); cout<<"ID    ";
+    H::foreColor(185); H::gotoxy(39,23); cout<<"Name  ";
+    H::foreColor(185); H::gotoxy(39,27); cout<<"Type   ";
+    H::foreColor(185); H::gotoxy(39,31); cout<<"Release Date ";
 
     H::foreColor(183); H::gotoxy(39,18); cout<<">.<";
     H::foreColor(183); H::gotoxy(39,22); cout<<">.<";
@@ -62,8 +57,6 @@ void BLT::GameInputDesign::InputGame_Design()
     H::foreColor(183); H::gotoxy(99,30); cout<<">.<";
 
     H::HLine(50,35,60,183,205);
-    H::gotoxy(58,36); H::foreColor(185); cout<<"Press ";H::foreColor(180); cout<<"[ENTER]";H::foreColor(185); cout<<" To Continues Or ";H::foreColor(180); cout<<"[ESC]";H::foreColor(185); cout<<" To Exit";
-    H::foreColor(7);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif

@@ -1,12 +1,15 @@
 #ifndef ___File_H___
 #define ___File_H___
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#include"../BLT_Process/BLT.h"
 #include "MgUserPayment.h"
 #include <sys/stat.h>
 #include <vector>
 #include <ctime>
 #include <cmath>
 #include <sstream>
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+using namespace BLT;
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 class File
 {
@@ -226,51 +229,46 @@ bool File::checkUsernameInVector(const char *username)
 void File::insertToVector(int n, string &currentFile)
 {
     int i = 1;
-    char press = ' ';
     char guestName[20];
     char username[20];
-    while (1)
+
+    while(1)
     {
-        int maxID = getMaxID(currentFile, n);
 
-        if (n == 1)
-        {
-            fnd.setID(maxID + i);
-            cout << "ID : " << fnd.getFndID() << endl;
-            fnd.input();
-            fndVector.push_back(fnd);
-        }
-        else if (n == 2)
-        {
-            game.setID(maxID + i);
-            cout << "ID : " << game.getID() << endl;
-            game.input();
-            gameVector.push_back(game);
-        }
-        else if (n == 3)
-        {
-            mup.setID(maxID + i);
-            cout << "ID : " << mup.getID() << endl;
-            cout << "Enter Guest name : "; H::inputLetter(guestName, sizeof(guestName)); cout << endl;
+    int maxID = getMaxID(currentFile, n);
 
-            do
-            {
-                cout << "Enter Account username : "; H::inputAll(username, sizeof(username)); cout << endl;
-            } while (checkUsername(username) || checkUsernameInVector(username));
+    if (n == 1)
+    {
+        fnd.setID(maxID + i);
+        H::foreColor(176); H::gotoxy(99,19); cout << ": "<< fnd.getFndID();//food&drink ID
+        fnd.input();
+        fndVector.push_back(fnd);
+    }
+    else if (n == 2)
+    {
+        game.setID(maxID + i);
+        H::foreColor(176); H::gotoxy(99,19); cout << ": ";cout << game.getID();//insert game ID
+        game.input();
+        gameVector.push_back(game);
+    }
+    else if (n == 3)
+    {
+        mup.setID(maxID + i);
+        H::setcolor(135); H::gotoxy(65,13); cout << mup.getID();
+        H::setcolor(135); H::gotoxy(65,17); H::inputLetter(guestName, sizeof(guestName));
 
-            mup.setGuestname(guestName);
-            mup.setUsername(username);
-            mup.input();
-            mupVector.push_back(mup);
-        }
-
-        cout << "Press any key to input again and [ESC] to stop" << endl;
-        press = getch();
-        if (press == 27)
+        do
         {
-            break;
-        }
-        i++;
+            H::setcolor(135); H::gotoxy(65,21); H::inputAll(username, sizeof(username));
+        } 
+        while (checkUsername(username) || checkUsernameInVector(username));
+
+        mup.setGuestname(guestName);
+        mup.setUsername(username);
+        mup.input();
+        mupVector.push_back(mup);
+    }
+    i++;
     }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -291,6 +289,7 @@ void File::insertFile(int n)
 	insertToVector(n, currentFile);
 
     file.open(currentFile, ios::out | ios::app | ios::binary);
+    
     if (n == 1)
     {
         for (const auto &insert : fndVector)
@@ -341,28 +340,33 @@ void File::viewFile(int n)
         {
             if (n == 1)
             {
+                int y = 0 ; 
                 while (file.read((char *)&fnd, sizeof(fnd)))
                 {
-                    fnd.output();
+                    fnd.output(y);
+                    y++;
                 }
             }
             else if (n == 2)
             {
+                int y = 0 ; 
                 while (file.read((char *)&game, sizeof(game)))
                 {
-                    game.output();
+                    game.output(y);
+                    y++;
                 }
             }
             else if (n == 3)
             {
+                int y = 0 ; 
                 while (file.read((char *)&mup, sizeof(MgUserPayment)))
                 {
-                    mup.output();
+                    mup.output(y);
+                    y++;
                 }
             }
         }
     }
-
     file.close();
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -374,8 +378,6 @@ void File::searchFile(int n)
 {
     char searchID[5];
     bool isfound = false;
-    char press = ' ';
-
     setCurrentFile(n);
     
     file.open(currentFile, ios::in | ios::binary);
@@ -392,70 +394,60 @@ void File::searchFile(int n)
         else
         {
             file.close();
-            while (1)
+
+            file.open(currentFile, ios::in | ios::binary);
+            isfound = false;
+            H::foreColor(1); H::gotoxy(85,17);H::inputNumber(searchID, sizeof(searchID));
+            cout << endl;
+            // can  use this instread of open again
+            //                ---------------------------------------------------------
+            //                file.clear();  // Clear any potential eof or fail flags
+            //                file.seekg(0);  // Reset file pointer to beginning
+            //                ---------------------------------------------------------
+
+            if (n == 1)
             {
-                file.open(currentFile, ios::in | ios::binary);
-                isfound = false;
-                cout << "Enter Food ID : ";
-                H::inputNumber(searchID, sizeof(searchID));
-                cout << endl;
-                // can  use this instread of open again
-                //                ---------------------------------------------------------
-                //                file.clear();  // Clear any potential eof or fail flags
-                //                file.seekg(0);  // Reset file pointer to beginning
-                //                ---------------------------------------------------------
-
-                if (n == 1)
+                while (file.read((char *)&fnd, sizeof(FoodnDrink)))
                 {
-                    while (file.read((char *)&fnd, sizeof(FoodnDrink)))
+                    if (atoi(searchID) == fnd.getFndID())
                     {
-                        if (atoi(searchID) == fnd.getFndID())
-                        {
-                            fnd.output();
-                            isfound = true;
-                        }
+                        fnd.output(11);
+                        isfound = true;
                     }
                 }
-                else if (n == 2)
-                {
-                    while (file.read((char *)&game, sizeof(Game)))
-                    {
-                        if (atoi(searchID) == game.getID())
-                        {
-                            game.output();
-                            isfound = true;
-                        }
-                    }
-                }
-                else if (n == 3)
-                {
-                    while (file.read((char *)&mup, sizeof(MgUserPayment)))
-                    {
-                        if (atoi(searchID) == mup.getID())
-                        {
-                            mup.output();
-                            isfound = true;
-                        }
-                    }
-                }
-
-                if (isfound == false)
-                {
-                    cout << "ID not found" << endl;
-                }
-                else
-                {
-                    cout << "ID found" << endl;
-                }
-                cout << "Press any key to search again or [ESC] to stop" << endl;
-                press = getch();
-                if (press == 27)
-                {
-                    file.close();
-                    break;
-                }
-                file.close();
             }
+            else if (n == 2)
+            {
+                while (file.read((char *)&game, sizeof(Game)))
+                {
+                    if (atoi(searchID) == game.getID())
+                    {
+                        game.output(11);
+                        isfound = true;
+                    }
+                }
+            }
+            else if (n == 3)
+            {
+                while (file.read((char *)&mup, sizeof(MgUserPayment)))
+                {
+                    if (atoi(searchID) == mup.getID())
+                    {
+                        mup.output(11);
+                        isfound = true;
+                    }
+                }
+            }
+
+            if (isfound == false)
+            {
+                H::setcolor(4); H::gotoxy(69,34);cout << "...ID is not found..." << endl;
+            }
+            else
+            {
+                H::setcolor(4); H::gotoxy(71,34); cout << "...ID is found..." << endl;
+            }
+            file.close();
         }
     }
 }
@@ -468,7 +460,6 @@ void File::updateFile(int n)
 {
     char updateID[5];
     bool isfound = false;
-    char press = ' ';
     char guestName[20];
     char username[20];
 
@@ -488,84 +479,78 @@ void File::updateFile(int n)
         }
         else
         {
-            while (1)
+            isfound = false;
+            
+            H::foreColor(1); H::gotoxy(86,17);H::inputNumber(updateID, sizeof(updateID));
+            file.clear();            // Clear any potential eof or fail flags
+            file.seekg(0, ios::beg); // Reset file pointer to beginning
+
+            if (n == 1)
             {
-                isfound = false;
-                cout << "Enter Food ID : ";
-                H::inputNumber(updateID, sizeof(updateID));
-                cout << endl;
-                file.clear();            // Clear any potential eof or fail flags
-                file.seekg(0, ios::beg); // Reset file pointer to beginning
-
-                if (n == 1)
+                while (file.read((char *)&fnd, sizeof(FoodnDrink)))
                 {
-                    while (file.read((char *)&fnd, sizeof(FoodnDrink)))
+                    if (atoi(updateID) == fnd.getFndID())
                     {
-                        if (atoi(updateID) == fnd.getFndID())
-                        {
-                        	cout << "ID : " << fnd.getFndID() << endl;
-                            fnd.input();
-                            file.seekp((int)file.tellg() - sizeof(FoodnDrink));
-                            file.write((char *)&fnd, sizeof(FoodnDrink));
-                            isfound = true;
-                        }
+                        fnd.output(8);
+                        H::gotoxy(35,36); H::foreColor(4); cout << fnd.getFndID();
+                        fnd.update();
+                        file.seekp((int)file.tellg() - sizeof(FoodnDrink));
+                        file.write((char *)&fnd, sizeof(FoodnDrink));
+                        isfound = true;
                     }
-                }
-                else if (n == 2)
-                {
-                    while (file.read((char *)&game, sizeof(Game)))
-                    {
-                        if (atoi(updateID) == game.getID())
-                        {
-                        	cout << "ID : " << game.getID() << endl;
-                            game.input();
-                            file.seekp((int)file.tellg() - sizeof(Game));
-                            file.write((char *)&game, sizeof(Game));
-                            isfound = true;
-                        }
-                    }
-                }
-                else if (n == 3)
-                {
-                    while (file.read((char *)&mup, sizeof(MgUserPayment)))
-                    {
-                        if (atoi(updateID) == mup.getID())
-                        {
-				            cout << "ID : " << mup.getID() << endl;
-				            cout << "Enter Guest name : "; H::inputLetter(guestName, sizeof(guestName)); cout << endl;
-				
-				            do
-				            {
-				                cout << "Enter Account username : "; H::inputAll(username, sizeof(username)); cout << endl;
-				            } while (checkUsername(username));
-				
-				            mup.setGuestname(guestName);
-				            mup.setUsername(username);
-				            mup.input();
-				            
-                            file.seekp((int)file.tellg() - sizeof(MgUserPayment));
-                            file.write((char *)&mup, sizeof(MgUserPayment));
-                            isfound = true;
-                        }
-                    }
-                }
-
-                if (isfound == false)
-                {
-                    cout << "...Incorrect Invoice ID..." << endl;
-                }
-                else
-                {
-                    cout << "...Update Successfully..." << endl;
-                }
-                cout << "Press any key to update again or [ESC] to stop" << endl;
-                press = getch();
-                if (press == 27)
-                {
-                    file.close();
-                    break;
                 }
             }
+            else if (n == 2)
+            {
+                while (file.read((char *)&game, sizeof(Game)))
+                {
+                    if (atoi(updateID) == game.getID())
+                    {
+                        cout << "ID : " << game.getID() << endl;
+                        game.input();
+                        file.seekp((int)file.tellg() - sizeof(Game));
+                        file.write((char *)&game, sizeof(Game));
+                        isfound = true;
+                    }
+                }
+            }
+            else if (n == 3)
+            {
+                while (file.read((char *)&mup, sizeof(MgUserPayment)))
+                {
+                    if (atoi(updateID) == mup.getID())
+                    {
+                        mup.output(8);
+
+                        H::foreColor(4);H::gotoxy(20,36); cout << mup.getID();
+                        cout << "\t";H::inputLetter(guestName, sizeof(guestName));
+            
+                        do
+                        {
+                            cout << "\t\t"; H::inputAll(username, sizeof(username));
+                        } 
+                        while (checkUsername(username));
+            
+                        mup.setGuestname(guestName);
+                        mup.setUsername(username);
+                        mup.update();
+                        
+                        file.seekp((int)file.tellg() - sizeof(MgUserPayment));
+                        file.write((char *)&mup, sizeof(MgUserPayment));
+                        isfound = true;
+                    }
+                }
+            }
+
+            if (isfound == false)
+            {
+                H::setcolor(4); H::gotoxy(71,37); cout << "...Incorrect ID...";
+            }
+            else
+            {
+                H::setcolor(4); H::gotoxy(68,37); cout << "...Update Successfully...";
+            }
+            file.close();
         }
     }
 }
@@ -578,7 +563,6 @@ void File::deleteFile(int n)
 {
     char deleteID[5];
     bool isfound = false;
-    char press = ' ';
 
     setCurrentFile(n);
 
@@ -598,83 +582,76 @@ void File::deleteFile(int n)
 
         file.close();
 
-        while (true)
+        //Search Case
+        isfound = false;
+        H::foreColor(1); H::gotoxy(86,17);H::inputNumber(deleteID, sizeof(deleteID));
+        int deleteIDInt = atoi(deleteID);
+
+        switch (n)
         {
-            isfound = false;
-            cout << "Enter ID to delete: ";
-            H::inputNumber(deleteID, sizeof(deleteID));
-            cout << endl;
-            int deleteIDInt = atoi(deleteID);
-
-            switch (n)
+            case 1:
             {
-	            case 1:
-	            {
-	                for (auto it = fndVector.begin(); it != fndVector.end();)
-	                {
-	                    if (it->getFndID() == deleteIDInt)
-	                    {
-	                        it = fndVector.erase(it);
-	                        isfound = true;
-	                    }
-	                    else
-	                    {
-	                        ++it;
-	                    }
-	                }
-	                break;
-	            }
-	            case 2:
-	            {
-	                for (auto it = gameVector.begin(); it != gameVector.end();)
-	                {
-	                    if (it->getID() == deleteIDInt)
-	                    {
-	                        it = gameVector.erase(it);
-	                        isfound = true;
-	                    }
-	                    else
-	                    {
-	                        ++it;
-	                    }
-	                }
-	                break;
-	            }
-	            case 3:
-	            {
-	                for (auto it = mupVector.begin(); it != mupVector.end();)
-	                {
-	                    if (it->getID() == deleteIDInt)
-	                    {
-	                        it = mupVector.erase(it);
-	                        isfound = true;
-	                    }
-	                    else
-	                    {
-	                        ++it;
-	                    }
-	                }
-	                break;
-	            }
+                for (auto it = fndVector.begin(); it != fndVector.end();)
+                {
+                    if (it->getFndID() == deleteIDInt)
+                    {
+                        it->output(11);
+                        it = fndVector.erase(it);
+                        isfound = true;
+                    }
+                    else
+                    {
+                        ++it;
+                    }
+                }
+                break;
             }
-
-            if (!isfound)
+            case 2:
             {
-                cout << "ID not found" << endl;
+                for (auto it = gameVector.begin(); it != gameVector.end();)
+                {
+                    if (it->getID() == deleteIDInt)
+                    {
+                        it->output(11);
+                        it = gameVector.erase(it);
+                        isfound = true;
+                    }
+                    else
+                    {
+                        ++it;
+                    }
+                }
+                break;
             }
-            else
+            case 3:
             {
-                cout << "Deleted Successfully" << endl;
-            }
-
-            cout << "Press any key to delete again or [ESC] to stop" << endl;
-            press = getch();
-            if (press == 27)
-            {
+                for (auto it = mupVector.begin(); it != mupVector.end();)
+                {
+                    if (it->getID() == deleteIDInt)
+                    {
+                        it->output(11);
+                        it = mupVector.erase(it);
+                        isfound = true;
+                    }
+                    else
+                    {
+                        ++it;
+                    }
+                }
                 break;
             }
         }
 
+        if (!isfound)
+        {
+            H::setcolor(4);H::gotoxy(69,34); cout << "...ID was not found...";
+        }
+        else
+        {
+            H::setcolor(4);H::gotoxy(67,34); cout << "...Delete Successfully...";
+        }
+
+        //write to file
         file.open(currentFile, ios::out | ios::binary | ios::trunc);
         if (!file.is_open())
         {
@@ -1211,7 +1188,7 @@ void File::viewProfile(const char *username, const char *password)
     {
         if (strcmp(username, mup.getUsername()) == 0 && strcmp(password, mup.getPassword()) == 0)
         {
-            mup.output();
+            mup.output(11);
         }
     }
     file.close();

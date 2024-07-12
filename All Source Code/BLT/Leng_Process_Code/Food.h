@@ -17,8 +17,9 @@ class FoodnDrink {
         const char* getPrice() const;
         const char* getQty() const;
         void setQty(const char* qty);
+        void update();
         void input();
-        void output();
+        void output(int y);
         void setID(int id);
 };
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -51,20 +52,29 @@ void FoodnDrink::setQty(const char * qty)
 {
 	strcpy(fdQty,qty);
 }
-void FoodnDrink::input() 
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void FoodnDrink::update()
 {
-    cout << "Enter Food nor Drink name : "; H::inputAll(fdName, sizeof(fdName)); cout << endl;
-    cout << "Enter Food nor Drink price : "; H::inputNumber(fdPrice, sizeof(fdPrice)); cout << endl;
-    cout << "Enter Food nor Drink quantity : "; H::inputNumber(fdQty, sizeof(fdQty)); cout << endl;
+    H::gotoxy(35,36); H::foreColor(4); cout << "\t\t\t"; H::inputAll(fdName, sizeof(fdName)); cout << "\t\t\t\t"; H::inputNumber(fdPrice, sizeof(fdPrice));
+    cout << "\t\t\t\t";H::inputNumber(fdQty, sizeof(fdQty));
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void FoodnDrink::output() 
+void FoodnDrink::input() 
 {
+    H::foreColor(176); H::gotoxy(99,23); cout<<": ";H::inputAll(fdName, sizeof(fdName));
+    H::foreColor(176); H::gotoxy(99,27); cout<<": "; H::inputNumber(fdPrice, sizeof(fdPrice));
+    H::foreColor(176); H::gotoxy(99,31); cout<<": "; H::inputNumber(fdQty, sizeof(fdQty));
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void FoodnDrink::output(int y) 
+{
+    double price = atof (getPrice());
+
 	if(strlen(fdQty) == 0)
 	{
-		strcpy(fdQty, "OUT OF STOCK");
+		H::setcolor(4);H::gotoxy(61,25); strcpy(fdQty, "...Food and Drink are out of stock...");
 	}
-    cout << left << setw(10) << fdId << setw(25) << fdName << setw(10) << fdPrice << fdQty << endl;
+    H::setcolor(1);H::gotoxy(35,14+y);cout << fdId << "\t\t\t"<< fdName << "\t\t\t\t" << fdQty << "\t\t\t\t$"  << fixed << setprecision(2) << price ;
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif
