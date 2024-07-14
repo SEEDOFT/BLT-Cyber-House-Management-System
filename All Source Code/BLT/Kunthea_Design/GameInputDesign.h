@@ -24,7 +24,7 @@ void BLT::GameInputDesign::InputGame_Design()
         H::VLine(90,12,i+1,7,221); H::delay(10);
     }
 
-    H::foreColor(199); H::gotoxy(58,11); cout<<"\3\3";H::setcolor(203);cout<<" Welcome to BTL Cyber House Game Input ";H::setcolor(199);cout<<"\3\3";
+    H::foreColor(199); H::gotoxy(58,11); cout<<"\3\3";H::setcolor(201);cout<<" Welcome to BTL Cyber House Game Input ";H::setcolor(199);cout<<"\3\3";
 
     H::drawBoxDoubleLineWithBG(30,16,100,20,187);
     H::drawBoxDoubleLineWithBG(35,17,30,15,196);

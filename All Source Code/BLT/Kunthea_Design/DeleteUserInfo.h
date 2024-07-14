@@ -43,7 +43,7 @@ void BLT::DeleteUserInfo::DeleteUserInfo_Design()
     H::drawBoxDoubleLine(20,19,120,15,4);
     H::drawBoxDoubleLine(20,19,120,1,3);
     H::drawBoxDoubleLine(20,33,120,1,3);
-    H::foreColor(7);H::gotoxy(20,20); cout<<"|ID|\t|Name|\t\t|USERNAME|\t\t|PASSWORD|\t    |HOUR|\t   |REMAIN HOUR|   \t|PRICE|";
+    H::foreColor(3);H::gotoxy(20,20); cout<<"|ID|\t|Name|\t\t|USERNAME|\t\t|PASSWORD|\t    |HOUR|\t   |REMAIN HOUR|   \t|PRICE|";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif

@@ -17,9 +17,9 @@ void BLT::UserSignUp::SignUpTxt()
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void BLT::UserSignUp::SignUp_Design()
 {
-    H::drawBoxDoubleLineWithBG(30,10,100,-1,179);
+    H::drawBoxDoubleLineWithBG(30,10,100,-1,25);
     H::drawBoxDoubleLineWithBG(35,11,90,23,196);
-    H::drawBoxDoubleLineWithBG(30,36,100,-1,179);
+    H::drawBoxDoubleLineWithBG(30,36,100,-1,25);
 
     //box label
     H::drawBoxDoubleLineWithBG(63,12,35,1,135);
@@ -29,16 +29,16 @@ void BLT::UserSignUp::SignUp_Design()
     H::drawBoxDoubleLineWithBG(63,28,35,1,135);
     H::drawBoxDoubleLineWithBG(63,32,35,1,135);
 
-    H::gotoxy(53,10); H::foreColor(183); cout<<"===========>\3\3\3 ";H::setcolor(176);cout<<" SIGN UP USER ACCOUNT ";H::setcolor(183);cout<<"\3\3\3<===========";
+    H::gotoxy(53,10); H::foreColor(22); cout<<"===========>\3\3\3 ";H::setcolor(23);cout<<" SIGN UP USER ACCOUNT ";H::setcolor(22);cout<<"\3\3\3<===========";
     //label
     H::gotoxy(64,12); H::foreColor(135); cout<<"ID";
     H::gotoxy(64,16); H::foreColor(135); cout<<"NAME";
     H::gotoxy(64,20); H::foreColor(135); cout<<"USERNAME";
     H::gotoxy(64,24); H::foreColor(135); cout<<"PASSWORD";
     H::gotoxy(64,28); H::foreColor(135); cout<<"HOUR";
-    H::gotoxy(64,32); H::foreColor(135); cout<<"PRICE";
+    H::gotoxy(64,32); H::foreColor(135); cout<<"TOTAL PRICE";
 
-    H::gotoxy(53,36); H::foreColor(183); cout<<"===========>\3\3\3 ";H::setcolor(176);cout<<"PLEASE FILL THE INFO ";H::setcolor(183);cout<<"\3\3\3<===========";
+    H::gotoxy(53,36); H::foreColor(22); cout<<"===========>\3\3\3 ";H::setcolor(23);cout<<"PLEASE FILL THE INFO ";H::setcolor(22);cout<<"\3\3\3<===========";
 
     H::VLine(42,12,21,199,219);
     H::VLine(47,12,21,199,219);

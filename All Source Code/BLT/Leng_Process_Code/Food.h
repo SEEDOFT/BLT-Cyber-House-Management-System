@@ -74,7 +74,7 @@ void FoodnDrink::output(int y)
 	{
 		H::setcolor(4);H::gotoxy(61,25); strcpy(fdQty, "...Food and Drink are out of stock...");
 	}
-    H::setcolor(1);H::gotoxy(35,14+y);cout << fdId << "\t\t\t"<< fdName << "\t\t\t\t" << fdQty << "\t\t\t\t$"  << fixed << setprecision(2) << price ;
+    H::setcolor(7);H::gotoxy(35,14+y);cout << left << setw(21) << fdId << setw(32) << fdName << setw(32) << fdQty << fixed << setprecision(2) << "$ " << price ;
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif

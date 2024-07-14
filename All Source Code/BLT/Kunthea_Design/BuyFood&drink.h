@@ -19,8 +19,10 @@ void  BLT::BuyFoodnDrink::buyFoodnDrink_Design()
     H::drawBoxSingleLineWithBG(15,10,130,1,179);
     H::VLine(70,12,3,7,221);
     H::VLine(90,12,3,7,221);
-    H::drawBoxSingleLineWithBG(66,16,28,1,4);
-    H::foreColor(4); H::gotoxy(68,17); cout<<"BUY Food or Drink : ";
+    H::drawBoxSingleLineWithBG(66,16,28,3,4);
+    H::foreColor(4); H::gotoxy(68,17); cout<<"Buy By ID : ";
+    H::foreColor(4); H::gotoxy(68,18); cout<<"Amount    : ";
+    
     H::foreColor(7);
     //loading while searching
     for(int i=0; i<25; i++)
@@ -34,11 +36,10 @@ void  BLT::BuyFoodnDrink::buyFoodnDrink_Design()
     }
     H::clearBox(65,21,36,2,7);//cls loading animation
     
-    H::foreColor(7); H::gotoxy(67,33); cout<<"\3\3";H::setcolor(4);cout<<" Successfully purchases";H::setcolor(7);cout<<" \3\3";
+    H::foreColor(7); H::gotoxy(67,33); cout<<"\3\3";H::setcolor(4);cout<<" Successfully purchase";H::setcolor(7);cout<<" \3\3";
     H::HLine(40,35,80,7,205);
-    H::foreColor(7); H::gotoxy(55,36); cout<<"\3\3 ";H::setcolor(1);cout<<"Press ";H::setcolor(4);cout<<"[ENTER]";H::setcolor(1);cout<<" To Continues Or ";H::setcolor(4);cout<<"[ESC]";H::setcolor(1);cout<<" To Exit";H::setcolor(7);cout<<" \3\3";
     H::drawBoxDoubleLineWithBG(20,19,120,1,196);
-    H::gotoxy(23,20); H::foreColor(199); cout<<"|ID|  |    |Name|    |     |USERNAME|     |    |PASSWORD|    |   |Food&Drink|   |  |REMAIN TIME|  |  |TOTAL PRICE|";
+    H::gotoxy(23,20); H::foreColor(199); cout<<"|ID| |NAME| |USERNAME| |FOOD AND DRINK| |QTY| |TOTAL PRICE|";
 
     H::drawBoxDoubleLineWithBG(10,11,1,25,179);
     H::VLine(11,11,25,183,219);

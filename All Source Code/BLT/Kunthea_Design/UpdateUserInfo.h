@@ -34,11 +34,11 @@ void BLT::UpdateUserInfo::UpdateUserInfo_Design()
     for(int i=0; i<7; i++)
     {
         H::VLine(25,12,i+1,i+1,221); H::delay(10);
-        H::VLine(135,12,i+1,i+1,221); H::delay(10);
+        H::VLine(136,12,i+1,i+1,221); H::delay(10);
     }
     H::drawBoxDoubleLine(20,19,120,4,3);
     H::foreColor(3);H::gotoxy(20,20); cout<<"|ID|\t|Name|\t\t|USERNAME|\t\t|PASSWORD|\t    |HOUR|\t   |REMAIN HOUR|   \t|PRICE|";
-    H::HLine(30,21,100,7,196);
+    H::HLine(20,21,120,7,196);
     
     for(int i=0; i<7; i++)
     {
@@ -50,10 +50,10 @@ void BLT::UpdateUserInfo::UpdateUserInfo_Design()
     for(int i=0; i<9; i++)
     {
         H::VLine(35,24,i+1,i+1,221); H::delay(10);
-        H::VLine(125,24,i+1,i+1,221); H::delay(10);
+        H::VLine(126,24,i+1,i+1,221); H::delay(10);
     }
     H::drawBoxDoubleLine(20,33,120,4,3);
-    H::foreColor(3);H::gotoxy(20,34); cout<<"|ID|\t|Name|\t\t|USERNAME|\t\t|PASSWORD|\t    |HOUR|\t";
+    H::foreColor(3);H::gotoxy(20,34); cout<<"\t\t|ID|\t\t|Name|\t\t\t|USERNAME|\t\t|PASSWORD|\t    |HOUR|";
     H::HLine(30,35,100,7,196);
 
 }

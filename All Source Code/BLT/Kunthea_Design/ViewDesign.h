@@ -23,7 +23,7 @@ void BLT::ViewDesign::View_Design()
     H::drawBoxDoubleLineWithBG(143,11,1,25,196);
     H::VLine(144,11,25,199,219);
     //laebel
-    H::setcolor(183);H::gotoxy(35,11); cout<<"|ID|\t\t\t|Name|\t\t\t\t|QTY|\t\t\t\t|Price|";
+    H::setcolor(185);H::gotoxy(35,11); cout<<"|ID|\t\t\t|Name|\t\t\t\t|QTY|\t\t\t\t|Price|";
     H::setcolor(7);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

@@ -51,7 +51,7 @@ class MgUserPayment : public FoodnDrink, public Game, public MgUserInfo
         ///////////////////////////////////////////////
 		void viewAll();
         void update();
-		void input();
+		void input(int id);
 		void output(int y);
 		void income();
 		////////////////////////////////////////////////
@@ -99,9 +99,9 @@ void MgUserPayment::update()
 {
     char times[6];
 
-   cout << "\t\t"; H::inputAll(password, sizeof(password));
+    cout << "\t\t        "; H::inputAll(password, sizeof(password));
 
-    cout << "\t    "; H::inputNumber(times, sizeof(times));
+    cout << "\t\t    "; H::inputNumber(times, sizeof(times));
 
     time = atoi(times) * 60;
     remainTime = time;
@@ -194,7 +194,7 @@ void MgUserPayment::setUsername(const char * name)
 	strcpy(username,name);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@        
-void MgUserPayment::input() 
+void MgUserPayment::input(int id) 
 {
     char times[6];
 
@@ -204,6 +204,7 @@ void MgUserPayment::input()
 
     time = atoi(times) * 60;
     remainTime = time;
+    muId = id;
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 int MgUserPayment::getID() const 
@@ -233,12 +234,12 @@ double MgUserPayment::totalIncome()
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void MgUserPayment::output(int y) 
 {
-    H::foreColor(1);H::gotoxy(20,14+y); cout<<muId<<"\t"<<guestName<<"\t\t"<<username<<"\t\t"<<password<<"\t\t    "<< fixed << setprecision(2) <<time/60 <<"\t    " << remainTime/60 << "\t\t" <<totalPrice();
+    H::foreColor(7);H::gotoxy(20,14+y); cout << left << setw(12) << muId << setw(16) << guestName << setw(24) << username << setw(20) << password << setw(15) << fixed << setprecision(0) << time/60 << setw(21) << remainTime/60 << totalPrice() << " KHR" ;
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void MgUserPayment::viewAll()
 {
-	cout << left << setw(10) << muId << setw(25) << guestName << setw(25) << username << setw(25) << password << setw(8) << time << setw(25) << buyedFoodnDrink << setw(8) << setw(8) << fdQty << endl;
+	cout << left << setw(10) << muId << setw(15) << guestName << setw(15) << username << setw(25) << password << setw(8) << time << setw(25) << buyedFoodnDrink << setw(8) << setw(8) << fdQty << endl;
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void MgUserPayment::income()

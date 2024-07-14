@@ -2,13 +2,20 @@
 #define _________DesignConsole____________
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #include"../ANT_Header/HinsyOOPV2"
+#include"../Leng_Design/manage_user_info.h"
+#include"../Leng_Design/sub_manage_user_info.h"
 using namespace HinsyOOP;
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-class Design{
+class Design: public LENG
+{
+
     protected:
+
         static const int x;
         static const int y;
+
     public:
+
         static void tp(int colorCode,int width,int height);
         static void outline();
         static void charLoop(int characters, int xAxis, int yAxis, int color, const char* text, int DelayTime);
@@ -18,28 +25,37 @@ class Design{
         static void interface_design();
 
         static void Admin_User_ClsBox(int num);
-        
+        /*
+                    Admin MENU Design
+        */
         static void Login_Design();
         static void LoginAs_Admin_UserTxt(int choice);//user and Admin
         static void AdminMenuTxt();
         static void AdminMenuBoxes();
         static void AdminMenu_Design();
         static void DesktopImg();
-
+        /*
+                    Admin Info Design
+        */
         static void AdminProfileInfoTxt();
         static void AdminProfileInfo_Design();
         static void AdminProfileInfo_Animation();
-        
+        /*
+                    About Us Design
+        */
         static void AboutUsTxt();
-        
         static void AboutUs_Design();
-
+        /*
+                    A letter from Us Design
+        */
         static void A_Letter_from_UsTxt();
         static void A_Letter_from_Us_Design();
         static void A_Letter_from_Us_Animation();
-
-        static void UserMenuDesign();
-
+        /*
+                    User MENU Design
+        */
+        static void UserMenuTxt();
+        //********//
 };
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 const int Design::x = 10;
@@ -59,7 +75,8 @@ void Design::message(int n, int width, int height)
         while(!kbhit())
         {
             H::gotoxy(57+width,height); H::foreColor(185); cout<<"Press ";H::foreColor(color); cout<<"[ENTER]";
-            H::foreColor(185); cout<<" To Continues Or ";H::foreColor(color); cout<<"[ESC]";H::foreColor(185); cout<<" To Go Back";H::delay(999);
+            H::foreColor(185); cout<<" To Continues Or ";H::foreColor(color); 
+            cout<<"[ESC]";H::foreColor(185); cout<<" To Go Back";H::delay(999);
             color ++ ; 
             if(color > 191) color = 176 ;
         }
@@ -69,7 +86,20 @@ void Design::message(int n, int width, int height)
         int color = 1 ;
         while(!kbhit())
         {
-            H::gotoxy(69+width,height); H::foreColor(1); cout<<"Press ";;H::foreColor(color); cout<<"[ESC]";H::foreColor(1); cout<<" To Go Back";H::delay(999);
+            H::gotoxy(69+width,height); H::foreColor(1); cout<<"Press ";;H::foreColor(color); 
+            cout<<"[ESC]";H::foreColor(1); cout<<" To Go Back";H::delay(999);
+            color ++ ; 
+            if(color > 15) color = 1 ;
+        }
+    }
+    if ( n == 3)
+    {
+        int color = 1 ;
+        while(!kbhit())
+        {
+            H::gotoxy(57+width,height); H::foreColor(1); cout<<"Press ";H::foreColor(color); cout<<"[ENTER]";
+            H::foreColor(1); cout<<" To Continues Or ";H::foreColor(color); 
+            cout<<"[ESC]";H::foreColor(1); cout<<" To Go Back";H::delay(999);
             color ++ ; 
             if(color > 15) color = 1 ;
         }
@@ -82,12 +112,12 @@ void Design::Admin_User_ClsBox(int num)
     {
         for(int i = 0 ; i < 15 ; i ++)
         {
-            tp(238,x+81+i,y+15);cout<<" ";//cls left to right
+            tp(238,x+81+i,y+15);cout<<" ";H::delay(1);//cls left to right
             tp(238,x+81+i,y+16);cout<<" ";H::delay(1);//cls left to right
             tp(238,x+81+i,y+17);cout<<" ";H::delay(1);//cls left to right
 
 
-            tp(238,x+1010-i,y+15);cout<<" ";H::delay(1);//right to left
+            tp(238,x+109-i,y+15);cout<<" ";H::delay(1);//right to left
             tp(238,x+109-i,y+16);cout<<" ";H::delay(1);//right to left
             tp(238,x+109-i,y+17);cout<<" ";H::delay(1);//right to left
         }
@@ -128,8 +158,10 @@ void Design::loginMsg(int opt)
     {
         while(!kbhit())
         {
-            H::setcolor(140);H::gotoxy(x+23,y+26);cout<<"Incorrect ";H::setcolor(color);cout<<"Username ";H::setcolor(140);cout<<"or ";H::setcolor(color);cout<<"Password";
-            H::setcolor(140);H::gotoxy(x+24,y+28);cout<<"Press any ";H::setcolor(color);cout<<"[key]";H::setcolor(140);cout<<" to continue";
+            H::setcolor(140);H::gotoxy(x+23,y+26);cout<<"Incorrect ";
+            H::setcolor(color);cout<<"Username ";H::setcolor(140);cout<<"or ";H::setcolor(color);cout<<"Password";
+            H::setcolor(140);H::gotoxy(x+24,y+28);cout<<"Press any ";
+            H::setcolor(color);cout<<"[key]";H::setcolor(140);cout<<" to continue";
 
             H::delay(999);
             
@@ -143,7 +175,9 @@ void Design::loginMsg(int opt)
         int i = 1;
         while(!kbhit())
         {
-            H::setcolor(4);H::gotoxy(x+38,y+32);cout<<"Press any ";H::setcolor(i);cout<<"[key]";H::setcolor(4);cout<<" to input again or ";H::setcolor(i);cout<<"[ESC]";H::setcolor(4);cout<<" to choose option again";H::delay(999);
+            H::setcolor(4);H::gotoxy(x+38,y+32);cout<<"Press any ";
+            H::setcolor(i);cout<<"[key]";H::setcolor(4);cout<<" to input again or ";
+            H::setcolor(i);cout<<"[ESC]";H::setcolor(4);cout<<" to choose option again";H::delay(999);
             i++;
             if(i > 15 ) i = 1;
         }
@@ -208,7 +242,8 @@ void Design::Login_Design()
 
     tp(4,n_x+4,38);cout<<"To move between options, use ";H::setcolor(1);cout<<"[UP]";
     H::setcolor(4);cout<<" and ";H::setcolor(1);cout<<"[DOWN]";H::setcolor(4);cout<<" arrow key and press ";
-    H::setcolor(1);cout<<"[ENTER]";H::setcolor(4);cout<<" key to select, or to leave the program, press ";H::setcolor(1);cout<<"[BACKSPACE]";
+    H::setcolor(1);cout<<"[ENTER]";
+    H::setcolor(4);cout<<" key to select, or to leave the program, press ";H::setcolor(1);cout<<"[BACKSPACE]";
 
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -512,6 +547,18 @@ void Design::A_Letter_from_Us_Design()
     charLoop(sizeof(fifth), x+30, y+12, 3, fifth, 10);charLoop(sizeof(sixth), x+68, y+12, 4, sixth, 10);//Third
     charLoop(sizeof(seventh), x+22, y+14, 23, seventh, 10);//Fourth
     charLoop(sizeof(eighth), x+51, y+16, 23, eighth, 10);//Fifth
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void Design::UserMenuTxt()
+{               
+    tp(3,x+39,y-4);cout<<R"( ____ ___                        _____                       )";
+    tp(3,x+39,y-3);cout<<R"(|    |   \______ ___________    /     \   ____   ____  __ __ )";
+    tp(3,x+39,y-2);cout<<R"(|    |   /  ___// __ \_  __ \  /  \ /  \_/ __ \ /    \|  |  \)";
+    tp(4,x+39,y-1);cout<<R"(|    |  /\___ \\  ___/|  | \/ /    Y    \  ___/|   |  \  |  /)";
+    tp(4,x+39,y-0);cout<<R"(|______//____  >\___  >__|    \____|__  /\___  >___|  /____/ )";
+    tp(4,x+39,y+1);cout<<R"(             \/     \/                \/     \/     \/       )";
+    H::HLine(20,y+2,120,7,220);
+             
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 /*

@@ -161,6 +161,12 @@ namespace BLT
         static void ViewAllUserInvoicesTxt();    
         static void ViewAllUserInvoices_Design();           
     };
+    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    class SearchUser{
+    public:
+        static void SearchUserTxt();
+        static void SearchUser_Design();
+    };
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif

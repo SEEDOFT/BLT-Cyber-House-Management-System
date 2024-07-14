@@ -36,7 +36,6 @@ void BLT::BuyHour::buyHour_Design()
     
     H::foreColor(7); H::gotoxy(67,33); cout<<"\3\3";H::setcolor(4);cout<<" Successfully purchases";H::setcolor(7);cout<<" \3\3";
     H::HLine(40,35,80,7,205);
-    H::foreColor(7); H::gotoxy(55,36); cout<<"\3\3 ";H::setcolor(1);cout<<"Press ";H::setcolor(4);cout<<"[ENTER]";H::setcolor(1);cout<<" To Continues Or ";H::setcolor(4);cout<<"[ESC]";H::setcolor(1);cout<<" To Exit";H::setcolor(7);cout<<" \3\3";
     H::drawBoxDoubleLineWithBG(20,19,120,1,196);
     H::gotoxy(23,20); H::foreColor(199); cout<<"|ID|  |    |Name|    |     |USERNAME|     |    |PASSWORD|    |   |Food&Drink|   |  |REMAIN TIME|  |  |TOTAL PRICE|";
 

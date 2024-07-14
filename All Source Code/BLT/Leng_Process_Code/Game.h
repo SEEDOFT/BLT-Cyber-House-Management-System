@@ -43,7 +43,7 @@ void Game::input()
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Game::output(int y)
 {
-    H::setcolor(1);H::gotoxy(35,14+y);cout << gId << "\t\t\t"<< gName << "\t\t\t\t" << gameType << "\t\t\t" << releaseDate ;
+    H::setcolor(7);H::gotoxy(35,14+y); cout << left << setw(21) << gId << setw(32) << gName << setw(24) << gameType << releaseDate ;  
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Game::inputDate(char date[], int dateLength)
