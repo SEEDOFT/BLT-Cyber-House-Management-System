@@ -11,26 +11,41 @@ void BLT::ViewProfile::ViewProfileTxt()
     H::foreColor(4); H::gotoxy(41,4); cout<<R"(  \     /  |  \  ___/\     /   |    |     |  | \(  <_> )  |  |  |  |_\  ___/ )";
     H::foreColor(4); H::gotoxy(41,5); cout<<R"(   \___/   |__|\___  >\/\_/    |____|     |__|   \____/|__|  |__|____/\___  >)";
     H::foreColor(4); H::gotoxy(41,6); cout<<R"(                   \/                                                     \/ )";
-    H::HLine(20,8,120,7,196);
+    H::HLine(20,8,120,7,220);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void BLT::ViewProfile::ViewProfile_Design()
-{
-    H::drawBoxDoubleLineWithBG(20,10,120,1,196);
-    H::HLine(22,11,117,199,221);
-    for(int i=0; i<3; i++)
-    {
-        H::VLine(70,12,i+1,7,221); H::delay(10);
-        H::VLine(90,12,i+1,7,221); H::delay(10);
-    }
-    H::drawBoxDoubleLineWithBG(20,15,120,1,25);
-    H::gotoxy(25,16); H::foreColor(23); cout<<"|ID|\t|Name|\t\t|USERNAME|\t   |PASSWORD|\t\t|HOUR|\t     |REMAIN TIME|\t     |TOTAL PRICE|";
-    H::drawBoxDoubleLineWithBG(16,11,1,25,179);
-    H::VLine(17,11,25,183,219);
-    H::drawBoxDoubleLineWithBG(143,11,1,25,179);
-    H::VLine(144,11,25,183,219);
-    H::foreColor(7);
+{   
+    H::drawBoxSingleLineWithBG(27,11,106,22,238);//background
 
+    H::gotoxy(29,12); H::foreColor(224); cout<<R"(,--------------------------------------------------------------------++++----------------------------.)";H::foreColor(224); cout<<R"()";
+    H::gotoxy(29,13); H::foreColor(224); cout<<R"(| ,-------------------.                                                                     )";H::foreColor(224); cout<<R"(`T$b. PL |)";
+    H::gotoxy(29,14); H::foreColor(224); cout<<R"(| |)";H::foreColor(235); cout<<R"(     ,_.----...    )";H::foreColor(224); cout<<R"(|      )";H::foreColor(233); cout<<R"(NAME        :                                                    )";H::foreColor(224); cout<<R"(`T$b.  |)";
+    H::gotoxy(29,15); H::foreColor(224); cout<<R"(| |)";H::foreColor(235); cout<<R"(  .''        ''\   )";H::foreColor(224); cout<<R"(|      )";H::foreColor(233); cout<<R"(USERNAME    :                                                      )";H::foreColor(224); cout<<R"(`T$b.|)";
+    H::gotoxy(29,16); H::foreColor(224); cout<<R"(| |)";H::foreColor(235); cout<<R"( ;      .-."""> \  )";H::foreColor(224); cout<<R"(|      )";H::foreColor(233); cout<<R"(PASSWROD    :                                                        )";H::foreColor(224); cout<<R"(`T$l)";
+    H::gotoxy(29,17); H::foreColor(224); cout<<R"(| |)";H::foreColor(235); cout<<R"(:    /;' ;'   ;  ] )";H::foreColor(224); cout<<R"(|                                                                             )";H::foreColor(224); cout<<R"(`l)";
+    H::gotoxy(29,18); H::foreColor(224); cout<<R"(| |)";H::foreColor(235); cout<<R"(;  ;"    '     \ ; )";H::foreColor(224); cout<<R"(|                                                                              )";H::foreColor(224); cout<<R"(|)";
+    H::gotoxy(29,19); H::foreColor(224); cout<<R"(| |)";H::foreColor(235); cout<<R"( ';  ____-____   ; )";H::foreColor(224); cout<<R"(|      )";H::foreColor(233); cout<<R"(MEMBER TYPE :      VIP                                                  )";H::foreColor(224); cout<<R"(|)";
+    H::gotoxy(29,20); H::foreColor(224); cout<<R"(| |)";H::foreColor(235); cout<<R"( (\-:###/7\###;-/) )";H::foreColor(224); cout<<R"(|      )";H::foreColor(233); cout<<R"(MEMBER SINCE:                                                           )";H::foreColor(224); cout<<R"(|)";
+    H::gotoxy(29,21); H::foreColor(224); cout<<R"(| |)";H::foreColor(235); cout<<R"(  ;  ""'/_ '""  ;  )";H::foreColor(224); cout<<R"(|                                                                              )";H::foreColor(224); cout<<R"(|)";
+    H::gotoxy(29,22); H::foreColor(224); cout<<R"(| |)";H::foreColor(235); cout<<R"(   ;           ;   )";H::foreColor(224); cout<<R"(|                                                                              )";H::foreColor(224); cout<<R"(|)";
+    H::gotoxy(29,23); H::foreColor(224); cout<<R"(| |)";H::foreColor(235); cout<<R"(   :    ---    ;   )";H::foreColor(224); cout<<R"(|      )";H::foreColor(233); cout<<R"(ADRESS      :      ANT TECHNOLOGY CENTER                                )";H::foreColor(224); cout<<R"(|)";
+    H::gotoxy(29,24); H::foreColor(224); cout<<R"(| |)";H::foreColor(235); cout<<R"(    ';   "   ;'    )";H::foreColor(224); cout<<R"(|      )";H::foreColor(233); cout<<R"(EMAIL       :      bltCyberHouse@yahoo.com                              )";H::foreColor(224); cout<<R"(|)";
+    H::gotoxy(29,25); H::foreColor(224); cout<<R"(| |)";H::foreColor(235); cout<<R"(,######.....######,)";H::foreColor(224); cout<<R"(|                                                                              )";H::foreColor(224); cout<<R"(|)";
+    H::gotoxy(29,26); H::foreColor(224); cout<<R"(| |)";H::foreColor(235); cout<<R"(   ,,,"-...-" ,,,  )";H::foreColor(224); cout<<R"(|                                                                              )";H::foreColor(224); cout<<R"(|)";
+    H::gotoxy(29,27); H::foreColor(224); cout<<R"(| '-------------------'                                                                              |)";
+    H::gotoxy(29,28); H::foreColor(224); cout<<R"(|  )";H::foreColor(228); cout<<R"(   /)       /                                                                                    )";H::foreColor(224); cout<<R"( |)";
+    H::gotoxy(29,29); H::foreColor(224); cout<<R"(|  )";H::foreColor(228); cout<<R"(  /   / /  /--  _                                                                                )";H::foreColor(224); cout<<R"( |)";
+    H::gotoxy(29,30); H::foreColor(224); cout<<R"(|  )";H::foreColor(228); cout<<R"(ox__.(_/(_/ \_.(-'                                                                               )";H::foreColor(224); cout<<R"( |)";
+    H::gotoxy(29,31); H::foreColor(224); cout<<R"(|-----------------------------------+----------------------------+-----------------------------------|)";
+    H::gotoxy(29,32); H::foreColor(224); cout<<R"(| )";H::foreColor(233); cout<<R"(MEMBER INFORMATION                )";H::foreColor(224); cout<<R"( | )";H::foreColor(233); cout<<R"(NO:                       )";H::foreColor(224); cout<<R"(|                                   |)";
+    H::gotoxy(29,33); H::foreColor(224); cout<<R"('-----------------------------------^----------------------------^-----------------------------------')";
+
+    H::HLine(55,13,66,239,220);
+    H::HLine(55,17,66,239,220);
+    H::HLine(55,21,66,239,220);
+    H::HLine(55,25,66,239,220);
+    
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif

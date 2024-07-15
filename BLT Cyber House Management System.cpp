@@ -1,7 +1,6 @@
 #include"All Source Code/BLT/BLT_Process/BLT.h"
 #include"All Source Code/BLT/BLT_Process/programProcess.h"
-#include"All Source Code/BLT/Leng_Design/manage_user_info.h"
-#include"All Source Code/BLT/Leng_Design/sub_manage_user_info.h"
+#include"All Source Code/BLT/Leng_Process_Code/File.h"
 
 using namespace BLT;
 
@@ -14,12 +13,7 @@ int main()
     
     Process::Admin_And_User();
 
-    // Process::FoodAndDrinkLst();
-
-
-    // /**/Process::ManageUserPayment();
-    // Process::User_Option();
-
-   getch(); return 0;
+    return 0;
 }
+
 

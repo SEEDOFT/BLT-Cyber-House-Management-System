@@ -62,8 +62,8 @@ void FoodnDrink::update()
 void FoodnDrink::input() 
 {
     H::foreColor(176); H::gotoxy(99,23); cout<<": ";H::inputAll(fdName, sizeof(fdName));
-    H::foreColor(176); H::gotoxy(99,27); cout<<": "; H::inputNumber(fdPrice, sizeof(fdPrice));
-    H::foreColor(176); H::gotoxy(99,31); cout<<": "; H::inputNumber(fdQty, sizeof(fdQty));
+    H::foreColor(176); H::gotoxy(99,27); cout<<": "; H::inputNumber(fdQty, sizeof(fdQty));
+    H::foreColor(176); H::gotoxy(99,31); cout<<": "; H::inputNumber(fdPrice, sizeof(fdPrice));
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void FoodnDrink::output(int y) 

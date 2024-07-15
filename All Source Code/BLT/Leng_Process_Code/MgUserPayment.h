@@ -50,8 +50,9 @@ public:
     void setTime(double hours);
     double totalPrice();
     ///////////////////////////////////////////////
-    void viewAll();
+    void viewAll(int y);
     void update();
+    void userProfile();
     void input(int id);
     void output(int y);
     void income();
@@ -239,19 +240,30 @@ void MgUserPayment::setID(int id)
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 double MgUserPayment::totalIncome()
 {
-    return totalPrice() + getFndTotal();
+    return totalPrice() + (getFndTotal() * 4000);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void MgUserPayment::output(int y)
 {
     H::foreColor(7);
     H::gotoxy(20, 14 + y);
-    cout << left << setw(12) << muId << setw(16) << guestName << setw(24) << username << setw(20) << password << setw(15) << fixed << setprecision(0) << time / 60 << setw(21) << remainTime / 60 << totalPrice() << " KHR";
+    cout << left << setw(12) << muId << setw(16) << guestName << setw(24) << username << setw(20) << password << setw(15) << fixed << setprecision(0) << time / 60 << setw(21) << remainTime / 60 << totalIncome() << " KHR";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void MgUserPayment::viewAll()
+void MgUserPayment::viewAll(int y)
 {
-    cout << left << setw(10) << muId << setw(15) << guestName << setw(15) << username << setw(25) << password << setw(8) << time << setw(25) << buyedFoodnDrink << setw(8) << setw(8) << fdQty << endl;
+    H::gotoxy(21,14+y); H::foreColor(7); cout << left << setw(10) << muId << setw(20) << guestName << setw(25) << buyedFoodnDrink << setw(20) << getQty() << setw(20) << time / 60 << totalIncome() << " KHR";
+    // cout << left << setw(10) << muId << setw(15) << guestName << setw(15) << username << setw(25) << password << setw(8) << fixed << setprecision(0) << time << setw(25) << remainTime << setw(15) << buyedFoodnDrink << setw(20) << fdQty << totalPrice();
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void MgUserPayment::userProfile()
+{
+    H::setcolor(236);H::gotoxy(77,14);cout << guestName ;
+    H::setcolor(236);H::gotoxy(77,15);cout << username ;
+    H::setcolor(236);H::gotoxy(77,16);cout << password ;
+
+    H::setcolor(236);H::gotoxy(77,20);//date
+    H::setcolor(236);H::gotoxy(71,32);cout << "BLT" << muId ;
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void MgUserPayment::income()

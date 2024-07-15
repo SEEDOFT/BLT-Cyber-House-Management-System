@@ -23,7 +23,7 @@ void BLT::ViewAllUserInvoice::ViewAllUserInvoices_Design()
     H::VLine(144,11,25,183,3);
     
     //laebel
-    H::foreColor(23);H::gotoxy(30,11); cout<<"|No.|\t\t|DATE|\t\t|CASHIER|\t\t|FOOD & DRINK|\t\t|TIME|\t\t|TOTAL|";
+    H::foreColor(23);H::gotoxy(30,11); cout<<"|No.|\t\t|DATE|\t\t|CASHIER|\t\t|FOOD & DRINK|\t\t|TIME|\t\t|TOTAL PRICE|";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif

@@ -24,7 +24,7 @@
 #include"../Kunthea_Design/BuyFood&drink.h"
 #include"../Kunthea_Design/CalculateIncome.h"
 #include"../Kunthea_Design/BuyHour.h"
-#include"../Kunthea_Design/ViewAllInvoices.h"
+#include"../Kunthea_Design/AllInvoicesAndIncome.h"
 #include"../Kunthea_Design/ViewProfile.h"
 #include"../Kunthea_Design/ViewAllUserInvoice.h"
 #include"../Kunthea_Design/SearchUserInfo.h"

@@ -9,6 +9,7 @@
 using namespace BLT;
 // Inherite Design method to use in here
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+class File;
 class Process : public Design
 {
 
@@ -44,7 +45,6 @@ public:
     static void RemoveFoodDrink();
 
     static void ManageUserPayment();
-    static void SubManageUserPayment(int num);
 
     static void ManageUserInfo();
     static void SubManageUserInfo(int num);
@@ -54,16 +54,7 @@ public:
     static void EditUserInfo();
     static void RemoveUser();
     static void SortUser();
-    /**********************************/
-    //@@@       USER METHODS       @@//
-    static void LogIn_AsUser(int cursor);
-    static void User_Option();
-    static void User_ChoosingOpt(int num);
-    //@@@       USER SUB METHODS       @@//
-    static void ViewProfileInfo();
-    static void BuyHourToPlay();
-    static void BuyFoodDrink();
-    static void ViewInvoice();
+    /***********************************/
     //@@@       END OF METHODS       @@//
     /**********************************/
     static void DisableMaximizeButton();
@@ -163,8 +154,6 @@ void Process::OutputHostName(int x, int y, int color)
 void Process::Admin_And_User()
 {
     H::setcolor(7);
-    outline();
-    Login_Design(); // Design of LOG IN
 
     char press;
     int num = 1;
@@ -172,6 +161,8 @@ void Process::Admin_And_User()
 
     while (1)
     {
+        outline();
+        Login_Design(); // Design of LOG IN
 
         do
         {
@@ -209,31 +200,31 @@ void Process::Admin_And_User()
 
             switch (press)
             {
-            case 72: // up
-            {
-                num--;
-                if (num < 1)
+                case 72: // up
                 {
-                    num = 2;
+                    num--;
+                    if (num < 1)
+                    {
+                        num = 2;
+                    }
+                    break;
                 }
-                break;
-            }
 
-            case 80: // down
-            {
-                num++;
-                if (num > 2)
+                case 80: // down
                 {
-                    num = 1;
+                    num++;
+                    if (num > 2)
+                    {
+                        num = 1;
+                    }
+                    break;
                 }
-                break;
-            }
 
-            case 8: // delete key
-            {
-                exit(0);
-                break;
-            }
+                case 8: // delete key
+                {
+                    exit(0);
+                    break;
+                }
             }
 
         } while (press != 13);
@@ -242,15 +233,15 @@ void Process::Admin_And_User()
 
         switch (num)
         {
-        case 1:
-            Admin_User_ClsBox(1);
-            LogIn_AsAdmin(1);
-            break;
+            case 1:
+                Admin_User_ClsBox(1);
+                LogIn_AsAdmin(1);
+                break;
 
-        case 2:
-            Admin_User_ClsBox(2);
-            File::user_login();
-            break;
+            case 2:
+                Admin_User_ClsBox(2);
+                File::user_login();
+                break;
         }
     }
 }
@@ -288,7 +279,7 @@ void Process::LogIn_AsAdmin(int cursor)
                 Admin_Option(); // Admin Option
                 break;
             }
-            if (strcmp(AdminUsername, "Cyber") != 0 || strcmp(AdminPassword, "168") != 0)
+            else if (strcmp(AdminUsername, "Cyber") != 0 || strcmp(AdminPassword, "168") != 0)
             {
                 H::setcursor(0, 0);
                 H::setcolor(140);
@@ -781,6 +772,10 @@ void Process::InsertGame()
             InsertGame();
             break;
         }
+        else
+        {
+            continue;
+        }
     }
 }
 /******************************************************** */
@@ -806,6 +801,10 @@ void Process::ViewGame()
         if (press == 27)
         {
             break;
+        }
+        else
+        {
+            continue;
         }
     }
 }
@@ -839,6 +838,10 @@ void Process::SearchGame()
             SearchGame();
             break;
         }
+        else
+        {
+            continue;
+        }
     }
 }
 /******************************************************** */
@@ -870,6 +873,10 @@ void Process::RemoveGame()
         {
             RemoveGame();
             break;
+        }
+        else
+        {
+            continue;
         }
     }
 }
@@ -1080,6 +1087,10 @@ void Process::InsertUser()
             InsertUser();
             break;
         }
+        else 
+        {
+            continue;
+        }
     }
 }
 /*********************************************************/
@@ -1106,10 +1117,9 @@ void Process::ViewUser()
         {
             break;
         }
-        else if (press == 13)
+        else
         {
-            ViewUser();
-            break;
+            continue;
         }
     }
 }
@@ -1144,6 +1154,10 @@ void Process::SearchUserData()
             SearchUserData();
             break;
         }
+        else
+        {
+            continue;
+        }
     }
 }
 /*********************************************************/
@@ -1176,6 +1190,10 @@ void Process::EditUserInfo()
         {
             EditUserInfo();
             break;
+        }
+        else
+        {
+            continue;
         }
     }
 }
@@ -1210,6 +1228,10 @@ void Process::RemoveUser()
             RemoveUser();
             break;
         }
+        else
+        {
+            continue;
+        }
     }
 }
 /*********************************************************/
@@ -1240,6 +1262,10 @@ void Process::SortUser()
             SortUser();
             break;
         }
+        else
+        {
+            continue;
+        }
     }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -1251,16 +1277,28 @@ void Process::ManageUserPayment()
     H::cls();
     H::setcursor(0, 0);
     outline();
-}
-/*********************************************************/
-// void Process::SubManageUserPayment(int num)
-// {
-//     H::setcolor(7);
-//     H::cls();
-//     H::setcursor(0,0);
-//     outline();
+    char press = ' ';
 
-// }
+    B::AllInvoicesTxt();
+    B::AllInvoices_Design();
+    File::viewAllUserInvoice();
+
+    while(1)
+    {
+        message(2,0,38);
+        
+        press = getch();
+
+        if(press == 27)
+        {
+            break;
+        }
+        else
+        {
+            continue;
+        }
+    }
+}
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Process::FoodAndDrinkLst()
@@ -1460,6 +1498,10 @@ void Process::InsertFoodDrink()
             InsertFoodDrink();
             break;
         }
+        else
+        {
+            continue;
+        }
     }
 }
 /*********************************************************/
@@ -1482,14 +1524,13 @@ void Process::ViewFoodDrink()
 
         press = getch();
 
-        // if (press == 27)
-        // {
-        //     break;
-        // }
         if (press == 27)
         {
-            // ViewFoodDrink();
             break;
+        }
+        else
+        {
+            continue;
         }
     }
 }
@@ -1524,6 +1565,10 @@ void Process::SearchFoodDrink()
             SearchFoodDrink();
             break;
         }
+        else
+        {
+            continue;
+        }
     }
 }
 /*********************************************************/
@@ -1556,6 +1601,10 @@ void Process::UpdateFoodDrink()
         {
             UpdateFoodDrink();
             break;
+        }
+        else
+        {
+            continue;
         }
     }
 }
@@ -1590,143 +1639,11 @@ void Process::RemoveFoodDrink()
             RemoveFoodDrink();
             break;
         }
-    }
-}
-
-void Process::ViewProfileInfo()
-{
-    H::setConsoleTitle(TEXT("My Information"));
-    H::setcolor(7);
-    H::cls();
-    H::setcursor(0, 0);
-    outline();
-
-    char press = ' ';
-
-    while (1)
-    {
-        // message(1,0,11);
-
-        press = getch();
-
-        if (press == 27)
+        else
         {
-            break;
-        }
-        else if (press == 13)
-        {
-            break;
+            continue;
         }
     }
-}
-/*********************************************************/
-void Process::BuyHourToPlay()
-{
-    H::setConsoleTitle(TEXT("Buy More Hour to Play"));
-    H::setcolor(7);
-    H::cls();
-    H::setcursor(0, 0);
-    outline();
-
-    char press = ' ';
-    B::buyHourTxt();
-    B::buyHour_Design();
-    H::setcursor(1, 0);
-
-    H::setcursor(0, 0);
-
-    while (1)
-    {
-
-        message(3, 0, 36);
-
-        press = getch();
-
-        if (press == 27)
-        {
-            break;
-        }
-        else if (press == 13)
-        {
-            BuyFoodDrink();
-            break;
-        }
-    }
-}
-/*********************************************************/
-void Process::BuyFoodDrink()
-{
-    H::setConsoleTitle(TEXT("Buy Food and Drink"));
-    H::setcolor(7);
-    H::cls();
-    H::setcursor(0, 0);
-    outline();
-
-    char press = ' ';
-
-    while (1)
-    {
-
-        B::BuyFoodnDrinkTxt();
-        B::buyFoodnDrink_Design();
-
-        H::setcolor(185);
-        H::gotoxy(x + 28, y + 6);
-        cout << "Press ";
-        H::setcolor(188);
-        cout << "[N/y]";
-        H::setcolor(185);
-        cout << " is you procceed to buy or ";
-        H::setcolor(188);
-        cout << "[Y/n]";
-        H::setcolor(185);
-        cout << " is you want to view Food and Drink list";
-
-        press = getch();
-
-        if (press == 121 || press == 89) // Y y
-        {
-            H::setcolor(7);
-            H::cls();
-            B::ViewTxt();
-            B::View_Design();
-            File::viewFile(1);
-
-            H::setcolor(3);
-            H::gotoxy(x + 57, y + 33);
-            cout << "Press ";
-            H::setcolor(4);
-            cout << "[any]";
-            H::setcolor(3);
-            cout << " key to go back";
-
-            getch();
-            H::cls();
-        }
-        else if (press == 78 || press == 110) // N n
-        {
-
-            // File::buyFood();
-
-            message(3, 0, 36);
-
-            press = getch();
-
-            if (press == 27)
-            {
-                break;
-            }
-            else if (press == 13)
-            {
-                BuyFoodDrink();
-                break;
-            }
-        }
-    }
-}
-/*********************************************************/
-void Process::ViewInvoice()
-{
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 /*
