@@ -8,7 +8,6 @@ using namespace HinsyOOP;
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 class Design: public LENG
 {
-
     protected:
 
         static const int x;
@@ -66,6 +65,11 @@ void Design::outline()
     H::drawBoxSingleLine(2,0,156,38,3);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//1: with BG
+//2: ESC
+//3: without BG
+//4: File Corrupted
+//5: File no data
 void Design::message(int n, int width, int height)
 {
     
@@ -81,7 +85,7 @@ void Design::message(int n, int width, int height)
             if(color > 191) color = 176 ;
         }
     }
-    if ( n == 2)
+    else if ( n == 2)
     {
         int color = 1 ;
         while(!kbhit())
@@ -92,7 +96,7 @@ void Design::message(int n, int width, int height)
             if(color > 15) color = 1 ;
         }
     }
-    if ( n == 3)
+    else if ( n == 3)
     {
         int color = 1 ;
         while(!kbhit())
@@ -102,6 +106,40 @@ void Design::message(int n, int width, int height)
             cout<<"[ESC]";H::foreColor(1); cout<<" To Go Back";H::delay(999);
             color ++ ; 
             if(color > 15) color = 1 ;
+        }
+    }
+    else if( n == 4)
+    {
+        int color = 1 ;
+        H::HLine(30,15+height,100,7,196);
+        H::HLine(30,19+height,100,7,196);
+        while(!kbhit())
+        {
+            for(int i = 1 ; i <= 20 ; i ++)
+            {
+                H::setcolor(color);H::gotoxy(50+i,17+height);cout << char(62);H::delay(20);
+                H::setcolor(color);H::gotoxy(110-i,17+height);cout << char(60);H::delay(20);
+                H::setcolor(color);H::gotoxy(70,17+height);cout << "   File Corrupted   ";
+            }
+            color++;
+            if(color > 15) color = 1;
+        }
+    }
+    else if( n == 5)
+    {
+        int color = 1 ;
+        H::HLine(30,15+height,100,7,196);
+        H::HLine(30,19+height,100,7,196);
+        while(!kbhit())
+        {
+            for(int i = 1 ; i <= 20 ; i ++)
+            {
+                H::setcolor(color);H::gotoxy(50+i,17+height);cout << char(62);H::delay(20);
+                H::setcolor(color);H::gotoxy(110-i,17+height);cout << char(60);H::delay(20);
+                H::setcolor(color);H::gotoxy(69,17+height);cout << "   File Has No Data   ";
+            }
+            color++;
+            if(color > 15) color = 1;
         }
     }
 }

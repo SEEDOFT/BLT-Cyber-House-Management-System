@@ -272,7 +272,8 @@ void File::insertToVector(int n, string &currentFile)
             H::setcolor(135);
             H::gotoxy(65, 21);
             H::inputAll(username, sizeof(username));
-        } while (checkUsername(username) || checkUsernameInVector(username));
+        } 
+        while (checkUsername(username) || checkUsernameInVector(username));
 
         mup.setGuestname(guestName);
         mup.setUsername(username);
@@ -338,13 +339,13 @@ void File::viewFile(int n)
     file.open(currentFile, ios::in | ios::binary);
     if (!file.is_open())
     {
-        cout << "File Curropted" << endl;
+        Design::message(4,0,3);
     }
     else
     {
         if (check_file(currentFile))
         {
-            cout << "File has no data" << endl;
+            Design::message(5,0,0);
         }
         else
         {
@@ -393,13 +394,13 @@ void File::searchFile(int n)
     file.open(currentFile, ios::in | ios::binary);
     if (!file.is_open())
     {
-        cout << "File Corrupted" << endl;
+        Design::message(4,0,3);
     }
     else
     {
         if (check_file(currentFile))
         {
-            cout << "File has no data" << endl;
+            Design::message(5,0,3);
         }
         else
         {
@@ -485,13 +486,13 @@ void File::updateFile(int n)
 
     if (!file.is_open())
     {
-        cout << "File Curropted" << endl;
+        Design::message(4,0,3);
     }
     else
     {
         if (check_file(currentFile))
         {
-            cout << "File has no data" << endl;
+            Design::message(5,0,3);
         }
         else
         {
@@ -596,11 +597,11 @@ void File::deleteFile(int n)
     file.open(currentFile, ios::in | ios::binary);
     if (!file.is_open())
     {
-        cout << "File Corrupted" << endl;
+        Design::message(4,0,3);
     }
     else if (check_file(currentFile))
     {
-        cout << "File has no data" << endl;
+        Design::message(5,0,3);
         file.close();
     }
     else
@@ -688,7 +689,7 @@ void File::deleteFile(int n)
         file.open(currentFile, ios::out | ios::binary | ios::trunc);
         if (!file.is_open())
         {
-            cout << "File Curropted" << endl;
+            Design::message(4,0,3);
         }
         else
         {
@@ -777,7 +778,7 @@ void File::loginTimeToFile(const char *username, const char *password)
     file.open(UserInfoFile, ios::in | ios::binary);
     if (!file.is_open())
     {
-        cout << "Unable to open file" << endl;
+        Design::message(4,0,3);
     }
     else
     {
@@ -801,7 +802,7 @@ void File::loginTimeToFile(const char *username, const char *password)
         file.open(UserInfoFile, ios::out | ios::binary | ios::trunc);
         if (!file.is_open())
         {
-            cout << "Unable to open file" << endl;
+            Design::message(4,0,3);
         }
         else
         {
@@ -827,7 +828,7 @@ void File::logoutTimeToFile(const char *username, const char *password)
     file.open(UserInfoFile, ios::in | ios::binary);
     if (!file.is_open())
     {
-        cout << "Unable to open file" << endl;
+        Design::message(4,0,3);
     }
     else
     {
@@ -851,7 +852,7 @@ void File::logoutTimeToFile(const char *username, const char *password)
         file.open(UserInfoFile, ios::out | ios::binary | ios::trunc);
         if (!file.is_open())
         {
-            cout << "Unable to open file" << endl;
+            Design::message(4,0,3);
         }
         else
         {
@@ -1126,7 +1127,6 @@ void File::userSubMenu(const char *username, const char *password)
                 invoice(username, password);
                 break;
             case 5:
-                // Process:: Admin_And_User();
                 user_login();
                 break;
         }
@@ -1144,7 +1144,6 @@ void File::buyMoreTime(const char *username, const char *password)
     H::cls();
     H::setcursor(0,0);
     B::buyHourTxt();
-    B::buyHour_Design();
 
     char hours[5];
     char creditCard[17];
@@ -1156,8 +1155,8 @@ void File::buyMoreTime(const char *username, const char *password)
 
     if (file.is_open() && tempFile.is_open())
     {
+        B::buyHour_Design();
         H::setcursor(1,0);
-        
         H::setcolor(1);H::gotoxy(110,16);
         H::inputNumber(hours, sizeof(hours));//Purdhase hour
 
@@ -1184,7 +1183,7 @@ void File::buyMoreTime(const char *username, const char *password)
     }
     else
     {
-        cout << "File Corrupted" << endl;
+        Design::message(4,0,3);
     }
 
     file.close();
@@ -1204,7 +1203,7 @@ void File::invoice(const char *username, const char *password)
 
     if (!file.is_open())
     {
-        cout << "File Corrupted" << endl;
+        Design::message(4,0,3);
     }
     else
     {
@@ -1235,7 +1234,7 @@ void File::calculateTime(const char *username, const char *password)
 
     if (!file.is_open() || !tempFile.is_open())
     {
-        cout << "File Corrupted" << endl;
+        Design::message(4,0,3);
     }
     else
     {
@@ -1297,33 +1296,29 @@ void File::buyFood(const char *username, const char *password)
     H::setcursor(0, 0);
     Design::outline();
 
-    // char press = ' ';
     char foodID[5];
     char quantity[13];
     bool isfound = false;
-
-    B::ViewTxt();
-    B::View_Design();
-    viewFile(1);
 
     file.open(UserInfoFile, ios::in | ios::binary);
     fstream tempFile(Backup, ios::out | ios::binary);
 
     if (!file.is_open() || !tempFile.is_open())
     {
-        cout << "File Corrupted" << endl;
+        Design::message(4,0,3);
     }
     else
     {
-        H::setcolor(3);
-        H::gotoxy(10 + 58, 5 + 33);
-        cout << "Press ";
-        H::setcolor(4);
-        cout << "[any]";
-        H::setcolor(3);
-        cout << " key to continue";
+        B::ViewTxt();
+        B::View_Design();
+        viewFile(1);
+
+        H::setcolor(3); H::gotoxy(10 + 58, 5 + 33); cout << "Press ";
+        H::setcolor(4); cout << "[any]";
+        H::setcolor(3); cout << " key to continue";
 
         getch();
+
         H::setcolor(7);
         H::cls();
         Design::outline();
