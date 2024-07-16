@@ -544,15 +544,15 @@ void File::updateFile(int n)
 
                         H::foreColor(4);
                         H::gotoxy(20, 36);
-                        cout << "\t\t" << mup.getID();
-                        cout << "\t\t";
-                        H::inputLetter(guestName, sizeof(guestName));
 
+                        cout << "\t\t" << mup.getID();
+                        cout << "\t\t"; H::inputLetter(guestName, sizeof(guestName));
                         do
                         {
                             cout << "\t\t\t";
                             H::inputAll(username, sizeof(username));
-                        } while (checkUsername(username));
+                        } 
+                        while (checkUsername(username));
 
                         mup.setGuestname(guestName);
                         mup.setUsername(username);
@@ -564,7 +564,6 @@ void File::updateFile(int n)
                     }
                 }
             }
-
             if (isfound == false)
             {
                 H::setcolor(4);
@@ -1305,7 +1304,7 @@ void File::buyFood(const char *username, const char *password)
 
     char foodID[5];
     char quantity[13];
-    bool isfound = false;
+    bool isfound = false; 
 
     file.open(UserInfoFile, ios::in | ios::binary);
     fstream tempFile(Backup, ios::out | ios::binary);

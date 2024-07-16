@@ -11,9 +11,11 @@ int main()
     H::setcursor(0, 0);
     Process::DisableMaximizeButton();
     
-    Process::Admin_And_User();
+    // Process::Admin_And_User();
+    // getch();
+    // Process::LoadingAnimation();
 
-    // Process::message(4,0,0);
+    Process::outline();
 
-    return 0;
+    getch();return 0;
 }

@@ -104,16 +104,9 @@ double MgUserPayment::getFndTotal() const
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void MgUserPayment::update()
 {
-    char times[6];
-
     cout << "\t\t        ";
     H::inputAll(password, sizeof(password));
-
-    cout << "\t\t    ";
-    H::inputNumber(times, sizeof(times));
-
-    time = atoi(times) * 60;
-    remainTime = time;
+    cout << "\t\t    "<< time / 60 ;
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void MgUserPayment::setnTime(double time)
@@ -257,7 +250,7 @@ void MgUserPayment::output(int y)
 {
     H::foreColor(7);
     H::gotoxy(20, 14 + y);
-    cout << left << setw(12) << muId << setw(16) << guestName << setw(24) << username << setw(20) << password << setw(15) << fixed << setprecision(0) << time / 60 << setw(21) << remainTime / 60 << totalIncome() << " KHR";
+    cout << left << setw(12) << muId << setw(16) << guestName << setw(24) << username << setw(20) << password << setw(15) << fixed << setprecision(0) << time / 60 << setw(21) << remainTime / 60 << totalPrice() << " KHR";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void MgUserPayment::viewAll(int y)
