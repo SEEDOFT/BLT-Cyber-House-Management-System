@@ -156,11 +156,15 @@ void Process::Admin_And_User()
     H::setcolor(7);
 
     char press;
-    int num = 1;
+    int num;
     H::setcursor(0, 0);
 
     while (1)
     {
+        // outer:
+        H::cls();
+        num = 1;
+        press = ' ';
         outline();
         Login_Design(); // Design of LOG IN
 
@@ -200,31 +204,31 @@ void Process::Admin_And_User()
 
             switch (press)
             {
-                case 72: // up
+            case 72: // up
+            {
+                num--;
+                if (num < 1)
                 {
-                    num--;
-                    if (num < 1)
-                    {
-                        num = 2;
-                    }
-                    break;
+                    num = 2;
                 }
+                break;
+            }
 
-                case 80: // down
+            case 80: // down
+            {
+                num++;
+                if (num > 2)
                 {
-                    num++;
-                    if (num > 2)
-                    {
-                        num = 1;
-                    }
-                    break;
+                    num = 1;
                 }
+                break;
+            }
 
-                case 8: // delete key
-                {
-                    exit(0);
-                    break;
-                }
+            case 8: // delete key
+            {
+                exit(0);
+                break;
+            }
             }
 
         } while (press != 13);
@@ -233,15 +237,15 @@ void Process::Admin_And_User()
 
         switch (num)
         {
-            case 1:
-                Admin_User_ClsBox(1);
-                LogIn_AsAdmin(1);
-                break;
+        case 1:
+            Admin_User_ClsBox(1);
+            LogIn_AsAdmin(1);
+            break;
 
-            case 2:
-                Admin_User_ClsBox(2);
-                File::user_login();
-                break;
+        case 2:
+            Admin_User_ClsBox(2);
+            File::user_login();
+            break;
         }
     }
 }
@@ -1087,7 +1091,7 @@ void Process::InsertUser()
             InsertUser();
             break;
         }
-        else 
+        else
         {
             continue;
         }
@@ -1283,13 +1287,13 @@ void Process::ManageUserPayment()
     B::AllInvoices_Design();
     File::viewAllUserInvoice();
 
-    while(1)
+    while (1)
     {
-        message(2,0,38);
-        
+        message(2, 0, 38);
+
         press = getch();
 
-        if(press == 27)
+        if (press == 27)
         {
             break;
         }

@@ -20,7 +20,8 @@ private:
     char fndPrice[5] = "\0";
     char fndQty[5] = "\0";
     double totalFnD = 0;
-    double totalIncome();
+
+    double allTotal = 0;
 
 public:
     void setFnd(const char *foodnDrink, const char *price, const char *quantity);
@@ -63,6 +64,10 @@ public:
     void setID(int id);
     void setGuestname(const char *name);
     void setUsername(const char *name);
+
+    double totalIncome();
+
+    void setAllTotal(double allTotal);
 };
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 double MgUserPayment::loginHour = 0;
@@ -243,6 +248,11 @@ double MgUserPayment::totalIncome()
     return totalPrice() + (getFndTotal() * 4000);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void MgUserPayment::setAllTotal(double allTotal)
+{
+    this->allTotal = allTotal;
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void MgUserPayment::output(int y)
 {
     H::foreColor(7);
@@ -252,18 +262,30 @@ void MgUserPayment::output(int y)
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void MgUserPayment::viewAll(int y)
 {
-    H::gotoxy(21,14+y); H::foreColor(7); cout << left << setw(10) << muId << setw(20) << guestName << setw(25) << buyedFoodnDrink << setw(20) << getQty() << setw(20) << time / 60 << totalIncome() << " KHR";
+    H::gotoxy(21, 14 + y);
+    H::foreColor(7);
+    cout << left << setw(10) << muId << setw(20) << guestName
+         << setw(25) << buyedFoodnDrink << setw(20) << getQty() << setw(20) << time / 60 << totalIncome() << " KHR";
     // cout << left << setw(10) << muId << setw(15) << guestName << setw(15) << username << setw(25) << password << setw(8) << fixed << setprecision(0) << time << setw(25) << remainTime << setw(15) << buyedFoodnDrink << setw(20) << fdQty << totalPrice();
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void MgUserPayment::userProfile()
 {
-    H::setcolor(236);H::gotoxy(77,14);cout << guestName ;
-    H::setcolor(236);H::gotoxy(77,15);cout << username ;
-    H::setcolor(236);H::gotoxy(77,16);cout << password ;
+    H::setcolor(236);
+    H::gotoxy(77, 14);
+    cout << guestName;
+    H::setcolor(236);
+    H::gotoxy(77, 15);
+    cout << username;
+    H::setcolor(236);
+    H::gotoxy(77, 16);
+    cout << password;
 
-    H::setcolor(236);H::gotoxy(77,20);//date
-    H::setcolor(236);H::gotoxy(71,32);cout << "BLT" << muId ;
+    H::setcolor(236);
+    H::gotoxy(77, 20); // date
+    H::setcolor(236);
+    H::gotoxy(71, 32);
+    cout << "BLT" << muId;
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void MgUserPayment::income()
