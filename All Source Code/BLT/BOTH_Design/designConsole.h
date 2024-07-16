@@ -20,7 +20,7 @@ class Design: public LENG
         static void charLoop(int characters, int xAxis, int yAxis, int color, const char* text, int DelayTime);
         static void loginMsg(int opt);
         static void message(int n, int width, int height);
-
+        static void LoadingAnimation();
         static void interface_design();
 
         static void Admin_User_ClsBox(int num);
@@ -63,6 +63,72 @@ const int Design::y = 5;
 void Design::outline()
 {
     H::drawBoxSingleLine(2,0,156,38,3);
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void Design::LoadingAnimation()
+{
+    H::setcursor(0,0);
+    H::cls();
+
+    for(int i = 0 ; i < 100 ; i ++)
+    {
+        //left and right
+        H::HLine(30,22,i,3,220);
+        H::HLine(130-i,21,1,3,220);
+
+        H::HLine(30,20,i,3,220);
+        H::HLine(130-i,19,1,3,220);
+
+        //up and down
+        if( i == 98 )
+        {
+            for(int i = 0 ; i < 26 ; i ++)
+            {
+                H::VLine(76,6,i+1,3,219);
+                H::VLine(78,31-i,1,3,219);
+
+                H::VLine(80,6,i+1,3,219);
+                H::VLine(82,31-i,1,3,219);
+
+            }
+        }
+    }
+
+    for(int i = 1 ; i <= 51 ; i ++)
+    {
+        H::gotoxy(131-i,22);cout<<" ";
+        H::gotoxy(29+i,22);cout<<" ";
+
+        H::gotoxy(131-i,21);cout<<" ";
+        H::gotoxy(29+i,21);cout<<" ";
+        
+        H::gotoxy(131-i,20);cout<<" ";
+        H::gotoxy(29+i,20);cout<<" ";
+        
+        H::gotoxy(131-i,19);cout<<" ";
+        H::gotoxy(29+i,19);cout<<" ";
+
+        H::delay(1);
+
+        if(i == 50)
+        {
+            for(int i = 1 ; i <= 12 ; i ++)
+            {
+                H::gotoxy(75,6+i);cout<<" ";
+                H::gotoxy(75,33-i);cout<<" ";
+
+                H::gotoxy(77,6+i);cout<<" ";
+                H::gotoxy(77,33-i);cout<<" ";
+
+                H::gotoxy(79,6+i);cout<<" ";
+                H::gotoxy(79,33-i);cout<<" ";
+
+                H::gotoxy(81,6+i);cout<<" ";
+                H::gotoxy(81,33-i);cout<<" ";
+                H::delay(5);
+            }
+        }
+    }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //1: with BG
