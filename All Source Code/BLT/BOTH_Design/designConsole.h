@@ -63,15 +63,6 @@ const int Design::y = 5;
 void Design::outline()
 {
     H::drawBoxSingleLine(2,0,156,38,3);
-    H::gotoxy(1,18);H::setcolor(1); cout << "B";
-    H::gotoxy(1,19);H::setcolor(1); cout << "L";
-    H::gotoxy(1,20);H::setcolor(1); cout << "T";
-    H::gotoxy(77,0);H::setcolor(1); cout << "B L T";
-
-    H::gotoxy(158,18);H::setcolor(1); cout << "B";
-    H::gotoxy(158,19);H::setcolor(1); cout << "L";
-    H::gotoxy(158,20);H::setcolor(1); cout << "T";
-    H::gotoxy(77,39);H::setcolor(1); cout << "B L T";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Design::LoadingAnimation()
@@ -98,9 +89,11 @@ void Design::LoadingAnimation()
 
                 H::VLine(80,6,i+1,3,219);
                 H::VLine(82,31-i,1,3,219);
+
             }
         }
     }
+
     for(int i = 1 ; i <= 51 ; i ++)
     {
         H::gotoxy(131-i,22);cout<<" ";
@@ -223,30 +216,28 @@ void Design::Admin_User_ClsBox(int num)
     {
         for(int i = 0 ; i < 15 ; i ++)
         {
-            tp(238,x+81+i,y+15);cout<<" ";
-            tp(238,x+81+i,y+16);cout<<" ";
-            tp(238,x+81+i,y+17);cout<<" ";
+            tp(238,x+81+i,y+15);cout<<" ";H::delay(1);//cls left to right
+            tp(238,x+81+i,y+16);cout<<" ";H::delay(1);//cls left to right
+            tp(238,x+81+i,y+17);cout<<" ";H::delay(1);//cls left to right
 
 
-            tp(238,x+109-i,y+15);cout<<" ";
-            tp(238,x+109-i,y+16);cout<<" ";
-            tp(238,x+109-i,y+17);cout<<" ";
-            H::delay(10);
+            tp(238,x+109-i,y+15);cout<<" ";H::delay(1);//right to left
+            tp(238,x+109-i,y+16);cout<<" ";H::delay(1);//right to left
+            tp(238,x+109-i,y+17);cout<<" ";H::delay(1);//right to left
         }
     }
     if(num == 2)
     {
         for(int i = 0 ; i < 15 ; i ++)
         {
-            tp(238,x+81+i,y+19);cout<<" ";
-            tp(238,x+81+i,y+20);cout<<" ";
-            tp(238,x+81+i,y+21);cout<<" ";
+            tp(238,x+81+i,y+19);cout<<" ";H::delay(1);//cls left to right
+            tp(238,x+81+i,y+20);cout<<" ";H::delay(1);//cls left to right
+            tp(238,x+81+i,y+21);cout<<" ";H::delay(1);//cls left to right
 
 
-            tp(238,x+109-i,y+19);cout<<" ";
-            tp(238,x+109-i,y+20);cout<<" ";
-            tp(238,x+109-i,y+21);cout<<" ";
-            H::delay(10);
+            tp(238,x+109-i,y+19);cout<<" ";H::delay(1);//right to left
+            tp(238,x+109-i,y+20);cout<<" ";H::delay(1);//right to left
+            tp(238,x+109-i,y+21);cout<<" ";H::delay(1);//right to left
         }
     }
 }

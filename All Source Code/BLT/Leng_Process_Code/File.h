@@ -481,7 +481,7 @@ void File::updateFile(int n)
 
     setCurrentFile(n);
 
-    file.open(currentFile, ios::out | ios::in | ios::binary);
+    file.open(currentFile, ios::in | ios::binary);
 
     if (!file.is_open())
     {
@@ -495,75 +495,99 @@ void File::updateFile(int n)
         }
         else
         {
+            file.close();
             isfound = false;
 
-            H::foreColor(1);
-            H::gotoxy(86, 17);
-            H::inputNumber(updateID, sizeof(updateID));
-            file.clear();            // Clear any potential eof or fail flags
-            file.seekg(0, ios::beg); // Reset file pointer to beginning
+            file.open(currentFile, ios::in | ios::binary);
+
+            fndVector.clear();
+            gameVector.clear();
+            mupVector.clear();
 
             if (n == 1)
             {
                 while (file.read((char *)&fnd, sizeof(FoodnDrink)))
                 {
-                    if (atoi(updateID) == fnd.getFndID())
-                    {
-                        fnd.output(8);
-                        H::gotoxy(35, 36);
-                        H::foreColor(4);
-                        cout << fnd.getFndID();
-                        fnd.update();
-                        file.seekp((int)file.tellg() - sizeof(FoodnDrink));
-                        file.write((char *)&fnd, sizeof(FoodnDrink));
-                        isfound = true;
-                    }
+                    fndVector.push_back(fnd);
                 }
             }
             else if (n == 2)
             {
                 while (file.read((char *)&game, sizeof(Game)))
                 {
-                    if (atoi(updateID) == game.getID())
-                    {
-                        cout << "ID : " << game.getID() << endl;
-                        game.input();
-                        file.seekp((int)file.tellg() - sizeof(Game));
-                        file.write((char *)&game, sizeof(Game));
-                        isfound = true;
-                    }
+                    gameVector.push_back(game);
                 }
             }
             else if (n == 3)
             {
                 while (file.read((char *)&mup, sizeof(MgUserPayment)))
                 {
-                    if (atoi(updateID) == mup.getID())
-                    {
-                        mup.output(8);
+                    mupVector.push_back(mup);
+                }
+            }
+            file.close();
 
+            H::foreColor(1);
+            H::gotoxy(86, 17);
+            H::inputNumber(updateID, sizeof(updateID));
+
+            if (n == 1)
+            {
+                for (auto &item : fndVector)
+                {
+                    if (atoi(updateID) == item.getFndID())
+                    {
+                        item.output(8);
+                        H::gotoxy(35, 36);
+                        H::foreColor(4);
+                        cout << item.getFndID();
+                        item.update();
+                        isfound = true;
+                        break;
+                    }
+                }
+            }
+            else if (n == 2)
+            {
+                for (auto &item : gameVector)
+                {
+                    if (atoi(updateID) == item.getID())
+                    {
+                        cout << "ID : " << item.getID() << endl;
+                        item.input();
+                        isfound = true;
+                        break;
+                    }
+                }
+            }
+            else if (n == 3)
+            {
+                for (auto &item : mupVector)
+                {
+                    if (atoi(updateID) == item.getID())
+                    {
+                        item.output(8);
                         H::foreColor(4);
                         H::gotoxy(20, 36);
+                        cout << "\t\t" << item.getID();
+                        cout << "\t\t";
+                        H::inputLetter(guestName, sizeof(guestName));
 
-                        cout << "\t\t" << mup.getID();
-                        cout << "\t\t"; H::inputLetter(guestName, sizeof(guestName));
                         do
                         {
                             cout << "\t\t\t";
                             H::inputAll(username, sizeof(username));
-                        } 
-                        while (checkUsername(username));
+                        } while (checkUsername(username));
 
-                        mup.setGuestname(guestName);
-                        mup.setUsername(username);
-                        mup.update();
-
-                        file.seekp((int)file.tellg() - sizeof(MgUserPayment));
-                        file.write((char *)&mup, sizeof(MgUserPayment));
+                        item.setGuestname(guestName);
+                        item.setUsername(username);
+                        item.update();
                         isfound = true;
+                        break;
                     }
                 }
             }
+
             if (isfound == false)
             {
                 H::setcolor(4);
@@ -576,6 +600,29 @@ void File::updateFile(int n)
                 H::gotoxy(68, 37);
                 cout << "...Update Successfully...";
             }
+            file.open(currentFile, ios::out | ios::binary);
+            if (n == 1)
+            {
+                for (const auto &item : fndVector)
+                {
+                    file.write((char *)&item, sizeof(item));
+                }
+            }
+            else if (n == 2)
+            {
+                for (const auto &item : gameVector)
+                {
+                    file.write((char *)&item, sizeof(item));
+                }
+            }
+            else if (n == 3)
+            {
+                for (const auto &item : mupVector)
+                {
+                    file.write((char *)&item, sizeof(item));
+                }
+            }
+
             file.close();
         }
     }
@@ -1304,7 +1351,7 @@ void File::buyFood(const char *username, const char *password)
 
     char foodID[5];
     char quantity[13];
-    bool isfound = false; 
+    bool isfound = false;
 
     file.open(UserInfoFile, ios::in | ios::binary);
     fstream tempFile(Backup, ios::out | ios::binary);
