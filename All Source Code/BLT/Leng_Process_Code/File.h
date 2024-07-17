@@ -1314,7 +1314,7 @@ void File::invoice(const char *username, const char *password)
                 cout << "Buyed Snack " << setw(25) << mup.getFoodnDrink() << "Price " << setw(8)
                      << mup.getPrice() << "Quantity " << setw(5) << mup.getQty() << "Total Price " << mup.getFndTotal() << endl;
 
-                    Design::message(3,0,38);
+                    Design::message(2,0,38);
             }
         }
     }
