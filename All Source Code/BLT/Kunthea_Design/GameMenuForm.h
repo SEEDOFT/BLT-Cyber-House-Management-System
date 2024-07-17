@@ -47,13 +47,15 @@ void BLT::GameMenu::GameMenu_Design()
 
     H::drawBoxDoubleLineWithBG(105,18,18,1,23);
     H::drawBoxDoubleLineWithBG(105,23,18,1,23);
+    H::drawBoxDoubleLineWithBG(105,28,18,1,23);
 
     H::foreColor(23); H::gotoxy(42,19); cout<<"ADD GAME";
     H::foreColor(23); H::gotoxy(42,24); cout<<"VIEW GAME";
     H::foreColor(23); H::gotoxy(40,29); cout<<"SEARCH GAME";
     
-    H::foreColor(23); H::gotoxy(108,19); cout<<"REMOVE GAME";
-    H::foreColor(23); H::gotoxy(112,24); cout<<"BACK";
+    H::foreColor(23); H::gotoxy(108,19); cout<<"UPDATE GAME";
+    H::foreColor(23); H::gotoxy(108,24); cout<<"REMOVE GAME";
+    H::foreColor(23); H::gotoxy(112,29); cout<<"BACK";
 
     H::foreColor(135); H::gotoxy(53,36); cout<<"Press";H::setcolor(137);cout<<" [UP] [DOWN]";H::setcolor(135);cout<<" arrow key to move, ";H::setcolor(137);cout<<"[ENTER]";H::setcolor(135);cout<<" to select";
        

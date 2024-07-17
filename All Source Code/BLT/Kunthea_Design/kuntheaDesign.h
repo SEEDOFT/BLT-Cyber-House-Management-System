@@ -19,6 +19,7 @@ namespace BLT
     public:
         static void DeleteTxt();
         static void Delete_Design();
+        static void Delete_Animation();
     };
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     class Invoice{
@@ -36,6 +37,7 @@ namespace BLT
     class SearchDesign{
     public:
         static void Search_Design();
+        static void Search_Animation();
         static void SearchTxt();
     };
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -43,12 +45,14 @@ namespace BLT
     public:
         static void SearchGame_Design();
         static void SearchGameTxt();
+        static void SearchGame_Animation();
     };
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     class UpdateDesign{
     public:
         static void UpdateTxt();
         static void Update_Design();
+        static void Update_Animation();
     };
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     class GameMenu{
@@ -63,6 +67,7 @@ namespace BLT
     public:
         static void UpdateGameTxt();
         static void UpdateGame_Design();
+        static void UpdateGame_Animation(); 
     };
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     class ViewDesign{
@@ -87,6 +92,7 @@ namespace BLT
     public:
         static void DeleteGame_Design();
         static void DeleteGameTxt();
+        static void DeleteGame_Animation();
     };
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     class FoodMenu{
@@ -118,12 +124,14 @@ namespace BLT
     public:
         static void DeleteUserInfoTxt();
         static void DeleteUserInfo_Design();
+        static void DeleteUserInfo_Animation();
     };
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     class UpdateUserInfo{
     public:
         static void UpdateUserInfoTxt();
         static void UpdateUserInfo_Design();
+        static void UpdateUserInfo_Animation();
     };  
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     class CalculateIncome{
@@ -166,6 +174,7 @@ namespace BLT
     public:
         static void SearchUserTxt();
         static void SearchUser_Design();
+        static void SearchUser_Animation();
     };
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

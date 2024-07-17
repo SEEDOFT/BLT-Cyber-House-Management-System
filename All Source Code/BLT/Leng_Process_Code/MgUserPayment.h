@@ -250,7 +250,7 @@ void MgUserPayment::setAllTotal(double allTotal)
 void MgUserPayment::output(int y)
 {
     H::foreColor(7);
-    H::gotoxy(20, 14 + y);
+    H::gotoxy(21, 14 + y);
     cout << left << setw(12) << muId << setw(16) << guestName << setw(24) << username << setw(20) << password
          << setw(15) << fixed << setprecision(0) << time / 60 << setw(21) << remainTime / 60 << totalPrice() << " KHR";
 }
@@ -266,21 +266,16 @@ void MgUserPayment::viewAll(int y)
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void MgUserPayment::userProfile()
 {
-    H::setcolor(236);
-    H::gotoxy(77, 14);
+    H::setcolor(236); H::gotoxy(77, 14);
     cout << guestName;
-    H::setcolor(236);
-    H::gotoxy(77, 15);
+    H::setcolor(236); H::gotoxy(77, 15);
     cout << username;
-    H::setcolor(236);
-    H::gotoxy(77, 16);
+    H::setcolor(236); H::gotoxy(77, 16);
     cout << password;
 
-    H::setcolor(236);
-    H::gotoxy(77, 20); // date
-    H::setcolor(236);
-    H::gotoxy(71, 32);
-    cout << "BLT" << muId;
+    // H::setcolor(236); H::gotoxy(77, 20); // date
+    H::setcolor(236); H::gotoxy(71, 32);
+    cout << "BLT " << muId;
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void MgUserPayment::income()

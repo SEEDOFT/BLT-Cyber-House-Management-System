@@ -34,6 +34,7 @@ public:
     static void InsertGame();
     static void ViewGame();
     static void SearchGame();
+    static void UpdateGame();
     static void RemoveGame();
 
     static void FoodAndDrinkLst();
@@ -154,14 +155,14 @@ void Process::OutputHostName(int x, int y, int color)
 void Process::Admin_And_User()
 {
     H::setcolor(7);
-
+    Design::LoadingAnimation();
     char press;
     int num;
     H::setcursor(0, 0);
 
     while (1)
     {
-        // outer:
+        H::setcolor(7);
         H::cls();
         num = 1;
         press = ' ';
@@ -280,6 +281,7 @@ void Process::LogIn_AsAdmin(int cursor)
 
             if (strcmp(AdminUsername, "Cyber") == 0 && strcmp(AdminPassword, "168") == 0)
             {
+                Design::loginMsg(3);
                 Admin_Option(); // Admin Option
                 break;
             }
@@ -345,6 +347,8 @@ void Process::Admin_Option()
 {
     H::setConsoleTitle(TEXT("Admin MENU"));
     H::setcursor(0, 0);
+    Design::LoadingAnimation();
+
     while (true)
     {
         H::setcolor(7);
@@ -356,7 +360,7 @@ void Process::Admin_Option()
         DesktopImg();
 
         char press;
-        int num = 1;
+        int num = 0;
         int choice = 0;
 
         do
@@ -452,31 +456,34 @@ void Process::Admin_ChoosingOpt(int num)
 {
     switch (num)
     {
-    case 1:
-        AdminProfileInfo();
-        break;
+        case 1:
+            Design::LoadingAnimation();
+            AdminProfileInfo();
+            break;
 
-    case 2:
-        GamesLst();
-        break;
+        case 2:
+            Design::LoadingAnimation();
+            GamesLst();
+            break;
 
-    case 3:
-        FoodAndDrinkLst();
-        break;
+        case 3:
+            Design::LoadingAnimation();
+            FoodAndDrinkLst();
+            break;
 
-    case 4:
-        ManageUserInfo();
-        break;
+        case 4:
+            Design::LoadingAnimation();
+            ManageUserInfo();
+            break;
 
-    case 5:
-        ManageUserPayment();
-        break;
+        case 5:
+            Design::LoadingAnimation();
+            ManageUserPayment();
+            break;
 
-    case 6:
-        H::setcolor(7);
-        H::cls();
-        Admin_And_User();
-        break;
+        case 6:
+            Admin_And_User();
+            break;
     }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -558,48 +565,18 @@ void Process::AdminProfileInfo()
 /******************************************************** */
 void Process::SubAdminProfileInfo(int num)
 {
-    char press;
     switch (num)
     {
-    case 1:
-        while (1)
-        {
+        case 1:
             AboutUs();
-
-            press = getch();
-
-            if (press == 27)
-            {
-                break;
-            }
-            else
-            {
-                continue;
-            }
-        }
-        break;
-    case 2:
-        while (1)
-        {
+            break;
+        case 2:
             A_LetterFromUs();
+            break;
 
-            press = getch();
-
-            if (press == 27)
-            {
-                break;
-            }
-            else
-            {
-                continue;
-            }
-        }
-        break;
-    case 3:
-        H::setcolor(7);
-        H::cls();
-        Admin_Option();
-        break;
+        case 3:
+            Admin_Option();
+            break;
     }
 }
 /******************************************************** */
@@ -679,16 +656,24 @@ void Process::GamesLst()
                 H::drawBoxDoubleLineWithBG(105, 18, 18, 1, 196);
                 H::foreColor(199);
                 H::gotoxy(108, 19);
-                cout << "REMOVE GAME";
+                cout << "UPDATE GAME";
                 x = 4;
             }
             if (y == 5)
             {
                 H::drawBoxDoubleLineWithBG(105, 23, 18, 1, 196);
                 H::foreColor(199);
-                H::gotoxy(112, 24);
-                cout << "BACK";
+                H::gotoxy(108, 24);
+                cout << "REMOVE GAME";
                 x = 5;
+            }
+            if (y == 6)
+            {
+                H::drawBoxDoubleLineWithBG(105, 28, 18, 1, 196);
+                H::foreColor(199);
+                H::gotoxy(112, 29);
+                cout << "BACK";
+                x = 6;
             }
             press = getch();
 
@@ -698,12 +683,12 @@ void Process::GamesLst()
                 y--;
                 if (y < 1)
                 {
-                    y = 5;
+                    y = 6;
                 }
                 break;
             case 80:
                 y++;
-                if (y > 5)
+                if (y > 6)
                 {
                     y = 1;
                 }
@@ -719,30 +704,40 @@ void Process::SubGameLst(int num)
 {
     switch (num)
     {
-    // input case
-    case 1:
-        InsertGame();
-        break;
+        // input case
+        case 1:
+            Design::LoadingAnimation();
+            InsertGame();
+            break;
 
-    // Display
-    case 2:
-        ViewGame();
-        break;
+        // Display
+        case 2:
+            Design::LoadingAnimation();
+            ViewGame();
+            break;
 
-    // Search
-    case 3:
-        SearchGame();
-        break;
+        // Search
+        case 3:
+            Design::LoadingAnimation();
+            SearchGame();
+            break;
 
-    // Remove
-    case 4:
-        RemoveGame();
-        break;
+        // Update
+        case 4:
+            Design::LoadingAnimation();
+            UpdateGame();
+            break;
 
-    // back
-    case 5:
-        Admin_Option();
-        break;
+        // Remove
+        case 5:
+            Design::LoadingAnimation();
+            RemoveGame();
+            break;
+
+            //back 
+        case 6:
+            Admin_Option();
+            break;
     }
 }
 /******************************************************** */
@@ -840,6 +835,42 @@ void Process::SearchGame()
         else if (press == 13)
         {
             SearchGame();
+            break;
+        }
+        else
+        {
+            continue;
+        }
+    }
+}
+/******************************************************** */
+void Process::UpdateGame()
+{
+    H::setConsoleTitle(TEXT("Update Game Data"));
+    H::setcolor(7);
+    H::cls();
+    H::setcursor(0, 0);
+    outline();
+
+    char press = ' ';
+    B::UpdateGameTxt();
+    B::UpdateGame_Design();
+    H::setcursor(1, 0);
+    File::updateFile(2);
+    H::setcursor(0, 0);
+    while (1)
+    {
+        message(1, 0, 11);
+
+        press = getch();
+
+        if (press == 27)
+        {
+            break;
+        }
+        else if (press == 13)
+        {
+            UpdateGame();
             break;
         }
         else
@@ -1025,39 +1056,45 @@ void Process::SubManageUserInfo(int num)
 {
     switch (num)
     {
-    // input case
-    case 1:
-        InsertUser();
-        break;
+        // input case
+        case 1:
+            Design::LoadingAnimation();
+            InsertUser();
+            break;
 
-    // Display
-    case 2:
-        ViewUser();
-        break;
+        // Display
+        case 2:
+            Design::LoadingAnimation();
+            ViewUser();
+            break;
 
-    // Search
-    case 3:
-        SearchUserData();
-        break;
+        // Search
+        case 3:
+            Design::LoadingAnimation();
+            SearchUserData();
+            break;
 
-    // Edit
-    case 4:
-        EditUserInfo();
-        break;
+        // Edit
+        case 4:
+            Design::LoadingAnimation();
+            EditUserInfo();
+            break;
 
-    // Remove
-    case 5:
-        RemoveUser();
-        break;
+        // Remove
+        case 5:
+            Design::LoadingAnimation();
+            RemoveUser();
+            break;
 
-    // short
-    case 6:
-        SortUser();
-        break;
+        // short
+        case 6:
+            Design::LoadingAnimation();
+            SortUser();
+            break;
 
-    case 7:
-        Admin_Option();
-        break;
+        case 7:
+            Admin_Option();
+            break;
     }
 }
 /*********************************************************/
@@ -1442,33 +1479,38 @@ void Process::SubFoodAndDrink(int num)
     switch (num)
     {
     // input case
-    case 1:
-        InsertFoodDrink();
-        break;
+        case 1:
+            Design::LoadingAnimation();
+            InsertFoodDrink();
+            break;
 
-    // Display
-    case 2:
-        ViewFoodDrink();
-        break;
+        // Display
+        case 2:
+            Design::LoadingAnimation();
+            ViewFoodDrink();
+            break;
 
-    // Search
-    case 3:
-        SearchFoodDrink();
-        break;
+        // Search
+        case 3:
+            Design::LoadingAnimation();
+            SearchFoodDrink();
+            break;
 
-    // Update
-    case 4:
-        UpdateFoodDrink();
-        break;
-    // Remove
-    case 5:
-        RemoveFoodDrink();
-        break;
+        // Update
+        case 4:
+            Design::LoadingAnimation();
+            UpdateFoodDrink();
+            break;
+        // Remove
+        case 5:
+            Design::LoadingAnimation();
+            RemoveFoodDrink();
+            break;
 
-    // back
-    case 6:
-        Admin_Option();
-        break;
+        // back
+        case 6:
+            Admin_Option();
+            break;
     }
 }
 /*********************************************************/

@@ -12,17 +12,10 @@ void BLT::SearchDesign::SearchTxt()
     H::foreColor(4); H::gotoxy(21,5); cout<<R"(/_______  /\___  >____  /__|    \___  >___|  /  \___  / \____/ \____/\____ \_____\ \/_______  /__|  |__|___|  /__|_ \)";
     H::foreColor(4); H::gotoxy(21,6); cout<<R"(        \/     \/     \/            \/     \/       \/                    \/      \/        \/              \/     \/)";
     H::HLine(20,8,120,7,196);
-
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void BLT::SearchDesign::Search_Design()
+void BLT::SearchDesign::Search_Animation()
 {
-    H::drawBoxSingleLineWithBG(20,10,120,1,179);
-    H::VLine(70,12,3,7,221);
-    H::VLine(90,12,3,7,221);
-    H::drawBoxSingleLineWithBG(65,16,28,1,4);
-    H::foreColor(4); H::gotoxy(70,17); cout<<"Search By ID : ";
-    H::foreColor(7);
     //loading while searching
     for(int i=0; i<25; i++)
     {
@@ -44,6 +37,15 @@ void BLT::SearchDesign::Search_Design()
     H::drawBoxDoubleLine(20,19,120,1,3);
     H::drawBoxDoubleLine(20,33,120,1,3);
     H::gotoxy(35,20); H::foreColor(3); cout<<"|ID|\t\t\t|Name|\t\t\t\t|QTY|\t\t\t\t|Price|";
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void BLT::SearchDesign::Search_Design()
+{
+    H::drawBoxSingleLineWithBG(20,10,120,1,179);
+    H::VLine(70,12,3,7,221);
+    H::VLine(90,12,3,7,221);
+    H::drawBoxSingleLineWithBG(65,16,28,1,4);
+    H::foreColor(4); H::gotoxy(70,17); cout<<"Search By ID : ";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif

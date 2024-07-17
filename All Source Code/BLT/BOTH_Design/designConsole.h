@@ -62,12 +62,54 @@ const int Design::y = 5;
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Design::outline()
 {
-    H::drawBoxSingleLine(2,0,156,38,3);
+    //top
+    H::setcolor(3);H::gotoxy(3,0);  cout << "\21";
+    H::HLine(4,0,72,3,196);
+    H::setcolor(3);H::gotoxy(76,0);  cout << "\20";
+    H::setcolor(3);H::gotoxy(83,0);  cout << "\21";
+    H::HLine(84,0,72,3,196);
+    H::setcolor(3);H::gotoxy(156,0);  cout << "\20";
+    H::setcolor(3);H::gotoxy(77,0); cout << "B L T";
+    //bot
+    H::setcolor(3);H::gotoxy(3,39);  cout << "\21";
+    H::HLine(4,39,72,3,196);
+    H::setcolor(3);H::gotoxy(76,39);  cout << "\20";
+    H::setcolor(3);H::gotoxy(83,39);  cout << "\21";
+    H::HLine(84,39,72,3,196);
+    H::setcolor(3);H::gotoxy(156,39);  cout << "\20";
+    H::setcolor(3);H::gotoxy(78,39); cout << "B L T";
+
+    // //left
+    H::setcolor(3);H::gotoxy(1,1); cout << "\36";
+    H::VLine(2,1,16,3,179);
+    H::setcolor(3);H::gotoxy(1,17); cout << "\37";
+
+    H::gotoxy(1,18);H::setcolor(3); cout <<"B";
+    H::gotoxy(1,19);H::setcolor(3); cout <<"L";
+    H::gotoxy(1,20);H::setcolor(3); cout <<"T";
+
+    H::setcolor(3);H::gotoxy(1,21); cout << "\36";
+    H::VLine(2,21,16,3,179);
+    H::setcolor(3);H::gotoxy(1,38); cout << "\37";
+
+    // //right
+    H::setcolor(3);H::gotoxy(158,1); cout << "\36";
+    H::VLine(159,1,16,3,179);
+    H::setcolor(3);H::gotoxy(158,17); cout << "\37";
+
+    H::gotoxy(158,18);H::setcolor(3); cout <<"B";
+    H::gotoxy(158,19);H::setcolor(3); cout <<"L";
+    H::gotoxy(158,20);H::setcolor(3); cout <<"T";
+
+    H::setcolor(3);H::gotoxy(158,21); cout << "\36";
+    H::VLine(159,21,16,3,179);
+    H::setcolor(3);H::gotoxy(158,38); cout << "\37";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Design::LoadingAnimation()
 {
     H::setcursor(0,0);
+    H::setcolor(7);
     H::cls();
 
     for(int i = 0 ; i < 100 ; i ++)
@@ -78,9 +120,8 @@ void Design::LoadingAnimation()
 
         H::HLine(30,20,i,3,220);
         H::HLine(130-i,19,1,3,220);
-
         //up and down
-        if( i == 98 )
+        if( i == 99 )
         {
             for(int i = 0 ; i < 26 ; i ++)
             {
@@ -90,6 +131,7 @@ void Design::LoadingAnimation()
                 H::VLine(80,6,i+1,3,219);
                 H::VLine(82,31-i,1,3,219);
 
+                H::delay(1);
             }
         }
     }
@@ -107,7 +149,6 @@ void Design::LoadingAnimation()
         
         H::gotoxy(131-i,19);cout<<" ";
         H::gotoxy(29+i,19);cout<<" ";
-
         H::delay(1);
 
         if(i == 50)
@@ -125,7 +166,7 @@ void Design::LoadingAnimation()
 
                 H::gotoxy(81,6+i);cout<<" ";
                 H::gotoxy(81,33-i);cout<<" ";
-                H::delay(5);
+                H::delay(2);
             }
         }
     }
@@ -136,9 +177,12 @@ void Design::LoadingAnimation()
 //3: without BG
 //4: File Corrupted
 //5: File no data
+//6: press any key
 void Design::message(int n, int width, int height)
 {
-    
+
+    H::setcursor(0,0);
+
     if ( n == 1)
     {
         int color = 176 ;
@@ -208,6 +252,19 @@ void Design::message(int n, int width, int height)
             if(color > 15) color = 1;
         }
     }
+    else if( n == 6 )
+    {
+        int color = 1 ;
+        while(!kbhit())
+        {   
+            H::setcolor(3);
+            H::gotoxy(10 + 58, 5 + 33);cout << "Press ";
+            H::setcolor(color);cout << "[any]";
+            H::setcolor(3);cout << " key to continue";H::delay(999);
+            color++;
+            if(color > 15 ) color = 1;
+        }
+    }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Design::Admin_User_ClsBox(int num)
@@ -216,28 +273,28 @@ void Design::Admin_User_ClsBox(int num)
     {
         for(int i = 0 ; i < 15 ; i ++)
         {
-            tp(238,x+81+i,y+15);cout<<" ";H::delay(1);//cls left to right
-            tp(238,x+81+i,y+16);cout<<" ";H::delay(1);//cls left to right
-            tp(238,x+81+i,y+17);cout<<" ";H::delay(1);//cls left to right
+            tp(238,x+81+i,y+15);cout<<" ";
+            tp(238,x+81+i,y+16);cout<<" ";
+            tp(238,x+81+i,y+17);cout<<" ";
 
-
-            tp(238,x+109-i,y+15);cout<<" ";H::delay(1);//right to left
-            tp(238,x+109-i,y+16);cout<<" ";H::delay(1);//right to left
-            tp(238,x+109-i,y+17);cout<<" ";H::delay(1);//right to left
+            tp(238,x+109-i,y+15);cout<<" ";
+            tp(238,x+109-i,y+16);cout<<" ";
+            tp(238,x+109-i,y+17);cout<<" ";
+            H::delay(30);
         }
     }
     if(num == 2)
     {
         for(int i = 0 ; i < 15 ; i ++)
         {
-            tp(238,x+81+i,y+19);cout<<" ";H::delay(1);//cls left to right
-            tp(238,x+81+i,y+20);cout<<" ";H::delay(1);//cls left to right
-            tp(238,x+81+i,y+21);cout<<" ";H::delay(1);//cls left to right
+            tp(238,x+81+i,y+19);cout<<" ";
+            tp(238,x+81+i,y+20);cout<<" ";
+            tp(238,x+81+i,y+21);cout<<" ";
 
-
-            tp(238,x+109-i,y+19);cout<<" ";H::delay(1);//right to left
-            tp(238,x+109-i,y+20);cout<<" ";H::delay(1);//right to left
-            tp(238,x+109-i,y+21);cout<<" ";H::delay(1);//right to left
+            tp(238,x+109-i,y+19);cout<<" ";
+            tp(238,x+109-i,y+20);cout<<" ";
+            tp(238,x+109-i,y+21);cout<<" ";
+            H::delay(30);
         }
     }
 }
@@ -257,9 +314,11 @@ void Design::tp(int colorCode, int width, int height)
 }
 void Design::loginMsg(int opt)
 {
-    int color = 137 ;
+    H::setcursor(0,0);
+
     if(opt == 1)
     {
+        int color = 137 ;
         while(!kbhit())
         {
             H::setcolor(140);H::gotoxy(x+23,y+26);cout<<"Incorrect ";
@@ -274,7 +333,7 @@ void Design::loginMsg(int opt)
             if( color > 142 ) color = 137;
         }
     }
-    else if(opt == 2)
+     if(opt == 2)
     {
         int i = 1;
         while(!kbhit())
@@ -286,7 +345,16 @@ void Design::loginMsg(int opt)
             if(i > 15 ) i = 1;
         }
     }
-    
+     if(opt == 3)
+    {
+        H::gotoxy(71,37);H::setcolor(1); cout << "Login Successfully";
+            for(int i = 1 ; i <= 15 ; i ++)
+            {
+                H::setcolor(3); H::gotoxy(50+i,37); cout << char(92);
+                H::setcolor(3); H::gotoxy(109-i,37); cout << char(47);
+                H::delay(50);
+            }
+    }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Design::interface_design()

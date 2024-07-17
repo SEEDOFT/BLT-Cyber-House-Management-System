@@ -338,13 +338,13 @@ void File::viewFile(int n)
     file.open(currentFile, ios::in | ios::binary);
     if (!file.is_open())
     {
-        Design::message(4, 0, 3);
+        Design::message(4, 0, 7);
     }
     else
     {
         if (check_file(currentFile))
         {
-            Design::message(5, 0, 0);
+            Design::message(5, 0, 7);
         }
         else
         {
@@ -393,13 +393,13 @@ void File::searchFile(int n)
     file.open(currentFile, ios::in | ios::binary);
     if (!file.is_open())
     {
-        Design::message(4, 0, 3);
+        Design::message(4, 0, 7);
     }
     else
     {
         if (check_file(currentFile))
         {
-            Design::message(5, 0, 3);
+            Design::message(5, 0, 7);
         }
         else
         {
@@ -407,10 +407,9 @@ void File::searchFile(int n)
 
             file.open(currentFile, ios::in | ios::binary);
             isfound = false;
-            H::foreColor(1);
-            H::gotoxy(85, 17);
+            H::foreColor(1);H::gotoxy(85, 17);
             H::inputNumber(searchID, sizeof(searchID));
-            cout << endl;
+            
             // can  use this instread of open again
             //                ---------------------------------------------------------
             //                file.clear();  // Clear any potential eof or fail flags
@@ -421,6 +420,9 @@ void File::searchFile(int n)
             {
                 while (file.read((char *)&fnd, sizeof(FoodnDrink)))
                 {
+
+                    B::Search_Animation();//Animation
+
                     if (atoi(searchID) == fnd.getFndID())
                     {
                         fnd.output(11);
@@ -432,6 +434,9 @@ void File::searchFile(int n)
             {
                 while (file.read((char *)&game, sizeof(Game)))
                 {
+
+                    B::SearchGame_Animation();//Apply Animation while Searching
+
                     if (atoi(searchID) == game.getID())
                     {
                         game.output(11);
@@ -443,6 +448,9 @@ void File::searchFile(int n)
             {
                 while (file.read((char *)&mup, sizeof(MgUserPayment)))
                 {
+
+                    B::SearchUser_Animation();////Apply Animation while Searching
+
                     if (atoi(searchID) == mup.getID())
                     {
                         mup.output(13);
@@ -485,13 +493,13 @@ void File::updateFile(int n)
 
     if (!file.is_open())
     {
-        Design::message(4, 0, 3);
+        Design::message(4, 0, 7);
     }
     else
     {
         if (check_file(currentFile))
         {
-            Design::message(5, 0, 3);
+            Design::message(5, 0, 7);
         }
         else
         {
@@ -527,19 +535,21 @@ void File::updateFile(int n)
             }
             file.close();
 
-            H::foreColor(1);
-            H::gotoxy(86, 17);
+            H::foreColor(1);H::gotoxy(86, 17);
             H::inputNumber(updateID, sizeof(updateID));
 
             if (n == 1)
             {
                 for (auto &item : fndVector)
                 {
+                    
+                    B::Update_Animation();//Animation
+
                     if (atoi(updateID) == item.getFndID())
                     {
                         item.output(8);
-                        H::gotoxy(35, 36);
-                        H::foreColor(4);
+                        //output Update ID
+                        H::gotoxy(35, 36);H::foreColor(4);
                         cout << item.getFndID();
                         item.update();
                         isfound = true;
@@ -551,10 +561,15 @@ void File::updateFile(int n)
             {
                 for (auto &item : gameVector)
                 {
+
+                    B::UpdateGame_Animation();//game design
+
                     if (atoi(updateID) == item.getID())
                     {
-                        cout << "ID : " << item.getID() << endl;
-                        item.input();
+                        item.output(8);
+                        //output update ID
+                        H::gotoxy(35,36); H::foreColor(7); cout  << item.getID();
+                        item.update();
                         isfound = true;
                         break;
                     }
@@ -564,6 +579,9 @@ void File::updateFile(int n)
             {
                 for (auto &item : mupVector)
                 {
+                    
+                    B::UpdateUserInfo_Animation();//Animation
+
                     if (atoi(updateID) == item.getID())
                     {
                         item.output(8);
@@ -577,7 +595,8 @@ void File::updateFile(int n)
                         {
                             cout << "\t\t\t";
                             H::inputAll(username, sizeof(username));
-                        } while (checkUsername(username));
+                        } 
+                        while (checkUsername(username));
 
                         item.setGuestname(guestName);
                         item.setUsername(username);
@@ -622,7 +641,6 @@ void File::updateFile(int n)
                     file.write((char *)&item, sizeof(item));
                 }
             }
-
             file.close();
         }
     }
@@ -642,11 +660,11 @@ void File::deleteFile(int n)
     file.open(currentFile, ios::in | ios::binary);
     if (!file.is_open())
     {
-        Design::message(4, 0, 3);
+        Design::message(4, 0, 7);
     }
     else if (check_file(currentFile))
     {
-        Design::message(5, 0, 3);
+        Design::message(5, 0, 7);
         file.close();
     }
     else
@@ -668,6 +686,9 @@ void File::deleteFile(int n)
         {
             for (auto it = fndVector.begin(); it != fndVector.end();)
             {
+
+                B::Delete_Animation();//animation
+
                 if (it->getFndID() == deleteIDInt)
                 {
                     it->output(11);
@@ -685,6 +706,9 @@ void File::deleteFile(int n)
         {
             for (auto it = gameVector.begin(); it != gameVector.end();)
             {
+
+                B::DeleteGame_Animation();//Apply
+
                 if (it->getID() == deleteIDInt)
                 {
                     it->output(11);
@@ -702,6 +726,9 @@ void File::deleteFile(int n)
         {
             for (auto it = mupVector.begin(); it != mupVector.end();)
             {
+
+                B::DeleteUserInfo_Animation();//Animation
+
                 if (it->getID() == deleteIDInt)
                 {
                     it->output(11);
@@ -926,109 +953,120 @@ void File::user_login()
     {
         H::setcolor(135);
         H::gotoxy(42, 32);
-        cout << "Register First!!" << endl;
-        H::delay(500);
+        cout << "Register First!!";
+        H::delay(999);
         H::clearBox(42, 32, 25, 0, 136);
     }
     else
     {
-        mupVector.clear();
-
-        while (file.read((char *)&mup, sizeof(MgUserPayment)))
+        if(check_file(UserInfoFile))
         {
-            mupVector.push_back(mup);
+            H::setcolor(135);
+            H::gotoxy(42, 32);
+            cout << "Register First!!";
+            H::delay(999);
+            H::clearBox(42, 32, 25, 0, 136);
         }
-
-        file.close();
-
-        while (1)
+        else
         {
-            int chance = 3;
+            mupVector.clear();
 
-            while (chance != 0)
+            while (file.read((char *)&mup, sizeof(MgUserPayment)))
             {
-                H::setcursor(1, 0);
-                H::setcolor(249);
-                H::gotoxy(30, 22);
-                H::inputLetter(username, sizeof(username)); // username
+                mupVector.push_back(mup);
+            }
 
-                H::setcolor(249);
-                H::gotoxy(30, 28);
-                H::hidePassword(password, sizeof(password));
-                H::setcursor(0, 0);
+            file.close();
 
-                for (const auto &user : mupVector)
+            while (1)
+            {
+                int chance = 3;
+
+                while (chance != 0)
                 {
-                    if (strcmp(username, user.getUsername()) == 0 && strcmp(password, user.getPassword()) == 0)
+                    H::setcursor(1, 0);
+                    H::setcolor(249);
+                    H::gotoxy(30, 22);
+                    H::inputLetter(username, sizeof(username)); // username
+
+                    H::setcolor(249);
+                    H::gotoxy(30, 28);
+                    H::hidePassword(password, sizeof(password));
+                    H::setcursor(0, 0);
+
+                    for (const auto &user : mupVector)
                     {
-                        islogin = true;
+                        if (strcmp(username, user.getUsername()) == 0 && strcmp(password, user.getPassword()) == 0)
+                        {
+                            islogin = true;
+                            break;
+                        }
+                    }
+                    if (islogin == true)
+                    {
+                        Design::loginMsg(3);
+                        loginTimeToFile(username, password);
+                        userSubMenu(username, password);
                         break;
+                    }
+                    else
+                    {
+                        islogin = false;
+                        H::setcursor(0, 0);
+                        H::setcolor(140);
+                        H::gotoxy(10 + 29, 5 + 27);cout << "You have ";
+                        H::setcolor(137);cout << --chance;
+                        H::setcolor(140);cout << " left";
+                        
+                        Design::loginMsg(1); // input msg
+
+                        getch();
+
+                        H::clearBox(10 + 19, 5 + 18, 42, 0, 247); // Clear username and password boxes
+                        H::clearBox(10 + 19, 5 + 24, 42, 0, 247); // Clear username and password boxes
+                        H::clearBox(10 + 23, 5 + 27, 34, 1, 136); // Clear message
+                        // break;
+                    }
+                }
+                if (chance == 0)
+                {
+                    for (int i = 1; i <= 6; i++)
+                    {
+                        H::setcursor(0, 0);
+                        H::setcolor(140);
+                        H::gotoxy(27, 32);
+                        cout << "You ran out chances! Please wait for   seconds";
+                        H::setcolor(137);
+                        H::gotoxy(10 + 54, 32);
+                        cout << 6 - i;
+                        H::delay(999);
+
+                        H::clearBox(27, 32, 45, 0, 136); // cls chance msg
+                        H::setcolor(7);
+                    }
+
+                    Design::loginMsg(2); // esc or continue
+
+                    press = getch();
+
+                    H::clearBox(10 + 38, 38, 61, 0, 7); // cls msg
+
+                    if (press == 27)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        continue;
                     }
                 }
                 if (islogin == true)
                 {
-                    loginTimeToFile(username, password);
-                    userSubMenu(username, password);
                     break;
                 }
-                else
-                {
-                    islogin = false;
-                    H::setcursor(0, 0);
-                    H::setcolor(140);
-                    H::gotoxy(10 + 29, 5 + 27);
-                    cout << "You have ";
-                    H::setcolor(137);
-                    cout << --chance;
-                    H::setcolor(140);
-                    cout << " left";
-                    Design::loginMsg(1); // input msg
-
-                    getch();
-
-                    H::clearBox(10 + 19, 5 + 18, 42, 0, 247); // Clear username and password boxes
-                    H::clearBox(10 + 19, 5 + 24, 42, 0, 247); // Clear username and password boxes
-                    H::clearBox(10 + 23, 5 + 27, 34, 1, 136); // Clear message
-                    // break;
-                }
-            }
-            if (chance == 0)
-            {
-                for (int i = 1; i <= 6; i++)
-                {
-                    H::setcursor(0, 0);
-                    H::setcolor(140);
-                    H::gotoxy(27, 32);
-                    cout << "You ran out chances! Please wait for   seconds";
-                    H::setcolor(137);
-                    H::gotoxy(10 + 54, 32);
-                    cout << 6 - i;
-                    H::delay(999);
-
-                    H::clearBox(27, 32, 45, 0, 136); // cls chance msg
-                    H::setcolor(7);
-                }
-
-                Design::loginMsg(2); // esc or continue
-
-                press = getch();
-
-                H::clearBox(10 + 38, 38, 61, 0, 7); // cls msg
-
-                if (press == 27)
-                {
-                    break;
-                }
-                else
-                {
-                    continue;
-                }
-            }
-            if (islogin == true)
-            {
-                break;
             }
         }
+        
     }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -1040,6 +1078,7 @@ void File::userSubMenu(const char *username, const char *password)
 {
     H::setConsoleTitle(TEXT("User MENU"));
     H::setcursor(0, 0);
+    Design::LoadingAnimation();
 
     int choice = 0;
     do
@@ -1104,14 +1143,10 @@ void File::userSubMenu(const char *username, const char *password)
             H::setcolor(1);
             H::gotoxy(10 + 38, 5 + 29);
             cout << "Press ";
-            H::setcolor(4);
-            cout << "[ALL]";
-            H::setcolor(1);
-            cout << " arrow key to move between option, ";
-            H::setcolor(4);
-            cout << "[ENTER]";
-            H::setcolor(1);
-            cout << " to select";
+            H::setcolor(4);cout << "[ALL]";
+            H::setcolor(1);cout << " arrow key to move between option, ";
+            H::setcolor(4);cout << "[ENTER]";
+            H::setcolor(1);cout << " to select";
 
             press = getch();
 
@@ -1164,25 +1199,31 @@ void File::userSubMenu(const char *username, const char *password)
 
         if (choice == 1)
         {
+            Design::LoadingAnimation();
             viewProfile(username, password);
         }
         else if (choice == 2)
         {
+            Design::LoadingAnimation();
             buyMoreTime(username, password);
         }
         else if (choice == 3)
         {
+            Design::LoadingAnimation();
             buyFood(username, password);
         }
         else if (choice == 4)
         {
+            Design::LoadingAnimation();
             invoice(username, password);
         }
         else if (choice == 5)
         {
             break;
         }
-    } while (choice != 5);
+
+    } 
+    while (choice != 5);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //////////////////////////////////////////
@@ -1208,8 +1249,7 @@ void File::buyMoreTime(const char *username, const char *password)
     {
         B::buyHour_Design();
         H::setcursor(1, 0);
-        H::setcolor(1);
-        H::gotoxy(110, 16);
+        H::setcolor(1);H::gotoxy(110, 19);
         H::inputNumber(hours, sizeof(hours)); // Purdhase hour
 
         while (file.read((char *)&mup, sizeof(MgUserPayment)))
@@ -1224,19 +1264,19 @@ void File::buyMoreTime(const char *username, const char *password)
         }
 
         H::setcolor(1);
-        H::gotoxy(110, 20);
+        H::gotoxy(110, 23);
         H::inputNumber(creditCard, sizeof(creditCard)); // Credit card number
         H::setcursor(0, 0);
 
         if (isfound)
         {
-            cout << "Purchase successful" << endl;
-            getch();
+            H::setcolor(4);H::gotoxy(96,25); cout << "...Purchase successfully...";
+            Design::message(2,0,36);
         }
     }
     else
     {
-        Design::message(4, 0, 3);
+        Design::message(4, 0, 7);
     }
 
     file.close();
@@ -1251,6 +1291,12 @@ void File::buyMoreTime(const char *username, const char *password)
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void File::invoice(const char *username, const char *password)
 {
+    H::setConsoleTitle(TEXT("My Spending"));
+    H::setcolor(7);
+    H::cls();
+    Design::outline();
+    H::setcursor(0,0);
+
 
     file.open(UserInfoFile, ios::in | ios::binary);
 
@@ -1267,6 +1313,8 @@ void File::invoice(const char *username, const char *password)
                 cout << "Added Time: " << mup.getBuyedTime() << endl;
                 cout << "Buyed Snack " << setw(25) << mup.getFoodnDrink() << "Price " << setw(8)
                      << mup.getPrice() << "Quantity " << setw(5) << mup.getQty() << "Total Price " << mup.getFndTotal() << endl;
+
+                    Design::message(3,0,38);
             }
         }
     }
@@ -1343,7 +1391,7 @@ void File::calculateTime(const char *username, const char *password)
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void File::buyFood(const char *username, const char *password)
 {
-    H::setConsoleTitle(TEXT("Buy Food and Drink"));
+    H::setConsoleTitle(TEXT("Buy Food or Drink"));
     H::setcolor(7);
     H::cls();
     H::setcursor(0, 0);
@@ -1351,7 +1399,6 @@ void File::buyFood(const char *username, const char *password)
 
     char foodID[5];
     char quantity[13];
-    bool isfound = false;
 
     file.open(UserInfoFile, ios::in | ios::binary);
     fstream tempFile(Backup, ios::out | ios::binary);
@@ -1380,15 +1427,7 @@ void File::buyFood(const char *username, const char *password)
         }
         file2.close();
 
-        H::setcolor(3);
-        H::gotoxy(10 + 58, 5 + 33);
-        cout << "Press ";
-        H::setcolor(4);
-        cout << "[any]";
-        H::setcolor(3);
-        cout << " key to continue";
-
-        getch();
+        Design::message(6,0,0);
 
         H::setcolor(7);
         H::cls();
@@ -1400,7 +1439,6 @@ void File::buyFood(const char *username, const char *password)
         {
             if (strcmp(username, mup.getUsername()) == 0 && strcmp(password, mup.getPassword()) == 0)
             {
-                isfound = true;
                 H::setcursor(1, 0);
                 H::foreColor(1);
                 H::gotoxy(118, 19);
@@ -1416,9 +1454,9 @@ void File::buyFood(const char *username, const char *password)
                 fstream foodFile(FoodnDrinkFile, ios::in | ios::out | ios::binary);
                 if (!foodFile.is_open())
                 {
-                    H::foreColor(7);
-                    H::gotoxy(91, 29);
+                    H::foreColor(7);H::gotoxy(91, 29);
                     cout << "Food file could not be opened";
+                    Design::message(2,0,38);
                 }
                 else
                 {
@@ -1441,21 +1479,19 @@ void File::buyFood(const char *username, const char *password)
                                 mup.setFnd(fnd.getName(), fnd.getPrice(), quantity);
 
                                 H::foreColor(7);
-                                H::gotoxy(91, 29);
-                                cout << "\3\3";
+                                H::gotoxy(91, 29); cout << "\3\3";
                                 H::setcolor(4);
-                                cout << " Successfully purchase";
-                                H::setcolor(7);
-                                cout << " \3\3";
+                                cout << " Successfully Purchase";
+                                H::setcolor(7); cout << " \3\3";
 
-                                getch();
+                                Design::message(2,0,38);
                             }
                             else
                             {
-                                H::foreColor(7);
-                                H::gotoxy(88, 29);
+                                H::foreColor(7); H::gotoxy(88, 29);
                                 cout << "Insufficient quantity are available";
-                                getch();
+
+                                Design::message(2,0,38);
                             }
                             foodFound = true;
                             break;
@@ -1468,17 +1504,13 @@ void File::buyFood(const char *username, const char *password)
                         H::foreColor(4);
                         H::gotoxy(80, 29);
                         cout << "Food or Drink ID is not found";
-                        getch();
+                        
+                        Design::message(2,0,38);
                     }
                 }
             }
             tempFile.write((char *)&mup, sizeof(MgUserPayment));
         }
-
-        // if (!isfound)
-        // {
-        //     cout << "User not found" << endl;
-        // }
 
         file.close();
         tempFile.close();
@@ -1545,7 +1577,14 @@ void File::viewAllUserInvoice()
         mup.viewAll(y);
         y++;
     }
-    cout << "All income" << allTotal << endl;
+    H::gotoxy(30,36); H::setcolor(55); 
+    cout << "All Income ";
+
+    H::gotoxy(81,36); H::setcolor(103); 
+    cout << "USD : " << fixed << setprecision(2) << allTotal / 4000;
+    H::gotoxy(111,36); H::setcolor(103); 
+    cout << "KHR : " << fixed << setprecision(0) << allTotal;
+
     file.close();
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

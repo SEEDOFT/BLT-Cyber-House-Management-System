@@ -24,7 +24,10 @@ void BLT::AllInvoice::AllInvoices_Design()
     H::drawBoxDoubleLineWithBG(143,11,1,25,179);
     H::VLine(144,11,25,183,219);
 
-    H::drawBoxDoubleLineWithBG(20,35,90,1,55);H::drawBoxSingleLineWithBG(110,35,30,1,103);
+    H::drawBoxDoubleLineWithBG(20,35,59,1,55);
+
+    H::drawBoxSingleLineWithBG(80,35,29,1,103);//USD
+    H::drawBoxSingleLineWithBG(110,35,30,1,103);//KHR
 }
  //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif

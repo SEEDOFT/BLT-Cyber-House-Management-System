@@ -17,6 +17,7 @@ protected:
 public:
     int getID();
     void input();
+    void update();
     void output(int y);
     void inputDate(char date[], int dateLength);
     void setID(int id);
@@ -41,6 +42,17 @@ void Game::setID(int id)
     gId = id;
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void Game::update()
+{
+    H::setcolor(7);
+    H::setcursor(1,0);
+    H::gotoxy(35, 36);H::setcolor(7);
+    cout << "\t\t\t"; H::inputAll(gName, sizeof(gName)); // name
+    cout << "\t\t\t\t"; H::inputLetter(gameType, sizeof(gameType));
+    cout << "\t\t\t"; inputDate(releaseDate, sizeof(releaseDate));
+    H::setcursor(0,0);
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Game::input()
 {
     H::foreColor(176);
@@ -60,7 +72,7 @@ void Game::input()
 void Game::output(int y)
 {
     H::setcolor(7);
-    H::gotoxy(35, 14 + y);
+    H::gotoxy(36, 14 + y);
     cout << left << setw(21) << gId << setw(32) << gName << setw(24) << gameType << releaseDate;
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
