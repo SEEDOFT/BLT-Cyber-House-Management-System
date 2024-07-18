@@ -48,7 +48,7 @@ class Design: public LENG
                     A letter from Us Design
         */
         static void A_Letter_from_UsTxt();
-        static void A_Letter_from_Us_Design();
+        static void A_Letter_from_Us_Design(int delayTime);
         static void A_Letter_from_Us_nonDesign();
         static void A_Letter_from_Us_Animation();
         /*
@@ -252,7 +252,7 @@ void Design::message(int n, int width, int height)
         while(!kbhit())
         {   
             H::setcolor(3);
-            H::gotoxy(10 + 58, 5 + 33);cout << "Press ";
+            H::gotoxy( 68, 38+height);cout << "Press ";
             H::setcolor(color);cout << "[any]";
             H::setcolor(3);cout << " key to continue";H::delay(999);
             color++;
@@ -629,7 +629,7 @@ void Design::AboutUsTxt()
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Design::AboutUs_Design()
 {
-
+    cout << "Infrastructure ";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Design::A_Letter_from_Us_Animation()
@@ -697,7 +697,7 @@ void Design::A_Letter_from_UsTxt()
      
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void Design::A_Letter_from_Us_Design()
+void Design::A_Letter_from_Us_Design(int delayTime)
 {
     char one[]="We're the scholarship students at ";
     char two[]="[1]ANT Technology Training Center";
@@ -708,11 +708,11 @@ void Design::A_Letter_from_Us_Design()
     char seventh[]="This opportunity is allowing us to develop valuable skills in mobile app development and pursue ";
     char eighth[]="exciting careers in the tech industry.";
 
-    charLoop(sizeof(one), x+19, y+8, 3, one, 10);charLoop(sizeof(two), x+53, y+8, 4, two, 10);charLoop(sizeof(three), x+86, y+8, 3, three, 10);//first line
-    charLoop(sizeof(fourth), x+39, y+10, 71, fourth, 10);//Second line
-    charLoop(sizeof(fifth), x+30, y+12, 3, fifth, 10);charLoop(sizeof(sixth), x+68, y+12, 4, sixth, 10);//Third
-    charLoop(sizeof(seventh), x+22, y+14, 23, seventh, 10);//Fourth
-    charLoop(sizeof(eighth), x+51, y+16, 23, eighth, 10);//Fifth
+    charLoop(sizeof(one), x+19, y+8, 3, one, delayTime);charLoop(sizeof(two), x+53, y+8, 4, two, delayTime);charLoop(sizeof(three), x+86, y+8, 3, three, delayTime);//first line
+    charLoop(sizeof(fourth), x+39, y+10, 71, fourth, delayTime);//Second line
+    charLoop(sizeof(fifth), x+30, y+12, 3, fifth, delayTime);charLoop(sizeof(sixth), x+68, y+12, 4, sixth, delayTime);//Third
+    charLoop(sizeof(seventh), x+22, y+14, 23, seventh, delayTime);//Fourth
+    charLoop(sizeof(eighth), x+51, y+16, 23, eighth, delayTime);//Fifth
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Design::A_Letter_from_Us_nonDesign()

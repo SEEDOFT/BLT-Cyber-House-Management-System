@@ -241,7 +241,7 @@ void Process::LogIn_AsAdmin(int cursor)
 {
     char AdminUsername[10];
     char AdminPassword[10];
-    char press;
+    char press = ' ';
 
     while (1)
     {
@@ -273,12 +273,9 @@ void Process::LogIn_AsAdmin(int cursor)
             {
                 H::setcursor(0, 0);
                 H::setcolor(140);
-                H::gotoxy(x + 29, y + 27);
-                cout << "You have ";
-                H::setcolor(137);
-                cout << --chance;
-                H::setcolor(140);
-                cout << " left";
+                H::gotoxy(x + 29, y + 27);cout << "You have ";
+                H::setcolor(137);cout << --chance;
+                H::setcolor(140);cout << " left";
                 loginMsg(1); // input msg
 
                 getch();
@@ -322,7 +319,6 @@ void Process::LogIn_AsAdmin(int cursor)
             }
         }
     }
-    H::setcolor(7);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //                          Admin Option
@@ -587,16 +583,21 @@ void Process::A_LetterFromUs()
 
     while(1)
     {
-        // if(!kbhit())
-        // {
-        //     A_Letter_from_Us_Design();
-        // }
-        // else 
-        // {
-            A_Letter_from_Us_nonDesign();
-        // }
+        A_Letter_from_Us_Design(5);
 
-        message(2, 0, 36);
+        H::HLine(30,28,100,7,196);
+        H::setcolor(1);H::gotoxy(40,29); 
+        cout << "To open the website of ";H::setcolor(3);cout <<"ANT Technology Training Center";
+        H::gotoxy(110,29);H::setcolor(71);cout <<" Press number 1";
+
+        H::HLine(30,30,100,7,196); 
+
+        H::setcolor(1);H::gotoxy(40,31); 
+        cout << "To open the website of ";H::setcolor(3);cout <<"Ministry of Post and Telecommunications";
+        H::gotoxy(110,31);H::setcolor(71);cout <<" Press number 2";
+        H::HLine(30,32,100,7,196);
+
+        message(2, 0, 38);
 
         press = getch();
 
@@ -604,11 +605,11 @@ void Process::A_LetterFromUs()
         {
             break;
         }
-        else if(press == 1)
+        else if(press == '1')
         {
             openURL("http://training.antkh.com/");
         }
-        else if(press == 2)
+        else if(press == '2')
         {
             openURL("https://mptc.gov.kh/en/");
         }

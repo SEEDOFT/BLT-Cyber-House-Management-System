@@ -119,7 +119,7 @@ void LENG::UserMenu_Art(int a)
 		H::gotoxy(x+75,y+15);cout << R"(|=| o=,===,=o |__||=|)";
 		H::gotoxy(x+75,y+16);cout << R"(|_|  _______)~`)  |_|)";
 		H::gotoxy(x+75,y+17);cout << R"(    [=======]  ()     )";
-		H::gotoxy(x+80,y+19);cout << "Buy Hour to Play";
+		H::gotoxy(x+77,y+20);cout << "Buy Hour to Play";
 	}
 	else if( a == 3)
 	{
@@ -149,7 +149,7 @@ void LENG::UserMenu_Art(int a)
 		tp(1,x+106,y  ); cout << R"(  (_) (__)  )";
 		
 		H::drawBoxSingleLineWithBG(x+20,y+15,31,1,230);
-		tp(229,x+22,y+16); cout << "Buy Food & Drink";
+		tp(229,35,21); cout << "Buy Food or Drink";
 		H::clearBox(x+58,y+10,55,13,179);
 		H::setcolor(181);
 		H::gotoxy(x+60,y+10);cout << R"(                                       .-'''''-. )";
@@ -163,7 +163,7 @@ void LENG::UserMenu_Art(int a)
 		H::gotoxy(x+60,y+18);cout << R"(       (`            )--.-"```     `"-.`'-----'`)";
 		H::gotoxy(x+60,y+19);cout << R"(        '-----------'  (               )        )";
 		H::gotoxy(x+60,y+20);cout << R"(                        `-------------`         )";
-		H::gotoxy(x+70,y+23);cout << "\3 Buy Food & Drink \3";
+		H::gotoxy(x+77,y+22);cout << "\3 Buy Food & Drink \3";
 
 	}
 	else if( a == 4)

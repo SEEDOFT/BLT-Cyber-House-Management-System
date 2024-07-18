@@ -43,12 +43,12 @@ void BLT::Invoice::Invoice_Design()
 	H::setcolor(249);H::gotoxy(53,16); cout << "ID          : ";
 	H::setcolor(249);H::gotoxy(53,17); cout << "NAME        : ";
 	H::setcolor(249);H::gotoxy(53,18); cout << "USERNAME    : ";
-	H::setcolor(249);H::gotoxy(53,19); cout << "DATE JOINED : ";
+	H::setcolor(249);H::gotoxy(53,19); cout << "ISSUE DATE  : ";
 	H::HLine(50,20,66,248,196);
 
 	H::setcolor(249);H::gotoxy(53,21); cout << "FOOD OR DRINK";
 	H::setcolor(249);H::gotoxy(83,21); cout << "QTY";
-	H::setcolor(249);H::gotoxy(93,21); cout << "HOURS";
+	H::setcolor(249);H::gotoxy(93,21); cout << "MINS";
 	H::setcolor(249);H::gotoxy(103,21); cout << "ADDED HOURS";
 	H::HLine(50,22,66,248,196);
 
@@ -63,12 +63,12 @@ void BLT::Invoice::Invoice_Design()
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void BLT::Invoice::InvoiceTxt()
 {
-	H::setcolor(7); H::gotoxy(41,1); cout <<  R"(   _____            _________                         .___.__                )";
-	H::setcolor(7); H::gotoxy(41,2); cout <<  R"(  /     \ ___.__.  /   _____/_____   ____   ____    __| _/|__| ____    ____  )";
-	H::setcolor(7); H::gotoxy(41,3); cout <<  R"( /  \ /  <   |  |  \_____  \\____ \_/ __ \ /    \  / __ | |  |/    \  / ___\ )";
-	H::setcolor(7); H::gotoxy(41,4); cout <<  R"(/    Y    \___  |  /        \  |_> >  ___/|   |  \/ /_/ | |  |   |  \/ /_/  >)";
-	H::setcolor(7); H::gotoxy(41,5); cout <<  R"(\____|__  / ____| /_______  /   __/ \___  >___|  /\____ | |__|___|  /\___  / )";
-	H::setcolor(7); H::gotoxy(41,6); cout <<  R"(        \/\/              \/|__|        \/     \/      \/         \//_____/  )";
+	H::setcolor(3); H::gotoxy(41,1); cout <<  R"(   _____            _________                         .___.__                )";
+	H::setcolor(3); H::gotoxy(41,2); cout <<  R"(  /     \ ___.__.  /   _____/_____   ____   ____    __| _/|__| ____    ____  )";
+	H::setcolor(3); H::gotoxy(41,3); cout <<  R"( /  \ /  <   |  |  \_____  \\____ \_/ __ \ /    \  / __ | |  |/    \  / ___\ )";
+	H::setcolor(4); H::gotoxy(41,4); cout <<  R"(/    Y    \___  |  /        \  |_> >  ___/|   |  \/ /_/ | |  |   |  \/ /_/  >)";
+	H::setcolor(4); H::gotoxy(41,5); cout <<  R"(\____|__  / ____| /_______  /   __/ \___  >___|  /\____ | |__|___|  /\___  / )";
+	H::setcolor(4); H::gotoxy(41,6); cout <<  R"(        \/\/              \/|__|        \/     \/      \/         \//_____/  )";
 	H::HLine(20,7,120,7,220);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

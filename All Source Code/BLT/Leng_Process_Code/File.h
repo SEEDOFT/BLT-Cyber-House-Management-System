@@ -1105,7 +1105,7 @@ void File::user_login()
 // USER MENU
 //////////////////////////////////////////
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void File::userSubMenu(const char *username, const char *password)
+void File:: userSubMenu(const char *username, const char *password)
 {
     H::setConsoleTitle(TEXT("User MENU"));
     H::setcursor(0, 0);
@@ -1139,7 +1139,7 @@ void File::userSubMenu(const char *username, const char *password)
             H::gotoxy(10 + 25, 5 + 13);
             cout << "Buy Hour to Play";
             H::gotoxy(10 + 25, 5 + 16);
-            cout << "Buy Food & Drink";
+            cout << "Buy Food or Drink";
             H::gotoxy(10 + 25, 5 + 19);
             cout << "View Spending";
             H::gotoxy(10 + 25, 5 + 22);
@@ -1328,6 +1328,7 @@ void File::invoice(const char *username, const char *password)
     Design::outline();
     H::setcursor(0,0);
 
+    char press = ' ';
     B::InvoiceTxt();
     B::Invoice_Design();
     file.open(UserInfoFile, ios::in | ios::binary);
@@ -1338,36 +1339,52 @@ void File::invoice(const char *username, const char *password)
     }
     else
     {
-        while (file.read((char *)&mup, sizeof(MgUserPayment)))
+        while(1)
         {
-            if (strcmp(username, mup.getUsername()) == 0 && strcmp(password, mup.getPassword()) == 0)
+            while (file.read((char *)&mup, sizeof(MgUserPayment)))
             {
-                
-                H::setcolor(252);H::gotoxy(83,16);
-                cout << mup.getID();
-                H::setcolor(252);H::gotoxy(83,17);
-                cout << mup.getGuestname();
-                H::setcolor(252);H::gotoxy(83,18);
-                cout << mup.getUsername();
-                OutputDate(83,19,252);
+                if (strcmp(username, mup.getUsername()) == 0 && strcmp(password, mup.getPassword()) == 0)
+                {
+                    
+                    H::setcolor(252);H::gotoxy(83,16);
+                    cout << mup.getID();
+                    H::setcolor(252);H::gotoxy(83,17);
+                    cout << mup.getGuestname();
+                    H::setcolor(252);H::gotoxy(83,18);
+                    cout << mup.getUsername();
+                    OutputDate(83,19,252);
 
-                H::setcolor(252);H::gotoxy(53,23);
-                cout << left << setw(30) << mup.getFoodnDrink()
-                << setw(10) << mup.getQty() 
-                << setw(10) << mup.getTime()
-                << setw(10) << mup.getBuyedTime() ;
-                
-                OutputHostName(75,30,252);
-                H::setcolor(252);H::gotoxy(89,32);
-                cout << fixed << setprecision(2) << mup.totalIncome() / 4000;
-                H::setcolor(252);H::gotoxy(109,32);
-                cout << fixed << setprecision(0) << mup.totalIncome();
+                    H::setcolor(252);H::gotoxy(53,23);
+                    cout << left 
+                    << setw(30) << mup.getFoodnDrink() 
+                    << fixed <<setprecision(0) <<
+                    setw(10) << mup.getQty() 
+                    << setw(10) << mup.getTime()
+                    << setw(10) << mup.getBuyedTime();
+                    
+                    OutputHostName(75,30,252);
+                    H::setcolor(252);H::gotoxy(89,32);
+                    cout << fixed << setprecision(2) << mup.totalIncome() / 4000;
+                    H::setcolor(252);H::gotoxy(109,32);
+                    cout << fixed << setprecision(0) << mup.totalIncome();
+                }
+            }
+            file.close();
 
-                Design::message(2,0,38);
+            Design::message(2,0,38);
+
+            press = getch();
+            
+            if(press == 27)
+            {
+                break;
+            }
+            else
+            {
+                continue;
             }
         }
     }
-    file.close();
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //////////////////////////////////////////
@@ -1503,7 +1520,7 @@ void File::buyFood(const char *username, const char *password)
                 fstream foodFile(FoodnDrinkFile, ios::in | ios::out | ios::binary);
                 if (!foodFile.is_open())
                 {
-                    H::foreColor(7);H::gotoxy(91, 29);
+                    H::foreColor(7);H::gotoxy(98, 29);
                     cout << "Food file could not be opened";
                     Design::message(2,0,38);
                 }
@@ -1528,7 +1545,7 @@ void File::buyFood(const char *username, const char *password)
                                 mup.setFnd(fnd.getName(), fnd.getPrice(), quantity);
 
                                 H::foreColor(7);
-                                H::gotoxy(91, 29); cout << "\3\3";
+                                H::gotoxy(94, 29); cout << "\3\3";
                                 H::setcolor(4);
                                 cout << " Successfully Purchase";
                                 H::setcolor(7); cout << " \3\3";
@@ -1537,7 +1554,7 @@ void File::buyFood(const char *username, const char *password)
                             }
                             else
                             {
-                                H::foreColor(7); H::gotoxy(88, 29);
+                                H::foreColor(7); H::gotoxy(89, 29);
                                 cout << "Insufficient quantity are available";
 
                                 Design::message(2,0,38);
@@ -1551,7 +1568,7 @@ void File::buyFood(const char *username, const char *password)
                     if (!foodFound)
                     {
                         H::foreColor(4);
-                        H::gotoxy(80, 29);
+                        H::gotoxy(92, 29);
                         cout << "Food or Drink ID is not found";
                         
                         Design::message(2,0,38);
