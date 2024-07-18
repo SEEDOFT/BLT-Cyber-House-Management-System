@@ -5,96 +5,80 @@
 #include "BLT.h"
 #include "../Leng_Process_Code/File.h"
 #include <cstdlib>
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 using namespace BLT;
-// Inherite Design method to use in here
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-class File;
+
+#ifdef _WIN32
+const char* OPEN_COMMAND = "start ";
+#elif defined(__APPLE__)
+const char* OPEN_COMMAND = "open ";
+#else
+const char* OPEN_COMMAND = "xdg-open ";
+#endif
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+// Inherite Design method to use in here
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 class Process : public Design
 {
+    public:
+        static void Admin_And_User();
+        /**********************************/
+        //@@@       ADMIN METHODS       @@//
+        static void LogIn_AsAdmin(int cursor);
+        static void Admin_Option();
+        static void Admin_ChoosingOpt(int num);
 
-private:
-    static const char *getOpenCommand();
+        static void AdminProfileInfo();
+        static void SubAdminProfileInfo(int num);
+        static void AboutUs();
+        static void A_LetterFromUs();
 
-public:
-    static void Admin_And_User();
-    /**********************************/
-    //@@@       ADMIN METHODS       @@//
-    static void LogIn_AsAdmin(int cursor);
-    static void Admin_Option();
-    static void Admin_ChoosingOpt(int num);
+        static void GamesLst();
+        static void SubGameLst(int num);
+        static void InsertGame();
+        static void ViewGame();
+        static void SearchGame();
+        static void UpdateGame();
+        static void RemoveGame();
 
-    static void AdminProfileInfo();
-    static void SubAdminProfileInfo(int num);
-    static void AboutUs();
-    static void A_LetterFromUs();
+        static void FoodOrDrinkLst();
+        static void SubFoodAndDrink(int num);
+        static void InsertFoodDrink();
+        static void ViewFoodDrink();
+        static void SearchFoodDrink();
+        static void UpdateFoodDrink();
+        static void RemoveFoodDrink();
 
-    static void GamesLst();
-    static void SubGameLst(int num);
-    static void InsertGame();
-    static void ViewGame();
-    static void SearchGame();
-    static void UpdateGame();
-    static void RemoveGame();
+        static void ManageUserPayment();
 
-    static void FoodAndDrinkLst();
-    static void SubFoodAndDrink(int num);
-    static void InsertFoodDrink();
-    static void ViewFoodDrink();
-    static void SearchFoodDrink();
-    static void UpdateFoodDrink();
-    static void RemoveFoodDrink();
-
-    static void ManageUserPayment();
-
-    static void ManageUserInfo();
-    static void SubManageUserInfo(int num);
-    static void InsertUser();
-    static void ViewUser();
-    static void SearchUserData();
-    static void EditUserInfo();
-    static void RemoveUser();
-    static void SortUser();
-    /***********************************/
-    //@@@       END OF METHODS       @@//
-    /**********************************/
-    static void DisableMaximizeButton();
-    static void DisableMinimizeButton();
-    static void DisableCloseButton();
-    static void OutputHostName(int x, int y, int color);
-    static void UrlOpenner(const string &url);
-    static void runURL(int argc, char *argv[], string URL);
+        static void ManageUserInfo();
+        static void SubManageUserInfo(int num);
+        static void InsertUser();
+        static void ViewUser();
+        static void SearchUserData();
+        static void EditUserInfo();
+        static void RemoveUser();
+        static void SortUser();
+        /***********************************/
+        //@@@       END OF METHODS       @@//
+        /**********************************/
+        static void DisableMaximizeButton();
+        static void DisableMinimizeButton();
+        static void DisableCloseButton();
+        static void OutputHostName(int x, int y, int color);
+        static void openURL(const string& url);
 };
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-const char *Process::getOpenCommand()
+void Process::openURL(const string &url)
 {
-#ifdef _WIN32
-    return "start ";
-#elif defined(__APPLE__)
-    return "open ";
-#else
-    return "xdg-open ";
-#endif
-}
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void Process::UrlOpenner(const string &url)
-{
-    string command = getOpenCommand() + url;
-    if (system(command.c_str()) != 0)
+    string command = string(OPEN_COMMAND) + url;
+    if (system(command.c_str()) != 0) 
     {
-        cout << "Error opening URL." << endl;
+        cerr << "Error opening URL.";
     }
-}
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void Process::runURL(int argc, char *argv[], string URL)
-{
-    string url = URL;
-    if (argc > 1)
-    {
-        url = argv[1];
-    }
-
-    UrlOpenner(url);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Process::DisableCloseButton()
@@ -142,7 +126,7 @@ void Process::OutputHostName(int x, int y, int color)
     if (GetComputerNameW(hostname, &size))
     {
         tp(color, x, y);
-        wcout << hostname << endl;
+        wcout << hostname ;
     }
     else
     {
@@ -468,7 +452,7 @@ void Process::Admin_ChoosingOpt(int num)
 
         case 3:
             Design::LoadingAnimation();
-            FoodAndDrinkLst();
+            FoodOrDrinkLst();
             break;
 
         case 4:
@@ -595,11 +579,45 @@ void Process::A_LetterFromUs()
     H::setConsoleTitle(TEXT("A letter from Developers"));
     H::setcolor(7);
     H::cls();
+    char press = ' ';
     outline();
 
     A_Letter_from_UsTxt();
     A_Letter_from_Us_Animation();
-    A_Letter_from_Us_Design();
+
+    while(1)
+    {
+        // if(!kbhit())
+        // {
+        //     A_Letter_from_Us_Design();
+        // }
+        // else 
+        // {
+            A_Letter_from_Us_nonDesign();
+        // }
+
+        message(2, 0, 36);
+
+        press = getch();
+
+        if(press == 27)
+        {
+            break;
+        }
+        else if(press == 1)
+        {
+            openURL("http://training.antkh.com/");
+        }
+        else if(press == 2)
+        {
+            openURL("https://mptc.gov.kh/en/");
+        }
+        else
+        {
+            continue;
+        }
+    }
+    
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -1342,7 +1360,7 @@ void Process::ManageUserPayment()
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void Process::FoodAndDrinkLst()
+void Process::FoodOrDrinkLst()
 {
     H::setConsoleTitle(TEXT("Food and Drink Menu"));
 
@@ -1385,19 +1403,19 @@ void Process::FoodAndDrinkLst()
             // label
             H::foreColor(23);
             H::gotoxy(41, 14);
-            cout << "Insert Food & Drinks";
+            cout << "Insert Food or Drink";
             H::foreColor(23);
             H::gotoxy(70, 14);
-            cout << "View Food & Drinks";
+            cout << "View Food or Drink";
             H::foreColor(23);
             H::gotoxy(98, 14);
-            cout << "Search Food & Drinks";
+            cout << "Search Food or Drink";
             H::foreColor(23);
             H::gotoxy(41, 32);
-            cout << "Update Food & Drinks";
+            cout << "Update Food or Drink";
             H::foreColor(23);
             H::gotoxy(69, 32);
-            cout << "Remove Food & Drinks";
+            cout << "Remove Food or Drink";
             H::foreColor(23);
             H::gotoxy(102, 32);
             cout << "Back to MENU";
@@ -1406,7 +1424,7 @@ void Process::FoodAndDrinkLst()
                 H::drawBoxDoubleLineWithBG(41, 13, 20, 1, 199);
                 H::foreColor(199);
                 H::gotoxy(41, 14);
-                cout << "Insert Food & Drinks";
+                cout << "Insert Food or Drink";
                 choice = 1;
             }
             if (y == 2)
@@ -1414,7 +1432,7 @@ void Process::FoodAndDrinkLst()
                 H::drawBoxDoubleLineWithBG(69, 13, 20, 1, 199);
                 H::foreColor(199);
                 H::gotoxy(70, 14);
-                cout << "View Food & Drinks";
+                cout << "View Food or Drink";
                 choice = 2;
             }
             if (y == 3)
@@ -1422,7 +1440,7 @@ void Process::FoodAndDrinkLst()
                 H::drawBoxDoubleLineWithBG(98, 13, 20, 1, 199);
                 H::foreColor(199);
                 H::gotoxy(98, 14);
-                cout << "Search Food & Drinks";
+                cout << "Search Food or Drink";
                 choice = 3;
             }
             if (y == 4)
@@ -1430,7 +1448,7 @@ void Process::FoodAndDrinkLst()
                 H::drawBoxDoubleLineWithBG(41, 31, 20, 1, 199);
                 H::foreColor(199);
                 H::gotoxy(41, 32);
-                cout << "Update Food & Drinks";
+                cout << "Update Food or Drink";
                 choice = 4;
             }
             if (y == 5)
@@ -1438,7 +1456,7 @@ void Process::FoodAndDrinkLst()
                 H::drawBoxDoubleLineWithBG(69, 31, 20, 1, 199);
                 H::foreColor(199);
                 H::gotoxy(69, 32);
-                cout << "Remove Food & Drinks";
+                cout << "Remove Food or Drink";
                 choice = 5;
             }
             if (y == 6)
@@ -1516,7 +1534,7 @@ void Process::SubFoodAndDrink(int num)
 /*********************************************************/
 void Process::InsertFoodDrink()
 {
-    H::setConsoleTitle(TEXT("Insert Food & Drink Data"));
+    H::setConsoleTitle(TEXT("Insert Food or Drink Data"));
     H::setcolor(7);
     H::cls();
     H::setcursor(0, 0);
@@ -1553,7 +1571,7 @@ void Process::InsertFoodDrink()
 /*********************************************************/
 void Process::ViewFoodDrink()
 {
-    H::setConsoleTitle(TEXT("View Food & Drink Data"));
+    H::setConsoleTitle(TEXT("View Food and Drink Data"));
     H::setcolor(7);
     H::cls();
     H::setcursor(0, 0);
@@ -1583,7 +1601,7 @@ void Process::ViewFoodDrink()
 /*********************************************************/
 void Process::SearchFoodDrink()
 {
-    H::setConsoleTitle(TEXT("Search Food & Drink Data"));
+    H::setConsoleTitle(TEXT("Search Food or Drink Data"));
     H::setcolor(7);
     H::cls();
     H::setcursor(0, 0);
@@ -1620,7 +1638,7 @@ void Process::SearchFoodDrink()
 /*********************************************************/
 void Process::UpdateFoodDrink()
 {
-    H::setConsoleTitle(TEXT("Update Food & Drink Data"));
+    H::setConsoleTitle(TEXT("Update Food or Drink Data"));
     H::setcolor(7);
     H::cls();
     H::setcursor(0, 0);
@@ -1629,9 +1647,9 @@ void Process::UpdateFoodDrink()
     char press = ' ';
     B::UpdateTxt();
     B::Update_Design();
-    H::setcursor(1, 0);
+    H::setcursor(1,0);
     File::updateFile(1);
-    H::setcursor(0, 0);
+    H::setcursor(0,0);
 
     while (1)
     {
@@ -1657,7 +1675,7 @@ void Process::UpdateFoodDrink()
 /*********************************************************/
 void Process::RemoveFoodDrink()
 {
-    H::setConsoleTitle(TEXT("Remove Food & Drink Data"));
+    H::setConsoleTitle(TEXT("Remove Food or Drink Data"));
     H::setcolor(7);
     H::cls();
     H::setcursor(0, 0);

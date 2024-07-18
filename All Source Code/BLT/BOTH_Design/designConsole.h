@@ -49,6 +49,7 @@ class Design: public LENG
         */
         static void A_Letter_from_UsTxt();
         static void A_Letter_from_Us_Design();
+        static void A_Letter_from_Us_nonDesign();
         static void A_Letter_from_Us_Animation();
         /*
                     User MENU Design
@@ -114,26 +115,22 @@ void Design::LoadingAnimation()
 
     for(int i = 0 ; i < 100 ; i ++)
     {
-        //left and right
         H::HLine(30,22,i,3,220);
         H::HLine(130-i,21,1,3,220);
 
         H::HLine(30,20,i,3,220);
         H::HLine(130-i,19,1,3,220);
-        //up and down
-        if( i == 99 )
-        {
-            for(int i = 0 ; i < 26 ; i ++)
-            {
-                H::VLine(76,6,i+1,3,219);
-                H::VLine(78,31-i,1,3,219);
+    }
 
-                H::VLine(80,6,i+1,3,219);
-                H::VLine(82,31-i,1,3,219);
+    for(int i = 0 ; i < 26 ; i ++)
+    {
+        H::VLine(76,6,i+1,3,219);
+        H::VLine(78,31-i,1,3,219);
 
-                H::delay(1);
-            }
-        }
+        H::VLine(80,6,i+1,3,219);
+        H::VLine(82,31-i,1,3,219);
+
+        H::delay(1);
     }
 
     for(int i = 1 ; i <= 51 ; i ++)
@@ -149,26 +146,23 @@ void Design::LoadingAnimation()
         
         H::gotoxy(131-i,19);cout<<" ";
         H::gotoxy(29+i,19);cout<<" ";
+
+    }
+
+    for(int i = 1 ; i <= 12 ; i ++)
+    {
+        H::gotoxy(75,6+i);cout<<" ";
+        H::gotoxy(75,33-i);cout<<" ";
+
+        H::gotoxy(77,6+i);cout<<" ";
+        H::gotoxy(77,33-i);cout<<" ";
+
+        H::gotoxy(79,6+i);cout<<" ";
+        H::gotoxy(79,33-i);cout<<" ";
+
+        H::gotoxy(81,6+i);cout<<" ";
+        H::gotoxy(81,33-i);cout<<" ";
         H::delay(1);
-
-        if(i == 50)
-        {
-            for(int i = 1 ; i <= 12 ; i ++)
-            {
-                H::gotoxy(75,6+i);cout<<" ";
-                H::gotoxy(75,33-i);cout<<" ";
-
-                H::gotoxy(77,6+i);cout<<" ";
-                H::gotoxy(77,33-i);cout<<" ";
-
-                H::gotoxy(79,6+i);cout<<" ";
-                H::gotoxy(79,33-i);cout<<" ";
-
-                H::gotoxy(81,6+i);cout<<" ";
-                H::gotoxy(81,33-i);cout<<" ";
-                H::delay(2);
-            }
-        }
     }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -719,6 +713,15 @@ void Design::A_Letter_from_Us_Design()
     charLoop(sizeof(fifth), x+30, y+12, 3, fifth, 10);charLoop(sizeof(sixth), x+68, y+12, 4, sixth, 10);//Third
     charLoop(sizeof(seventh), x+22, y+14, 23, seventh, 10);//Fourth
     charLoop(sizeof(eighth), x+51, y+16, 23, eighth, 10);//Fifth
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void Design::A_Letter_from_Us_nonDesign()
+{
+    tp(3,x+19,y+8);  cout << "We're the scholarship students at ";H::setcolor(4);cout <<"[1]ANT Technology Training Center";H::setcolor(3);cout <<", specialize in Mobile Application.";
+    tp(71,x+39,y+10);cout << "Study For 11 Months From 19 February 2024 To 20 December 2024.";
+    tp(3,x+30,y+12); cout << "Thanks to the generous support of the ";H::setcolor(4);cout <<"[2]Ministry of Post and Telecommunication.";
+    tp(23,x+22,y+14);cout << "This opportunity is allowing us to develop valuable skills in mobile app development and pursue ";
+    tp(23,x+51,y+16);cout << "exciting careers in the tech industry.";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Design::UserMenuTxt()

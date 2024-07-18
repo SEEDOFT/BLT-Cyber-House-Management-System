@@ -55,15 +55,27 @@ void FoodnDrink::setQty(const char * qty)
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void FoodnDrink::update()
 {
-    H::gotoxy(35,36); H::foreColor(4); cout << "\t\t\t"; H::inputAll(fdName, sizeof(fdName)); cout << "\t\t\t\t"; H::inputNumber(fdPrice, sizeof(fdPrice));
-    cout << "\t\t\t\t";H::inputNumber(fdQty, sizeof(fdQty));
+    int tempQty;
+    char tmpQty[13];
+    H::gotoxy(35,36); H::foreColor(4); 
+    cout << "\t\t\t"; H::inputAll(fdName, sizeof(fdName)); 
+    cout << "\t\t\t\t"; H::inputNumber(tmpQty, sizeof(tmpQty));
+    cout << "\t\t\t\t";H::inputNumber(fdPrice, sizeof(fdPrice));
+
+    tempQty = atoi(tmpQty);
+    sprintf(tmpQty, "%d", tempQty);
+
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void FoodnDrink::input() 
 {
+    int tempQty;
+    char tmpQty[13];
     H::foreColor(176); H::gotoxy(99,23); cout<<": ";H::inputAll(fdName, sizeof(fdName));
-    H::foreColor(176); H::gotoxy(99,27); cout<<": "; H::inputNumber(fdQty, sizeof(fdQty));
+    H::foreColor(176); H::gotoxy(99,27); cout<<": "; H::inputNumber(tmpQty, sizeof(tmpQty));
     H::foreColor(176); H::gotoxy(99,31); cout<<": "; H::inputNumber(fdPrice, sizeof(fdPrice));
+    tempQty = atoi(tmpQty);
+    sprintf(tmpQty, "%d", tempQty);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void FoodnDrink::output(int y) 

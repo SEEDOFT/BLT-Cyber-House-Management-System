@@ -17,57 +17,59 @@ using namespace BLT;
 class File
 {
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-private:
-    static string dir;
-    static string FoodnDrinkFile;
-    static string Backup;
-    static string GameFile;
-    static string UserInfoFile;
-    static string MgUserPaymentFile;
+    private:
+        static string dir;
+        static string FoodnDrinkFile;
+        static string Backup;
+        static string GameFile;
+        static string UserInfoFile;
+        static string MgUserPaymentFile;
 
-    static int getMaxID(const string &fileName, int type);
+        static int getMaxID(const string &fileName, int type);
 
-    static vector<FoodnDrink> fndVector;
-    static vector<Game> gameVector;
-    static vector<MgUserPayment> mupVector;
+        static vector<FoodnDrink> fndVector;
+        static vector<Game> gameVector;
+        static vector<MgUserPayment> mupVector;
 
-    static FoodnDrink fnd;
-    static Game game;
-    static MgUserInfo mui;
-    static MgUserPayment mup;
+        static FoodnDrink fnd;
+        static Game game;
+        static MgUserInfo mui;
+        static MgUserPayment mup;
 
-    static fstream file;
-    static string currentFile;
+        static fstream file;
+        static string currentFile;
 
-    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-public:
-    static void insertFile(int n);
-    static void viewFile(int n);
-    static void searchFile(int n);
-    static void updateFile(int n);
-    static void deleteFile(int n);
-    static bool check_file(const string &fileName);
-    static bool checkUsername(const char *username);
-    static bool checkUsernameInVector(const char *username);
-    static void viewProfile(const char *username, const char *password);
+        //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    public:
+        static void insertFile(int n);
+        static void viewFile(int n);
+        static void searchFile(int n);
+        static void updateFile(int n);
+        static void deleteFile(int n);
+        static bool check_file(const string &fileName);
+        static bool checkUsername(const char *username, int x, int y, int color);
+        static bool checkUsernameInVector(const char *username, int x, int y, int color);
+        static void viewProfile(const char *username, const char *password);
 
-    static void setCurrentFile(int n);
-    static void insertToVector(int n, string &fileName);
-    static void pushToVector(int n);
-    static void loginTimeToFile(const char *username, const char *password);
-    static void logoutTimeToFile(const char *username, const char *password);
-    static void readLogin(const char *username, const char *password);
-    static void readLogout(const char *username, const char *password);
-    static void user_login();
-    static void userSubMenu(const char *username, const char *password);
-    static void buyMoreTime(const char *username, const char *password);
-    static void invoice(const char *username, const char *password);
-    static void calculateTime(const char *username, const char *password);
-    static void buyFood(const char *username, const char *password);
+        static void setCurrentFile(int n);
+        static void insertToVector(int n, string &fileName);
+        static void pushToVector(int n);
+        static void loginTimeToFile(const char *username, const char *password);
+        static void logoutTimeToFile(const char *username, const char *password);
+        static void readLogin(const char *username, const char *password);
+        static void readLogout(const char *username, const char *password);
+        static void user_login();
+        static void userSubMenu(const char *username, const char *password);
+        static void buyMoreTime(const char *username, const char *password);
+        static void invoice(const char *username, const char *password);
+        static void calculateTime(const char *username, const char *password);
+        static void buyFood(const char *username, const char *password);
 
-    static void viewAllUserInvoice();
-    // static void totalIncome();
-    static void viewIncome();
+        static void viewAllUserInvoice();
+        // static void totalIncome();
+        static void viewIncome();
+        static void OutputDate(int x, int y, int color);
+        static void OutputHostName(int x, int y, int color);
 };
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -90,6 +92,39 @@ string File::UserInfoFile = dir + "/UserInfo.ant";
 string File::MgUserPaymentFile = dir + "/MgUserPayment.ant";
 string File::currentFile = "";
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void File::OutputHostName(int x, int y, int color)
+{
+    DWORD size = MAX_COMPUTERNAME_LENGTH + 1;
+    wchar_t hostname[MAX_COMPUTERNAME_LENGTH + 1];
+
+    if (GetComputerNameW(hostname, &size))
+    {
+        H::setcolor(color); H::gotoxy(x,y);
+        wcout << hostname ;
+    }
+    else
+    {
+        cerr << "Error: Could not retrieve hostname." << endl;
+    }
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void File::OutputDate(int x, int y, int color)
+{
+    time_t t = time(nullptr);
+    tm* localTime = localtime(&t);
+    
+    const char* months[] = 
+    {
+        "January", "February", "March", "April", "May", 
+        "June","July", "August", "September", "October", "November", "December"
+    };
+
+    H::gotoxy(x,y);H::setcolor(color);
+    cout    << localTime->tm_mday << "/"
+            << months[localTime->tm_mon] << "/"
+            << (localTime->tm_year + 1900);
+}
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 bool sortByPriceDesc(const FoodnDrink &a, const FoodnDrink &b)
 {
@@ -186,8 +221,9 @@ void File::setCurrentFile(int n)
 // CHECK USERNAME IN FILE
 //////////////////////////////////////////
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-bool File::checkUsername(const char *username)
+bool File::checkUsername(const char *username, int x, int y, int color)
 {
+    H::setcursor(0,0);
     file.open(UserInfoFile, ios::in | ios::binary);
     if (!file.is_open())
     {
@@ -199,7 +235,10 @@ bool File::checkUsername(const char *username)
         {
             if (strcmp(mup.getUsername(), username) == 0)
             {
-                cout << "Username already exists" << endl;
+                H::setcolor(color); H::gotoxy(x,y);
+                cout << "Username already exists";
+                H::delay(500);
+                H::clearBox(x,y+1,23,-1,7);
                 file.close();
                 return true;
             }
@@ -213,13 +252,15 @@ bool File::checkUsername(const char *username)
 // CHECK USERNAME IN VECTOR
 //////////////////////////////////////////
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-bool File::checkUsernameInVector(const char *username)
+bool File::checkUsernameInVector(const char *username, int x, int y, int color)
 {
+    H::setcursor(0,0);
     for (const auto &user : mupVector)
     {
         if (strcmp(user.getUsername(), username) == 0)
         {
-            cout << "Username already exists" << endl;
+            H::setcolor(color); H::gotoxy(x,y);
+            cout << "Username already exists";
             return true;
         }
     }
@@ -272,7 +313,8 @@ void File::insertToVector(int n, string &currentFile)
             H::setcolor(135);
             H::gotoxy(65, 21);
             H::inputAll(username, sizeof(username));
-        } while (checkUsername(username) || checkUsernameInVector(username));
+
+        } while (checkUsername(username,0,0,0) || checkUsernameInVector(username,0,0,0));
 
         mup.setGuestname(guestName);
         mup.setUsername(username);
@@ -418,11 +460,9 @@ void File::searchFile(int n)
 
             if (n == 1)
             {
+                B::Search_Animation();//Animation
                 while (file.read((char *)&fnd, sizeof(FoodnDrink)))
                 {
-
-                    B::Search_Animation();//Animation
-
                     if (atoi(searchID) == fnd.getFndID())
                     {
                         fnd.output(11);
@@ -432,11 +472,9 @@ void File::searchFile(int n)
             }
             else if (n == 2)
             {
+                B::SearchGame_Animation();//Apply Animation while Searching
                 while (file.read((char *)&game, sizeof(Game)))
                 {
-
-                    B::SearchGame_Animation();//Apply Animation while Searching
-
                     if (atoi(searchID) == game.getID())
                     {
                         game.output(11);
@@ -446,11 +484,9 @@ void File::searchFile(int n)
             }
             else if (n == 3)
             {
+                B::SearchUser_Animation();////Apply Animation while Searching
                 while (file.read((char *)&mup, sizeof(MgUserPayment)))
                 {
-
-                    B::SearchUser_Animation();////Apply Animation while Searching
-
                     if (atoi(searchID) == mup.getID())
                     {
                         mup.output(13);
@@ -540,15 +576,14 @@ void File::updateFile(int n)
 
             if (n == 1)
             {
+                B::Update_Animation();//Animation
                 for (auto &item : fndVector)
                 {
-                    
-                    B::Update_Animation();//Animation
-
                     if (atoi(updateID) == item.getFndID())
                     {
                         item.output(8);
                         //output Update ID
+                        H::setcursor(1,0);
                         H::gotoxy(35, 36);H::foreColor(4);
                         cout << item.getFndID();
                         item.update();
@@ -559,11 +594,9 @@ void File::updateFile(int n)
             }
             else if (n == 2)
             {
+                B::UpdateGame_Animation();//game design
                 for (auto &item : gameVector)
                 {
-
-                    B::UpdateGame_Animation();//game design
-
                     if (atoi(updateID) == item.getID())
                     {
                         item.output(8);
@@ -577,30 +610,32 @@ void File::updateFile(int n)
             }
             else if (n == 3)
             {
+                B::UpdateUserInfo_Animation();//Animation
                 for (auto &item : mupVector)
-                {
-                    
-                    B::UpdateUserInfo_Animation();//Animation
-
+                {       
                     if (atoi(updateID) == item.getID())
                     {
                         item.output(8);
-                        H::foreColor(4);
-                        H::gotoxy(20, 36);
-                        cout << "\t\t" << item.getID();
-                        cout << "\t\t";
-                        H::inputLetter(guestName, sizeof(guestName));
+                        H::foreColor(4); H::gotoxy(32, 36);
+                        cout << item.getID();
 
+                        H::setcursor(1,0);
+                        H::foreColor(4); H::gotoxy(48, 36);
+                        H::inputLetter(guestName, sizeof(guestName));
                         do
                         {
-                            cout << "\t\t\t";
+                            H::setcursor(1,0);
+                            H::foreColor(4); H::gotoxy(72, 36);
+                            // H::clearBox(72,37,sizeof(username), -1, 7);
                             H::inputAll(username, sizeof(username));
                         } 
-                        while (checkUsername(username));
-
+                        while (checkUsername(username,68,37,4));
                         item.setGuestname(guestName);
                         item.setUsername(username);
+
+                        H::setcursor(1,0);
                         item.update();
+                        H::setcursor(0,0);
                         isfound = true;
                         break;
                     }
@@ -684,11 +719,9 @@ void File::deleteFile(int n)
         {
         case 1:
         {
+            B::Delete_Animation();//animation
             for (auto it = fndVector.begin(); it != fndVector.end();)
             {
-
-                B::Delete_Animation();//animation
-
                 if (it->getFndID() == deleteIDInt)
                 {
                     it->output(11);
@@ -704,11 +737,9 @@ void File::deleteFile(int n)
         }
         case 2:
         {
+            B::DeleteGame_Animation();//Apply
             for (auto it = gameVector.begin(); it != gameVector.end();)
             {
-
-                B::DeleteGame_Animation();//Apply
-
                 if (it->getID() == deleteIDInt)
                 {
                     it->output(11);
@@ -724,11 +755,9 @@ void File::deleteFile(int n)
         }
         case 3:
         {
+            B::DeleteUserInfo_Animation();//Animation
             for (auto it = mupVector.begin(); it != mupVector.end();)
             {
-
-                B::DeleteUserInfo_Animation();//Animation
-
                 if (it->getID() == deleteIDInt)
                 {
                     it->output(11);
@@ -1297,7 +1326,8 @@ void File::invoice(const char *username, const char *password)
     Design::outline();
     H::setcursor(0,0);
 
-
+    B::InvoiceTxt();
+    B::Invoice_Design();
     file.open(UserInfoFile, ios::in | ios::binary);
 
     if (!file.is_open())
@@ -1310,11 +1340,28 @@ void File::invoice(const char *username, const char *password)
         {
             if (strcmp(username, mup.getUsername()) == 0 && strcmp(password, mup.getPassword()) == 0)
             {
-                cout << "Added Time: " << mup.getBuyedTime() << endl;
-                cout << "Buyed Snack " << setw(25) << mup.getFoodnDrink() << "Price " << setw(8)
-                     << mup.getPrice() << "Quantity " << setw(5) << mup.getQty() << "Total Price " << mup.getFndTotal() << endl;
+                
+                H::setcolor(252);H::gotoxy(83,16);
+                cout << mup.getID();
+                H::setcolor(252);H::gotoxy(83,17);
+                cout << mup.getGuestname();
+                H::setcolor(252);H::gotoxy(83,18);
+                cout << mup.getUsername();
+                OutputDate(83,19,252);
 
-                    Design::message(2,0,38);
+                H::setcolor(252);H::gotoxy(53,23);
+                cout << left << setw(30) << mup.getFoodnDrink()
+                << setw(10) << mup.getQty() 
+                << setw(10) << mup.getTime()
+                << setw(10) << mup.getBuyedTime() ;
+                
+                OutputHostName(75,30,252);
+                H::setcolor(252);H::gotoxy(89,32);
+                cout << fixed << setprecision(2) << mup.totalIncome() / 4000;
+                H::setcolor(252);H::gotoxy(109,32);
+                cout << fixed << setprecision(0) << mup.totalIncome();
+
+                Design::message(2,0,38);
             }
         }
     }
@@ -1541,6 +1588,7 @@ void File::viewProfile(const char *username, const char *password)
         {
             if (strcmp(username, mup.getUsername()) == 0 && strcmp(password, mup.getPassword()) == 0)
             {
+                OutputDate(77,20,236);
                 mup.userProfile();
             }
         }

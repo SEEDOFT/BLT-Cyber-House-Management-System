@@ -61,6 +61,7 @@ public:
     int getID() const;
     const char *getUsername() const;
     const char *getPassword() const;
+    const char * getGuestname() const;
     void setID(int id);
     void setGuestname(const char *name);
     void setUsername(const char *name);
@@ -93,6 +94,11 @@ const char *MgUserPayment::getPrice() const
     return fndPrice;
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+const char * MgUserPayment::getGuestname() const 
+{
+    return guestName;
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 const char *MgUserPayment::getQty() const
 {
     return fndQty;
@@ -104,10 +110,11 @@ double MgUserPayment::getFndTotal() const
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void MgUserPayment::update()
 {
-    cout << "\t\t        ";
+    H::foreColor(4); H::gotoxy(96, 36);
     H::inputAll(password, sizeof(password));
 
-    cout << "\t\t    " << (time / 60);
+    H::foreColor(4); H::gotoxy(116, 36);
+    cout << (time / 60);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void MgUserPayment::setnTime(double time)
@@ -250,7 +257,7 @@ void MgUserPayment::setAllTotal(double allTotal)
 void MgUserPayment::output(int y)
 {
     H::foreColor(7);
-    H::gotoxy(21, 14 + y);
+    H::gotoxy(20, 14 + y);
     cout << left << setw(12) << muId << setw(16) << guestName << setw(24) << username << setw(20) << password
          << setw(15) << fixed << setprecision(0) << time / 60 << setw(21) << remainTime / 60 << totalPrice() << " KHR";
 }
@@ -272,8 +279,6 @@ void MgUserPayment::userProfile()
     cout << username;
     H::setcolor(236); H::gotoxy(77, 16);
     cout << password;
-
-    // H::setcolor(236); H::gotoxy(77, 20); // date
     H::setcolor(236); H::gotoxy(71, 32);
     cout << "BLT " << muId;
 }
