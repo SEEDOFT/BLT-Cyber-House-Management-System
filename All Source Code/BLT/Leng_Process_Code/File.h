@@ -276,9 +276,11 @@ void File::insertToVector(int n, string &currentFile)
     int i = 1;
     char guestName[20];
     char username[20];
-
+    H::setcursor(1,0);
     int maxID = getMaxID(currentFile, n);
-
+    fndVector.clear();
+    gameVector.clear();
+    mupVector.clear();
     if (n == 1)
     {
         fnd.setID(maxID + i);

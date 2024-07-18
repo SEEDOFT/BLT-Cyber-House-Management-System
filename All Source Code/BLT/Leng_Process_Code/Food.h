@@ -63,7 +63,7 @@ void FoodnDrink::update()
     cout << "\t\t\t\t";H::inputNumber(fdPrice, sizeof(fdPrice));
 
     tempQty = atoi(tmpQty);
-    sprintf(tmpQty, "%d", tempQty);
+    sprintf(fdQty, "%d", tempQty);
 
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -75,18 +75,20 @@ void FoodnDrink::input()
     H::foreColor(176); H::gotoxy(99,27); cout<<": "; H::inputNumber(tmpQty, sizeof(tmpQty));
     H::foreColor(176); H::gotoxy(99,31); cout<<": "; H::inputNumber(fdPrice, sizeof(fdPrice));
     tempQty = atoi(tmpQty);
-    sprintf(tmpQty, "%d", tempQty);
+    sprintf(fdQty, "%d", tempQty);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void FoodnDrink::output(int y) 
 {
     double price = atof (getPrice());
 
-	if(strlen(fdQty) == 0)
+	if(strcmp(fdQty,"0") == 0)
 	{
-		H::setcolor(4);H::gotoxy(61,25); strcpy(fdQty, "...Food and Drink are out of stock...");
+		H::setcolor(4);H::gotoxy(61,25); strcpy(fdQty, "OUT OF STOCK");
 	}
-    H::setcolor(7);H::gotoxy(36,14+y);cout << left << setw(21) << fdId << setw(32) << fdName << setw(32) << fdQty << fixed << setprecision(2) << "$ " << price ;
+    H::setcolor(7);H::gotoxy(36,14+y);cout << left << setw(21) << fdId 
+        << setw(32) << fdName << setw(32) << fdQty << fixed << setprecision(2) 
+        << "$ " << price ;
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif
