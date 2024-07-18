@@ -28,6 +28,7 @@
 #include"../Kunthea_Design/ViewProfile.h"
 #include"../Kunthea_Design/ViewAllUserInvoice.h"
 #include"../Kunthea_Design/SearchUserInfo.h"
+#include"../Kunthea_Design/ExitDesign.h"
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 namespace BLT
 {
@@ -39,8 +40,7 @@ namespace BLT
     public ManageUserInfo, public DeleteGameDesign,public UserSignUp, public ViewUserInfoDesign, 
     public DeleteUserInfo, public SortUserDesign, public UpdateUserInfo, public CalculateIncome,
     public BuyFoodnDrink, public BuyHour, public AllInvoice, public ViewProfile, public ViewAllUserInvoice,
-    public SearchUser
-
+    public SearchUser, public ExitDesign
     {
         public:
     };

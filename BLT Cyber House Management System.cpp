@@ -10,10 +10,9 @@ int main()
     H::setFont(20, 700);
     H::setcursor(0, 0);
     Process::DisableMaximizeButton();
+    Process::DisableCloseButton();
     
     Process::Admin_And_User();
-    // Process::AboutUs_Design();
-    // Process::A_LetterFromUs();
 
     return 0;
 }

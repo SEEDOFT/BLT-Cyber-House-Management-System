@@ -62,6 +62,8 @@ class Process : public Design
         static void EditUserInfo();
         static void RemoveUser();
         static void SortUser();
+
+        static void ExitTheProgram();
         /***********************************/
         //@@@       END OF METHODS       @@//
         /**********************************/
@@ -189,31 +191,31 @@ void Process::Admin_And_User()
 
             switch (press)
             {
-            case 72: // up
-            {
-                num--;
-                if (num < 1)
+                case 72: // up
                 {
-                    num = 2;
+                    num--;
+                    if (num < 1)
+                    {
+                        num = 2;
+                    }
+                    break;
                 }
-                break;
-            }
 
-            case 80: // down
-            {
-                num++;
-                if (num > 2)
+                case 80: // down
                 {
-                    num = 1;
+                    num++;
+                    if (num > 2)
+                    {
+                        num = 1;
+                    }
+                    break;
                 }
-                break;
-            }
 
-            case 8: // delete key
-            {
-                exit(0);
-                break;
-            }
+                case 8: // delete key
+                {
+                    ExitTheProgram();//exit program method
+                    break;
+                }
             }
 
         } while (press != 13);
@@ -222,15 +224,15 @@ void Process::Admin_And_User()
 
         switch (num)
         {
-        case 1:
-            Admin_User_ClsBox(1);
-            LogIn_AsAdmin(1);
-            break;
+            case 1:
+                Admin_User_ClsBox(1);
+                LogIn_AsAdmin(1);
+                break;
 
-        case 2:
-            Admin_User_ClsBox(2);
-            File::user_login();
-            break;
+            case 2:
+                Admin_User_ClsBox(2);
+                File::user_login();
+                break;
         }
     }
 }
@@ -340,7 +342,7 @@ void Process::Admin_Option()
         DesktopImg();
 
         char press;
-        int num = 0;
+        int num = 1;
         int choice = 0;
 
         do
@@ -428,6 +430,7 @@ void Process::Admin_Option()
             }
             }
         } while (press != 13);
+        adminSelectionOpt(choice);
         Admin_ChoosingOpt(choice);
     }
 }
@@ -493,23 +496,30 @@ void Process::AdminProfileInfo()
 
         do
         {
-            H::drawBoxDoubleLineWithBG(105, 10, 30, 1, 187);
-            H::drawBoxDoubleLineWithBG(105, 16, 30, 1, 187);
-            H::drawBoxDoubleLineWithBG(105, 22, 30, 1, 187);
+            H::drawBoxDoubleLineWithBG(105, 11, 30, 1, 183);
+            H::drawBoxDoubleLineWithBG(105, 17, 30, 1, 183);
+            H::drawBoxDoubleLineWithBG(105, 23, 30, 1, 183);
+
+            H::gotoxy(116,12);H::setcolor(185); cout <<"About Us";
+            H::gotoxy(112,18);H::setcolor(185); cout <<"A Letter from Us";
+            H::gotoxy(114,24);H::setcolor(185); cout <<"Back to MENU";
 
             if (y == 1)
             {
-                H::drawBoxDoubleLineWithBG(105, 10, 30, 1, 68);
+                H::drawBoxDoubleLineWithBG(105, 11, 30, 1, 68);
+                H::gotoxy(116,12);H::setcolor(71); cout <<"About Us";
                 choice = 1;
             }
             if (y == 2)
             {
-                H::drawBoxDoubleLineWithBG(105, 16, 30, 1, 68);
+                H::drawBoxDoubleLineWithBG(105, 17, 30, 1, 68);
+                H::gotoxy(112,18);H::setcolor(71); cout <<"A Letter from Us";
                 choice = 2;
             }
             if (y == 3)
             {
-                H::drawBoxDoubleLineWithBG(105, 22, 30, 1, 68);
+                H::drawBoxDoubleLineWithBG(105, 23, 30, 1, 68);
+                H::gotoxy(114,24);H::setcolor(71); cout <<"Back to MENU";
                 choice = 3;
             }
 
@@ -548,9 +558,11 @@ void Process::SubAdminProfileInfo(int num)
     switch (num)
     {
         case 1:
+            LoadingAnimation();
             AboutUs();
             break;
         case 2:
+            LoadingAnimation();
             A_LetterFromUs();
             break;
 
@@ -565,9 +577,28 @@ void Process::AboutUs()
     H::setConsoleTitle(TEXT("About Us"));
     H::setcolor(7);
     H::cls();
+    H::setcursor(0,0);
     outline();
+    
+    char press = ' ';
     AboutUsTxt();
     AboutUs_Design();
+
+    while(1)
+    {
+        message(2,0,38);
+
+        press = getch();
+
+        if(press == 27)
+        {
+            break;
+        }
+        else
+        {
+            continue;
+        }
+    }
 }
 /******************************************************** */
 void Process::A_LetterFromUs()
@@ -957,8 +988,7 @@ void Process::ManageUserInfo()
         do
         {
             H::drawBoxDoubleLineWithBG(30, 17, 30, 1, 183);
-            H::drawBoxDoubleLineWithBG(30, 22, 30, 1, 183);
-            H::drawBoxDoubleLineWithBG(30, 27, 30, 1, 183);
+            H::drawBoxDoubleLineWithBG(30, 25, 30, 1, 183);
             H::drawBoxDoubleLineWithBG(30, 32, 30, 1, 183);
 
             H::drawBoxDoubleLineWithBG(99, 17, 30, 1, 183);
@@ -969,21 +999,18 @@ void Process::ManageUserInfo()
             H::gotoxy(38, 18);
             cout << "SIGN UP USER";
             H::foreColor(183);
-            H::gotoxy(38, 23);
+            H::gotoxy(38, 26);
             cout << "VIEW USER INFO";
             H::foreColor(183);
-            H::gotoxy(37, 28);
+            H::gotoxy(37, 33);
             cout << "SEARCH USER INFO";
-            H::foreColor(183);
-            H::gotoxy(38, 33);
-            cout << "EDIT USER INFO";
 
             H::foreColor(183);
-            H::gotoxy(106, 18);
-            cout << "DELETE USER INFO";
+            H::gotoxy(107, 18);
+            cout << "EDIT USER INFO";
             H::foreColor(183);
-            H::gotoxy(107, 25);
-            cout << "SORTING USER";
+            H::gotoxy(106, 25);
+            cout << "DELETE USER INFO";
             H::foreColor(183);
             H::gotoxy(112, 33);
             cout << "BACK";
@@ -998,51 +1025,43 @@ void Process::ManageUserInfo()
             }
             if (y == 2)
             {
-                H::drawBoxDoubleLineWithBG(30, 22, 30, 1, 135);
+                H::drawBoxDoubleLineWithBG(30, 25, 30, 1, 135);
                 H::foreColor(135);
-                H::gotoxy(38, 23);
+                H::gotoxy(38, 26);
                 cout << "VIEW USER INFO";
                 choice = 2;
             }
             if (y == 3)
             {
-                H::drawBoxDoubleLineWithBG(30, 27, 30, 1, 135);
+                H::drawBoxDoubleLineWithBG(30, 32, 30, 1, 135);
                 H::foreColor(135);
-                H::gotoxy(37, 28);
+                H::gotoxy(37, 33);
                 cout << "SEARCH USER INFO";
                 choice = 3;
             }
             if (y == 4)
             {
-                H::drawBoxDoubleLineWithBG(30, 32, 30, 1, 135);
+                H::drawBoxDoubleLineWithBG(99, 17, 30, 1, 135);
                 H::foreColor(135);
-                H::gotoxy(38, 33);
+                H::gotoxy(107, 18);
                 cout << "EDIT USER INFO";
                 choice = 4;
             }
             if (y == 5)
             {
-                H::drawBoxDoubleLineWithBG(99, 17, 30, 1, 135);
+                H::drawBoxDoubleLineWithBG(99, 24, 30, 1, 135);
                 H::foreColor(135);
-                H::gotoxy(106, 18);
+                H::gotoxy(106, 25);
                 cout << "DELETE USER INFO";
                 choice = 5;
             }
             if (y == 6)
             {
-                H::drawBoxDoubleLineWithBG(99, 24, 30, 1, 135);
-                H::foreColor(135);
-                H::gotoxy(107, 25);
-                cout << "SORTING USER";
-                choice = 6;
-            }
-            if (y == 7)
-            {
                 H::drawBoxDoubleLineWithBG(99, 32, 30, 1, 135);
                 H::foreColor(135);
                 H::gotoxy(112, 33);
                 cout << "BACK";
-                choice = 7;
+                choice = 6;
             }
 
             press = getch();
@@ -1054,12 +1073,12 @@ void Process::ManageUserInfo()
                 if (y < 1)
                 {
 
-                    y = 7;
+                    y = 6;
                 }
                 break;
             case 80:
                 y++;
-                if (y > 7)
+                if (y > 6)
                 {
                     y = 1;
                 }
@@ -1105,13 +1124,8 @@ void Process::SubManageUserInfo(int num)
             RemoveUser();
             break;
 
-        // short
+        //Back
         case 6:
-            Design::LoadingAnimation();
-            SortUser();
-            break;
-
-        case 7:
             Admin_Option();
             break;
     }
@@ -1297,7 +1311,7 @@ void Process::RemoveUser()
 /*********************************************************/
 void Process::SortUser()
 {
-    H::setConsoleTitle(TEXT("Remove User Data"));
+    H::setConsoleTitle(TEXT("Sort User Data"));
     H::setcolor(7);
     H::cls();
     H::setcursor(0, 0);
@@ -1709,6 +1723,21 @@ void Process::RemoveFoodDrink()
             continue;
         }
     }
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void Process::ExitTheProgram()
+{
+    H::setConsoleTitle(TEXT("Exit the program"));
+    H::setcolor(7);
+    H::cls();
+    outline();
+    H::setcursor(0,0);
+
+    B::ExitTxt();
+    
+    message(6,0,0);
+
+    H::gotoxy(0,41);exit(0);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 /*

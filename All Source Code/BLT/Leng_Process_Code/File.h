@@ -47,7 +47,7 @@ class File
         static void updateFile(int n);
         static void deleteFile(int n);
         static bool check_file(const string &fileName);
-        static bool checkUsername(const char *username, int x, int y, int color);
+        static bool checkUsername(const char *username, int x, int y, int color, int clsColor);
         static bool checkUsernameInVector(const char *username, int x, int y, int color);
         static void viewProfile(const char *username, const char *password);
 
@@ -221,7 +221,7 @@ void File::setCurrentFile(int n)
 // CHECK USERNAME IN FILE
 //////////////////////////////////////////
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-bool File::checkUsername(const char *username, int x, int y, int color)
+bool File::checkUsername(const char *username, int x, int y, int color, int clsColor)
 {
     H::setcursor(0,0);
     file.open(UserInfoFile, ios::in | ios::binary);
@@ -238,7 +238,7 @@ bool File::checkUsername(const char *username, int x, int y, int color)
                 H::setcolor(color); H::gotoxy(x,y);
                 cout << "Username already exists";
                 H::delay(500);
-                H::clearBox(x,y+1,23,-1,7);
+                H::clearBox(x,y+1,23,-1,clsColor);
                 file.close();
                 return true;
             }
@@ -312,16 +312,18 @@ void File::insertToVector(int n, string &currentFile)
 
         do
         {
+            H::setcursor(1,0);
             H::setcolor(135);
             H::gotoxy(65, 21);
             H::inputAll(username, sizeof(username));
 
-        } while (checkUsername(username,0,0,0) || checkUsernameInVector(username,0,0,0));
-
+        } while (checkUsername(username,65,21,135,136) || checkUsernameInVector(username,65,21,135));
+        H::setcursor(1,0);
         mup.setGuestname(guestName);
         mup.setUsername(username);
         mup.input(maxID + i);
         mupVector.push_back(mup);
+        H::setcursor(0,0);
     }
     i++;
 }
@@ -626,12 +628,12 @@ void File::updateFile(int n)
                         H::inputLetter(guestName, sizeof(guestName));
                         do
                         {
+                            H::clearBox(72,37,5, -1, 7);
                             H::setcursor(1,0);
                             H::foreColor(4); H::gotoxy(72, 36);
-                            // H::clearBox(72,37,sizeof(username), -1, 7);
                             H::inputAll(username, sizeof(username));
                         } 
-                        while (checkUsername(username,68,37,4));
+                        while (checkUsername(username,68,37,4,7));
                         item.setGuestname(guestName);
                         item.setUsername(username);
 
@@ -1507,10 +1509,10 @@ void File::buyFood(const char *username, const char *password)
             {
                 H::setcursor(1, 0);
                 H::foreColor(1);
-                H::gotoxy(118, 19);
+                H::gotoxy(116, 19);
                 H::inputNumber(foodID, sizeof(foodID)); // food&drink ID
                 H::foreColor(1);
-                H::gotoxy(118, 23);
+                H::gotoxy(116, 23);
                 H::inputNumber(quantity, sizeof(quantity)); // qty
 
                 H::setcursor(0, 0);
@@ -1637,22 +1639,35 @@ void File::viewAllUserInvoice()
     double allTotal = 0;
     file.open(UserInfoFile, ios::in | ios::binary);
 
-    int y = 0;
-    while (file.read((char *)&mup, sizeof(MgUserPayment)))
+    if(!file.is_open())
     {
-        allTotal += mup.totalIncome();
-        mup.viewAll(y);
-        y++;
+        Design::message(4, 0, 7);
     }
-    H::gotoxy(30,36); H::setcolor(55); 
-    cout << "All Income ";
+    else
+    {
+        if(check_file(UserInfoFile))
+        {
+            Design::message(5,0,7);
+        }
+        else
+        {
+            int y = 0;
+            while (file.read((char *)&mup, sizeof(MgUserPayment)))
+            {
+                allTotal += mup.totalIncome();
+                mup.viewAll(y);
+                y++;
+            }
+            H::gotoxy(30,36); H::setcolor(55); 
+            cout << "All Income ";
 
-    H::gotoxy(81,36); H::setcolor(103); 
-    cout << "USD : " << fixed << setprecision(2) << allTotal / 4000;
-    H::gotoxy(111,36); H::setcolor(103); 
-    cout << "KHR : " << fixed << setprecision(0) << allTotal;
-
-    file.close();
+            H::gotoxy(81,36); H::setcolor(103); 
+            cout << "USD : " << fixed << setprecision(2) << allTotal / 4000;
+            H::gotoxy(111,36); H::setcolor(103); 
+            cout << "KHR : " << fixed << setprecision(0) << allTotal;
+        }
+        file.close();
+    }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 ////////////////////////////////

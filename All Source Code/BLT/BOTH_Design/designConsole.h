@@ -22,6 +22,7 @@ class Design: public LENG
         static void message(int n, int width, int height);
         static void LoadingAnimation();
         static void interface_design();
+        static void adminSelectionOpt(int num);
 
         static void Admin_User_ClsBox(int num);
         /*
@@ -105,6 +106,208 @@ void Design::outline()
     H::setcolor(3);H::gotoxy(158,21); cout << "\36";
     H::VLine(159,21,16,3,179);
     H::setcolor(3);H::gotoxy(158,38); cout << "\37";
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void Design::adminSelectionOpt(int num)
+{
+    if(num == 1)
+    {
+        for(int i = 1 ; i <= 15 ; i ++)
+        {
+            H::delay(20);
+
+            H::setcolor(7);
+            H::gotoxy(18+i,13); cout<<" ";
+            H::gotoxy(18+i,14); cout<<" ";
+            H::gotoxy(18+i,15); cout<<" ";
+
+            H::gotoxy(51-i,13); cout<<" ";
+            H::gotoxy(51-i,14); cout<<" ";
+            H::gotoxy(51-i,15); cout<<" ";
+
+            //text
+            H::setcolor(204);
+            H::gotoxy(85+i,32);cout<<" ";
+            H::gotoxy(85+i,33);cout<<" ";
+            H::gotoxy(85+i,34);cout<<" ";
+
+            H::gotoxy(115-i,32);cout<<" ";
+            H::gotoxy(115-i,33);cout<<" ";
+            H::gotoxy(115-i,34);cout<<" ";
+
+            if(i == 14)
+            {
+                H::setcolor(199);H::gotoxy(87,33);cout<<"Admin Profile Information";
+
+            }
+            
+        }
+    }
+    else if(num == 2)
+    {
+        for(int i = 1 ; i <= 15 ; i ++)
+        {
+            H::delay(20);
+
+            H::setcolor(7);
+            H::gotoxy(23+i,17); cout<<" ";
+            H::gotoxy(23+i,18); cout<<" ";
+            H::gotoxy(23+i,19); cout<<" ";
+
+            H::gotoxy(56-i,17); cout<<" ";
+            H::gotoxy(56-i,18); cout<<" ";
+            H::gotoxy(56-i,19); cout<<" ";
+
+            //text
+            H::setcolor(204);
+            H::gotoxy(85+i,32);cout<<" ";
+            H::gotoxy(85+i,33);cout<<" ";
+            H::gotoxy(85+i,34);cout<<" ";
+
+            H::gotoxy(115-i,32);cout<<" ";
+            H::gotoxy(115-i,33);cout<<" ";
+            H::gotoxy(115-i,34);cout<<" ";
+
+            if(i == 14)
+            {
+                H::setcolor(199);H::gotoxy(95,33);cout<<"Games List";
+
+            }
+            
+        }
+    }
+    else if(num == 3)
+    {
+        for(int i = 1 ; i <= 15 ; i ++)
+        {
+            H::delay(20);
+
+            H::setcolor(7);
+            H::gotoxy(18+i,21); cout<<" ";
+            H::gotoxy(18+i,22); cout<<" ";
+            H::gotoxy(18+i,23); cout<<" ";
+
+            H::gotoxy(51-i,21); cout<<" ";
+            H::gotoxy(51-i,22); cout<<" ";
+            H::gotoxy(51-i,23); cout<<" ";
+
+            //text
+            H::setcolor(204);
+            H::gotoxy(85+i,32);cout<<" ";
+            H::gotoxy(85+i,33);cout<<" ";
+            H::gotoxy(85+i,34);cout<<" ";
+
+            H::gotoxy(115-i,32);cout<<" ";
+            H::gotoxy(115-i,33);cout<<" ";
+            H::gotoxy(115-i,34);cout<<" ";
+
+            if(i == 14)
+            {
+                H::setcolor(199);H::gotoxy(90,33);cout<<"Food and Drink List";
+
+            }
+            
+        }
+    }
+    else if(num == 4)
+    {
+        for(int i = 1 ; i <= 15 ; i ++)
+        {
+            H::delay(20);
+
+            H::setcolor(7);
+            H::gotoxy(23+i,25); cout<<" ";
+            H::gotoxy(23+i,26); cout<<" ";
+            H::gotoxy(23+i,27); cout<<" ";
+
+            H::gotoxy(56-i,25); cout<<" ";
+            H::gotoxy(56-i,26); cout<<" ";
+            H::gotoxy(56-i,27); cout<<" ";
+
+            //text
+            H::setcolor(204);
+            H::gotoxy(85+i,32);cout<<" ";
+            H::gotoxy(85+i,33);cout<<" ";
+            H::gotoxy(85+i,34);cout<<" ";
+
+            H::gotoxy(115-i,32);cout<<" ";
+            H::gotoxy(115-i,33);cout<<" ";
+            H::gotoxy(115-i,34);cout<<" ";
+
+            if(i == 14)
+            {
+                H::setcolor(199);H::gotoxy(87,33);cout<<"Manage User's Information";
+
+            }
+            
+        }
+    }
+    else if(num == 5)
+    {
+         for(int i = 1 ; i <= 15 ; i ++)
+        {
+            H::delay(20);
+
+            H::setcolor(7);
+            H::gotoxy(18+i,29); cout<<" ";
+            H::gotoxy(18+i,30); cout<<" ";
+            H::gotoxy(18+i,31); cout<<" ";
+
+            H::gotoxy(51-i,29); cout<<" ";
+            H::gotoxy(51-i,30); cout<<" ";
+            H::gotoxy(51-i,31); cout<<" ";
+
+            //text
+            H::setcolor(204);
+            H::gotoxy(85+i,32);cout<<" ";
+            H::gotoxy(85+i,33);cout<<" ";
+            H::gotoxy(85+i,34);cout<<" ";
+
+            H::gotoxy(115-i,32);cout<<" ";
+            H::gotoxy(115-i,33);cout<<" ";
+            H::gotoxy(115-i,34);cout<<" ";
+
+            if(i == 14)
+            {
+                H::setcolor(199);H::gotoxy(89,33);cout<<"Manage User's Payment";
+
+            }
+            
+        }
+    }
+    else if(num == 6)
+    {
+        for(int i = 1 ; i <= 15 ; i ++)
+        {
+            H::delay(20);
+
+            H::setcolor(7);
+            H::gotoxy(23+i,33); cout<<" ";
+            H::gotoxy(23+i,34); cout<<" ";
+            H::gotoxy(23+i,35); cout<<" ";
+
+            H::gotoxy(56-i,33); cout<<" ";
+            H::gotoxy(56-i,34); cout<<" ";
+            H::gotoxy(56-i,35); cout<<" ";
+
+            //text
+            H::setcolor(204);
+            H::gotoxy(85+i,32);cout<<" ";
+            H::gotoxy(85+i,33);cout<<" ";
+            H::gotoxy(85+i,34);cout<<" ";
+
+            H::gotoxy(115-i,32);cout<<" ";
+            H::gotoxy(115-i,33);cout<<" ";
+            H::gotoxy(115-i,34);cout<<" ";
+
+            if(i == 14)
+            {
+                H::setcolor(199);H::gotoxy(91,33);cout<<"Log Out of Account";
+
+            }
+            
+        }
+    }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Design::LoadingAnimation()
@@ -415,12 +618,12 @@ void Design::Login_Design()
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Design::AdminMenuBoxes()
 {
-    H::drawBoxSingleLineWithBG(x+10,y+8,30,1,153);     
-    H::drawBoxSingleLineWithBG(x+15,y+12,30,1,153);      
-    H::drawBoxSingleLineWithBG(x+10,y+16,30,1,153);
-    H::drawBoxSingleLineWithBG(x+15,y+20,30,1,153);
-    H::drawBoxSingleLineWithBG(x+10,y+24,30,1,153);
-    H::drawBoxSingleLineWithBG(x+15,y+28,30,1,153);
+    H::drawBoxDoubleLineWithBG(x+10,y+8 ,30,1,151);     
+    H::drawBoxDoubleLineWithBG(x+15,y+12,30,1,151);      
+    H::drawBoxDoubleLineWithBG(x+10,y+16,30,1,151);
+    H::drawBoxDoubleLineWithBG(x+15,y+20,30,1,151);
+    H::drawBoxDoubleLineWithBG(x+10,y+24,30,1,151);
+    H::drawBoxDoubleLineWithBG(x+15,y+28,30,1,151);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -457,41 +660,11 @@ void Design::AdminMenu_Design()
     for(int i = 1 ; i <= 50 ; i ++)
     {
         //top
-        tp(191,x+69-i,y-4);cout<<char(204);H::HLine(x+70-i,y-4,1,191,205);
-        H::HLine(x+70,y-4,i,191,205);H::setcolor(191);cout<<char(185);
+        tp(4,x+69-i,y-4);cout<<char(204);H::HLine(x+70-i,y-4,1,4,7);
+        H::HLine(x+70,y-4,i,4,7);H::setcolor(4);cout<<char(185);
         //bottom
-        tp(191,x+69-i,y+3);cout<<char(204);H::HLine(x+70-i,y+3,1,191,205);
-        H::HLine(x+70,y+3,i,191,205);H::setcolor(191);cout<<char(185);
-    }
-    //second
-    for(int i = 1 ; i <= 40 ; i ++)
-    {
-        //top
-        tp(71,x+69-i,y-4);cout<<char(204);H::HLine(x+70-i,y-4,1,71,205);
-        H::HLine(x+70,y-4,i,71,205);H::setcolor(71);cout<<char(185);
-        //bottom
-        tp(71,x+69-i,y+3);cout<<char(204);H::HLine(x+70-i,y+3,1,71,205);
-        H::HLine(x+70,y+3,i,71,205);H::setcolor(71);cout<<char(185);   
-    }
-    //third
-    for(int i = 1 ; i <= 28 ; i ++)
-    {
-        //top
-        tp(191,x+69-i,y-4);cout<<char(204);H::HLine(x+70-i,y-4,1,191,205);
-        H::HLine(x+70,y-4,i,191,205);H::setcolor(191);cout<<char(185);
-        //bottom
-        tp(191,x+69-i,y+3);cout<<char(204);H::HLine(x+70-i,y+3,1,191,205);
-        H::HLine(x+70,y+3,i,191,205);H::setcolor(191);cout<<char(185);   
-    }
-    //fourth
-    for(int i = 1 ; i <= 17 ; i ++)
-    {
-        //top
-        tp(103,x+69-i,y-4);cout<<char(204);H::HLine(x+70-i,y-4,1,103,205);
-        H::HLine(x+70,y-4,i,103,205);H::setcolor(103);cout<<char(185);
-        //bottom
-        tp(103,x+69-i,y+3);cout<<char(204);H::HLine(x+70-i,y+3,1,103,205);
-        H::HLine(x+70,y+3,i,103,205);H::setcolor(103);cout<<char(185);   
+        tp(4,x+69-i,y+3);cout<<char(204);H::HLine(x+70-i,y+3,1,4,7);
+        H::HLine(x+70,y+3,i,4,7);H::setcolor(4);cout<<char(185);
     }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -514,10 +687,10 @@ void Design::AdminMenuTxt()
     H::VLine(x+13 ,y-4,6,4,219);
 
     H::VLine(x+128,y-4,6,4,219);
-    H::VLine(x+127,y-5,8,4,219);
+    H::VLine(x+127,y-5,8,3,219);
     H::VLine(x+126,y-4,6,4,219);
     H::VLine(x+125,y-5,8,3,219);
-    H::VLine(x+124,y-4,6,3,219);
+    H::VLine(x+124,y-4,6,4,219);
     H::VLine(x+123,y-5,8,3,219);
 
 }
@@ -592,28 +765,39 @@ void Design::AdminProfileInfo_Design()
         H::HLine(x+87-i,y+5,1,7,205);
 
         //bot
-        H::HLine(x+5,y+20,i,7,205);
-        H::HLine(x+87-i,y+20,1,7,205);
+        H::HLine(x+5,y+21,i,7,205);
+        H::HLine(x+87-i,y+21,1,7,205);
     }
     //connect ascii code
     H::gotoxy(x+5,y+5);cout<<char(201);//left to down
-    H::gotoxy(x+5,y+20);cout<<char(200);//down to right
+    H::gotoxy(x+5,y+21);cout<<char(200);//down to right
     H::gotoxy(x+87,y+5);cout<<char(187);//right to down
-    H::gotoxy(x+87,y+20);cout<<char(188);//down to left
-    for(int i = 1 ; i <= 7 ; i ++)
+    H::gotoxy(x+87,y+21);cout<<char(188);//down to left
+
+    for(int i = 1 ; i <= 8 ; i ++)
     {
         //left
         H::VLine(x+6,y+5,i,7,186);H::delay(10);
-        H::VLine(x+6,y+19-i,1,7,186);H::delay(10);
+        H::VLine(x+6,y+20-i,1,7,186);H::delay(10);
 
         //right
         H::VLine(x+88,y+5,i,7,186);H::delay(10);
-        H::VLine(x+88,y+19-i,1,7,186);H::delay(10);
+        H::VLine(x+88,y+20-i,1,7,186);H::delay(10);
     }
+
+    tp(4,x+3,27);cout<<R"(                 _                                                            _                                                       )";
+    tp(4,x+3,28);cout<<R"(               _(_)_                          wWWWw   _                     _(_)_                          wWWWw   _      wWWWw       )";
+    tp(4,x+3,29);cout<<R"(   @@@@       (_)@(_)   vVVVv     _     @@@@  (___) _(_)_       @@@@       (_)@(_)   vVVVv     _     @@@@  (___) _(_)_    (___)  @@@@ )";
+    tp(4,x+3,30);cout<<R"(  @@()@@ wWWWw  (_))";H::setcolor(7);cout<<R"(\)";H::setcolor(4);cout<<R"(    (___)   _(_)_  @@()@@   )";H::setcolor(7);cout<<R"(Y  )";H::setcolor(4);cout<<R"((_)@(_)     @@()@@ wWWWw  (_))";H::setcolor(7);cout<<R"(\    )";H::setcolor(4);cout<<R"((___)   _(_)_  @@()@@   )";H::setcolor(7);cout<<R"(Y  )";H::setcolor(4);cout<<R"((_)@(_)    )";H::setcolor(7);cout<<R"( Y  )";H::setcolor(4);cout<<R"( @@()@@)";
+    tp(4,x+3,31);cout<<R"(   @@@@  (___)     )";H::setcolor(7);cout<<R"(`|/    Y )";H::setcolor(4);cout<<R"(   (_)@(_)  @@@@   )";H::setcolor(7);cout<<R"(\|/   )";H::setcolor(4);cout<<R"((_))";H::setcolor(7);cout<<R"(\      )";H::setcolor(4);cout<<R"( @@@@  (___)     )";H::setcolor(7);cout<<R"(`|/    Y    )";H::setcolor(4);cout<<R"((_)@(_)  @@@@   )";H::setcolor(7);cout<<R"(\|/   )";H::setcolor(4);cout<<R"((_))";H::setcolor(7);cout<<R"(\     \|/)";H::setcolor(4);cout<<R"(   @@@@ )";
+    tp(7,x+3,32);cout<<R"(    /      Y       \|    \|/    /(_)    \|      |/      |        /      Y       \|    \|/    /(_)    \|      |/      |      |/   \|   )";
+    tp(7,x+3,33);cout<<R"( \ |     \ |/       | / \ | /  \|/       |/    \|      \|/    \ |     \ |/       | / \ | /  \|/       |/    \|      \|/    \|     |/  )";
+    tp(7,x+3,34);cout<<R"(   |//   \\|///  \\\|//\\\|/// \|///  \\\|//  \\|//  \\\|//     |//   \\|///  \\\|//\\\|/// \|///  \\\|//  \\|//  \\\|//  \\|//\\\|// )";
+    tp(2,x+3,35);cout<<R"(^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^)";
 
     tp(1,x+33,y+18);cout<<"BLT Cyber House ";H::setcolor(4);cout<<"(Concept)";
 
-    
+    tp(4,53,37); cout << "Press ";H::setcolor(1);cout <<"[UP] [DOWN]";H::setcolor(4);cout <<" arrow key to move, ";H::setcolor(1);cout <<"[ENTER]";H::setcolor(4);cout <<" to select";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Design::AboutUsTxt()
@@ -629,7 +813,59 @@ void Design::AboutUsTxt()
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Design::AboutUs_Design()
 {
-    cout << "Infrastructure ";
+    tp(1,x+48,y+4); cout << "=> \4 Infrastructure of C++ OOP Course  \4 <=";
+
+    tp(8,x-5,10); cout << R"(                                                      _____                                                                     _____                 )";
+    tp(8,x-5,11); cout << R"(                                                    /'     `\                                                                 /'     `\               )";
+    tp(8,x-5,12); cout << R"(  __                                           ___/'         `\             __                                           ___/'         `\             )";
+    tp(8,x-5,13); cout << R"(/'  `\_                                      /'                \          /'  `\_                                      /'                \            )";
+    tp(8,x-5,14); cout << R"(       \___________________________________/'                   `\_______/      \____________________________________/'                   `\_________ )";
+    tp(2,x-5,29); cout << R"(                                (`)                                                                       (`)                               (`)       )";
+    tp(2,x-5,30); cout << R"(                             _  | |                _                                                   _  | |                _           _  | |       )";
+    tp(2,x-5,31); cout << R"(          _                 ( \ |  )  _           ( ) _                             _                 ( \ |  )  _           ( ) _       ( \ |  )  _   )";
+    tp(2,x-5,32); cout << R"(       _ ( )                 \ `|  | ( )         _| |/ )                         _ ( )                 \ `|  | ( )         _| |/ )       \ `|  | ( )  )";
+    tp(2,x-5,33); cout << R"(      ( \| | _                `\,  |/'/'        ( \  /'                         ( \| | _                `\,  |/'/'        ( \  /'         `\,  |/'/'  )";
+    tp(2,x-5,34); cout << R"(       \,. |/ )                 |   /'           \  |                            \,. |/ )                 |   /'           \  |             |   /'    )";
+    tp(2,x-5,35); cout << R"(         |  /'                  |  |              | |                              |  /'                  |  |              | |             |  |      )";
+    tp(2,x-5,36); cout << R"(         | |                                      | |                              | |                                      | |                       )";
+//
+    H::VLine(67,17,3,7,186);  
+    H::gotoxy(66,18); H::setcolor(7); cout << char (201) << char (205) << char (205); 
+    H::gotoxy(64,20); H::setcolor(7); cout << char (205) << char (205) << char (188);
+
+    H::HLine(5,20,38,7,205);
+    H::HLine(117,20,38,7,205);
+
+    H::VLine(94,17,3,7,186); 
+    H::gotoxy(91,18); H::setcolor(7); cout << char (205) << char (205) << char (187); 
+    H::gotoxy(93,20); H::setcolor(7); cout << char (200) << char (205) << char (205);
+ //   
+    H::VLine(67,24,3,7,186);  
+    H::gotoxy(66,25); H::setcolor(7); cout << char (201) << char (205) << char (205); 
+    H::gotoxy(64,27); H::setcolor(7); cout << char (205) << char (205) << char (188);
+
+    H::HLine(5,27,38,7,205);
+    H::HLine(117,27,38,7,205);
+
+    H::VLine(94,24,3,7,186); 
+    H::gotoxy(91,25); H::setcolor(7); cout << char (205) << char (205) << char (187); 
+    H::gotoxy(93,27); H::setcolor(7); cout << char (200) << char (205) << char (205);
+//
+
+    H::gotoxy(76,16); H::setcolor(7); cout << "TEACHER";
+    H::drawBoxDoubleLineWithBG(70,17,20,1,23); H::gotoxy(75,18); H::setcolor(23); cout <<"UON HINSY";
+
+    H::gotoxy(49,18); H::setcolor(7); cout << "MENTOR 1";
+    H::drawBoxDoubleLineWithBG(43,19,20,1,23); H::gotoxy(47,20); H::setcolor(23); cout <<"VUTH RACHANA";
+    H::gotoxy(103,18); H::setcolor(7); cout << "MENTOR 2";
+    H::drawBoxDoubleLineWithBG(97,19,20,1,23); H::gotoxy(101,20); H::setcolor(23); cout <<"CHHEAN SEYHA";
+
+    H::gotoxy(72,23); H::setcolor(7); cout << "OUR TEAM MEMBERS";
+    H::drawBoxDoubleLineWithBG(70,24,20,1,23); H::gotoxy(74,25); H::setcolor(23); cout <<"YONG BUNLENG";
+
+    H::drawBoxDoubleLineWithBG(43,26,20,1,23); H::gotoxy(46,27); H::setcolor(23); cout <<"KOY YOTRABOTH";
+    H::drawBoxDoubleLineWithBG(97,26,20,1,23); H::gotoxy(100,27); H::setcolor(23); cout <<"SAM SOKUNTHEA";
+
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Design::A_Letter_from_Us_Animation()

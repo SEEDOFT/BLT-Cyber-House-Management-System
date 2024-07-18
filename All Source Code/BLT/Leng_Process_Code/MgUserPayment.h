@@ -219,7 +219,7 @@ void MgUserPayment::input(int id)
     time = atoi(times) * 60;
     H::gotoxy(65, 33);
     H::foreColor(135);
-    cout << totalPrice() << " KHR";
+    cout << fixed << setprecision(0) << totalPrice() << " KHR";
     remainTime = time;
     muId = id;
 }
