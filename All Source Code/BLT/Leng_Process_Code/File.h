@@ -70,6 +70,8 @@ class File
         static void viewIncome();
         static void OutputDate(int x, int y, int color);
         static void OutputHostName(int x, int y, int color);
+        
+        ~File();
 };
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -286,7 +288,7 @@ void File::insertToVector(int n, string &currentFile)
         fnd.setID(maxID + i);
         H::foreColor(176);
         H::gotoxy(99, 19);
-        cout << ": " << fnd.getFndID(); // food&drink ID
+        cout << ": " << fnd.getFndID();
         fnd.input();
         fndVector.push_back(fnd);
     }
@@ -296,7 +298,7 @@ void File::insertToVector(int n, string &currentFile)
         H::foreColor(176);
         H::gotoxy(99, 19);
         cout << ": ";
-        cout << game.getID(); // insert game ID
+        cout << game.getID();
         game.input();
         gameVector.push_back(game);
     }
@@ -322,6 +324,7 @@ void File::insertToVector(int n, string &currentFile)
         mup.setGuestname(guestName);
         mup.setUsername(username);
         mup.input(maxID + i);
+        mup.setFnd("\0", "\0", "\0");
         mupVector.push_back(mup);
         H::setcursor(0,0);
     }
@@ -1505,6 +1508,7 @@ void File::buyFood(const char *username, const char *password)
 
         while (file.read((char *)&mup, sizeof(MgUserPayment)))
         {
+//        	mup.setFnd("\0", "\0", 0);
             if (strcmp(username, mup.getUsername()) == 0 && strcmp(password, mup.getPassword()) == 0)
             {
                 H::setcursor(1, 0);
@@ -1683,6 +1687,12 @@ void File::viewIncome()
     }
     file.close();
 }
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+////////////////////////////////
+// DESTRUCTOR
+////////////////////////////////
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+File::~File(){}
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 /*
                                 END OF FILE
