@@ -18,7 +18,7 @@ void BLT::AllInvoice::AllInvoices_Design()
 {
     H::drawBoxDoubleLineWithBG(20,10,120,1,25);
     
-    H::gotoxy(20,11); H::foreColor(23); cout << left << setw(10) << "|ID|" << setw(20) << "|USERNAME|" << setw(25) << "|FOOD & DRINK|" << setw(20) << "|QTY|" << setw(20) << "|HOUR|" << "|TOTAL PRICE|";
+    H::gotoxy(20,11); H::foreColor(23); cout << left << setw(10) << "|ID|" << setw(20) << "|NAME|" << setw(25) << "|FOOD & DRINK|" << setw(20) << "|QTY|" << setw(20) << "|HOUR|" << "|TOTAL PRICE|";
     H::drawBoxDoubleLineWithBG(16,11,1,25,179);
     H::VLine(17,11,25,183,219);
     H::drawBoxDoubleLineWithBG(143,11,1,25,179);
