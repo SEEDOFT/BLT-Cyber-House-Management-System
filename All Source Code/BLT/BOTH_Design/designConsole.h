@@ -866,6 +866,8 @@ void Design::AboutUs_Design()
     H::drawBoxDoubleLineWithBG(43,26,20,1,23); H::gotoxy(46,27); H::setcolor(23); cout <<"KOY YOTRABOTH";
     H::drawBoxDoubleLineWithBG(97,26,20,1,23); H::gotoxy(100,27); H::setcolor(23); cout <<"SAM SOKUNTHEA";
 
+    H::gotoxy(35,29);H::setcolor(1);cout << "To see our information in detail, Please ";H::setcolor(71); cout << "press number 1";H::setcolor(1); cout << " to enter to our developers website";
+
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Design::A_Letter_from_Us_Animation()

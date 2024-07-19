@@ -580,7 +580,7 @@ void Process::AboutUs()
     H::setcursor(0,0);
     outline();
     
-    char press = ' ';
+    char press;
     AboutUsTxt();
     AboutUs_Design();
 
@@ -592,6 +592,11 @@ void Process::AboutUs()
 
         if(press == 27)
         {
+            break;
+        }
+        else if(press == '1')
+        {
+            openURL("https://drraspec.github.io/about-us/");
             break;
         }
         else
