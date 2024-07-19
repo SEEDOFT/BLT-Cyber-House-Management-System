@@ -1,8 +1,4 @@
-#include "All Source Code/BLT/BLT_Process/BLT.h"
 #include "All Source Code/BLT/BLT_Process/programProcess.h"
-#include "All Source Code/BLT/Leng_Process_Code/File.h"
-
-using namespace BLT;
 
 int main()
 {

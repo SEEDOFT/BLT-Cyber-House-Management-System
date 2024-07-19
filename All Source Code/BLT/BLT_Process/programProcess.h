@@ -258,7 +258,7 @@ void Process::LogIn_AsAdmin(int cursor)
             // username
             H::setcolor(249);
             H::gotoxy(x + 20, y + 17);
-            H::inputLetter(AdminUsername, 10);
+            H::inputAll(AdminUsername, 10);
 
             // password
             H::setcolor(249); // 137

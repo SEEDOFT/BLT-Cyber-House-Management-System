@@ -1020,7 +1020,7 @@ void File::user_login()
                     H::setcursor(1, 0);
                     H::setcolor(249);
                     H::gotoxy(30, 22);
-                    H::inputLetter(username, sizeof(username)); // username
+                    H::inputAll(username, sizeof(username)); // username
 
                     H::setcolor(249);
                     H::gotoxy(30, 28);
