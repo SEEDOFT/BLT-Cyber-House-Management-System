@@ -16,19 +16,19 @@ private:
     static double logoutHour;
     static double logoutMn;
 
-    char buyedFoodnDrink[20] = "\0";
-    char fndPrice[5] = "\0";
-    char fndQty[5] = "\0";
-    double totalFnD = 0;
+//    char buyedFoodnDrink[20] = "\0";
+//    char fndPrice[5] = "\0";
+//    char fndQty[5] = "\0";
+//    double totalFnD = 0;
 
     double allTotal = 0;
 
 public:
-    void setFnd(const char *foodnDrink, const char *price, const char *quantity);
-    const char *getFoodnDrink() const;
-    const char *getPrice() const;
-    const char *getQty() const;
-    double getFndTotal() const;
+//    void setFnd(const char *foodnDrink, const char *price, const char *quantity);
+//    const char *getFoodnDrink() const;
+//    const char *getPrice() const;
+//    const char *getQty() const;
+//    double getFndTotal() const;
     ///////////////////////////////////////////////
     static double getLoginHour();
     static void setLoginHour(double hour);
@@ -49,14 +49,16 @@ public:
     double getBuyedTime();
     double getTime();
     void setTime(double hours);
-    double totalPrice();
+    double getRemainTime();
+//    double totalPrice();
     ///////////////////////////////////////////////
-    void viewAll(int y);
+//    void viewAll(int y);
     void update();
     void userProfile();
     void input(int id);
     void output(int y);
-    void income();
+    void Invoutput(int y);
+//    void income();
     ////////////////////////////////////////////////
     int getID() const;
     const char *getUsername() const;
@@ -66,7 +68,7 @@ public:
     void setGuestname(const char *name);
     void setUsername(const char *name);
 
-    double totalIncome();
+//    double totalIncome();
 
     void setAllTotal(double allTotal);
 };
@@ -76,36 +78,9 @@ double MgUserPayment::loginMn = 0;
 double MgUserPayment::logoutHour = 0;
 double MgUserPayment::logoutMn = 0;
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void MgUserPayment::setFnd(const char *foodnDrink, const char *price, const char *quantity)
-{
-    strncpy(fndQty, quantity, sizeof(fndQty) - 1);
-    strncpy(fndPrice, price, sizeof(fndPrice) - 1);
-    strncpy(buyedFoodnDrink, foodnDrink, sizeof(buyedFoodnDrink) - 1);
-    totalFnD = atoi(fndQty) * atof(fndPrice);
-}
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-const char *MgUserPayment::getFoodnDrink() const
-{
-    return buyedFoodnDrink;
-}
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-const char *MgUserPayment::getPrice() const
-{
-    return fndPrice;
-}
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 const char * MgUserPayment::getGuestname() const 
 {
     return guestName;
-}
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-const char *MgUserPayment::getQty() const
-{
-    return fndQty;
-}
-double MgUserPayment::getFndTotal() const
-{
-    return totalFnD;
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void MgUserPayment::update()
@@ -136,6 +111,11 @@ double MgUserPayment::getLoginHour()
 void MgUserPayment::setLoginHour(double hour)
 {
     loginHour = hour;
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+double MgUserPayment::getRemainTime()
+{
+	return remainTime;
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 double MgUserPayment::getLoginMn()
@@ -189,11 +169,6 @@ double MgUserPayment::getTime()
     return time;
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-double MgUserPayment::totalPrice()
-{
-    return (5000 * (time / 60));
-}
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void MgUserPayment::setGuestname(const char *name)
 {
     strcpy(guestName, name);
@@ -219,7 +194,7 @@ void MgUserPayment::input(int id)
     time = atoi(times) * 60;
     H::gotoxy(65, 33);
     H::foreColor(135);
-    cout << fixed << setprecision(0) << totalPrice() << " KHR";
+    cout << fixed << setprecision(0) << atoi(times) * 5000 << " KHR";
     remainTime = time;
     muId = id;
 }
@@ -244,11 +219,6 @@ void MgUserPayment::setID(int id)
     muId = id;
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-double MgUserPayment::totalIncome()
-{
-    return totalPrice() + (getFndTotal() * 4000);
-}
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void MgUserPayment::setAllTotal(double allTotal)
 {
     this->allTotal = allTotal;
@@ -259,16 +229,15 @@ void MgUserPayment::output(int y)
     H::foreColor(7);
     H::gotoxy(20, 14 + y);
     cout << left << setw(12) << muId << setw(16) << guestName << setw(24) << username << setw(20) << password
-         << setw(15) << fixed << setprecision(0) << time / 60 << setw(21) << remainTime / 60 << totalPrice() << " KHR";
+         << setw(15) << fixed << setprecision(0) << time / 60 << setw(21) << remainTime / 60 << (time/60) * 5000 << " KHR";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void MgUserPayment::viewAll(int y)
+void MgUserPayment::Invoutput(int y)
 {
-    H::gotoxy(21, 14 + y);
+	H::gotoxy(21, 14 + y);
     H::foreColor(7);
     cout << left << setw(10) << muId << setw(20) << guestName
-         << setw(25) << buyedFoodnDrink << setw(20) << getQty() << setw(20) << time / 60 << totalIncome() << " KHR";
-    // cout << left << setw(10) << muId << setw(15) << guestName << setw(15) << username << setw(25) << password << setw(8) << fixed << setprecision(0) << time << setw(25) << remainTime << setw(15) << buyedFoodnDrink << setw(20) << fdQty << totalPrice();
+         << setw(25) << "" << setw(20) << " " << setw(20) << time / 60 << (time/60) * 5000 << " KHR";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void MgUserPayment::userProfile()
@@ -281,12 +250,6 @@ void MgUserPayment::userProfile()
     cout << password;
     H::setcolor(236); H::gotoxy(71, 32);
     cout << "BLT " << muId;
-}
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void MgUserPayment::income()
-{
-    cout << left << setw(10) << muId << setw(25) << guestName << setw(25) << username << setw(25) << password << setw(8) << time << totalPrice()
-         << setw(8) << "$" << setw(25) << buyedFoodnDrink << setw(8) << fndQty << setw(8) << getFndTotal() << totalIncome() << "$" << endl;
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif

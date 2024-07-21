@@ -5,7 +5,7 @@
 #include "../BOTH_Design/designConsole.h"
 #include "../Leng_Design/manage_user_info.h"
 #include "../Leng_Design/sub_manage_user_info.h"
-#include "MgUserPayment.h"
+#include "Invoice.h"
 #include <sys/stat.h>
 #include <vector>
 #include <ctime>
@@ -24,17 +24,20 @@ class File
         static string GameFile;
         static string UserInfoFile;
         static string MgUserPaymentFile;
+        static string invoiceFile;
 
         static int getMaxID(const string &fileName, int type);
 
         static vector<FoodnDrink> fndVector;
         static vector<Game> gameVector;
         static vector<MgUserPayment> mupVector;
+        static vector<myInvoice> invVector;
 
         static FoodnDrink fnd;
         static Game game;
         static MgUserInfo mui;
         static MgUserPayment mup;
+        static myInvoice inv;
 
         static fstream file;
         static string currentFile;
@@ -78,11 +81,13 @@ class File
 vector<FoodnDrink> File::fndVector;
 vector<Game> File::gameVector;
 vector<MgUserPayment> File::mupVector;
+vector<myInvoice> File::invVector;
 
 FoodnDrink File::fnd;
 Game File::game;
 MgUserInfo File::mui;
 MgUserPayment File::mup;
+myInvoice File::inv;
 
 fstream File::file;
 
@@ -92,6 +97,7 @@ string File::Backup = dir + "/BackUpFile.ant";
 string File::GameFile = dir + "/Game.ant";
 string File::UserInfoFile = dir + "/UserInfo.ant";
 string File::MgUserPaymentFile = dir + "/MgUserPayment.ant";
+string File::invoiceFile = dir + "/Invoice.ant";
 string File::currentFile = "";
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -126,16 +132,6 @@ void File::OutputDate(int x, int y, int color)
     cout    << localTime->tm_mday << "/"
             << months[localTime->tm_mon] << "/"
             << (localTime->tm_year + 1900);
-}
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-bool sortByPriceDesc(const FoodnDrink &a, const FoodnDrink &b)
-{
-    return a.getPrice() > b.getPrice();
-}
-
-bool sortByPriceAsc(const FoodnDrink &a, const FoodnDrink &b)
-{
-    return a.getPrice() < b.getPrice();
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //////////////////////////////////////////
@@ -324,7 +320,7 @@ void File::insertToVector(int n, string &currentFile)
         mup.setGuestname(guestName);
         mup.setUsername(username);
         mup.input(maxID + i);
-        mup.setFnd("\0", "\0", "\0");
+//        mup.setFnd("\0", "\0", "\0");
         mupVector.push_back(mup);
         H::setcursor(0,0);
     }
@@ -555,27 +551,7 @@ void File::updateFile(int n)
             gameVector.clear();
             mupVector.clear();
 
-            if (n == 1)
-            {
-                while (file.read((char *)&fnd, sizeof(FoodnDrink)))
-                {
-                    fndVector.push_back(fnd);
-                }
-            }
-            else if (n == 2)
-            {
-                while (file.read((char *)&game, sizeof(Game)))
-                {
-                    gameVector.push_back(game);
-                }
-            }
-            else if (n == 3)
-            {
-                while (file.read((char *)&mup, sizeof(MgUserPayment)))
-                {
-                    mupVector.push_back(mup);
-                }
-            }
+            pushToVector(n);
             file.close();
 
             H::foreColor(1);H::gotoxy(86, 17);
@@ -844,33 +820,33 @@ void File::pushToVector(int n)
 {
     switch (n)
     {
-    case 1:
-    {
-        fndVector.clear();
-        while (file.read((char *)&fnd, sizeof(FoodnDrink)))
-        {
-            fndVector.push_back(fnd);
-        }
-        break;
-    }
-    case 2:
-    {
-        gameVector.clear();
-        while (file.read((char *)&game, sizeof(Game)))
-        {
-            gameVector.push_back(game);
-        }
-        break;
-    }
-    case 3:
-    {
-        mupVector.clear();
-        while (file.read((char *)&mup, sizeof(MgUserPayment)))
-        {
-            mupVector.push_back(mup);
-        }
-        break;
-    }
+	    case 1:
+	    {
+	        fndVector.clear();
+	        while (file.read((char *)&fnd, sizeof(FoodnDrink)))
+	        {
+	            fndVector.push_back(fnd);
+	        }
+	        break;
+	    }
+	    case 2:
+	    {
+	        gameVector.clear();
+	        while (file.read((char *)&game, sizeof(Game)))
+	        {
+	            gameVector.push_back(game);
+	        }
+	        break;
+	    }
+	    case 3:
+	    {
+	        mupVector.clear();
+	        while (file.read((char *)&mup, sizeof(MgUserPayment)))
+	        {
+	            mupVector.push_back(mup);
+	        }
+	        break;
+	    }
     }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -1255,6 +1231,8 @@ void File:: userSubMenu(const char *username, const char *password)
         }
         else if (choice == 5)
         {
+        	logoutTimeToFile(username,password);
+        	calculateTime(username,password);
             break;
         }
 
@@ -1286,7 +1264,7 @@ void File::buyMoreTime(const char *username, const char *password)
         B::buyHour_Design();
         H::setcursor(1, 0);
         H::setcolor(1);H::gotoxy(110, 19);
-        H::inputNumber(hours, sizeof(hours)); // Purdhase hour
+        H::inputNumber(hours, sizeof(hours)); // Purchase hour
 
         while (file.read((char *)&mup, sizeof(MgUserPayment)))
         {
@@ -1295,6 +1273,15 @@ void File::buyMoreTime(const char *username, const char *password)
                 isfound = true;
                 mup.setnTime(atof(hours));
                 mup.setBuyingTime(atof(hours));
+                fstream file2(invoiceFile, ios::in | ios::app | ios::binary);
+                inv.setName(mup.getGuestname());
+                inv.setUsername(username);
+                inv.setBuyedTime(atoi(hours));
+                inv.setTime(mup.getTime());
+                inv.setId(mup.getID());
+                inv.setFnd("\0","\0","\0");
+                file2.write((char *)&inv, sizeof(myInvoice));
+                file2.close();
             }
             tempFile.write((char *)&mup, sizeof(MgUserPayment));
         }
@@ -1327,6 +1314,8 @@ void File::buyMoreTime(const char *username, const char *password)
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void File::invoice(const char *username, const char *password)
 {
+	int y = 16;
+	
     H::setConsoleTitle(TEXT("My Spending"));
     H::setcolor(7);
     H::cls();
@@ -1337,6 +1326,7 @@ void File::invoice(const char *username, const char *password)
     B::InvoiceTxt();
     B::Invoice_Design();
     file.open(UserInfoFile, ios::in | ios::binary);
+    fstream file2(invoiceFile, ios::in | ios::binary);
 
     if (!file.is_open())
     {
@@ -1350,31 +1340,37 @@ void File::invoice(const char *username, const char *password)
             {
                 if (strcmp(username, mup.getUsername()) == 0 && strcmp(password, mup.getPassword()) == 0)
                 {
-                    
-                    H::setcolor(252);H::gotoxy(83,16);
-                    cout << mup.getID();
-                    H::setcolor(252);H::gotoxy(83,17);
-                    cout << mup.getGuestname();
-                    H::setcolor(252);H::gotoxy(83,18);
-                    cout << mup.getUsername();
-                    OutputDate(83,19,252);
-
-                    H::setcolor(252);H::gotoxy(53,23);
-                    cout << left 
-                    << setw(30) << mup.getFoodnDrink() 
-                    << fixed <<setprecision(0) <<
-                    setw(10) << mup.getQty() 
-                    << setw(10) << mup.getTime()
-                    << setw(10) << mup.getBuyedTime();
-                    
-                    OutputHostName(75,30,252);
-                    H::setcolor(252);H::gotoxy(89,32);
-                    cout << fixed << setprecision(2) << mup.totalIncome() / 4000;
-                    H::setcolor(252);H::gotoxy(109,32);
-                    cout << fixed << setprecision(0) << mup.totalIncome();
+                	while (file2.read((char *)&inv, sizeof(myInvoice)))
+                	{
+                		if(strcmp(username,inv.getUsername()) == 0)
+	                    {
+	                    	H::setcolor(252);H::gotoxy(83,16);
+		                    cout << mup.getID();
+		                    H::setcolor(252);H::gotoxy(83,17);
+		                    cout << mup.getGuestname();
+		                    H::setcolor(252);H::gotoxy(83,18);
+		                    cout << mup.getUsername();
+		                    OutputDate(83,19,252);
+		
+		                    H::setcolor(252);H::gotoxy(53,y+7);
+		                    cout << left 
+		                    << setw(30) << inv.getFoodnDrink() 
+		                    << fixed <<setprecision(0) <<
+		                    setw(10) << inv.getQty() 
+		                    << setw(10) << mup.getTime()
+		                    << setw(10) << inv.getBuyedTime();
+		                    y++;
+						}
+						OutputHostName(75,30,252);
+	                    H::setcolor(252);H::gotoxy(89,32);
+	                    cout << fixed << setprecision(2) << inv.totalIncome() / 4000;
+	                    H::setcolor(252);H::gotoxy(109,32);
+	                    cout << fixed << setprecision(0) << inv.totalIncome();
+					}
                 }
             }
             file.close();
+            file2.close();
 
             Design::message(2,0,38);
 
@@ -1437,12 +1433,14 @@ void File::calculateTime(const char *username, const char *password)
                 }
                 //	            mup.setnTime(remainingTime);
                 mup.setRemainTime(remainingTime);
-                cout << "Debug Output:" << endl;
-                cout << "loginHour: " << loginHour << ", loginMn: " << loginMn << endl;
-                cout << "logoutHour: " << logoutHour << ", logoutMn: " << logoutMn << endl;
-                cout << "loginTime (minutes): " << loginTime << ", logoutTime (minutes): " << logoutTime << endl;
-                cout << "usedTime (minutes): " << usedTimeMinutes << endl;
-                cout << "remainingTime: " << remainingTime << endl;
+                
+//                cout << "Debug Output:" << endl;
+//                cout << "loginHour: " << loginHour << ", loginMn: " << loginMn << endl;
+//                cout << "logoutHour: " << logoutHour << ", logoutMn: " << logoutMn << endl;
+//                cout << "loginTime (minutes): " << loginTime << ", logoutTime (minutes): " << logoutTime << endl;
+//                cout << "usedTime (minutes): " << usedTimeMinutes << endl;
+//                cout << "remainingTime: " << remainingTime << endl;
+//                getch();
 
                 // tempFile.write((char *)&mup, sizeof(MgUserPayment));
             }
@@ -1472,9 +1470,10 @@ void File::buyFood(const char *username, const char *password)
     char quantity[13];
 
     file.open(UserInfoFile, ios::in | ios::binary);
-    fstream tempFile(Backup, ios::out | ios::binary);
+    fstream file3(invoiceFile, ios::out | ios::app | ios::binary);
+//    fstream tempFile(Backup, ios::out | ios::binary);
 
-    if (!file.is_open() || !tempFile.is_open())
+    if (!file.is_open())
     {
         Design::message(4, 0, 3);
     }
@@ -1508,16 +1507,16 @@ void File::buyFood(const char *username, const char *password)
 
         while (file.read((char *)&mup, sizeof(MgUserPayment)))
         {
-//        	mup.setFnd("\0", "\0", 0);
+        	
             if (strcmp(username, mup.getUsername()) == 0 && strcmp(password, mup.getPassword()) == 0)
             {
                 H::setcursor(1, 0);
                 H::foreColor(1);
                 H::gotoxy(116, 19);
-                H::inputNumber(foodID, sizeof(foodID)); // food&drink ID
+                H::inputNumber(foodID, sizeof(foodID));
                 H::foreColor(1);
                 H::gotoxy(116, 23);
-                H::inputNumber(quantity, sizeof(quantity)); // qty
+                H::inputNumber(quantity, sizeof(quantity));
 
                 H::setcursor(0, 0);
                 int foodIDInt = atoi(foodID);
@@ -1547,8 +1546,13 @@ void File::buyFood(const char *username, const char *password)
 
                                 foodFile.seekp(-sizeof(FoodnDrink), ios::cur);
                                 foodFile.write((char *)&fnd, sizeof(FoodnDrink));
-
-                                mup.setFnd(fnd.getName(), fnd.getPrice(), quantity);
+								
+								inv.setName(mup.getGuestname());
+								inv.setUsername(username);
+                                inv.setFnd(fnd.getName(), fnd.getPrice(), quantity);
+                                inv.setBuyedTime(0);
+                                inv.setTime(mup.getTime());
+                                inv.setId(mup.getID());
 
                                 H::foreColor(7);
                                 H::gotoxy(94, 29); cout << "\3\3";
@@ -1580,14 +1584,13 @@ void File::buyFood(const char *username, const char *password)
                         Design::message(2,0,38);
                     }
                 }
+                file3.write((char *)&inv, sizeof(myInvoice));
             }
-            tempFile.write((char *)&mup, sizeof(MgUserPayment));
+//            file3.write((char *)&inv, sizeof(myInvoice));
         }
 
         file.close();
-        tempFile.close();
-        remove(UserInfoFile.c_str());
-        rename(Backup.c_str(), UserInfoFile.c_str());
+        file3.close();
     }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -1615,6 +1618,7 @@ void File::viewProfile(const char *username, const char *password)
             {
                 OutputDate(77,20,236);
                 mup.userProfile();
+                cout << endl << mup.getRemainTime();
             }
         }
         file.close();
@@ -1641,7 +1645,11 @@ void File::viewProfile(const char *username, const char *password)
 void File::viewAllUserInvoice()
 {
     double allTotal = 0;
-    file.open(UserInfoFile, ios::in | ios::binary);
+    double totalTime = 0;
+    double fndPrice = 0;
+    int y = 0;
+	file.open(invoiceFile, ios::in | ios::binary);
+	fstream file2(UserInfoFile, ios::in | ios::binary);
 
     if(!file.is_open())
     {
@@ -1649,19 +1657,26 @@ void File::viewAllUserInvoice()
     }
     else
     {
-        if(check_file(UserInfoFile))
+        if(check_file(invoiceFile))
         {
             Design::message(5,0,7);
         }
         else
         {
-            int y = 0;
-            while (file.read((char *)&mup, sizeof(MgUserPayment)))
+        	while(file2.read((char*)&mup,sizeof(MgUserPayment)))
+        	{
+        		mup.Invoutput(y);
+        		y++;
+        		totalTime += (5000 * (mup.getTime() / 60));
+			}
+			file2.close();
+        	while (file.read((char *)&inv, sizeof(myInvoice)))
             {
-                allTotal += mup.totalIncome();
-                mup.viewAll(y);
-                y++;
-            }
+            	inv.viewAll(y);
+            	fndPrice += (atoi(inv.getQty()) * (atof(inv.getPrice()) * 4100));
+				y++;
+        	}
+        	allTotal += (totalTime + fndPrice);
             H::gotoxy(30,36); H::setcolor(55); 
             cout << "All Income ";
 
@@ -1678,15 +1693,15 @@ void File::viewAllUserInvoice()
 // INCOME
 ////////////////////////////////
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void File::viewIncome()
-{
-    file.open(UserInfoFile, ios::in | ios::binary);
-    while (file.read((char *)&mup, sizeof(MgUserPayment)))
-    {
-        mup.income();
-    }
-    file.close();
-}
+//void File::viewIncome()
+//{
+//    file.open(UserInfoFile, ios::in | ios::binary);
+//    while (file.read((char *)&mup, sizeof(MgUserPayment)))
+//    {
+//        mup.income();
+//    }
+//    file.close();
+//}
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 ////////////////////////////////
 // DESTRUCTOR

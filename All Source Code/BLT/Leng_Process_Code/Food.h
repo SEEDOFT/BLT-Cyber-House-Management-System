@@ -12,7 +12,7 @@ class FoodnDrink {
         char fdPrice[5];
         char fdQty[13];
     public:
-        int getFndID();
+        int getFndID() const;
         const char* getName() const;
         const char* getPrice() const;
         const char* getQty() const;
@@ -23,7 +23,7 @@ class FoodnDrink {
         void setID(int id);
 };
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-int FoodnDrink::getFndID() 
+int FoodnDrink::getFndID() const
 {
     return fdId;
 }
