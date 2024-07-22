@@ -117,10 +117,10 @@ int myInvoice::getRmTime()
 	return rmTime;
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-double myInvoice::totalIncome()
-{
-    return totalPrice() + (getFndTotal() * 4000);
-}
+//double myInvoice::totalIncome()
+//{
+//    return totalPrice() + (getFndTotal() * 4000);
+//}
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void myInvoice::setTime(int t) 
 {
@@ -146,8 +146,8 @@ void myInvoice::viewAll(int y)
 {
 	H::gotoxy(21, 14 + y);
     H::foreColor(7);
-    cout << left << setw(10) << id << setw(20) << guestName
-         << setw(25) << buyedFoodnDrink << setw(20) << getQty() << setw(20) << buyedTime << totalIncome() << " KHR";
+    cout << left << "INV" << setw(7) << id << setw(20) << guestName
+         << setw(25) << buyedFoodnDrink << setw(20) << getQty() << setw(20) << buyedTime << totalPrice() << " KHR";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //void MgUserPayment::income()
@@ -158,7 +158,7 @@ void myInvoice::viewAll(int y)
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 double myInvoice::totalPrice()
 {
-    return (atoi(fndQty) * atof(fndPrice) + (5000 * buyedTime));
+    return ((atoi(fndQty) * (atof(fndPrice) * 4100)) + (5000 * buyedTime));
 }
 
 #endif

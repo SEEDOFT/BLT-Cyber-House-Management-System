@@ -67,6 +67,7 @@ class File
         static void invoice(const char *username, const char *password);
         static void calculateTime(const char *username, const char *password);
         static void buyFood(const char *username, const char *password);
+        static int getInvoiceID();
 
         static void viewAllUserInvoice();
         // static void totalIncome();
@@ -1254,6 +1255,7 @@ void File::buyMoreTime(const char *username, const char *password)
 
     char hours[5];
     char creditCard[17];
+    int myInvID = getInvoiceID() + 1;
     bool isfound = false;
 
     file.open(UserInfoFile, ios::in | ios::binary);
@@ -1280,6 +1282,7 @@ void File::buyMoreTime(const char *username, const char *password)
                 inv.setTime(mup.getTime());
                 inv.setId(mup.getID());
                 inv.setFnd("\0","\0","\0");
+                inv.setId(myInvID);
                 file2.write((char *)&inv, sizeof(myInvoice));
                 file2.close();
             }
@@ -1315,6 +1318,7 @@ void File::buyMoreTime(const char *username, const char *password)
 void File::invoice(const char *username, const char *password)
 {
 	int y = 16;
+	double total = 0;
 	
     H::setConsoleTitle(TEXT("My Spending"));
     H::setcolor(7);
@@ -1359,13 +1363,14 @@ void File::invoice(const char *username, const char *password)
 		                    setw(10) << inv.getQty() 
 		                    << setw(10) << mup.getTime()
 		                    << setw(10) << inv.getBuyedTime();
+		                    total += inv.totalPrice(); 
 		                    y++;
 						}
 						OutputHostName(75,30,252);
 	                    H::setcolor(252);H::gotoxy(89,32);
-	                    cout << fixed << setprecision(2) << inv.totalIncome() / 4000;
+	                    cout << fixed << setprecision(2) << total / 4000;
 	                    H::setcolor(252);H::gotoxy(109,32);
-	                    cout << fixed << setprecision(0) << inv.totalIncome();
+	                    cout << fixed << setprecision(0) << total;
 					}
                 }
             }
@@ -1394,8 +1399,6 @@ void File::invoice(const char *username, const char *password)
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void File::calculateTime(const char *username, const char *password)
 {
-    // bool isfound = false;
-    // string tempFileName = "Data/temp.ant";
 
     file.open(UserInfoFile, ios::in | ios::binary);
     fstream tempFile(Backup, ios::out | ios::binary);
@@ -1431,18 +1434,7 @@ void File::calculateTime(const char *username, const char *password)
                 {
                     remainingTime = 0;
                 }
-                //	            mup.setnTime(remainingTime);
                 mup.setRemainTime(remainingTime);
-                
-//                cout << "Debug Output:" << endl;
-//                cout << "loginHour: " << loginHour << ", loginMn: " << loginMn << endl;
-//                cout << "logoutHour: " << logoutHour << ", logoutMn: " << logoutMn << endl;
-//                cout << "loginTime (minutes): " << loginTime << ", logoutTime (minutes): " << logoutTime << endl;
-//                cout << "usedTime (minutes): " << usedTimeMinutes << endl;
-//                cout << "remainingTime: " << remainingTime << endl;
-//                getch();
-
-                // tempFile.write((char *)&mup, sizeof(MgUserPayment));
             }
             tempFile.write((char *)&mup, sizeof(MgUserPayment));
         }
@@ -1468,6 +1460,7 @@ void File::buyFood(const char *username, const char *password)
 
     char foodID[5];
     char quantity[13];
+    int myInvID = getInvoiceID() + 1;
 
     file.open(UserInfoFile, ios::in | ios::binary);
     fstream file3(invoiceFile, ios::out | ios::app | ios::binary);
@@ -1552,7 +1545,8 @@ void File::buyFood(const char *username, const char *password)
                                 inv.setFnd(fnd.getName(), fnd.getPrice(), quantity);
                                 inv.setBuyedTime(0);
                                 inv.setTime(mup.getTime());
-                                inv.setId(mup.getID());
+//                                inv.setId(mup.getID());
+                                inv.setId(myInvID);
 
                                 H::foreColor(7);
                                 H::gotoxy(94, 29); cout << "\3\3";
@@ -1639,7 +1633,7 @@ void File::viewProfile(const char *username, const char *password)
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 ////////////////////////////////
-// USER INVOICE
+// ALL INVOICE
 ////////////////////////////////
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void File::viewAllUserInvoice()
@@ -1651,7 +1645,7 @@ void File::viewAllUserInvoice()
 	file.open(invoiceFile, ios::in | ios::binary);
 	fstream file2(UserInfoFile, ios::in | ios::binary);
 
-    if(!file.is_open())
+    if(!file.is_open() && !file2.is_open())
     {
         Design::message(4, 0, 7);
     }
@@ -1687,6 +1681,25 @@ void File::viewAllUserInvoice()
         }
         file.close();
     }
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//////////////////////////////////////////
+// INVOICE ID
+//////////////////////////////////////////
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+int File::getInvoiceID()
+{
+	int invoiceID = 1999;
+	fstream invID(invoiceFile, ios::in | ios::binary);
+	while (invID.read((char *)&inv, sizeof(myInvoice)))
+	{
+	    if (inv.getId() > invoiceID)
+	    {
+	        invoiceID = inv.getId();
+	    }
+	}
+    invID.close();
+    return invoiceID;
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 ////////////////////////////////

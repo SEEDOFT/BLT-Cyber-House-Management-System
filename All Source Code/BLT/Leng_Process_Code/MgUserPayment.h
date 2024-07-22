@@ -236,7 +236,7 @@ void MgUserPayment::Invoutput(int y)
 {
 	H::gotoxy(21, 14 + y);
     H::foreColor(7);
-    cout << left << setw(10) << muId << setw(20) << guestName
+    cout << left << "IVU" << setw(7) << muId << setw(20) << guestName
          << setw(25) << "" << setw(20) << " " << setw(20) << time / 60 << (time/60) * 5000 << " KHR";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
