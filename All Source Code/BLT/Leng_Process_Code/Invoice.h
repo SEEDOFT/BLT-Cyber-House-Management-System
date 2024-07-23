@@ -16,6 +16,7 @@ class myInvoice {
 	    
 	    int time;
 	    int buyedTime = 0;
+//	    char intNull[5] = "\0";
 	    
 //	    static MgUserPayment mg;
 	    
@@ -144,11 +145,61 @@ int myInvoice::getId() const
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void myInvoice::viewAll(int y)
 {
-	H::gotoxy(21, 14 + y);
-    H::foreColor(7);
-    cout << left << "INV" << setw(7) << id << setw(20) << guestName
-         << setw(25) << buyedFoodnDrink << setw(20) << getQty() << setw(20) << buyedTime << totalPrice() << " KHR";
-}
+	char bt[5] = "\0";
+	char bf[20] = "\0";
+    char fq[5] = "\0";
+    strcpy(bf,buyedFoodnDrink);
+    strcpy(fq,fndQty);
+	if(buyedTime == 0)
+	{
+		strcpy(bt,"NONE");
+	}
+	else
+	{
+		sprintf(bt, "%d", buyedTime);
+	}
+	if((strlen(buyedFoodnDrink) == 0 )&& (strlen(fndQty) == 0))
+	{
+		strcpy(bf,"NONE");
+		strcpy(fq,"NONE");
+	}
+	if((strcmp(bf,"NONE") == 0) && strcmp(fq,"NONE") == 0)
+	{
+		H::foreColor(1);
+		H::gotoxy(21, 14 + y);
+	    cout  << "INV" << id;
+	    H::gotoxy(31, 14 + y);
+		cout << guestName;
+		H::foreColor(4);
+		H::gotoxy(51, 14 + y);
+	    cout << bf;
+	    H::gotoxy(76, 14 + y);
+		cout << fq;
+		H::foreColor(1);
+		H::gotoxy(96, 14 + y);
+		cout << bt;
+		H::gotoxy(116, 14 + y);
+		cout << totalPrice() << " KHR";
+	}
+	if((strcmp(bt,"NONE") == 0))
+	{
+		H::foreColor(1);
+		H::gotoxy(21, 14 + y);
+	    cout  << "INV" << id;
+	    H::gotoxy(31, 14 + y);
+		cout << guestName;
+		H::gotoxy(51, 14 + y);
+	    cout << bf;
+	    H::gotoxy(76, 14 + y);
+		cout << fq;
+		H::foreColor(4);
+		H::gotoxy(96, 14 + y);
+		cout << bt;
+		H::foreColor(1);
+		H::gotoxy(116, 14 + y);
+		cout << totalPrice() << " KHR";
+	}
+}                                                                              
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //void MgUserPayment::income()
 //{

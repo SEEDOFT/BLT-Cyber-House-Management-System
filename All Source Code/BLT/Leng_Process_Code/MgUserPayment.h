@@ -57,7 +57,7 @@ public:
     void userProfile();
     void input(int id);
     void output(int y);
-    void Invoutput(int y);
+    void Invoutput(int y,int color);
 //    void income();
     ////////////////////////////////////////////////
     int getID() const;
@@ -232,12 +232,23 @@ void MgUserPayment::output(int y)
          << setw(15) << fixed << setprecision(0) << time / 60 << setw(21) << remainTime / 60 << (time/60) * 5000 << " KHR";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void MgUserPayment::Invoutput(int y)
+void MgUserPayment::Invoutput(int y, int color)
 {
+	H::foreColor(color);
 	H::gotoxy(21, 14 + y);
-    H::foreColor(7);
-    cout << left << "IVU" << setw(7) << muId << setw(20) << guestName
-         << setw(25) << "" << setw(20) << " " << setw(20) << time / 60 << (time/60) * 5000 << " KHR";
+    cout << "IVU" << muId;
+    H::gotoxy(31, 14 + y);
+	cout << guestName;
+	H::foreColor(4);
+	H::gotoxy(51, 14 + y);
+    cout << "NONE";
+    H::gotoxy(76, 14 + y);
+	cout << "NONE"; 
+    H::foreColor(color);
+    H::gotoxy(96, 14 + y);
+	cout << time / 60;
+	H::gotoxy(116, 14 + y);
+	cout << (time/60) * 5000 << " KHR";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void MgUserPayment::userProfile()

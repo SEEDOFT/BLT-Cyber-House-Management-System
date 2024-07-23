@@ -48,7 +48,6 @@ void BLT::Invoice::Invoice_Design()
 
 	H::setcolor(249);H::gotoxy(53,21); cout << "FOOD OR DRINK";
 	H::setcolor(249);H::gotoxy(83,21); cout << "QTY";
-	H::setcolor(249);H::gotoxy(93,21); cout << "MINS";
 	H::setcolor(249);H::gotoxy(103,21); cout << "ADDED HOURS";
 	H::HLine(50,22,66,248,196);
 
