@@ -1372,6 +1372,11 @@ void Process::ManageUserPayment()
         {
             break;
         }
+        else if (press == 13)
+        {
+        	File::allUserInvoiceToCSV();
+        	system("start Data\\all_user_invoice.csv");
+		}
         else
         {
             continue;

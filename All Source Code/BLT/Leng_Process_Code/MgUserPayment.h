@@ -8,6 +8,9 @@
 class MgUserPayment : public FoodnDrink, public Game, public MgUserInfo
 {
 private:
+	char crtMonth[10];
+	int day;
+	int year;
     double buyedTime = 0;
     double remainTime = 0;
 
@@ -68,7 +71,12 @@ public:
     void setGuestname(const char *name);
     void setUsername(const char *name);
 
-//    double totalIncome();
+	void setCrtMonth(const char* month);
+    void setDay(int d);
+    void setYear(int y);
+    const char* getCrtMonth() const;
+    int getDay() const;
+    int getYear() const;
 
     void setAllTotal(double allTotal);
 };
@@ -224,7 +232,38 @@ void MgUserPayment::setAllTotal(double allTotal)
     this->allTotal = allTotal;
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void MgUserPayment::output(int y)
+void MgUserPayment::setCrtMonth(const char* month) 
+{
+    strncpy(crtMonth, month, sizeof(crtMonth) - 1);
+    crtMonth[sizeof(crtMonth) - 1] = '\0';
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void MgUserPayment::setDay(int d) 
+{
+    day = d;
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void MgUserPayment::setYear(int y) 
+{
+    year = y;
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+const char* MgUserPayment::getCrtMonth() const 
+{
+    return crtMonth;
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+int MgUserPayment::getDay() const 
+{
+    return time;
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+int MgUserPayment::getYear() const 
+{
+    return year;
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void MgUserPayment::MgUserPayment::output(int y)
 {
     H::foreColor(7);
     H::gotoxy(20, 14 + y);

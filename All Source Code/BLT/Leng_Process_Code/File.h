@@ -76,7 +76,9 @@ public:
     static void OutputDate(int x, int y, int color);
     static void OutputHostName(int x, int y, int color);
     
-    static void writeInvoiceToExcel(const char *username, const char *password);
+    static void allUserInvoiceToCSV();
+    static void UserInvoiceToCSV(const char * username);
+//    static void writeInvoiceToExcel(const char *username, const char *password);
 
     ~File();
 };
@@ -278,6 +280,13 @@ bool File::checkUsernameInVector(const char *username, int x, int y, int color)
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void File::insertToVector(int n, string &currentFile)
 {
+	time_t t = time(nullptr);
+    tm *localTime = localtime(&t);
+
+    const char *months[] =
+        {
+            "January", "February", "March", "April", "May",
+            "June", "July", "August", "September", "October", "November", "December"};
     int i = 1;
     char guestName[20];
     char username[20];
@@ -328,6 +337,10 @@ void File::insertToVector(int n, string &currentFile)
         mup.setUsername(username);
         mup.input(maxID + i);
         //        mup.setFnd("\0", "\0", "\0");
+        
+        mup.setCrtMonth(months[localTime->tm_mon]);
+    	mup.setDay(localTime->tm_hour * 100 + localTime->tm_min);
+	    mup.setYear(localTime->tm_year + 1900);
         mupVector.push_back(mup);
         H::setcursor(0, 0);
     }
@@ -1386,7 +1399,10 @@ void File::invoice(const char *username, const char *password)
                             H::setcolor(252);
                             H::gotoxy(83, 18);
                             cout << mup.getUsername();
-                            OutputDate(83, 19, 252);
+//                            OutputDate(83, 19, 252);
+							H::foreColor(252);
+							H::gotoxy(83,19);
+                            cout << mup.getDay() << "/" << mup.getCrtMonth() << "/" << mup.getYear() << endl;
 
                             strcpy(bFnD, inv.getFoodnDrink());
                             strcpy(fndQty, inv.getQty());
@@ -1427,7 +1443,7 @@ void File::invoice(const char *username, const char *password)
 								}
 								else if(press = 13)
 								{
-									writeInvoiceToExcel(username, password);
+									UserInvoiceToCSV(username);
 								}
 								H::clearBox(53,24,60,4,255);
 							}
@@ -1453,12 +1469,85 @@ void File::invoice(const char *username, const char *password)
             {
                 break;
             }
+            else if(press = 13)
+			{
+				UserInvoiceToCSV(username);
+			}
             else
             {
                 continue;
             }
         }
     }
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//////////////////////////////////////////
+// USER INVOICE TO CSV
+//////////////////////////////////////////
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void File::UserInvoiceToCSV(const char* username)
+{
+    int y = 16;
+    double total = 0.0;
+
+    file.open(UserInfoFile, ios::in | ios::binary);
+    fstream file2(invoiceFile, ios::in | ios::binary);
+
+    if (!file.is_open() && !file2.is_open())
+    {
+        Design::message(4, 0, 3);
+        file.close();
+        file2.close();
+    }
+    else if (check_file(invoiceFile))
+    {
+        file.close();
+        file2.close();
+        Design::message(5, 0, 7);
+    }
+	else
+	{
+		ofstream csv("Data/user_invoice.csv");
+	    if (!csv.is_open())
+	    {
+	        cout << "Could not open CSV file for writing!" << endl;
+	        file.close();
+	        file2.close();
+	    }
+	    else
+		{
+			csv << "\nName,Username,\n";
+			csv << inv.getName() << "," << inv.getUsername() << ",\n\n";
+			csv << "ID,FoodnDrink,Qty,Added Hour,\n";
+	
+		    while (file.read((char*)&mup, sizeof(MgUserPayment)))
+		    {
+		        if (strcmp(username, mup.getUsername()) == 0)
+		        {
+		
+		            while (file2.read((char*)&inv, sizeof(myInvoice)))
+		            {
+		                if (strcmp(username, inv.getUsername()) == 0)
+		                {
+		                    csv << inv.getId() << ","
+		                        << inv.getFoodnDrink() << ","
+		                        << inv.getQty() << ","
+		                        << inv.getBuyedTime() << "\n";
+		                    total += inv.totalPrice();
+		                }
+		            }
+		        }
+		    }
+		
+		    csv << "All Income,," << "USD : " << fixed << setprecision(2) << total / 4000 << ","
+		        << "KHR : " << fixed << setprecision(0) << total << "\n";
+		
+		    csv.close();
+		    file.close();
+		    file2.close();
+		    system("start Data\\user_invoice.csv");
+		}
+	}
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //////////////////////////////////////////
@@ -1771,6 +1860,80 @@ void File::viewAllUserInvoice()
             cout << "KHR : " << fixed << setprecision(0) << allTotal;
         }
         file.close();
+    }
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+////////////////////////////////
+// ALL INVOICE TO CSV
+////////////////////////////////
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void File::allUserInvoiceToCSV()
+{
+    double allTotal = 0;
+    double totalTime = 0;
+    double fndPrice = 0;
+    int y = 0;
+    file.open(invoiceFile, ios::in | ios::binary);
+    fstream file2(UserInfoFile, ios::in | ios::binary);
+
+    if (!file.is_open() || !file2.is_open())
+    {
+        Design::message(4, 0, 7);
+    }
+    else
+    {
+        if (check_file(invoiceFile))
+        {
+            Design::message(5, 0, 7);
+        }
+        else
+        {
+            ofstream csv("Data/all_user_invoice.csv");
+            if (!csv.is_open())
+            {
+                cerr << "Could not open CSV file for writing!" << endl;
+                return;
+            }
+
+            csv << "ID,Name,Time,FoodnDrink,Qty,Price,Total\n";
+
+            while (file2.read(reinterpret_cast<char *>(&mup), sizeof(MgUserPayment)))
+            {
+                double paymentTotal = 5000 * (mup.getTime() / 60);
+                csv << mup.getID() << ","
+                    << mup.getGuestname() << ","
+                    << mup.getTime() << ","
+                    << "" << ","
+                    << "" << ","
+                    << "" << ","
+                    << paymentTotal << "\n";
+
+                totalTime += paymentTotal;
+            }
+            file2.close();
+
+            while (file.read(reinterpret_cast<char *>(&inv), sizeof(myInvoice)))
+            {
+                double invoiceTotal = (inv.getBuyedTime() * 5000) + (atoi(inv.getQty()) * (atof(inv.getPrice()) * 4100));
+                csv << inv.getId() << ","
+                    << inv.getName() << ","
+                    << inv.getBuyedTime() << ","
+                    << inv.getFoodnDrink() << ","
+                    << inv.getQty() << ","
+                    << inv.getPrice() << ","
+                    << invoiceTotal << "\n";
+
+                fndPrice += atoi(inv.getQty()) * (atof(inv.getPrice()) * 4100);
+            }
+            file.close();
+
+            allTotal = totalTime + fndPrice;
+
+            csv << "All Income" << ",,,,," << "USD : " << fixed << setprecision(2) << allTotal / 4000 << ","
+                << "KHR : " << fixed << setprecision(0) << allTotal << "\n";
+
+            csv.close();
+        }
     }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
