@@ -20,55 +20,55 @@ const char *OPEN_COMMAND = "xdg-open ";
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 class Process : public Design
 {
-public:
-    static void Admin_And_User();
-    /**********************************/
-    //@@@       ADMIN METHODS       @@//
-    static void LogIn_AsAdmin(int cursor);
-    static void Admin_Option();
-    static void Admin_ChoosingOpt(int num);
+    public:
+        static void Admin_And_User();
+        /**********************************/
+        //@@@       ADMIN METHODS       @@//
+        static void LogIn_AsAdmin(int cursor);
+        static void Admin_Option();
+        static void Admin_ChoosingOpt(int num);
 
-    static void AdminProfileInfo();
-    static void SubAdminProfileInfo(int num);
-    static void AboutUs();
-    static void A_LetterFromUs();
+        static void AdminProfileInfo();
+        static void SubAdminProfileInfo(int num);
+        static void AboutUs();
+        static void A_LetterFromUs();
 
-    static void GamesLst();
-    static void SubGameLst(int num);
-    static void InsertGame();
-    static void ViewGame();
-    static void SearchGame();
-    static void UpdateGame();
-    static void RemoveGame();
+        static void GamesLst();
+        static void SubGameLst(int num);
+        static void InsertGame();
+        static void ViewGame();
+        static void SearchGame();
+        static void UpdateGame();
+        static void RemoveGame();
 
-    static void FoodOrDrinkLst();
-    static void SubFoodAndDrink(int num);
-    static void InsertFoodDrink();
-    static void ViewFoodDrink();
-    static void SearchFoodDrink();
-    static void UpdateFoodDrink();
-    static void RemoveFoodDrink();
+        static void FoodOrDrinkLst();
+        static void SubFoodAndDrink(int num);
+        static void InsertFoodDrink();
+        static void ViewFoodDrink();
+        static void SearchFoodDrink();
+        static void UpdateFoodDrink();
+        static void RemoveFoodDrink();
 
-    static void ManageUserPayment();
+        static void ManageUserPayment();
 
-    static void ManageUserInfo();
-    static void SubManageUserInfo(int num);
-    static void InsertUser();
-    static void ViewUser();
-    static void SearchUserData();
-    static void EditUserInfo();
-    static void RemoveUser();
-    static void SortUser();
+        static void ManageUserInfo();
+        static void SubManageUserInfo(int num);
+        static void InsertUser();
+        static void ViewUser();
+        static void SearchUserData();
+        static void EditUserInfo();
+        static void RemoveUser();
+        static void SortUser();
 
-    static void ExitTheProgram();
-    /***********************************/
-    //@@@       END OF METHODS       @@//
-    /**********************************/
-    static void DisableMaximizeButton();
-    static void DisableMinimizeButton();
-    static void DisableCloseButton();
-    static void OutputHostName(int x, int y, int color);
-    static void openURL(const string &url);
+        static void ExitTheProgram();
+        /***********************************/
+        //@@@       END OF METHODS       @@//
+        /**********************************/
+        static void DisableMaximizeButton();
+        static void DisableMinimizeButton();
+        static void DisableCloseButton();
+        static void OutputHostName(int x, int y, int color);
+        static void openURL(const string &url);
 };
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Process::openURL(const string &url)

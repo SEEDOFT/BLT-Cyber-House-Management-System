@@ -17,69 +17,69 @@ using namespace BLT;
 class File
 {
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-private:
-    static string dir;
-    static string FoodnDrinkFile;
-    static string Backup;
-    static string GameFile;
-    static string UserInfoFile;
-    static string MgUserPaymentFile;
-    static string invoiceFile;
+    private:
+        static string dir;
+        static string FoodnDrinkFile;
+        static string Backup;
+        static string GameFile;
+        static string UserInfoFile;
+        static string MgUserPaymentFile;
+        static string invoiceFile;
 
-    static int getMaxID(const string &fileName, int type);
+        static int getMaxID(const string &fileName, int type);
 
-    static vector<FoodnDrink> fndVector;
-    static vector<Game> gameVector;
-    static vector<MgUserPayment> mupVector;
-    static vector<myInvoice> invVector;
+        static vector<FoodnDrink> fndVector;
+        static vector<Game> gameVector;
+        static vector<MgUserPayment> mupVector;
+        static vector<myInvoice> invVector;
 
-    static FoodnDrink fnd;
-    static Game game;
-    static MgUserInfo mui;
-    static MgUserPayment mup;
-    static myInvoice inv;
+        static FoodnDrink fnd;
+        static Game game;
+        static MgUserInfo mui;
+        static MgUserPayment mup;
+        static myInvoice inv;
 
-    static fstream file;
-    static string currentFile;
+        static fstream file;
+        static string currentFile;
 
-    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-public:
-    static void insertFile(int n);
-    static void viewFile(int n);
-    static void searchFile(int n);
-    static void updateFile(int n);
-    static void deleteFile(int n);
-    static bool check_file(const string &fileName);
-    static bool checkUsername(const char *username, int x, int y, int color, int clsColor);
-    static bool checkUsernameInVector(const char *username, int x, int y, int color);
-    static void viewProfile(const char *username, const char *password);
+        //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    public:
+        static void insertFile(int n);
+        static void viewFile(int n);
+        static void searchFile(int n);
+        static void updateFile(int n);
+        static void deleteFile(int n);
+        static bool check_file(const string &fileName);
+        static bool checkUsername(const char *username, int x, int y, int color, int clsColor);
+        static bool checkUsernameInVector(const char *username, int x, int y, int color);
+        static void viewProfile(const char *username, const char *password);
 
-    static void setCurrentFile(int n);
-    static void insertToVector(int n, string &fileName);
-    static void pushToVector(int n);
-    static void loginTimeToFile(const char *username, const char *password);
-    static void logoutTimeToFile(const char *username, const char *password);
-    static void readLogin(const char *username, const char *password);
-    static void readLogout(const char *username, const char *password);
-    static void user_login();
-    static void userSubMenu(const char *username, const char *password);
-    static void buyMoreTime(const char *username, const char *password);
-    static void invoice(const char *username, const char *password);
-    static void calculateTime(const char *username, const char *password);
-    static void buyFood(const char *username, const char *password);
-    static int getInvoiceID();
+        static void setCurrentFile(int n);
+        static void insertToVector(int n, string &fileName);
+        static void pushToVector(int n);
+        static void loginTimeToFile(const char *username, const char *password);
+        static void logoutTimeToFile(const char *username, const char *password);
+        static void readLogin(const char *username, const char *password);
+        static void readLogout(const char *username, const char *password);
+        static void user_login();
+        static void userSubMenu(const char *username, const char *password);
+        static void buyMoreTime(const char *username, const char *password);
+        static void invoice(const char *username, const char *password);
+        static void calculateTime(const char *username, const char *password);
+        static void buyFood(const char *username, const char *password);
+        static int getInvoiceID();
 
-    static void viewAllUserInvoice();
-    // static void totalIncome();
-    static void viewIncome();
-    static void OutputDate(int x, int y, int color);
-    static void OutputHostName(int x, int y, int color);
+        static void viewAllUserInvoice();
+        // static void totalIncome();
+        static void viewIncome();
+        static void OutputDate(int x, int y, int color);
+        static void OutputHostName(int x, int y, int color);
 
-    static void allUserInvoiceToCSV();
-    static void UserInvoiceToCSV(const char *username);
-    //    static void writeInvoiceToExcel(const char *username, const char *password);
+        static void allUserInvoiceToCSV();
+        static void UserInvoiceToCSV(const char *username);
+        //    static void writeInvoiceToExcel(const char *username, const char *password);
 
-    ~File();
+        ~File();
 };
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
