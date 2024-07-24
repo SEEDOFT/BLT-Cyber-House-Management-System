@@ -1,9 +1,10 @@
 #ifndef ___File_H___
 #define ___File_H___
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-#include "../../BLT_Design/Namespace/BLT.h"
 #include "../../BLT_Design/designConsole.h"
-//#include "libxlsxwriter.h"
+#include "../../BLT_Design/Namespace/BLT.h"
+#include <cstdlib>
+// #include "libxlsxwriter.h"
 #include "Invoice.h"
 #include <sys/stat.h>
 #include <vector>
@@ -73,10 +74,10 @@ public:
     static void viewIncome();
     static void OutputDate(int x, int y, int color);
     static void OutputHostName(int x, int y, int color);
-    
+
     static void allUserInvoiceToCSV();
-    static void UserInvoiceToCSV(const char * username);
-//    static void writeInvoiceToExcel(const char *username, const char *password);
+    static void UserInvoiceToCSV(const char *username);
+    //    static void writeInvoiceToExcel(const char *username, const char *password);
 
     ~File();
 };
@@ -278,7 +279,7 @@ bool File::checkUsernameInVector(const char *username, int x, int y, int color)
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void File::insertToVector(int n, string &currentFile)
 {
-	time_t t = time(nullptr);
+    time_t t = time(nullptr);
     tm *localTime = localtime(&t);
 
     const char *months[] =
@@ -335,10 +336,10 @@ void File::insertToVector(int n, string &currentFile)
         mup.setUsername(username);
         mup.input(maxID + i);
         //        mup.setFnd("\0", "\0", "\0");
-        
+
         mup.setCrtMonth(months[localTime->tm_mon]);
-    	mup.setDay(localTime->tm_hour * 100 + localTime->tm_min);
-	    mup.setYear(localTime->tm_year + 1900);
+        mup.setDay(localTime->tm_hour * 100 + localTime->tm_min);
+        mup.setYear(localTime->tm_year + 1900);
         mupVector.push_back(mup);
         H::setcursor(0, 0);
     }
@@ -1397,54 +1398,54 @@ void File::invoice(const char *username, const char *password)
                             H::setcolor(252);
                             H::gotoxy(83, 18);
                             cout << mup.getUsername();
-//                            OutputDate(83, 19, 252);
-							H::foreColor(252);
-							H::gotoxy(83,19);
+                            //                            OutputDate(83, 19, 252);
+                            H::foreColor(252);
+                            H::gotoxy(83, 19);
                             cout << mup.getDay() << "/" << mup.getCrtMonth() << "/" << mup.getYear() << endl;
 
                             strcpy(bFnD, inv.getFoodnDrink());
                             strcpy(fndQty, inv.getQty());
-                            if(inv.getBuyedTime() <= 0)
+                            if (inv.getBuyedTime() <= 0)
                             {
-                                 strcpy(buyTime,"NONE");
-                                 
-							}
+                                strcpy(buyTime, "NONE");
+                            }
                             else
                             {
-                            	sprintf(buyTime,"%d",inv.getBuyedTime());
-							}
-							if(strlen(inv.getFoodnDrink()) == 0)
-							{
-								strcpy(bFnD, "NONE");
-							}
-							if(strlen(inv.getQty()) == 0)
-							{
-								strcpy(fndQty,"NONE");
-							}
-							H::setcolor(252);
+                                sprintf(buyTime, "%d", inv.getBuyedTime());
+                            }
+                            if (strlen(inv.getFoodnDrink()) == 0)
+                            {
+                                strcpy(bFnD, "NONE");
+                            }
+                            if (strlen(inv.getQty()) == 0)
+                            {
+                                strcpy(fndQty, "NONE");
+                            }
+                            H::setcolor(252);
                             H::gotoxy(53, y + 7);
-                        	cout << left
-                             << setw(30) << bFnD
-                             << fixed << setprecision(0) << setw(20) << fndQty
-                             << setw(10) << buyTime;
-                             
+                            cout << left
+                                 << setw(30) << bFnD
+                                 << fixed << setprecision(0) << setw(20) << fndQty
+                                 << setw(10) << buyTime;
+
                             total += inv.totalPrice();
                             y++;
-                            if(y == 21)
+                            if (y == 21)
                             {
-                            	y = 16;
-                            	H::gotoxy(60,28);cout << "press any key to view more" << endl;
-                            	press = getch();
-                            	if(press == 27)
-                            	{
-                            		break;
-								}
-								else if(press == 13)
-								{
-									UserInvoiceToCSV(username);
-								}
-								H::clearBox(53,24,60,4,255);
-							}
+                                y = 16;
+                                H::gotoxy(60, 28);
+                                cout << "press any key to view more" << endl;
+                                press = getch();
+                                if (press == 27)
+                                {
+                                    break;
+                                }
+                                else if (press == 13)
+                                {
+                                    UserInvoiceToCSV(username);
+                                }
+                                H::clearBox(53, 24, 60, 4, 255);
+                            }
                         }
                         OutputHostName(75, 30, 252);
                         H::setcolor(252);
@@ -1467,10 +1468,10 @@ void File::invoice(const char *username, const char *password)
             {
                 break;
             }
-            else if(press == 13)
-			{
-				UserInvoiceToCSV(username);
-			}
+            else if (press == 13)
+            {
+                UserInvoiceToCSV(username);
+            }
             else
             {
                 continue;
@@ -1483,10 +1484,11 @@ void File::invoice(const char *username, const char *password)
 // USER INVOICE TO CSV
 //////////////////////////////////////////
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void File::UserInvoiceToCSV(const char* username)
+void File::UserInvoiceToCSV(const char *username)
 {
     int y = 16;
     double total = 0.0;
+    bool foundData = false;
 
     file.open(UserInfoFile, ios::in | ios::binary);
     fstream file2(invoiceFile, ios::in | ios::binary);
@@ -1503,49 +1505,69 @@ void File::UserInvoiceToCSV(const char* username)
         file2.close();
         Design::message(5, 0, 7);
     }
-	else
-	{
-		ofstream csv("Data/user_invoice.csv");
-	    if (!csv.is_open())
-	    {
-	        cout << "Could not open CSV file for writing!" << endl;
-	        file.close();
-	        file2.close();
-	    }
-	    else
-		{
-			csv << "\nName,Username,\n";
-			csv << inv.getName() << "," << inv.getUsername() << ",\n\n";
-			csv << "ID,FoodnDrink,Qty,Added Hour,\n";
-	
-		    while (file.read((char*)&mup, sizeof(MgUserPayment)))
-		    {
-		        if (strcmp(username, mup.getUsername()) == 0)
-		        {
-		
-		            while (file2.read((char*)&inv, sizeof(myInvoice)))
-		            {
-		                if (strcmp(username, inv.getUsername()) == 0)
-		                {
-		                    csv << inv.getId() << ","
-		                        << inv.getFoodnDrink() << ","
-		                        << inv.getQty() << ","
-		                        << inv.getBuyedTime() << "\n";
-		                    total += inv.totalPrice();
-		                }
-		            }
-		        }
-		    }
-		
-		    csv << "All Income,," << "USD : " << fixed << setprecision(2) << total / 4000 << ","
-		        << "KHR : " << fixed << setprecision(0) << total << "\n";
-		
-		    csv.close();
-		    file.close();
-		    file2.close();
-		    system("start Data\\user_invoice.csv");
-		}
-	}
+    else
+    {
+        while (file2.read((char *)&inv, sizeof(myInvoice)))
+        {
+            if (strcmp(inv.getUsername(), username) == 0)
+            {
+                foundData = true;
+            }
+        }
+        if (foundData == false)
+        {
+            file.close();
+            file2.close();
+            cout << "hg ot ton tinh eii te" << endl;
+        }
+        else
+        {
+            file.close();
+            file2.close();
+            file.open(UserInfoFile, ios::in | ios::binary);
+            fstream file2(invoiceFile, ios::in | ios::binary);
+            ofstream csv("Data/user_invoice.csv");
+            if (!csv.is_open())
+            {
+                cout << "Could not open CSV file for writing!" << endl;
+                file.close();
+                file2.close();
+            }
+            else
+            {
+                csv << "\nName,Username,\n";
+                csv << inv.getName() << "," << inv.getUsername() << ",\n\n";
+                csv << "ID,FoodnDrink,Qty,Added Hour,\n";
+
+                while (file.read((char *)&mup, sizeof(MgUserPayment)))
+                {
+                    if (strcmp(username, mup.getUsername()) == 0)
+                    {
+
+                        while (file2.read((char *)&inv, sizeof(myInvoice)))
+                        {
+                            if (strcmp(username, inv.getUsername()) == 0)
+                            {
+                                csv << inv.getId() << ","
+                                    << inv.getFoodnDrink() << ","
+                                    << inv.getQty() << ","
+                                    << inv.getBuyedTime() << "\n";
+                                total += inv.totalPrice();
+                            }
+                        }
+                    }
+                }
+
+                csv << "All Income,," << "USD : " << fixed << setprecision(2) << total / 4000 << ","
+                    << "KHR : " << fixed << setprecision(0) << total << "\n";
+
+                csv.close();
+                file.close();
+                file2.close();
+                system("start Data\\user_invoice.csv");
+            }
+        }
+    }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //////////////////////////////////////////
@@ -1637,7 +1659,7 @@ void File::buyFood(const char *username, const char *password)
             foodFound = false;
             file2.close();
             file.close();
-        	file3.close();
+            file3.close();
         }
         else
         {
@@ -1651,112 +1673,112 @@ void File::buyFood(const char *username, const char *password)
         }
         file2.close();
 
-       	if(foodFound == true)
-       	{
-       		 Design::message(6, 0, 0);
+        if (foodFound == true)
+        {
+            Design::message(6, 0, 0);
 
-	        H::setcolor(7);
-	        H::cls();
-	        Design::outline();
-	        B::BuyFoodnDrinkTxt();
-	        B::buyFoodnDrink_Design();
-	
-	        while (file.read((char *)&mup, sizeof(MgUserPayment)))
-	        {
-	
-	            if (strcmp(username, mup.getUsername()) == 0 && strcmp(password, mup.getPassword()) == 0)
-	            {
-	                H::setcursor(1, 0);
-	                H::foreColor(1);
-	                H::gotoxy(116, 19);
-	                H::inputNumber(foodID, sizeof(foodID));
-	                H::foreColor(1);
-	                H::gotoxy(116, 23);
-	                H::inputNumber(quantity, sizeof(quantity));
-	
-	                H::setcursor(0, 0);
-	                int foodIDInt = atoi(foodID);
-	                int quantityInt = atoi(quantity);
-	
-	                fstream foodFile(FoodnDrinkFile, ios::in | ios::out | ios::binary);
-	                if (!foodFile.is_open())
-	                {
-	                    H::foreColor(7);
-	                    H::gotoxy(98, 29);
-	                    cout << "Food file could not be opened";
-	                    Design::message(2, 0, 38);
-	                }
-	                else
-	                {
-	                    bool foodFound = false;
-	                    while (foodFile.read((char *)&fnd, sizeof(FoodnDrink)))
-	                    {
-	                        if (fnd.getFndID() == foodIDInt)
-	                        {
-	                            int availableQty = atoi(fnd.getQty());
-	                            if (quantityInt <= availableQty)
-	                            {
-	                                int newQty = availableQty - quantityInt;
-	                                char newQtyStr[5];
-	                                sprintf(newQtyStr, "%d", newQty);
-	                                fnd.setQty(newQtyStr);
-	
-	                                foodFile.seekp(-sizeof(FoodnDrink), ios::cur);
-	                                foodFile.write((char *)&fnd, sizeof(FoodnDrink));
-	
-	                                inv.setName(mup.getGuestname());
-	                                inv.setUsername(username);
-	                                inv.setFnd(fnd.getName(), fnd.getPrice(), quantity);
-	                                inv.setBuyedTime(0);
-	                                inv.setTime(mup.getTime());
-	                                //                                inv.setId(mup.getID());
-	                                inv.setId(myInvID);
-	
-	                                H::foreColor(7);
-	                                H::gotoxy(94, 29);
-	                                cout << "\3\3";
-	                                H::setcolor(4);
-	                                cout << " Successfully Purchase";
-	                                H::setcolor(7);
-	                                cout << " \3\3";
-	
-	                                Design::message(2, 0, 38);
-	                            }
-	                            else
-	                            {
-	                                H::foreColor(7);
-	                                H::gotoxy(89, 29);
-	                                cout << "Insufficient quantity are available";
-	
-	                                Design::message(2, 0, 38);
-	                                file.close();
-	                                file3.close();
-	                            }
-	                            foodFound = true;
-	                            break;
-	                        }
-	                    }
-	                    foodFile.close();
-	
-	                    if (!foodFound)
-	                    {
-	                        H::foreColor(4);
-	                        H::gotoxy(92, 29);
-	                        cout << "Food or Drink ID is not found";
-	
-	                        Design::message(2, 0, 38);
-	                        file.close();
-	                        file3.close();
-	                    }
-	                }
-	                file3.write((char *)&inv, sizeof(myInvoice));
-	            }
-	            //            file3.write((char *)&inv, sizeof(myInvoice));
-	        }
-	
-	        file.close();
-	        file3.close();
-		}
+            H::setcolor(7);
+            H::cls();
+            Design::outline();
+            B::BuyFoodnDrinkTxt();
+            B::buyFoodnDrink_Design();
+
+            while (file.read((char *)&mup, sizeof(MgUserPayment)))
+            {
+
+                if (strcmp(username, mup.getUsername()) == 0 && strcmp(password, mup.getPassword()) == 0)
+                {
+                    H::setcursor(1, 0);
+                    H::foreColor(1);
+                    H::gotoxy(116, 19);
+                    H::inputNumber(foodID, sizeof(foodID));
+                    H::foreColor(1);
+                    H::gotoxy(116, 23);
+                    H::inputNumber(quantity, sizeof(quantity));
+
+                    H::setcursor(0, 0);
+                    int foodIDInt = atoi(foodID);
+                    int quantityInt = atoi(quantity);
+
+                    fstream foodFile(FoodnDrinkFile, ios::in | ios::out | ios::binary);
+                    if (!foodFile.is_open())
+                    {
+                        H::foreColor(7);
+                        H::gotoxy(98, 29);
+                        cout << "Food file could not be opened";
+                        Design::message(2, 0, 38);
+                    }
+                    else
+                    {
+                        bool foodFound = false;
+                        while (foodFile.read((char *)&fnd, sizeof(FoodnDrink)))
+                        {
+                            if (fnd.getFndID() == foodIDInt)
+                            {
+                                int availableQty = atoi(fnd.getQty());
+                                if (quantityInt <= availableQty)
+                                {
+                                    int newQty = availableQty - quantityInt;
+                                    char newQtyStr[5];
+                                    sprintf(newQtyStr, "%d", newQty);
+                                    fnd.setQty(newQtyStr);
+
+                                    foodFile.seekp(-sizeof(FoodnDrink), ios::cur);
+                                    foodFile.write((char *)&fnd, sizeof(FoodnDrink));
+
+                                    inv.setName(mup.getGuestname());
+                                    inv.setUsername(username);
+                                    inv.setFnd(fnd.getName(), fnd.getPrice(), quantity);
+                                    inv.setBuyedTime(0);
+                                    inv.setTime(mup.getTime());
+                                    //                                inv.setId(mup.getID());
+                                    inv.setId(myInvID);
+
+                                    H::foreColor(7);
+                                    H::gotoxy(94, 29);
+                                    cout << "\3\3";
+                                    H::setcolor(4);
+                                    cout << " Successfully Purchase";
+                                    H::setcolor(7);
+                                    cout << " \3\3";
+
+                                    Design::message(2, 0, 38);
+                                }
+                                else
+                                {
+                                    H::foreColor(7);
+                                    H::gotoxy(89, 29);
+                                    cout << "Insufficient quantity are available";
+
+                                    Design::message(2, 0, 38);
+                                    file.close();
+                                    file3.close();
+                                }
+                                foodFound = true;
+                                break;
+                            }
+                        }
+                        foodFile.close();
+
+                        if (!foodFound)
+                        {
+                            H::foreColor(4);
+                            H::gotoxy(92, 29);
+                            cout << "Food or Drink ID is not found";
+
+                            Design::message(2, 0, 38);
+                            file.close();
+                            file3.close();
+                        }
+                    }
+                    file3.write((char *)&inv, sizeof(myInvoice));
+                }
+                //            file3.write((char *)&inv, sizeof(myInvoice));
+            }
+
+            file.close();
+            file3.close();
+        }
     }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -1817,7 +1839,6 @@ void File::viewAllUserInvoice()
     int y = 0;
     file.open(invoiceFile, ios::in | ios::binary);
     fstream file2(UserInfoFile, ios::in | ios::binary);
-
     if (!file.is_open() && !file2.is_open())
     {
         Design::message(4, 0, 7);
@@ -1832,15 +1853,15 @@ void File::viewAllUserInvoice()
         {
             while (file2.read((char *)&mup, sizeof(MgUserPayment)))
             {
-//            	H::setcolor(3);
-                mup.Invoutput(y,3);
+                //            	H::setcolor(3);
+                mup.Invoutput(y, 3);
                 y++;
                 totalTime += (5000 * (mup.getTime() / 60));
             }
             file2.close();
             while (file.read((char *)&inv, sizeof(myInvoice)))
             {
-            	H::setcolor(2);
+                H::setcolor(2);
                 inv.viewAll(y);
                 fndPrice += (atoi(inv.getQty()) * (atof(inv.getPrice()) * 4100));
                 y++;
@@ -1858,6 +1879,38 @@ void File::viewAllUserInvoice()
             cout << "KHR : " << fixed << setprecision(0) << allTotal;
         }
         file.close();
+    }
+    while (1)
+    {
+        char press = ' ';
+        Design::message(2, 0, 38);
+
+        press = getch();
+
+        if (press == 27)
+        {
+            break;
+        }
+        else if (press == 13)
+        {
+            file.open(invoiceFile, ios::in | ios::binary);
+            fstream file2(UserInfoFile, ios::in | ios::binary);
+            if (!file.is_open() && !file2.is_open())
+            {
+                cout << "ot mean file te khom mes" << endl;
+            }
+            else
+            {
+                File::allUserInvoiceToCSV();
+                system("start Data\\all_user_invoice.csv");
+            }
+        }
+        else
+        {
+            continue;
+        }
+        file.close();
+        file2.close();
     }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -1877,60 +1930,69 @@ void File::allUserInvoiceToCSV()
     if (!file.is_open() || !file2.is_open())
     {
         Design::message(4, 0, 7);
+        file.close();
+        file2.close();
     }
     else
     {
         if (check_file(invoiceFile))
         {
             Design::message(5, 0, 7);
+            file.close();
+            file2.close();
         }
         else
         {
+            file.close();
+            file2.close();
+            file.open(invoiceFile, ios::in | ios::binary);
+            file2.open(UserInfoFile, ios::in | ios::binary);
             ofstream csv("Data/all_user_invoice.csv");
             if (!csv.is_open())
             {
-                cerr << "Could not open CSV file for writing!" << endl;
-                return;
+                cout << "Could not open CSV file for writing!" << endl;
             }
-
-            csv << "ID,Name,Time,FoodnDrink,Qty,Price,Total\n";
-
-            while (file2.read(reinterpret_cast<char *>(&mup), sizeof(MgUserPayment)))
+            else
             {
-                double paymentTotal = 5000 * (mup.getTime() / 60);
-                csv << mup.getID() << ","
-                    << mup.getGuestname() << ","
-                    << mup.getTime() << ","
-                    << "" << ","
-                    << "" << ","
-                    << "" << ","
-                    << paymentTotal << "\n";
+                csv << "ID,Name,Time,FoodnDrink,Qty,Price,Total\n";
 
-                totalTime += paymentTotal;
+                while (file2.read((char *)&mup, sizeof(MgUserPayment)))
+                {
+                    double paymentTotal = 5000 * (mup.getTime() / 60);
+                    csv << mup.getID() << ","
+                        << mup.getGuestname() << ","
+                        << mup.getTime() << ","
+                        << "" << ","
+                        << "" << ","
+                        << "" << ","
+                        << paymentTotal << "\n";
+
+                    totalTime += paymentTotal;
+                }
+                file2.close();
+
+                while (file.read((char *)&inv, sizeof(myInvoice)))
+                {
+                    double invoiceTotal = (inv.getBuyedTime() * 5000) + (atoi(inv.getQty()) * (atof(inv.getPrice()) * 4100));
+                    csv << inv.getId() << ","
+                        << inv.getName() << ","
+                        << inv.getBuyedTime() << ","
+                        << inv.getFoodnDrink() << ","
+                        << inv.getQty() << ","
+                        << inv.getPrice() << ","
+                        << invoiceTotal << "\n";
+
+                    fndPrice += atoi(inv.getQty()) * (atof(inv.getPrice()) * 4100);
+                }
+                file.close();
+
+                allTotal = totalTime + fndPrice;
+
+                csv << "All Income" << ",,,,," << "USD : " << fixed << setprecision(2) << allTotal / 4000 << ","
+                    << "KHR : " << fixed << setprecision(0) << allTotal << "\n";
+
+                csv.close();
             }
-            file2.close();
-
-            while (file.read(reinterpret_cast<char *>(&inv), sizeof(myInvoice)))
-            {
-                double invoiceTotal = (inv.getBuyedTime() * 5000) + (atoi(inv.getQty()) * (atof(inv.getPrice()) * 4100));
-                csv << inv.getId() << ","
-                    << inv.getName() << ","
-                    << inv.getBuyedTime() << ","
-                    << inv.getFoodnDrink() << ","
-                    << inv.getQty() << ","
-                    << inv.getPrice() << ","
-                    << invoiceTotal << "\n";
-
-                fndPrice += atoi(inv.getQty()) * (atof(inv.getPrice()) * 4100);
-            }
-            file.close();
-
-            allTotal = totalTime + fndPrice;
-
-            csv << "All Income" << ",,,,," << "USD : " << fixed << setprecision(2) << allTotal / 4000 << ","
-                << "KHR : " << fixed << setprecision(0) << allTotal << "\n";
-
-            csv.close();
         }
     }
 }
@@ -1959,85 +2021,85 @@ int File::getInvoiceID()
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 File::~File() {}
 
-//use with header libxlsxwriter.h
-//void File::writeInvoiceToExcel(const char *username, const char *password)
+// use with header libxlsxwriter.h
+// void File::writeInvoiceToExcel(const char *username, const char *password)
 //{
-//    file.open(UserInfoFile, ios::in | ios::binary);
-//    fstream file2(invoiceFile, ios::in | ios::binary);
+//     file.open(UserInfoFile, ios::in | ios::binary);
+//     fstream file2(invoiceFile, ios::in | ios::binary);
 //
-//    if (!file.is_open())
-//    {
-//        Design::message(4, 0, 3);
-//        return;
-//    }
+//     if (!file.is_open())
+//     {
+//         Design::message(4, 0, 3);
+//         return;
+//     }
 //
-//    // Create a new Excel workbook
-//    lxw_workbook  *workbook  = workbook_new("invoice.xlsx");
-//    lxw_worksheet *worksheet = workbook_add_worksheet(workbook, NULL);
+//     // Create a new Excel workbook
+//     lxw_workbook  *workbook  = workbook_new("invoice.xlsx");
+//     lxw_worksheet *worksheet = workbook_add_worksheet(workbook, NULL);
 //
-//    // Add headers to the Excel sheet
-//    worksheet_write_string(worksheet, 0, 0, "ID", NULL);
-//    worksheet_write_string(worksheet, 0, 1, "Guest Name", NULL);
-//    worksheet_write_string(worksheet, 0, 2, "Username", NULL);
-//    worksheet_write_string(worksheet, 0, 3, "Food and Drink", NULL);
-//    worksheet_write_string(worksheet, 0, 4, "Quantity", NULL);
-//    worksheet_write_string(worksheet, 0, 5, "Buy Time", NULL);
-//    worksheet_write_string(worksheet, 0, 6, "Total Price", NULL);
+//     // Add headers to the Excel sheet
+//     worksheet_write_string(worksheet, 0, 0, "ID", NULL);
+//     worksheet_write_string(worksheet, 0, 1, "Guest Name", NULL);
+//     worksheet_write_string(worksheet, 0, 2, "Username", NULL);
+//     worksheet_write_string(worksheet, 0, 3, "Food and Drink", NULL);
+//     worksheet_write_string(worksheet, 0, 4, "Quantity", NULL);
+//     worksheet_write_string(worksheet, 0, 5, "Buy Time", NULL);
+//     worksheet_write_string(worksheet, 0, 6, "Total Price", NULL);
 //
-//    int row = 1;
+//     int row = 1;
 //
-//    while (file.read((char *)&mup, sizeof(MgUserPayment)))
-//    {
-//        if (strcmp(username, mup.getUsername()) == 0 && strcmp(password, mup.getPassword()) == 0)
-//        {
-//            while (file2.read((char *)&inv, sizeof(myInvoice)))
-//            {
-//                if (strcmp(username, inv.getUsername()) == 0)
-//                {
-//                    char buyTime[5] = "\0";
-//                    char bFnD[20] = "\0";
-//                    char fndQty[5] = "\0";
+//     while (file.read((char *)&mup, sizeof(MgUserPayment)))
+//     {
+//         if (strcmp(username, mup.getUsername()) == 0 && strcmp(password, mup.getPassword()) == 0)
+//         {
+//             while (file2.read((char *)&inv, sizeof(myInvoice)))
+//             {
+//                 if (strcmp(username, inv.getUsername()) == 0)
+//                 {
+//                     char buyTime[5] = "\0";
+//                     char bFnD[20] = "\0";
+//                     char fndQty[5] = "\0";
 //
-//                    strcpy(bFnD, inv.getFoodnDrink());
-//                    strcpy(fndQty, inv.getQty());
-//                    if(inv.getBuyedTime() <= 0)
-//                    {
-//                        strcpy(buyTime,"NONE");
-//                    }
-//                    else
-//                    {
-//                        sprintf(buyTime,"%d",inv.getBuyedTime());
-//                    }
-//                    if(strlen(inv.getFoodnDrink()) == 0)
-//                    {
-//                        strcpy(bFnD, "NONE");
-//                    }
-//                    if(strlen(inv.getQty()) == 0)
-//                    {
-//                        strcpy(fndQty,"NONE");
-//                    }
+//                     strcpy(bFnD, inv.getFoodnDrink());
+//                     strcpy(fndQty, inv.getQty());
+//                     if(inv.getBuyedTime() <= 0)
+//                     {
+//                         strcpy(buyTime,"NONE");
+//                     }
+//                     else
+//                     {
+//                         sprintf(buyTime,"%d",inv.getBuyedTime());
+//                     }
+//                     if(strlen(inv.getFoodnDrink()) == 0)
+//                     {
+//                         strcpy(bFnD, "NONE");
+//                     }
+//                     if(strlen(inv.getQty()) == 0)
+//                     {
+//                         strcpy(fndQty,"NONE");
+//                     }
 //
-//                    // Write data to Excel sheet
-//                    worksheet_write_string(worksheet, row, 0, mup.getID(), NULL);
-//                    worksheet_write_string(worksheet, row, 1, mup.getGuestname(), NULL);
-//                    worksheet_write_string(worksheet, row, 2, mup.getUsername(), NULL);
-//                    worksheet_write_string(worksheet, row, 3, bFnD, NULL);
-//                    worksheet_write_string(worksheet, row, 4, fndQty, NULL);
-//                    worksheet_write_string(worksheet, row, 5, buyTime, NULL);
-//                    worksheet_write_number(worksheet, row, 6, inv.totalPrice(), NULL);
+//                     // Write data to Excel sheet
+//                     worksheet_write_string(worksheet, row, 0, mup.getID(), NULL);
+//                     worksheet_write_string(worksheet, row, 1, mup.getGuestname(), NULL);
+//                     worksheet_write_string(worksheet, row, 2, mup.getUsername(), NULL);
+//                     worksheet_write_string(worksheet, row, 3, bFnD, NULL);
+//                     worksheet_write_string(worksheet, row, 4, fndQty, NULL);
+//                     worksheet_write_string(worksheet, row, 5, buyTime, NULL);
+//                     worksheet_write_number(worksheet, row, 6, inv.totalPrice(), NULL);
 //
-//                    row++;
-//                }
-//            }
-//        }
-//    }
+//                     row++;
+//                 }
+//             }
+//         }
+//     }
 //
-//    file.close();
-//    file2.close();
+//     file.close();
+//     file2.close();
 //
-//    // Close the Excel workbook
-//    workbook_close(workbook);
-//}
+//     // Close the Excel workbook
+//     workbook_close(workbook);
+// }
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 /*

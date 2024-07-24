@@ -1,19 +1,16 @@
 #ifndef ______MainProgram_Process______
 #define ______MainProgram_Process______
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-#include "../../BLT_Design/designConsole.h"
-#include "../../BLT_Design/Namespace/BLT.h"
 #include "../User_Process_Code/File.h"
 #include <cstdlib>
-using namespace BLT;
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 #ifdef _WIN32
-const char* OPEN_COMMAND = "start ";
+const char *OPEN_COMMAND = "start ";
 #elif defined(__APPLE__)
-const char* OPEN_COMMAND = "open ";
+const char *OPEN_COMMAND = "open ";
 #else
-const char* OPEN_COMMAND = "xdg-open ";
+const char *OPEN_COMMAND = "xdg-open ";
 #endif
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -23,61 +20,61 @@ const char* OPEN_COMMAND = "xdg-open ";
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 class Process : public Design
 {
-    public:
-        static void Admin_And_User();
-        /**********************************/
-        //@@@       ADMIN METHODS       @@//
-        static void LogIn_AsAdmin(int cursor);
-        static void Admin_Option();
-        static void Admin_ChoosingOpt(int num);
+public:
+    static void Admin_And_User();
+    /**********************************/
+    //@@@       ADMIN METHODS       @@//
+    static void LogIn_AsAdmin(int cursor);
+    static void Admin_Option();
+    static void Admin_ChoosingOpt(int num);
 
-        static void AdminProfileInfo();
-        static void SubAdminProfileInfo(int num);
-        static void AboutUs();
-        static void A_LetterFromUs();
+    static void AdminProfileInfo();
+    static void SubAdminProfileInfo(int num);
+    static void AboutUs();
+    static void A_LetterFromUs();
 
-        static void GamesLst();
-        static void SubGameLst(int num);
-        static void InsertGame();
-        static void ViewGame();
-        static void SearchGame();
-        static void UpdateGame();
-        static void RemoveGame();
+    static void GamesLst();
+    static void SubGameLst(int num);
+    static void InsertGame();
+    static void ViewGame();
+    static void SearchGame();
+    static void UpdateGame();
+    static void RemoveGame();
 
-        static void FoodOrDrinkLst();
-        static void SubFoodAndDrink(int num);
-        static void InsertFoodDrink();
-        static void ViewFoodDrink();
-        static void SearchFoodDrink();
-        static void UpdateFoodDrink();
-        static void RemoveFoodDrink();
+    static void FoodOrDrinkLst();
+    static void SubFoodAndDrink(int num);
+    static void InsertFoodDrink();
+    static void ViewFoodDrink();
+    static void SearchFoodDrink();
+    static void UpdateFoodDrink();
+    static void RemoveFoodDrink();
 
-        static void ManageUserPayment();
+    static void ManageUserPayment();
 
-        static void ManageUserInfo();
-        static void SubManageUserInfo(int num);
-        static void InsertUser();
-        static void ViewUser();
-        static void SearchUserData();
-        static void EditUserInfo();
-        static void RemoveUser();
-        static void SortUser();
+    static void ManageUserInfo();
+    static void SubManageUserInfo(int num);
+    static void InsertUser();
+    static void ViewUser();
+    static void SearchUserData();
+    static void EditUserInfo();
+    static void RemoveUser();
+    static void SortUser();
 
-        static void ExitTheProgram();
-        /***********************************/
-        //@@@       END OF METHODS       @@//
-        /**********************************/
-        static void DisableMaximizeButton();
-        static void DisableMinimizeButton();
-        static void DisableCloseButton();
-        static void OutputHostName(int x, int y, int color);
-        static void openURL(const string& url);
+    static void ExitTheProgram();
+    /***********************************/
+    //@@@       END OF METHODS       @@//
+    /**********************************/
+    static void DisableMaximizeButton();
+    static void DisableMinimizeButton();
+    static void DisableCloseButton();
+    static void OutputHostName(int x, int y, int color);
+    static void openURL(const string &url);
 };
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Process::openURL(const string &url)
 {
     string command = string(OPEN_COMMAND) + url;
-    if (system(command.c_str()) != 0) 
+    if (system(command.c_str()) != 0)
     {
         cerr << "Error opening URL.";
     }
@@ -128,7 +125,7 @@ void Process::OutputHostName(int x, int y, int color)
     if (GetComputerNameW(hostname, &size))
     {
         tp(color, x, y);
-        wcout << hostname ;
+        wcout << hostname;
     }
     else
     {
@@ -191,31 +188,31 @@ void Process::Admin_And_User()
 
             switch (press)
             {
-                case 72: // up
+            case 72: // up
+            {
+                num--;
+                if (num < 1)
                 {
-                    num--;
-                    if (num < 1)
-                    {
-                        num = 2;
-                    }
-                    break;
+                    num = 2;
                 }
+                break;
+            }
 
-                case 80: // down
+            case 80: // down
+            {
+                num++;
+                if (num > 2)
                 {
-                    num++;
-                    if (num > 2)
-                    {
-                        num = 1;
-                    }
-                    break;
+                    num = 1;
                 }
+                break;
+            }
 
-                case 8: // delete key
-                {
-                    ExitTheProgram();//exit program method
-                    break;
-                }
+            case 8: // delete key
+            {
+                ExitTheProgram(); // exit program method
+                break;
+            }
             }
 
         } while (press != 13);
@@ -224,15 +221,15 @@ void Process::Admin_And_User()
 
         switch (num)
         {
-            case 1:
-                Admin_User_ClsBox(1);
-                LogIn_AsAdmin(1);
-                break;
+        case 1:
+            Admin_User_ClsBox(1);
+            LogIn_AsAdmin(1);
+            break;
 
-            case 2:
-                Admin_User_ClsBox(2);
-                File::user_login();
-                break;
+        case 2:
+            Admin_User_ClsBox(2);
+            File::user_login();
+            break;
         }
     }
 }
@@ -275,9 +272,12 @@ void Process::LogIn_AsAdmin(int cursor)
             {
                 H::setcursor(0, 0);
                 H::setcolor(140);
-                H::gotoxy(x + 29, y + 27);cout << "You have ";
-                H::setcolor(137);cout << --chance;
-                H::setcolor(140);cout << " left";
+                H::gotoxy(x + 29, y + 27);
+                cout << "You have ";
+                H::setcolor(137);
+                cout << --chance;
+                H::setcolor(140);
+                cout << " left";
                 loginMsg(1); // input msg
 
                 getch();
@@ -439,34 +439,34 @@ void Process::Admin_ChoosingOpt(int num)
 {
     switch (num)
     {
-        case 1:
-            Design::LoadingAnimation();
-            AdminProfileInfo();
-            break;
+    case 1:
+        Design::LoadingAnimation();
+        AdminProfileInfo();
+        break;
 
-        case 2:
-            Design::LoadingAnimation();
-            GamesLst();
-            break;
+    case 2:
+        Design::LoadingAnimation();
+        GamesLst();
+        break;
 
-        case 3:
-            Design::LoadingAnimation();
-            FoodOrDrinkLst();
-            break;
+    case 3:
+        Design::LoadingAnimation();
+        FoodOrDrinkLst();
+        break;
 
-        case 4:
-            Design::LoadingAnimation();
-            ManageUserInfo();
-            break;
+    case 4:
+        Design::LoadingAnimation();
+        ManageUserInfo();
+        break;
 
-        case 5:
-            Design::LoadingAnimation();
-            ManageUserPayment();
-            break;
+    case 5:
+        Design::LoadingAnimation();
+        ManageUserPayment();
+        break;
 
-        case 6:
-            Admin_And_User();
-            break;
+    case 6:
+        Admin_And_User();
+        break;
     }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -500,26 +500,38 @@ void Process::AdminProfileInfo()
             H::drawBoxDoubleLineWithBG(105, 17, 30, 1, 183);
             H::drawBoxDoubleLineWithBG(105, 23, 30, 1, 183);
 
-            H::gotoxy(116,12);H::setcolor(185); cout <<"About Us";
-            H::gotoxy(112,18);H::setcolor(185); cout <<"A Letter from Us";
-            H::gotoxy(114,24);H::setcolor(185); cout <<"Back to MENU";
+            H::gotoxy(116, 12);
+            H::setcolor(185);
+            cout << "About Us";
+            H::gotoxy(112, 18);
+            H::setcolor(185);
+            cout << "A Letter from Us";
+            H::gotoxy(114, 24);
+            H::setcolor(185);
+            cout << "Back to MENU";
 
             if (y == 1)
             {
                 H::drawBoxDoubleLineWithBG(105, 11, 30, 1, 68);
-                H::gotoxy(116,12);H::setcolor(71); cout <<"About Us";
+                H::gotoxy(116, 12);
+                H::setcolor(71);
+                cout << "About Us";
                 choice = 1;
             }
             if (y == 2)
             {
                 H::drawBoxDoubleLineWithBG(105, 17, 30, 1, 68);
-                H::gotoxy(112,18);H::setcolor(71); cout <<"A Letter from Us";
+                H::gotoxy(112, 18);
+                H::setcolor(71);
+                cout << "A Letter from Us";
                 choice = 2;
             }
             if (y == 3)
             {
                 H::drawBoxDoubleLineWithBG(105, 23, 30, 1, 68);
-                H::gotoxy(114,24);H::setcolor(71); cout <<"Back to MENU";
+                H::gotoxy(114, 24);
+                H::setcolor(71);
+                cout << "Back to MENU";
                 choice = 3;
             }
 
@@ -557,18 +569,18 @@ void Process::SubAdminProfileInfo(int num)
 {
     switch (num)
     {
-        case 1:
-            LoadingAnimation();
-            AboutUs();
-            break;
-        case 2:
-            LoadingAnimation();
-            A_LetterFromUs();
-            break;
+    case 1:
+        LoadingAnimation();
+        AboutUs();
+        break;
+    case 2:
+        LoadingAnimation();
+        A_LetterFromUs();
+        break;
 
-        case 3:
-            Admin_Option();
-            break;
+    case 3:
+        Admin_Option();
+        break;
     }
 }
 /******************************************************** */
@@ -577,27 +589,28 @@ void Process::AboutUs()
     H::setConsoleTitle(TEXT("About Us"));
     H::setcolor(7);
     H::cls();
-    H::setcursor(0,0);
+    H::setcursor(0, 0);
     outline();
-    
+
     char press;
     AboutUsTxt();
     AboutUs_Design();
 
-    while(1)
+    while (1)
     {
-        message(2,0,38);
+        message(2, 0, 38);
 
         press = getch();
 
-        if(press == 27)
+        if (press == 27)
         {
             break;
         }
-        else if(press == '1')
+        else if (press == '1')
         {
             // openURL("https://drraspec.github.io/about-us/");
-            openURL("http://127.0.0.1:5500/Source%20Code/Website/index.html");
+//            openURL("start Website/index.html");
+			system("start Website/index.html");
             break;
         }
         else
@@ -618,35 +631,45 @@ void Process::A_LetterFromUs()
     A_Letter_from_UsTxt();
     A_Letter_from_Us_Animation();
 
-    while(1)
+    while (1)
     {
         A_Letter_from_Us_Design(5);
 
-        H::HLine(30,28,100,7,196);
-        H::setcolor(1);H::gotoxy(40,29); 
-        cout << "To open the website of ";H::setcolor(3);cout <<"ANT Technology Training Center";
-        H::gotoxy(110,29);H::setcolor(71);cout <<" Press number 1";
+        H::HLine(30, 28, 100, 7, 196);
+        H::setcolor(1);
+        H::gotoxy(40, 29);
+        cout << "To open the website of ";
+        H::setcolor(3);
+        cout << "ANT Technology Training Center";
+        H::gotoxy(110, 29);
+        H::setcolor(71);
+        cout << " Press number 1";
 
-        H::HLine(30,30,100,7,196); 
+        H::HLine(30, 30, 100, 7, 196);
 
-        H::setcolor(1);H::gotoxy(40,31); 
-        cout << "To open the website of ";H::setcolor(3);cout <<"Ministry of Post and Telecommunications";
-        H::gotoxy(110,31);H::setcolor(71);cout <<" Press number 2";
-        H::HLine(30,32,100,7,196);
+        H::setcolor(1);
+        H::gotoxy(40, 31);
+        cout << "To open the website of ";
+        H::setcolor(3);
+        cout << "Ministry of Post and Telecommunications";
+        H::gotoxy(110, 31);
+        H::setcolor(71);
+        cout << " Press number 2";
+        H::HLine(30, 32, 100, 7, 196);
 
         message(2, 0, 38);
 
         press = getch();
 
-        if(press == 27)
+        if (press == 27)
         {
             break;
         }
-        else if(press == '1')
+        else if (press == '1')
         {
             openURL("http://training.antkh.com/");
         }
-        else if(press == '2')
+        else if (press == '2')
         {
             openURL("https://mptc.gov.kh/en/");
         }
@@ -655,7 +678,6 @@ void Process::A_LetterFromUs()
             continue;
         }
     }
-    
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -760,40 +782,40 @@ void Process::SubGameLst(int num)
 {
     switch (num)
     {
-        // input case
-        case 1:
-            Design::LoadingAnimation();
-            InsertGame();
-            break;
+    // input case
+    case 1:
+        Design::LoadingAnimation();
+        InsertGame();
+        break;
 
-        // Display
-        case 2:
-            Design::LoadingAnimation();
-            ViewGame();
-            break;
+    // Display
+    case 2:
+        Design::LoadingAnimation();
+        ViewGame();
+        break;
 
-        // Search
-        case 3:
-            Design::LoadingAnimation();
-            SearchGame();
-            break;
+    // Search
+    case 3:
+        Design::LoadingAnimation();
+        SearchGame();
+        break;
 
-        // Update
-        case 4:
-            Design::LoadingAnimation();
-            UpdateGame();
-            break;
+    // Update
+    case 4:
+        Design::LoadingAnimation();
+        UpdateGame();
+        break;
 
-        // Remove
-        case 5:
-            Design::LoadingAnimation();
-            RemoveGame();
-            break;
+    // Remove
+    case 5:
+        Design::LoadingAnimation();
+        RemoveGame();
+        break;
 
-            //back 
-        case 6:
-            Admin_Option();
-            break;
+        // back
+    case 6:
+        Admin_Option();
+        break;
     }
 }
 /******************************************************** */
@@ -1100,40 +1122,40 @@ void Process::SubManageUserInfo(int num)
 {
     switch (num)
     {
-        // input case
-        case 1:
-            Design::LoadingAnimation();
-            InsertUser();
-            break;
+    // input case
+    case 1:
+        Design::LoadingAnimation();
+        InsertUser();
+        break;
 
-        // Display
-        case 2:
-            Design::LoadingAnimation();
-            ViewUser();
-            break;
+    // Display
+    case 2:
+        Design::LoadingAnimation();
+        ViewUser();
+        break;
 
-        // Search
-        case 3:
-            Design::LoadingAnimation();
-            SearchUserData();
-            break;
+    // Search
+    case 3:
+        Design::LoadingAnimation();
+        SearchUserData();
+        break;
 
-        // Edit
-        case 4:
-            Design::LoadingAnimation();
-            EditUserInfo();
-            break;
+    // Edit
+    case 4:
+        Design::LoadingAnimation();
+        EditUserInfo();
+        break;
 
-        // Remove
-        case 5:
-            Design::LoadingAnimation();
-            RemoveUser();
-            break;
+    // Remove
+    case 5:
+        Design::LoadingAnimation();
+        RemoveUser();
+        break;
 
-        //Back
-        case 6:
-            Admin_Option();
-            break;
+    // Back
+    case 6:
+        Admin_Option();
+        break;
     }
 }
 /*********************************************************/
@@ -1357,32 +1379,10 @@ void Process::ManageUserPayment()
     H::cls();
     H::setcursor(0, 0);
     outline();
-    char press = ' ';
 
     B::AllInvoicesTxt();
     B::AllInvoices_Design();
     File::viewAllUserInvoice();
-
-    while (1)
-    {
-        message(2, 0, 38);
-
-        press = getch();
-
-        if (press == 27)
-        {
-            break;
-        }
-        else if (press == 13)
-        {
-        	File::allUserInvoiceToCSV();
-        	system("start Data\\all_user_invoice.csv");
-		}
-        else
-        {
-            continue;
-        }
-    }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -1522,39 +1522,39 @@ void Process::SubFoodAndDrink(int num)
 {
     switch (num)
     {
-    // input case
-        case 1:
-            Design::LoadingAnimation();
-            InsertFoodDrink();
-            break;
+        // input case
+    case 1:
+        Design::LoadingAnimation();
+        InsertFoodDrink();
+        break;
 
-        // Display
-        case 2:
-            Design::LoadingAnimation();
-            ViewFoodDrink();
-            break;
+    // Display
+    case 2:
+        Design::LoadingAnimation();
+        ViewFoodDrink();
+        break;
 
-        // Search
-        case 3:
-            Design::LoadingAnimation();
-            SearchFoodDrink();
-            break;
+    // Search
+    case 3:
+        Design::LoadingAnimation();
+        SearchFoodDrink();
+        break;
 
-        // Update
-        case 4:
-            Design::LoadingAnimation();
-            UpdateFoodDrink();
-            break;
-        // Remove
-        case 5:
-            Design::LoadingAnimation();
-            RemoveFoodDrink();
-            break;
+    // Update
+    case 4:
+        Design::LoadingAnimation();
+        UpdateFoodDrink();
+        break;
+    // Remove
+    case 5:
+        Design::LoadingAnimation();
+        RemoveFoodDrink();
+        break;
 
-        // back
-        case 6:
-            Admin_Option();
-            break;
+    // back
+    case 6:
+        Admin_Option();
+        break;
     }
 }
 /*********************************************************/
@@ -1673,9 +1673,9 @@ void Process::UpdateFoodDrink()
     char press = ' ';
     B::UpdateTxt();
     B::Update_Design();
-    H::setcursor(1,0);
+    H::setcursor(1, 0);
     File::updateFile(1);
-    H::setcursor(0,0);
+    H::setcursor(0, 0);
 
     while (1)
     {
@@ -1742,13 +1742,14 @@ void Process::ExitTheProgram()
     H::setcolor(7);
     H::cls();
     outline();
-    H::setcursor(0,0);
+    H::setcursor(0, 0);
 
     B::ExitTxt();
-    
-    message(6,0,0);
 
-    H::gotoxy(0,41);exit(0);
+    message(6, 0, 0);
+
+    H::gotoxy(0, 41);
+    exit(0);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 /*

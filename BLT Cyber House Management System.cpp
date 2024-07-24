@@ -8,7 +8,7 @@ int main()
     Process::DisableMaximizeButton();
     Process::DisableCloseButton();
     
-    Process::Admin_And_User();  
+    Process::Admin_And_User(); 
 
     return 0;
 }
