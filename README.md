@@ -1,7 +1,7 @@
 # ------------------------------------------------------------------
 # ------------------------------------------------------------------
 # Note
-# Date: 19/July/2024
+# Date: 26/July/2024
 
 
 # Console Type: Window Console Host
@@ -19,32 +19,36 @@
 
 # ------------------------------------------------------------------
 # Team Memebers:
-# ->> Koy Yotraboth
-# ->> Yong Bunleng
-# ->> Sam Sokunthea
+ ->> Koy Yotraboth
+ ->> Yong Bunleng
+ ->> Sam Sokunthea
 # ------------------------------------------------------------------
 
 
 # ------------------------------------------------------------------
 # Log in as Administrator
-# Username: Cyber
-# Password: 168
+ ->> Username: Cyber
+ ->> Password: 168
+
+# Log in as User (Demo account)
+ ->> Username: leng
+ --> Password: 168
 # ------------------------------------------------------------------
 
 
 # ------------------------------------------------------------------
 # to login as User
-# check Username and Password that contains in Admin functions 
-# (View User Information) or Sign up via Admin (Sign Up User)
+check Username and Password that contains in Admin functions 
+(View User Information) or Sign up via Admin (Sign Up User)
 # ------------------------------------------------------------------
 
 
 # ------------------------------------------------------------------
 # NOTE**
-# Search, Update, Delete function may need at least one data in file
-# to perform the process
+Search, Update, Delete function may need at least one data in file
+to perform the process
 
-# Cannot leave the program unless you log out of account...
+Cannot leave the program unless you log out of account...
 # ------------------------------------------------------------------
 
 

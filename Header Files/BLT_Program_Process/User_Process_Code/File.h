@@ -1806,8 +1806,7 @@ void File::viewProfile(const char *username, const char *password)
             {
                 OutputDate(77, 20, 236);
                 mup.userProfile();
-                cout << endl
-                     << mup.getRemainTime();
+                H::setcolor(236);H::gotoxy(77,18); cout << fixed << setprecision(0) << mup.getRemainTime() << " MINUTES";
             }
         }
         file.close();
@@ -1853,7 +1852,6 @@ void File::viewAllUserInvoice()
         {
             while (file2.read((char *)&mup, sizeof(MgUserPayment)))
             {
-                //            	H::setcolor(3);
                 mup.Invoutput(y, 3);
                 y++;
                 totalTime += (5000 * (mup.getTime() / 60));

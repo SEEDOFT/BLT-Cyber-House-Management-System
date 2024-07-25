@@ -268,7 +268,7 @@ void MgUserPayment::MgUserPayment::output(int y)
     H::foreColor(7);
     H::gotoxy(20, 14 + y);
     cout << left << setw(12) << muId << setw(16) << guestName << setw(24) << username << setw(20) << password
-         << setw(15) << fixed << setprecision(0) << time / 60 << setw(21) << remainTime / 60 << (time/60) * 5000 << " KHR";
+         << setw(15) << fixed << setprecision(0) << time / 60 << setw(21) << remainTime << (time/60) * 5000 << " KHR";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void MgUserPayment::Invoutput(int y, int color)
@@ -285,9 +285,9 @@ void MgUserPayment::Invoutput(int y, int color)
 	cout << "NONE"; 
     H::foreColor(color);
     H::gotoxy(96, 14 + y);
-	cout << time / 60;
+	cout << fixed << setprecision(0) << time / 60;
 	H::gotoxy(116, 14 + y);
-	cout << (time/60) * 5000 << " KHR";
+	cout << fixed << setprecision(0) << (time/60) * 5000 << " KHR";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void MgUserPayment::userProfile()
