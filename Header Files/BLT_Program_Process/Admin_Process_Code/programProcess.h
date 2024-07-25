@@ -3,6 +3,7 @@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #include "../User_Process_Code/File.h"
 #include <cstdlib>
+#include <stdlib.h>
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 #ifdef _WIN32
@@ -609,8 +610,10 @@ void Process::AboutUs()
         else if (press == '1')
         {
             // openURL("https://drraspec.github.io/about-us/");
-//            openURL("start Website/index.html");
-			system("start Website/index.html");
+            //            openURL("start Website/index.html");
+            const char* websiteUrl = "Website\\index.html";
+    
+	    	system(("start " + string(websiteUrl)).c_str());
             break;
         }
         else
