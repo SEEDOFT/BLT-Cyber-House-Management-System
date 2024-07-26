@@ -4,6 +4,9 @@
 #include "../User_Process_Code/File.h"
 #include <cstdlib>
 #include <stdlib.h>
+#include <chrono>
+#include <ctime>
+#include <thread>
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 #ifdef _WIN32
@@ -70,7 +73,44 @@ class Process : public Design
         static void DisableCloseButton();
         static void OutputHostName(int x, int y, int color);
         static void openURL(const string &url);
+        static void GetRealTime();
 };
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void Process::GetRealTime()
+{
+    while (true) {
+    // Get the current time
+    auto now = chrono::system_clock::now();
+    
+    // Convert to time_t to get the time in a readable format
+    time_t currentTime = chrono::system_clock::to_time_t(now);
+
+    // Convert to tm structure for local timezone
+    tm* localTime = localtime(&currentTime);
+
+    // Determine AM/PM
+    string period = (localTime->tm_hour < 12) ? "AM" : "PM";
+
+    // Convert to 12-hour format
+    int hour = localTime->tm_hour % 12;
+    if (hour == 0) hour = 12; // Handle midnight and noon
+
+    // Clear the console (this works on Unix-like systems; for Windows, you may need to use system("CLS"))
+    // cout << "\033[2J\033[1;1H";
+    H::clearBox(14,1,20,0,7);
+
+    // Print the time in a readable format with AM/PM
+    cout << "Current time: " 
+            << setw(2) << setfill('0') << hour << ":"
+            << setw(2) << setfill('0') << localTime->tm_min << ":"
+            << setw(2) << setfill('0') << localTime->tm_sec << " "
+            << period 
+            << endl;
+
+    // Sleep for one second
+    this_thread::sleep_for(chrono::seconds(1));
+}
+}
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Process::openURL(const string &url)
 {

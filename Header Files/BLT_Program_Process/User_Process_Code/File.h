@@ -1433,9 +1433,11 @@ void File::invoice(const char *username, const char *password)
                             if (y == 21)
                             {
                                 y = 16;
-                                H::gotoxy(60, 28);
-                                cout << "press any key to view more" << endl;
+                                H::gotoxy(67, 36); H::setcolor(1);
+                                cout << "press any key to view more";
                                 press = getch();
+                                H::clearBox(67,36,26,0,7);
+                                
                                 if (press == 27)
                                 {
                                     break;

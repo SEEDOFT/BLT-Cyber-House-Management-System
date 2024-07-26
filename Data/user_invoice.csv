@@ -1,7 +1,9 @@
 
 Name,Username,
-a,a,
+Leng,leng,
 
 ID,FoodnDrink,Qty,Added Hour,
-2000,b,2,0
-All Income,,USD : 84.05,KHR : 336200
+2000,,,1
+2001,Water,3,0
+2002,Water,1,0
+All Income,,USD : 2.48,KHR : 9920
