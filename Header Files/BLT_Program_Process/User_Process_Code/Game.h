@@ -45,12 +45,14 @@ void Game::setID(int id)
 void Game::update()
 {
     H::setcolor(7);
-    H::setcursor(1,0);
-    H::gotoxy(35, 36);H::setcolor(7);
-    cout << "\t\t\t"; H::inputAll(gName, sizeof(gName)); // name
-    cout << "\t\t\t\t"; H::inputLetter(gameType, sizeof(gameType));
-    cout << "\t\t\t"; inputDate(releaseDate, sizeof(releaseDate));
-    H::setcursor(0,0);
+    H::setcursor(1, 0);
+    H::gotoxy(56, 36);
+    H::inputAll(gName, sizeof(gName)); // name
+    H::gotoxy(88, 36);
+    H::inputLetter(gameType, sizeof(gameType));
+    H::gotoxy(112, 36);
+    inputDate(releaseDate, sizeof(releaseDate));
+    H::setcursor(0, 0);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Game::input()
