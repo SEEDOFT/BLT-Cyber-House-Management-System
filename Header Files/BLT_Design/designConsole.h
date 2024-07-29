@@ -19,6 +19,11 @@ class Design
         static void loginMsg(int opt);
         static void message(int n, int width, int height);
         static void LoadingAnimation();
+        static void ExpandBoxAnimation();
+        static void ShrinkBox(int width, int height, int xOffset, int yOffset);
+        static void ShrinkBoxAnimation();
+        static void DinosaurArt(int num);
+        static void DinosaurAnimation();
         static void interface_design();
         static void adminSelectionOpt(int num);
 
@@ -555,10 +560,194 @@ void Design::loginMsg(int opt)
 void Design::interface_design()
 {
     H::setConsoleTitle(TEXT("BLT Cyber House Management System"));
+    ExpandBoxAnimation();
+
 
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void Design::ExpandBoxAnimation()
+{
+    H::setcursor(0,0);
 
+    for(int i = 1 ; i <= 80 ; i ++)
+    {
+        //top
+        H::HLine(2,1,i,7,178);
+        H::HLine(158-i,1,1,7,178);
+
+        //bot
+        H::HLine(2,38,i,7,178);
+        H::HLine(158-i,38,1,7,178);
+    }
+
+    for(int i = 1 ; i <= 18 ; i ++)
+    {
+        //left
+        H::VLine(3,1,i,7,178);
+        H::VLine(3,37-i,1,7,178);
+        H::VLine(4,1,i,7,178);
+        H::VLine(4,37-i,1,7,178);
+
+        //right
+        H::VLine(158,1,i,7,178);
+        H::VLine(158,37-i,1,7,178);
+        H::VLine(157,1,i,7,178);
+        H::VLine(157,37-i,1,7,178);
+
+        H::delay(2);
+    }
+    //line left
+    H::HLine(10,2,20,7,220);
+    H::HLine(15,3,20,7,220);
+    H::HLine(20,4,20,7,220);
+    H::HLine(15,5,20,7,220);
+    H::HLine(10,6,20,7,220);
+    H::HLine(5,7,20,7,220);
+    H::HLine(10,8,20,7,220);
+    H::HLine(15,9,20,7,220);
+    H::HLine(10,10,20,7,220);
+    H::HLine(5,11,20,7,220);
+
+    H::HLine(130,2,20,7,220);
+    H::HLine(125,3,20,7,220);
+    H::HLine(120,4,20,7,220);
+    H::HLine(125,5,20,7,220);
+    H::HLine(130,6,20,7,220);
+    H::HLine(135,7,20,7,220);
+    H::HLine(130,8,20,7,220);
+    H::HLine(125,9,20,7,220);
+    H::HLine(130,10,20,7,220);
+    H::HLine(135,11,20,7,220);
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void Design::ShrinkBox(int width, int height, int xOffset, int yOffset)
+{
+    for (int i = 0; i < yOffset; ++i) 
+    {
+        cout << endl;
+    }
+    for (int i = 0; i < height; ++i) 
+    {
+        for (int j = 0; j < xOffset; ++j) 
+        {
+            cout << ' ';
+        }
+        for (int j = 0; j < width; ++j) 
+        {
+            if (i == 0 || i == height - 1)  // Top or bottom line
+            {
+                H::setcolor(7); 
+                cout << char(178);
+            }
+            else if (j == 0)  // Left line
+            {
+                H::setcolor(7); 
+                cout << char(178) << char(178);
+                j++;  // Skip one character to adjust for the double border on the left
+            }
+            else if (j == width - 2 && j != 0)  // Right line
+            {
+                H::setcolor(7); 
+                cout << char(178) << char(178);
+                break;  // Exit the loop after printing the right border
+            }
+            else
+            {
+                cout << ' ';
+            }
+        }
+        cout << endl;
+    }
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void Design::ShrinkBoxAnimation()
+{
+    H::setcursor(0, 0);
+    H::gotoxy(2, 1);
+    
+    int initialWidth = 156;
+    int initialHeight = 37;
+    int width = initialWidth;
+    int height = initialHeight;
+
+    while (width > 0 && height > 0) 
+    {
+        H::cls();
+
+        int xOffset = 2 + (initialWidth - width) / 2;
+        int yOffset = 1 + (initialHeight - height) / 2;
+
+        ShrinkBox(width, height, xOffset, yOffset);
+
+        width -= 4;
+        height -= 2;
+    }
+    //@@@@@@@@@@@@@@@@@@@@@@
+    for(int i = 1 ; i <= 84 ; i ++)
+    {
+        H::gotoxy(37+i,19); cout << " ";
+        H::delay(10);
+    }
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void Design::DinosaurAnimation()
+{
+    H::setcursor(0,0);
+
+    int x = 83;
+
+    while(true)
+    {
+        DinosaurArt(x);
+        x-=3;
+
+        if(x <= 5)
+        {
+            // H::cls();
+            // x = 90;
+            break;
+        }
+    }
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void Design::DinosaurArt(int num)
+{
+    H::setcolor(1); H::gotoxy(num,22); cout << R"(                          .       .                                 )" ; H::setcolor(7); cout << " ";
+    H::setcolor(1); H::gotoxy(num,23); cout << R"(                        / `.   .' \                                 )" ; H::setcolor(7); cout << " ";
+    H::setcolor(1); H::gotoxy(num,24); cout << R"(                .---.  <    > <    >  .---.                         )" ; H::setcolor(7); cout << " ";
+    H::setcolor(1); H::gotoxy(num,25); cout << R"(                |    \  \ - ~ ~ - /  /    |                         )" ; H::setcolor(7); cout << " ";
+    H::setcolor(1); H::gotoxy(num,26); cout << R"(                 ~-..-~             ~-..-~                          )" ; H::setcolor(7); cout << " ";
+    H::setcolor(1); H::gotoxy(num,27); cout << R"(             \~~~\.'                    `./~~~/                     )" ; H::setcolor(7); cout << " ";
+    H::setcolor(1); H::gotoxy(num,28); cout << R"(              \__/                        \__/                      )" ; H::setcolor(7); cout << " ";
+    H::setcolor(1); H::gotoxy(num,29); cout << R"(               /                  .-    .  \                        )" ; H::setcolor(7); cout << " ";
+    H::setcolor(1); H::gotoxy(num,30); cout << R"(        _._ _.-    .-~ ~-.       /       }   \/~~~/                 )" ; H::setcolor(7); cout << " ";
+    H::setcolor(1); H::gotoxy(num,31); cout << R"(    _.-'q  }~     /       }     {        ;    \__/                  )" ; H::setcolor(7); cout << " ";
+    H::setcolor(1); H::gotoxy(num,32); cout << R"(   {'__,  /      (       /      {       /      `. ,~~|   .     .    )" ; H::setcolor(7); cout << " ";
+    H::setcolor(1); H::gotoxy(num,33); cout << R"(    `''''='~~-.__(      /_      |      /- _      `..-'   \\   //    )" ; H::setcolor(7); cout << " ";
+    H::setcolor(1); H::gotoxy(num,34); cout << R"(                / \   =/  ~~--~~{    ./|    ~-.     `-..__\\_//_.-' )" ; H::setcolor(7); cout << " ";
+    H::setcolor(1); H::gotoxy(num,35); cout << R"(               {   \  +\         \  =\ (        ~ - . _ _ _..---~   )" ; H::setcolor(7); cout << " ";
+    H::setcolor(1); H::gotoxy(num,36); cout << R"(               |  | {   }         \   \_\                           )" ; H::setcolor(7); cout << " ";
+    H::setcolor(1); H::gotoxy(num,37); cout << R"(              '---.o___,'       .o___,'                             )" ; H::setcolor(7); cout << " ";
+    H::delay(20);   
+
+    H::setcolor(1); H::gotoxy(num,22); cout << R"(                        .       .                                   )" ; H::setcolor(7); cout << " ";
+    H::setcolor(1); H::gotoxy(num,23); cout << R"(                      / `.   .' \                                   )" ; H::setcolor(7); cout << " ";
+    H::setcolor(1); H::gotoxy(num,24); cout << R"(              .---.  <    > <    >  .---.                           )" ; H::setcolor(7); cout << " ";
+    H::setcolor(1); H::gotoxy(num,25); cout << R"(              |    \  \ - ~ ~ - /  /    |                           )" ; H::setcolor(7); cout << " ";
+    H::setcolor(1); H::gotoxy(num,26); cout << R"(               ~-..-~             ~-..-~                            )" ; H::setcolor(7); cout << " ";
+    H::setcolor(1); H::gotoxy(num,27); cout << R"(           \~~~\.'                    `./~~~/                       )" ; H::setcolor(7); cout << " ";
+    H::setcolor(1); H::gotoxy(num,28); cout << R"(            \__/                        \__/                        )" ; H::setcolor(7); cout << " ";
+    H::setcolor(1); H::gotoxy(num,29); cout << R"(             /                  .-    .  \                          )" ; H::setcolor(7); cout << " ";
+    H::setcolor(1); H::gotoxy(num,30); cout << R"(      _._ _.-    .-~ ~-.       /       }   \/~~~/                   )" ; H::setcolor(7); cout << " ";
+    H::setcolor(1); H::gotoxy(num,31); cout << R"(  _.-'q  }~     /       }     {        ;    \__/                    )" ; H::setcolor(7); cout << " ";
+    H::setcolor(1); H::gotoxy(num,32); cout << R"( {'__,  /      (       /      {       /      `. ,~~|   .     .      )" ; H::setcolor(7); cout << " ";
+    H::setcolor(1); H::gotoxy(num,33); cout << R"(  `''''='~~-.__(      /_      |      /- _      `..-'   \\   //      )" ; H::setcolor(7); cout << " ";
+    H::setcolor(1); H::gotoxy(num,34); cout << R"(              / \   =/  ~~--~~{    ./|    ~-.     `-..__\\_//_.-'   )" ; H::setcolor(7); cout << " ";
+    H::setcolor(1); H::gotoxy(num,35); cout << R"(             {   \  +\         \  =\ (        ~ - . _ _ _..---~     )" ; H::setcolor(7); cout << " ";
+    H::setcolor(1); H::gotoxy(num,36); cout << R"(             |  | {   }         \   \_\                             )" ; H::setcolor(7); cout << " ";   
+    H::setcolor(1); H::gotoxy(num,37); cout << R"(             '---.o___,'       .o___,'                              )" ; H::setcolor(7); cout << " ";
+    H::delay(20);
+}
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Design::Login_Design()
 {

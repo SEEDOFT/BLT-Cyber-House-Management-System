@@ -338,7 +338,7 @@ void File::insertToVector(int n, string &currentFile)
         //        mup.setFnd("\0", "\0", "\0");
 
         mup.setCrtMonth(months[localTime->tm_mon]);
-        mup.setDay(localTime->tm_hour * 100 + localTime->tm_min);
+        mup.setDay(localTime->tm_mday);
         mup.setYear(localTime->tm_year + 1900);
         mupVector.push_back(mup);
         H::setcursor(0, 0);
@@ -1398,10 +1398,10 @@ void File::invoice(const char *username, const char *password)
                             H::setcolor(252);
                             H::gotoxy(83, 18);
                             cout << mup.getUsername();
-                            //                            OutputDate(83, 19, 252);
+                            OutputDate(83, 19, 252);
                             H::foreColor(252);
                             H::gotoxy(83, 19);
-                            cout << mup.getDay() << "/" << mup.getCrtMonth() << "/" << mup.getYear() << endl;
+                            // cout << mup.getDay() << "/" << mup.getCrtMonth() << "/" << mup.getYear() << endl;
 
                             strcpy(bFnD, inv.getFoodnDrink());
                             strcpy(fndQty, inv.getQty());
@@ -1806,9 +1806,10 @@ void File::viewProfile(const char *username, const char *password)
         {
             if (strcmp(username, mup.getUsername()) == 0 && strcmp(password, mup.getPassword()) == 0)
             {
-                OutputDate(77, 20, 236);
+                // OutputDate(77, 20, 236);
                 mup.userProfile();
                 H::setcolor(236);H::gotoxy(77,18); cout << fixed << setprecision(0) << mup.getRemainTime() << " MINUTES";
+                H::setcolor(236);H::gotoxy(77,20); cout << mup.getDay() << "/" << mup.getCrtMonth() << "/" << mup.getYear();
             }
         }
         file.close();
