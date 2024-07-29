@@ -44,19 +44,102 @@ void Game::setID(int id)
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Game::update()
 {
+    bool isCorrect = false;
     H::setcolor(7);
     H::setcursor(1, 0);
     H::gotoxy(56, 36);
     H::inputAll(gName, sizeof(gName)); // name
     H::gotoxy(88, 36);
     H::inputLetter(gameType, sizeof(gameType));
-    H::gotoxy(112, 36);
-    inputDate(releaseDate, sizeof(releaseDate));
+
+    do
+    {
+        H::foreColor(7);
+        H::gotoxy(112, 36);
+        cout << "DD/MM/YEAR" << endl;
+        H::gotoxy(112, 36);
+        inputDate(releaseDate, sizeof(releaseDate));
+
+        int year = convertYearToInt(releaseDate);
+        int day = convertDateToInt(releaseDate);
+        int month = convertMonthToInt(releaseDate);
+
+        if (day > 31)
+        {
+            H::delay(1000);
+            H::clearBox(112, 37, 18, 0, 7);
+            H::foreColor(7);
+            H::gotoxy(112, 36);
+            cout << "Can't be Over 31" << endl;
+            H::delay(1000);
+            H::clearBox(112, 37, 18, 0, 7);
+            isCorrect = false;
+        }
+
+        else if (day == 29 && month == 2)
+        {
+
+            if (year % 4 != 0)
+            {
+                if (year % 100 == 0 || year % 400 != 0)
+                {
+                    H::delay(1000);
+                    H::clearBox(112, 37, 18, 0, 7);
+
+                    H::foreColor(7);
+                    H::gotoxy(112, 36);
+                    cout << "only has 28 Days" << endl;
+                    H::delay(1000);
+                    H::clearBox(112, 37, 18, 0, 7);
+                    isCorrect = false;
+                }
+            }
+        }
+        else if (day > 29 && month == 2)
+        {
+            H::delay(1000);
+            H::clearBox(112, 37, 18, 0, 7);
+            H::foreColor(7);
+            H::gotoxy(112, 36);
+            cout << "only has 29 Days" << endl;
+            H::delay(1000);
+            H::clearBox(112, 37, 18, 0, 7);
+            isCorrect = false;
+        }
+        else if ((month == 4 || month == 6 || month == 9 || month == 11) && day == 31)
+        {
+            H::delay(1000);
+            H::clearBox(112, 37, 18, 0, 7);
+            H::foreColor(7);
+            H::gotoxy(112, 36);
+            cout << "Can't be over 30" << endl;
+            H::delay(1000);
+            H::clearBox(112, 37, 18, 0, 7);
+            isCorrect = false;
+        }
+
+        else if (month > 12 || month < 1)
+        {
+            H::delay(1000);
+            H::clearBox(112, 37, 18, 0, 7);
+            H::foreColor(7);
+            H::gotoxy(112, 36);
+            cout << "Only 1-12 Months" << endl;
+            H::delay(1000);
+            H::clearBox(112, 37, 18, 0, 7);
+            isCorrect = false;
+        }
+        else
+        {
+            isCorrect = true;
+        }
+    } while (!isCorrect);
     H::setcursor(0, 0);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Game::input()
 {
+    bool isCorrect = false;
     H::foreColor(176);
     H::gotoxy(99, 23);
     cout << ": ";
@@ -65,10 +148,94 @@ void Game::input()
     H::gotoxy(99, 27);
     cout << ": ";
     H::inputLetter(gameType, sizeof(gameType)); // type4
-    H::foreColor(176);
-    H::gotoxy(99, 31);
-    cout << ": ";
-    inputDate(releaseDate, sizeof(releaseDate));
+    do
+    {
+        H::drawBoxDoubleLineWithBG(97, 30, 26, 1, 183);
+        H::foreColor(176);
+        H::gotoxy(101, 31);
+        cout << "DD/MM/YEAR" << endl;
+        H::gotoxy(99, 31);
+        cout << ": ";
+        inputDate(releaseDate, sizeof(releaseDate));
+
+        int year = convertYearToInt(releaseDate);
+        int day = convertDateToInt(releaseDate);
+        int month = convertMonthToInt(releaseDate);
+
+        if (day > 31)
+        {
+            H::delay(1000);
+            H::clearBox(99, 31, 11, 0, 7);
+            H::drawBoxDoubleLineWithBG(97, 30, 26, 1, 183);
+            H::foreColor(176);
+            Hinsy::gotoxy(99, 31);
+            cout << "Can't be Over 31" << endl;
+            H::delay(1000);
+            H::clearBox(99, 31, 11, 0, 7);
+            isCorrect = false;
+        }
+
+        else if (day == 29 && month == 2)
+        {
+
+            if (year % 4 != 0)
+            {
+                if (year % 100 == 0 || year % 400 != 0)
+                {
+                    H::delay(1000);
+                    H::clearBox(99, 31, 11, 0, 7);
+                    H::drawBoxDoubleLineWithBG(97, 30, 26, 1, 183);
+                    H::foreColor(176);
+                    Hinsy::gotoxy(99, 31);
+                    cout << "only has 28 Days" << endl;
+                    H::delay(1000);
+                    H::clearBox(99, 31, 11, 0, 7);
+                    isCorrect = false;
+                }
+            }
+        }
+        else if (day > 29 && month == 2)
+        {
+            H::delay(1000);
+            H::clearBox(99, 31, 11, 0, 7);
+            H::drawBoxDoubleLineWithBG(97, 30, 26, 1, 183);
+            H::foreColor(176);
+            Hinsy::gotoxy(99, 31);
+            cout << "only has 29 Days" << endl;
+            H::delay(1000);
+            H::clearBox(99, 31, 11, 0, 7);
+            isCorrect = false;
+        }
+        else if ((month == 4 || month == 6 || month == 9 || month == 11) && day == 31)
+        {
+            H::delay(1000);
+            H::clearBox(99, 31, 11, 0, 7);
+            H::drawBoxDoubleLineWithBG(97, 30, 26, 1, 183);
+            H::foreColor(176);
+            Hinsy::gotoxy(99, 31);
+            cout << "Can't be over 30" << endl;
+            H::delay(1000);
+            H::clearBox(99, 31, 11, 0, 7);
+            isCorrect = false;
+        }
+
+        else if (month > 12 || month < 1)
+        {
+            H::delay(1000);
+            H::clearBox(99, 31, 11, 0, 7);
+            H::drawBoxDoubleLineWithBG(97, 30, 26, 1, 183);
+            H::foreColor(176);
+            Hinsy::gotoxy(99, 31);
+            cout << "Only 1-12 Months" << endl;
+            H::delay(1000);
+            H::clearBox(99, 31, 11, 0, 7);
+            isCorrect = false;
+        }
+        else
+        {
+            isCorrect = true;
+        }
+    } while (!isCorrect);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Game::output(int y)

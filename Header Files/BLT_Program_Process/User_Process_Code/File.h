@@ -17,69 +17,70 @@ using namespace BLT;
 class File
 {
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    private:
-        static string dir;
-        static string FoodnDrinkFile;
-        static string Backup;
-        static string GameFile;
-        static string UserInfoFile;
-        static string MgUserPaymentFile;
-        static string invoiceFile;
+private:
+    static string dir;
+    static string subDir;
+    static string FoodnDrinkFile;
+    static string Backup;
+    static string GameFile;
+    static string UserInfoFile;
+    static string MgUserPaymentFile;
+    static string invoiceFile;
 
-        static int getMaxID(const string &fileName, int type);
+    static int getMaxID(const string &fileName, int type);
 
-        static vector<FoodnDrink> fndVector;
-        static vector<Game> gameVector;
-        static vector<MgUserPayment> mupVector;
-        static vector<myInvoice> invVector;
+    static vector<FoodnDrink> fndVector;
+    static vector<Game> gameVector;
+    static vector<MgUserPayment> mupVector;
+    static vector<myInvoice> invVector;
 
-        static FoodnDrink fnd;
-        static Game game;
-        static MgUserInfo mui;
-        static MgUserPayment mup;
-        static myInvoice inv;
+    static FoodnDrink fnd;
+    static Game game;
+    static MgUserInfo mui;
+    static MgUserPayment mup;
+    static myInvoice inv;
 
-        static fstream file;
-        static string currentFile;
+    static fstream file;
+    static string currentFile;
 
-        //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    public:
-        static void insertFile(int n);
-        static void viewFile(int n);
-        static void searchFile(int n);
-        static void updateFile(int n);
-        static void deleteFile(int n);
-        static bool check_file(const string &fileName);
-        static bool checkUsername(const char *username, int x, int y, int color, int clsColor);
-        static bool checkUsernameInVector(const char *username, int x, int y, int color);
-        static void viewProfile(const char *username, const char *password);
+    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+public:
+    static void insertFile(int n);
+    static void viewFile(int n);
+    static void searchFile(int n);
+    static void updateFile(int n);
+    static void deleteFile(int n);
+    static bool check_file(const string &fileName);
+    static bool checkUsername(const char *username, int x, int y, int color, int clsColor);
+    static bool checkUsernameInVector(const char *username, int x, int y, int color);
+    static void viewProfile(const char *username, const char *password);
 
-        static void setCurrentFile(int n);
-        static void insertToVector(int n, string &fileName);
-        static void pushToVector(int n);
-        static void loginTimeToFile(const char *username, const char *password);
-        static void logoutTimeToFile(const char *username, const char *password);
-        static void readLogin(const char *username, const char *password);
-        static void readLogout(const char *username, const char *password);
-        static void user_login();
-        static void userSubMenu(const char *username, const char *password);
-        static void buyMoreTime(const char *username, const char *password);
-        static void invoice(const char *username, const char *password);
-        static void calculateTime(const char *username, const char *password);
-        static void buyFood(const char *username, const char *password);
-        static int getInvoiceID();
+    static void setCurrentFile(int n);
+    static void insertToVector(int n, string &fileName);
+    static void pushToVector(int n);
+    static void loginTimeToFile(const char *username, const char *password);
+    static void logoutTimeToFile(const char *username, const char *password);
+    static void readLogin(const char *username, const char *password);
+    static void readLogout(const char *username, const char *password);
+    static void user_login();
+    static void userSubMenu(const char *username, const char *password);
+    static void buyMoreTime(const char *username, const char *password);
+    static void invoice(const char *username, const char *password);
+    static void calculateTime(const char *username, const char *password);
+    static void buyFood(const char *username, const char *password);
+    static int getInvoiceID();
 
-        static void viewAllUserInvoice();
-        // static void totalIncome();
-        static void viewIncome();
-        static void OutputDate(int x, int y, int color);
-        static void OutputHostName(int x, int y, int color);
+    static void viewAllUserInvoice();
+    // static void totalIncome();
+    // static void viewIncome();
+    static void OutputDate(int x, int y, int color);
+    static void OutputHostName(int x, int y, int color);
 
-        static void allUserInvoiceToCSV();
-        static void UserInvoiceToCSV(const char *username);
-        //    static void writeInvoiceToExcel(const char *username, const char *password);
+    static void allUserInvoiceToCSV();
+    static void UserInvoiceToCSV(const char *username);
+    //    static void writeInvoiceToExcel(const char *username, const char *password);
 
-        ~File();
+    ~File();
 };
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -97,6 +98,7 @@ myInvoice File::inv;
 fstream File::file;
 
 string File::dir = "Data";
+string File::subDir = dir + "/Excel";
 string File::FoodnDrinkFile = dir + "/FoodnDrink.ant";
 string File::Backup = dir + "/BackUpFile.ant";
 string File::GameFile = dir + "/Game.ant";
@@ -1433,11 +1435,12 @@ void File::invoice(const char *username, const char *password)
                             if (y == 21)
                             {
                                 y = 16;
-                                H::gotoxy(67, 36); H::setcolor(1);
+                                H::gotoxy(67, 36);
+                                H::setcolor(1);
                                 cout << "press any key to view more";
                                 press = getch();
-                                H::clearBox(67,36,26,0,7);
-                                
+                                H::clearBox(67, 36, 26, 0, 7);
+
                                 if (press == 27)
                                 {
                                     break;
@@ -1524,11 +1527,20 @@ void File::UserInvoiceToCSV(const char *username)
         }
         else
         {
+            struct stat sb;
+            if (stat(dir.c_str(), &sb) == 0)
+            {
+                if (stat(subDir.c_str(), &sb) != 0)
+                {
+                    mkdir(subDir.c_str());
+                }
+            }
+
             file.close();
             file2.close();
             file.open(UserInfoFile, ios::in | ios::binary);
             fstream file2(invoiceFile, ios::in | ios::binary);
-            ofstream csv("Data/user_invoice.csv");
+            ofstream csv(subDir + "/user_invoice.csv");
             if (!csv.is_open())
             {
                 cout << "Could not open CSV file for writing!" << endl;
@@ -1566,7 +1578,7 @@ void File::UserInvoiceToCSV(const char *username)
                 csv.close();
                 file.close();
                 file2.close();
-                system("start Data\\user_invoice.csv");
+                system("start  Data\\Excel\\user_invoice.csv");
             }
         }
     }
@@ -1638,13 +1650,12 @@ void File::buyFood(const char *username, const char *password)
     Design::outline();
 
     char foodID[5];
-    char quantity[13];
+    char quantity[8];
     int myInvID = getInvoiceID() + 1;
     bool foodFound = false;
 
     file.open(UserInfoFile, ios::in | ios::binary);
     fstream file3(invoiceFile, ios::out | ios::app | ios::binary);
-    //    fstream tempFile(Backup, ios::out | ios::binary);
 
     if (!file.is_open())
     {
@@ -1687,16 +1698,20 @@ void File::buyFood(const char *username, const char *password)
 
             while (file.read((char *)&mup, sizeof(MgUserPayment)))
             {
-
                 if (strcmp(username, mup.getUsername()) == 0 && strcmp(password, mup.getPassword()) == 0)
                 {
                     H::setcursor(1, 0);
                     H::foreColor(1);
                     H::gotoxy(116, 19);
                     H::inputNumber(foodID, sizeof(foodID));
-                    H::foreColor(1);
-                    H::gotoxy(116, 23);
-                    H::inputNumber(quantity, sizeof(quantity));
+                    do
+                    {
+                        H::foreColor(1);
+                        H::gotoxy(116, 23);
+                        H::inputNumber(quantity, sizeof(quantity));
+                        H::clearBox(116, 23, 8, 0, 7);
+                        H::drawBoxSingleLine(88, 22, 36, 1, 3);
+                    } while (atoi(quantity) <= 0);
 
                     H::setcursor(0, 0);
                     int foodIDInt = atoi(foodID);
@@ -1808,8 +1823,12 @@ void File::viewProfile(const char *username, const char *password)
             {
                 // OutputDate(77, 20, 236);
                 mup.userProfile();
-                H::setcolor(236);H::gotoxy(77,18); cout << fixed << setprecision(0) << mup.getRemainTime() << " MINUTES";
-                H::setcolor(236);H::gotoxy(77,20); cout << mup.getDay() << "/" << mup.getCrtMonth() << "/" << mup.getYear();
+                H::setcolor(236);
+                H::gotoxy(77, 18);
+                cout << fixed << setprecision(0) << mup.getRemainTime() << " MINUTES";
+                H::setcolor(236);
+                H::gotoxy(77, 20);
+                cout << mup.getDay() << "/" << mup.getCrtMonth() << "/" << mup.getYear();
             }
         }
         file.close();
@@ -1903,7 +1922,7 @@ void File::viewAllUserInvoice()
             else
             {
                 File::allUserInvoiceToCSV();
-                system("start Data\\all_user_invoice.csv");
+                system("start Data\\Excel\\all_user_invoice.csv");
             }
         }
         else
@@ -1928,7 +1947,7 @@ void File::allUserInvoiceToCSV()
     file.open(invoiceFile, ios::in | ios::binary);
     fstream file2(UserInfoFile, ios::in | ios::binary);
 
-    if (!file.is_open() || !file2.is_open())
+    if (!file.is_open() && !file2.is_open())
     {
         Design::message(4, 0, 7);
         file.close();
@@ -1944,11 +1963,20 @@ void File::allUserInvoiceToCSV()
         }
         else
         {
+            struct stat sb;
+            if (stat(dir.c_str(), &sb) == 0)
+            {
+                if (stat(subDir.c_str(), &sb) != 0)
+                {
+                    mkdir(subDir.c_str());
+                }
+            }
+
             file.close();
             file2.close();
             file.open(invoiceFile, ios::in | ios::binary);
             file2.open(UserInfoFile, ios::in | ios::binary);
-            ofstream csv("Data/all_user_invoice.csv");
+            ofstream csv(subDir + "/all_user_invoice.csv");
             if (!csv.is_open())
             {
                 cout << "Could not open CSV file for writing!" << endl;
