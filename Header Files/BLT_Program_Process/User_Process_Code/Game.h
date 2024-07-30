@@ -193,6 +193,10 @@ void Game::input()
                     isCorrect = false;
                 }
             }
+            else
+            {
+                isCorrect = true;
+            }
         }
         else if (day > 29 && month == 2)
         {
