@@ -3,6 +3,7 @@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #include "../../BLT_Design/designConsole.h"
 #include "../../BLT_Design/Namespace/BLT.h"
+#include "PGame.h"
 #include <cstdlib>
 // #include "libxlsxwriter.h"
 #include "Invoice.h"
@@ -17,70 +18,69 @@ using namespace BLT;
 class File
 {
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-private:
-    static string dir;
-    static string subDir;
-    static string FoodnDrinkFile;
-    static string Backup;
-    static string GameFile;
-    static string UserInfoFile;
-    static string MgUserPaymentFile;
-    static string invoiceFile;
+    private:
 
-    static int getMaxID(const string &fileName, int type);
+        static string dir;
+        static string subDir;
+        static string FoodnDrinkFile;
+        static string Backup;
+        static string GameFile;
+        static string UserInfoFile;
+        static string MgUserPaymentFile;
+        static string invoiceFile;
 
-    static vector<FoodnDrink> fndVector;
-    static vector<Game> gameVector;
-    static vector<MgUserPayment> mupVector;
-    static vector<myInvoice> invVector;
+        static int getMaxID(const string &fileName, int type);
 
-    static FoodnDrink fnd;
-    static Game game;
-    static MgUserInfo mui;
-    static MgUserPayment mup;
-    static myInvoice inv;
+        static vector<FoodnDrink> fndVector;
+        static vector<Game> gameVector;
+        static vector<MgUserPayment> mupVector;
+        static vector<myInvoice> invVector;
 
-    static fstream file;
-    static string currentFile;
+        static FoodnDrink fnd;
+        static Game game;
+        static MgUserInfo mui;
+        static MgUserPayment mup;
+        static myInvoice inv;
 
-    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-public:
-    static void insertFile(int n);
-    static void viewFile(int n);
-    static void searchFile(int n);
-    static void updateFile(int n);
-    static void deleteFile(int n);
-    static bool check_file(const string &fileName);
-    static bool checkUsername(const char *username, int x, int y, int color, int clsColor);
-    static bool checkUsernameInVector(const char *username, int x, int y, int color);
-    static void viewProfile(const char *username, const char *password);
+        static fstream file;
+        static string currentFile;
 
-    static void setCurrentFile(int n);
-    static void insertToVector(int n, string &fileName);
-    static void pushToVector(int n);
-    static void loginTimeToFile(const char *username, const char *password);
-    static void logoutTimeToFile(const char *username, const char *password);
-    static void readLogin(const char *username, const char *password);
-    static void readLogout(const char *username, const char *password);
-    static void user_login();
-    static void userSubMenu(const char *username, const char *password);
-    static void buyMoreTime(const char *username, const char *password);
-    static void invoice(const char *username, const char *password);
-    static void calculateTime(const char *username, const char *password);
-    static void buyFood(const char *username, const char *password);
-    static int getInvoiceID();
+        //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    public:
 
-    static void viewAllUserInvoice();
-    // static void totalIncome();
-    // static void viewIncome();
-    static void OutputDate(int x, int y, int color);
-    static void OutputHostName(int x, int y, int color);
+        static void insertFile(int n);
+        static void viewFile(int n);
+        static void searchFile(int n);
+        static void updateFile(int n);
+        static void deleteFile(int n);
+        static bool check_file(const string &fileName);
+        static bool checkUsername(const char *username, int x, int y, int color, int clsColor);
+        static bool checkUsernameInVector(const char *username, int x, int y, int color);
+        static void viewProfile(const char *username, const char *password);
 
-    static void allUserInvoiceToCSV();
-    static void UserInvoiceToCSV(const char *username);
-    //    static void writeInvoiceToExcel(const char *username, const char *password);
+        static void setCurrentFile(int n);
+        static void insertToVector(int n, string &fileName);
+        static void pushToVector(int n);
+        static void loginTimeToFile(const char *username, const char *password);
+        static void logoutTimeToFile(const char *username, const char *password);
+        static void user_login();
+        static void userSubMenu(const char *username, const char *password);
+        static void buyMoreTime(const char *username, const char *password);
+        static void invoice(const char *username, const char *password);
+        static void calculateTime(const char *username, const char *password);
+        static void buyFood(const char *username, const char *password);
+        static int getInvoiceID();
+        static void GameMENU();
 
-    ~File();
+        static void viewAllUserInvoice();
+        static void OutputDate(int x, int y, int color);
+        static void OutputHostName(int x, int y, int color);
+
+        static void allUserInvoiceToCSV();
+        static void UserInvoiceToCSV(const char *username);
+        //static void writeInvoiceToExcel(const char *username, const char *password);
+
+        ~File();
 };
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -317,7 +317,6 @@ void File::insertToVector(int n, string &currentFile)
     }
     else if (n == 3)
     {
-        // mup.setID(maxID + i);
         H::setcolor(135);
         H::gotoxy(65, 13);
         cout << maxID + 1;
@@ -337,7 +336,6 @@ void File::insertToVector(int n, string &currentFile)
         mup.setGuestname(guestName);
         mup.setUsername(username);
         mup.input(maxID + i);
-        //        mup.setFnd("\0", "\0", "\0");
 
         mup.setCrtMonth(months[localTime->tm_mon]);
         mup.setDay(localTime->tm_mday);
@@ -528,7 +526,7 @@ void File::searchFile(int n)
             }
             else
             {
-                H::setcolor(4);
+                H::setcolor(2);
                 H::gotoxy(71, 34);
                 cout << "...ID is found..." << endl;
             }
@@ -661,7 +659,7 @@ void File::updateFile(int n)
             }
             else
             {
-                H::setcolor(4);
+                H::setcolor(2);
                 H::gotoxy(68, 37);
                 cout << "...Update Successfully...";
             }
@@ -792,7 +790,7 @@ void File::deleteFile(int n)
         }
         else
         {
-            H::setcolor(4);
+            H::setcolor(2);
             H::gotoxy(67, 34);
             cout << "...Delete Successfully...";
         }
@@ -1139,21 +1137,25 @@ void File::userSubMenu(const char *username, const char *password)
 
         do
         {
-            H::drawBoxSingleLineWithBG(10 + 23, 5 + 9, 31, 1, 1);
-            H::drawBoxSingleLineWithBG(10 + 23, 5 + 12, 31, 1, 1);
-            H::drawBoxSingleLineWithBG(10 + 23, 5 + 15, 31, 1, 1);
-            H::drawBoxSingleLineWithBG(10 + 23, 5 + 18, 31, 1, 1);
-            H::drawBoxSingleLineWithBG(10 + 23, 5 + 21, 31, 1, 1);
+            H::drawBoxSingleLineWithBG(33, 14, 31, 1, 1);//info
+            H::drawBoxSingleLineWithBG(33, 17, 31, 1, 1);//play game
+            H::drawBoxSingleLineWithBG(33, 20, 31, 1, 1);//buy hour
+            H::drawBoxSingleLineWithBG(33, 23, 31, 1, 1);//buy foodndrink
+            H::drawBoxSingleLineWithBG(33, 26, 31, 1, 1);//invoice 
+            H::drawBoxSingleLineWithBG(33, 29, 31, 1, 1);//log out
 
-            Design::tp(7, 10 + 25, 5 + 10);
+
+            Design::tp(7, 35, 15);
             cout << "My Information";
-            H::gotoxy(10 + 25, 5 + 13);
+            H::gotoxy(35, 18);
+            cout << "Play Game";
+            H::gotoxy(35, 21);
             cout << "Buy Hour to Play";
-            H::gotoxy(10 + 25, 5 + 16);
+            H::gotoxy(35, 24);
             cout << "Buy Food or Drink";
-            H::gotoxy(10 + 25, 5 + 19);
+            H::gotoxy(35, 27);
             cout << "View Spending";
-            H::gotoxy(10 + 25, 5 + 22);
+            H::gotoxy(35, 30);
             cout << "Log out";
 
             if (num == 1)
@@ -1161,29 +1163,34 @@ void File::userSubMenu(const char *username, const char *password)
                 LENG::UserMenu_Art(num);
                 choice = 1;
             }
-            if (num == 2)
+            else if (num == 2)
             {
                 LENG::UserMenu_Art(num);
                 choice = 2;
             }
-            if (num == 3)
+            else if (num == 3)
             {
                 LENG::UserMenu_Art(num);
                 choice = 3;
             }
-            if (num == 4)
+            else if (num == 4)
             {
                 LENG::UserMenu_Art(num);
                 choice = 4;
             }
-            if (num == 5)
+            else if (num == 5)
             {
                 LENG::UserMenu_Art(num);
                 choice = 5;
             }
+            else if (num == 6)
+            {
+                LENG::UserMenu_Art(num);
+                choice = 6;
+            }
 
             H::setcolor(1);
-            H::gotoxy(10 + 38, 5 + 29);
+            H::gotoxy(48, 36);
             cout << "Press ";
             H::setcolor(4);
             cout << "[ALL]";
@@ -1215,25 +1222,25 @@ void File::userSubMenu(const char *username, const char *password)
                 num--;
                 if (num < 1)
                 {
-                    num = 5;
+                    num = 6;
                 }
                 break;
 
             case 77:
                 num++;
-                if (num > 5)
+                if (num > 6)
                 {
                     num = 1;
                 }
-                if (posistion < (10 + 22))
+                if (posistion < 32)
                 {
-                    posistion = 10 + 22;
+                    posistion = 32;
                 }
                 break;
 
             case 80:
                 num++;
-                if (num > 5)
+                if (num > 6)
                 {
                     num = 1;
                 }
@@ -1248,29 +1255,35 @@ void File::userSubMenu(const char *username, const char *password)
             Design::LoadingAnimation();
             viewProfile(username, password);
         }
-        else if (choice == 2)
+        else if( choice == 2)
         {
             Design::LoadingAnimation();
-            buyMoreTime(username, password);
+            GameMENU();
         }
         else if (choice == 3)
         {
             Design::LoadingAnimation();
-            buyFood(username, password);
+            buyMoreTime(username, password);
         }
         else if (choice == 4)
         {
             Design::LoadingAnimation();
-            invoice(username, password);
+            buyFood(username, password);
         }
         else if (choice == 5)
         {
+            Design::LoadingAnimation();
+            invoice(username, password);
+        }
+        else if (choice == 6)
+        {
+            Design::LoadingAnimation();
             logoutTimeToFile(username, password);
             calculateTime(username, password);
             break;
         }
 
-    } while (choice != 5);
+    } while (choice != 6);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //////////////////////////////////////////
@@ -2022,6 +2035,43 @@ void File::allUserInvoiceToCSV()
 
                 csv.close();
             }
+        }
+    }
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//////////////////////////////////////////
+// Game MENU
+//////////////////////////////////////////
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void File::GameMENU()
+{
+    H::setConsoleTitle(TEXT("Play Game"));
+    H::setcolor(7);
+    H::cls();
+    H::setcursor(0,0);
+    Design::outline();
+    char press = ' ';
+
+    while(1)
+    {
+        //game one
+        PGame::menu();
+
+        Design::message(3,0,38);
+
+        press = getch();
+
+        if(press == 13)
+        {
+            GameMENU();
+        }
+        else if(press == 27)
+        {
+            break;
+        }
+        else
+        {
+            continue;
         }
     }
 }

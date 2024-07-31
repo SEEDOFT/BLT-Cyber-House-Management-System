@@ -5,60 +5,46 @@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void BLT::GameMenu::GameMenuTxt()
 {
-    H::foreColor(3); H::gotoxy(47,1); cout<<R"(  ________                           _____                       )";
-    H::foreColor(3); H::gotoxy(47,2); cout<<R"( /  _____/_____    _____   ____     /     \   ____   ____  __ __ )";
-    H::foreColor(3); H::gotoxy(47,3); cout<<R"(/   \  ___\__  \  /     \_/ __ \   /  \ /  \_/ __ \ /    \|  |  \)";
-    H::foreColor(4); H::gotoxy(47,4); cout<<R"(\    \_\  \/ __ \|  Y Y  \  ___/  /    Y    \  ___/|   |  \  |  /)";
-    H::foreColor(4); H::gotoxy(47,5); cout<<R"( \______  (____  /__|_|  /\___  > \____|__  /\___  >___|  /____/ )";
-    H::foreColor(4); H::gotoxy(47,6); cout<<R"(        \/     \/      \/     \/          \/     \/     \/       )";
-
-    H::HLine(35,8,90,7,220);
-}
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void BLT::GameMenu::CyberTxt()
-{
-    H::foreColor(199); H::gotoxy(61,21); cout<<R"(_________        ___.                 )";
-    H::foreColor(199); H::gotoxy(61,22); cout<<R"(\_   ___ \___.__.\_ |__   ___________ )";
-    H::foreColor(199); H::gotoxy(61,23); cout<<R"(/    \  \<   |  | | __ \_/ __ \_  __ \)";
-    H::foreColor(199); H::gotoxy(61,24); cout<<R"(\     \___\___  | | \_\ \  ___/|  | \/)";
-    H::foreColor(199); H::gotoxy(61,25); cout<<R"( \______  / ____| |___  /\___  >__|   )";
-    H::foreColor(199); H::gotoxy(61,26); cout<<R"(        \/\/          \/     \/       )";
-}
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void BLT::GameMenu::Header_Design()
-{
-    H::drawBoxDoubleLineWithBG(30,10,100,1,196);
-    H::HLine(40,11,80,7,178);
-    H::VLine(40,12,3,7,219);
-    H::VLine(121,12,3,7,219);
-    H::drawBoxDoubleLineWithBG(35,16,90,15,145);
-    H::drawBoxDoubleLineWithBG(60,16,40,15,196);
-    H::VLine(50,32,2,7,219);
-    H::VLine(110,32,2,7,219);
-
-    H::drawBoxDoubleLineWithBG(40,35,80,1,136);
+    Design::TxtOutline(5,0,-11,1);
+    H::foreColor(7); H::gotoxy(53,3); cout<<R"(   ___                                               )";
+    H::foreColor(7); H::gotoxy(53,4); cout<<R"(  / _ \__ _ _ __ ___   ___    /\/\   ___ _ __  _   _ )";
+    H::foreColor(1); H::gotoxy(53,5); cout<<R"( / /_\/ _` | '_ ` _ \ / _ \  /    \ / _ \ '_ \| | | |)";
+    H::foreColor(7); H::gotoxy(53,6); cout<<R"(/ /_\\ (_| | | | | | |  __/ / /\/\ \  __/ | | | |_| |)";
+    H::foreColor(7); H::gotoxy(53,7); cout<<R"(\____/\__,_|_| |_| |_|\___| \/    \/\___|_| |_|\__,_|)";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void BLT::GameMenu::GameMenu_Design()
 {
-    H::drawBoxDoubleLineWithBG(37,18,18,1,23);
-    H::drawBoxDoubleLineWithBG(37,23,18,1,23);
-    H::drawBoxDoubleLineWithBG(37,28,18,1,23);
+    //Desigh
+    H::setcolor(7); H::gotoxy(22,13); cout << R"(      ____  )";   H::setcolor(14); H::gotoxy(70,13); cout << R"( ____________________ )";   H::setcolor(7); H::gotoxy(128,13); cout << R"(  ____      )";
+    H::setcolor(7); H::gotoxy(22,14); cout << R"(     ' |  ' )";   H::setcolor(14); H::gotoxy(70,14); cout << R"(' )"; H::setcolor(3); cout << R"( .______________. )"; H::setcolor(6); cout << R"( ')";   H::setcolor(7); H::gotoxy(128,14); cout << R"( '  | '     )";
+    H::setcolor(7); H::gotoxy(22,15); cout << R"(     |=|  | )";   H::setcolor(14); H::gotoxy(70,15); cout << R"(| )"; H::setcolor(3); cout << R"(|/+------------+/|)"; H::setcolor(6); cout << R"( |)";   H::setcolor(7); H::gotoxy(128,15); cout << R"( |  |=|     )";
+    H::setcolor(7); H::gotoxy(22,16); cout << R"(     |=|  | )";   H::setcolor(14); H::gotoxy(70,16); cout << R"(| )"; H::setcolor(3); cout << R"(|/|            |/|)"; H::setcolor(6); cout << R"( |)";   H::setcolor(7); H::gotoxy(128,16); cout << R"( |On|=|     )";
+    H::setcolor(7); H::gotoxy(22,17); cout << R"(     |/|  | )";   H::setcolor(14); H::gotoxy(70,17); cout << R"(| )"; H::setcolor(3); cout << R"(|/|            |/|)"; H::setcolor(6); cout << R"( |)";   H::setcolor(7); H::gotoxy(128,17); cout << R"( |[]|\|     )";
+    H::setcolor(7); H::gotoxy(22,18); cout << R"(    ;     | )";   H::setcolor(14); H::gotoxy(70,18); cout << R"(| )"; H::setcolor(3); cout << R"(|o|            |/|)"; H::setcolor(6); cout << R"( |)";   H::setcolor(7); H::gotoxy(128,18); cout << R"( |[]|  ;    )";
+    H::setcolor(7); H::gotoxy(22,19); cout << R"(    ;/": E| )";   H::setcolor(14); H::gotoxy(70,19); cout << R"(| )"; H::setcolor(3); cout << R"(|/|            |/|)"; H::setcolor(6); cout << R"( |)";   H::setcolor(7); H::gotoxy(128,19); cout << R"( |Of|  ;    )";
+    H::setcolor(7); H::gotoxy(22,20); cout << R"(    ;|:| X| )";   H::setcolor(14); H::gotoxy(70,20); cout << R"(| )"; H::setcolor(3); cout << R"(|/|            |/|)"; H::setcolor(6); cout << R"( |)";   H::setcolor(7); H::gotoxy(128,20); cout << R"( |f |  ;    )";
+    H::setcolor(7); H::gotoxy(22,21); cout << R"(    .\_: T| )";   H::setcolor(14); H::gotoxy(70,21); cout << R"(| )"; H::setcolor(3); cout << R"(|/+------------+/|)"; H::setcolor(6); cout << R"( |)";   H::setcolor(7); H::gotoxy(128,21); cout << R"( |  |  .    )";
+    H::setcolor(7); H::gotoxy(22,22); cout << R"(   ,'     | )";   H::setcolor(14); H::gotoxy(70,22); cout << R"(| )"; H::setcolor(3); cout << R"(|/              /|)"; H::setcolor(6); cout << R"( |)";   H::setcolor(7); H::gotoxy(128,22); cout << R"( |  |  ',   )";
+    H::setcolor(7); H::gotoxy(22,23); cout << R"(   |   ||:| )";   H::setcolor(14); H::gotoxy(70,23); cout << R"(| )"; H::setcolor(3); cout << R"('----------------')"; H::setcolor(6); cout << R"( |)";   H::setcolor(7); H::gotoxy(128,23); cout << R"( |  |   |   )";
+    H::setcolor(7); H::gotoxy(22,24); cout << R"(   |   ||:| )";   H::setcolor(14); H::gotoxy(70,24); cout << R"(|                    |)";   H::setcolor(7); H::gotoxy(128,24); cout << R"( |  |   |   )";
+    H::setcolor(7); H::gotoxy(22,25); cout << R"(   ;   |V | )";   H::setcolor(14); H::gotoxy(70,25); cout << R"(|                    |)";   H::setcolor(7); H::gotoxy(128,25); cout << R"( |  |   ;   )";
+    H::setcolor(7); H::gotoxy(22,26); cout << R"(|  ;   |O |])";   H::setcolor(14); H::gotoxy(70,26); cout << R"(| / ^ \          (A) |)";   H::setcolor(7); H::gotoxy(128,26); cout << R"([|  |   ;  |)";
+    H::setcolor(7); H::gotoxy(22,27); cout << R"('> ;   |L |])";   H::setcolor(14); H::gotoxy(70,27); cout << R"(| <(o)>      (B)     |)";   H::setcolor(7); H::gotoxy(128,27); cout << R"([|  |   ; <')";
+    H::setcolor(7); H::gotoxy(22,28); cout << R"(   |   ||\|])";   H::setcolor(14); H::gotoxy(70,28); cout << R"(| \ V /              |)";   H::setcolor(7); H::gotoxy(128,28); cout << R"([|  |   |   )";
+    H::setcolor(7); H::gotoxy(22,29); cout << R"(   |   |'"| )";   H::setcolor(14); H::gotoxy(70,29); cout << R"(|                    |)";   H::setcolor(7); H::gotoxy(128,29); cout << R"( |  |   |   )";
+    H::setcolor(7); H::gotoxy(22,30); cout << R"(   .   |  |))";   H::setcolor(14); H::gotoxy(70,30); cout << R"(|       == ==    .-. |)";   H::setcolor(7); H::gotoxy(128,30); cout << R"((|  |   .   )";
+    H::setcolor(7); H::gotoxy(22,31); cout << R"(    ;  |  | )";   H::setcolor(14); H::gotoxy(70,31); cout << R"(|               ':::'|)";   H::setcolor(7); H::gotoxy(128,31); cout << R"( |  |  ;    )";
+    H::setcolor(7); H::gotoxy(22,32); cout << R"(     \ |  | )";   H::setcolor(14); H::gotoxy(70,32); cout << R"('..__           '__..')";   H::setcolor(7); H::gotoxy(128,32); cout << R"( |  | /     )";
+    H::setcolor(7); H::gotoxy(22,33); cout << R"(      "'--' )";   H::setcolor(14); H::gotoxy(70,33); cout << R"(     """"""""""""     )";   H::setcolor(1); H::gotoxy(128,33); cout << R"( '--'")";
 
-    H::drawBoxDoubleLineWithBG(105,18,18,1,23);
-    H::drawBoxDoubleLineWithBG(105,23,18,1,23);
-    H::drawBoxDoubleLineWithBG(105,28,18,1,23);
+    // //connect line
+    // H::HLine(40,16,24,7,220);
+    // H::HLine(40,24,24,7,220);
 
-    H::foreColor(23); H::gotoxy(42,19); cout<<"ADD GAME";
-    H::foreColor(23); H::gotoxy(42,24); cout<<"VIEW GAME";
-    H::foreColor(23); H::gotoxy(40,29); cout<<"SEARCH GAME";
-    
-    H::foreColor(23); H::gotoxy(108,19); cout<<"UPDATE GAME";
-    H::foreColor(23); H::gotoxy(108,24); cout<<"REMOVE GAME";
-    H::foreColor(23); H::gotoxy(112,29); cout<<"BACK";
+    // H::HLine(98,16,24,7,220);
+    // H::HLine(98,24,24,7,220);
 
-    H::foreColor(135); H::gotoxy(53,36); cout<<"Press";H::setcolor(137);cout<<" [UP] [DOWN]";H::setcolor(135);cout<<" arrow key to move, ";H::setcolor(137);cout<<"[ENTER]";H::setcolor(135);cout<<" to select";
-       
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif

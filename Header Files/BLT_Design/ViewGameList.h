@@ -5,18 +5,17 @@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void BLT::ViewGameListDesign::ViewGameTxt()
 {
-    H::foreColor(3); H::gotoxy(48,1); cout<<R"(____   ____.__                  ________                       )";
-    H::foreColor(3); H::gotoxy(48,2); cout<<R"(\   \ /   /|__| ______  _  __  /  _____/_____    _____   ____  )";
-    H::foreColor(3); H::gotoxy(48,3); cout<<R"( \   Y   / |  |/ __ \ \/ \/ / /   \  ___\__  \  /     \_/ __ \ )";
-    H::foreColor(4); H::gotoxy(48,4); cout<<R"(  \     /  |  \  ___/\     /  \    \_\  \/ __ \|  Y Y  \  ___/ )";
-    H::foreColor(4); H::gotoxy(48,5); cout<<R"(   \___/   |__|\___  >\/\_/    \______  (____  /__|_|  /\___  >)";
-    H::foreColor(4); H::gotoxy(48,6); cout<<R"(                   \/                 \/     \/      \/     \/ )";
-    H::HLine(20,8,120,7,196);
+    Design::TxtOutline(-8,0,15,1);
+    H::foreColor(7); H::gotoxy(40,3); cout<<R"(       _                   ___                               ___      _        )";
+    H::foreColor(7); H::gotoxy(40,4); cout<<R"(/\   /(_) _____      __   / _ \__ _ _ __ ___   ___  ___     /   \__ _| |_ __ _ )";
+    H::foreColor(1); H::gotoxy(40,5); cout<<R"(\ \ / / |/ _ \ \ /\ / /  / /_\/ _` | '_ ` _ \ / _ \/ __|   / /\ / _` | __/ _` |)";
+    H::foreColor(7); H::gotoxy(40,6); cout<<R"( \ V /| |  __/\ V  V /  / /_\\ (_| | | | | | |  __/\__ \  / /_// (_| | || (_| |)";
+    H::foreColor(7); H::gotoxy(40,7); cout<<R"(  \_/ |_|\___| \_/\_/   \____/\__,_|_| |_| |_|\___||___/ /___,' \__,_|\__\__,_|)";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void BLT::ViewGameListDesign::ViewGame_Design()
 {
-    H::drawBoxSingleLineWithBG(20,10,120,1,183);
+    H::drawBoxDoubleLineWithBG(20,10,120,1,183);
     H::drawBoxDoubleLineWithBG(16,11,1,25,196);
     H::VLine(17,11,25,199,219);
     H::drawBoxDoubleLineWithBG(143,11,1,25,196);

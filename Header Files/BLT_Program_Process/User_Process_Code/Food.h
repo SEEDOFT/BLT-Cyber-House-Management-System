@@ -103,8 +103,8 @@ void FoodnDrink::output(int y)
         strcpy(fdQty, "OUT OF STOCK");
     }
     H::setcolor(7);
-    H::gotoxy(36, 14 + y);
-    cout << left << setw(20) << fdId
+    H::gotoxy(35, 14 + y);
+    cout << left << setw(21) << fdId
          << setw(32) << fdName << setw(32) << fdQty << fixed << setprecision(2)
          << "$ " << price;
 }

@@ -5,13 +5,13 @@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void BLT::GameInputDesign::InputGameTxt()
 {
-    H::foreColor(3); H::gotoxy(32,1); cout<<R"(.___                      __      ________                        ________          __          )";
-    H::foreColor(3); H::gotoxy(32,2); cout<<R"(|   | ____ ______  __ ___/  |_   /  _____/_____    _____   ____   \______ \ _____ _/  |______   )";
-    H::foreColor(3); H::gotoxy(32,3); cout<<R"(|   |/    \\____ \|  |  \   __\ /   \  ___\__  \  /     \_/ __ \   |    |  \\__  \\   __\__  \  )";
-    H::foreColor(4); H::gotoxy(32,4); cout<<R"(|   |   |  \  |_> >  |  /|  |   \    \_\  \/ __ \|  Y Y  \  ___/   |    `   \/ __ \|  |  / __ \_)";
-    H::foreColor(4); H::gotoxy(32,5); cout<<R"(|___|___|  /   __/|____/ |__|    \______  (____  /__|_|  /\___  > /_______  (____  /__| (____  /)";
-    H::foreColor(4); H::gotoxy(32,6); cout<<R"(         \/|__|                         \/     \/      \/     \/          \/     \/          \/ )";
-    H::HLine(20,8,120,7,196);
+    Design::TxtOutline(-9,-1,19,1);
+    H::foreColor(7); H::gotoxy(39,2); cout<<R"(  _____                   _       ___                          ___      _        )";
+    H::foreColor(7); H::gotoxy(39,3); cout<<R"(  \_   \_ __  _ __  _   _| |_    / _ \__ _ _ __ ___   ___     /   \__ _| |_ __ _ )";
+    H::foreColor(1); H::gotoxy(39,4); cout<<R"(   / /\/ '_ \| '_ \| | | | __|  / /_\/ _` | '_ ` _ \ / _ \   / /\ / _` | __/ _` |)";
+    H::foreColor(7); H::gotoxy(39,5); cout<<R"(/\/ /_ | | | | |_) | |_| | |_  / /_\\ (_| | | | | | |  __/  / /_// (_| | || (_| |)";
+    H::foreColor(7); H::gotoxy(39,6); cout<<R"(\____/ |_| |_| .__/ \__,_|\__| \____/\__,_|_| |_| |_|\___| /___,' \__,_|\__\__,_|)";
+    H::foreColor(7); H::gotoxy(39,7); cout<<R"(             |_|                                                                 )";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void BLT::GameInputDesign::InputGame_Design()
@@ -20,11 +20,11 @@ void BLT::GameInputDesign::InputGame_Design()
 
     for(int i=0; i<3; i++)
     {
-        H::VLine(70,12,i+1,7,221); H::delay(10);
-        H::VLine(90,12,i+1,7,221); H::delay(10);
+        H::VLine(70,12,i+1,7,221); H::delay(20);
+        H::VLine(90,12,i+1,7,221); H::delay(20);
     }
 
-    H::foreColor(199); H::gotoxy(58,11); cout<<"\3\3";H::setcolor(201);cout<<" Welcome to BTL Cyber House Game Input ";H::setcolor(199);cout<<"\3\3";
+    H::foreColor(199); H::gotoxy(58,11); cout<<"\3\3 Welcome to BTL Cyber House Game Input \3\3";
 
     H::drawBoxDoubleLineWithBG(30,16,100,20,187);
     H::drawBoxDoubleLineWithBG(35,17,30,15,196);

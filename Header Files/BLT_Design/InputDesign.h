@@ -5,13 +5,13 @@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void BLT::InputDesign::InputTxt()
 {
-    H::foreColor(3); H::gotoxy(24,1); cout<<R"(.___                      __    ___________               .___                ________        .__        __    )";
-    H::foreColor(3); H::gotoxy(24,2); cout<<R"(|   | ____ ______  __ ___/  |_  \_   _____/___   ____   __| _/   ___________  \______ \_______|__| ____ |  | __)";
-    H::foreColor(3); H::gotoxy(24,3); cout<<R"(|   |/    \\____ \|  |  \   __\  |    __)/  _ \ /  _ \ / __ |   /  _ \_  __ \  |    |  \_  __ \  |/    \|  |/ /)";
-    H::foreColor(4); H::gotoxy(24,4); cout<<R"(|   |   |  \  |_> >  |  /|  |    |     \(  <_> |  <_> ) /_/ |  (  <_> )  | \/  |    `   \  | \/  |   |  \    < )";
-    H::foreColor(4); H::gotoxy(24,5); cout<<R"(|___|___|  /   __/|____/ |__|    \___  / \____/ \____/\____ |   \____/|__|    /_______  /__|  |__|___|  /__|_ \)";
-    H::foreColor(4); H::gotoxy(24,6); cout<<R"(         \/|__|                      \/                    \/                         \/              \/     \/)";
-    H::HLine(20,8,120,7,196);
+    Design::TxtOutline(-15,-1,30,1);
+    H::foreColor(7); H::gotoxy(33,2); cout<<R"(  _____                   _       ___               _                   ___      _       _    )";
+    H::foreColor(7); H::gotoxy(33,3); cout<<R"(  \_   \_ __  _ __  _   _| |_    / __\__   ___   __| |   ___  _ __     /   \_ __(_)_ __ | | __)";
+    H::foreColor(1); H::gotoxy(33,4); cout<<R"(   / /\/ '_ \| '_ \| | | | __|  / _\/ _ \ / _ \ / _` |  / _ \| '__|   / /\ / '__| | '_ \| |/ /)";
+    H::foreColor(7); H::gotoxy(33,5); cout<<R"(/\/ /_ | | | | |_) | |_| | |_  / / | (_) | (_) | (_| | | (_) | |     / /_//| |  | | | | |   < )";
+    H::foreColor(7); H::gotoxy(33,6); cout<<R"(\____/ |_| |_| .__/ \__,_|\__| \/   \___/ \___/ \__,_|  \___/|_|    /___,' |_|  |_|_| |_|_|\_\)";
+    H::foreColor(7); H::gotoxy(33,7); cout<<R"(             |_|                                                                              )";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void BLT::InputDesign::Input_Design()
@@ -24,7 +24,7 @@ void BLT::InputDesign::Input_Design()
         H::VLine(90,12,i+1,7,221); H::delay(10);
     }
 
-    H::foreColor(199); H::gotoxy(54,11); cout<<"\3\3";H::setcolor(199);cout<<" Welcome to BTL Cyber House Food or Drink Input ";H::setcolor(199);cout<<"\3\3";
+    H::foreColor(199); H::gotoxy(54,11); cout<<"\3\3 Welcome to BTL Cyber House Food or Drink Input \3\3";
 
     H::drawBoxDoubleLineWithBG(30,16,100,20,187);
     H::drawBoxDoubleLineWithBG(35,17,30,15,196);

@@ -58,9 +58,7 @@ namespace BLT
     class GameMenu{
     public:
         static void GameMenuTxt();
-        static void Header_Design(); 
-        static void CyberTxt();
-        static void GameMenu_Design();
+        static void GameMenu_Design(); 
     };
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     class UpdateGameDesign{
@@ -99,7 +97,6 @@ namespace BLT
     public:
         static void FoodMenu_Design();
         static void FoodMenuTxt();
-        static void Cyber99Txt();
     };
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     class UserSignUp{
@@ -180,6 +177,7 @@ namespace BLT
     class ExitDesign{
     public:
         static void ExitTxt();
+        static void Exit_Design();
     };
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     class LENG{

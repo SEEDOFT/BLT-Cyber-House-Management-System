@@ -6,9 +6,19 @@ int main()
     H::setFont(20, 700);
     H::setcursor(0, 0);
     Process::DisableMaximizeButton();
-    Process::DisableCloseButton();
-    
-    Process::Admin_And_User();
+    // Process::DisableCloseButton();
+
+    // Process::Admin_And_User();
+    Process::ManageUserInfo();
+    // Process::Admin_Option();
+    // Process::GamesLst();
+    // Process::ManageUserPayment();
+
+    // Process::AdminProfileInfo();
+
+    // Process::FoodOrDrinkLst();
+
+    // Design::AdminProfileInfoTxt();
 
     getch(); return 0;
 }
