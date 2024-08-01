@@ -1522,7 +1522,7 @@ void File::invoice(const char *username, const char *password)
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void File::UserInvoiceToCSV(const char *username)
 {
-    int y = 16;
+    // int y = 16;
     double total = 0.0;
     bool foundData = false;
 
@@ -1674,166 +1674,164 @@ void File::calculateTime(const char *username, const char *password)
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void File::buyFood(const char *username, const char *password)
 {
-    char press(' ');
+    
     H::setConsoleTitle(TEXT("Buy Food or Drink"));
-    H::setcolor(7);
-    H::cls();
-    H::setcursor(0, 0);
-    Design::outline();
+        H::setcolor(7);
+        H::cls();
+        H::setcursor(0, 0);
+        Design::outline();
+    
+        char press = ' ';
+        char foodID[5];
+        char quantity[8];
+        int myInvID = getInvoiceID() + 1;
+        bool foodFound = false;
 
-    char foodID[5];
-    char quantity[8];
-    int myInvID = getInvoiceID() + 1;
-    bool foodFound = false;
+        file.open(UserInfoFile, ios::in | ios::binary);
+        fstream file3(invoiceFile, ios::out | ios::app | ios::binary);
 
-    file.open(UserInfoFile, ios::in | ios::binary);
-    fstream file3(invoiceFile, ios::out | ios::app | ios::binary);
-
-    if (!file.is_open())
-    {
-        Design::message(4, 0, 3);
-    }
-    else
-    {
-        B::ViewTxt();
-        B::View_Design();
-        fstream file2(FoodnDrinkFile, ios::in | ios::binary);
-        if (!file2.is_open())
+        if (!file.is_open())
         {
             Design::message(4, 0, 3);
-            foodFound = false;
-            file2.close();
-            file.close();
-            file3.close();
         }
         else
         {
-            int y = 0;
-            foodFound = true;
-            while (file2.read((char *)&fnd, sizeof(fnd)))
+            B::ViewTxt();
+            B::View_Design();
+            fstream file2(FoodnDrinkFile, ios::in | ios::binary);
+            if (!file2.is_open())
             {
-                fnd.output(y);
-                y++;
+                Design::message(4, 0, 3);
+                foodFound = false;
+                file2.close();
+                file.close();
+                file3.close();
             }
-        }
-        file2.close();
-
-        if (foodFound == true)
-        {
-            Design::message(6, 0, 0);
-
-            H::setcolor(7);
-            H::cls();
-            Design::outline();
-            B::BuyFoodnDrinkTxt();
-            B::buyFoodnDrink_Animation(15);
-            B::buyFoodnDrink_Design();
-
-            while (file.read((char *)&mup, sizeof(MgUserPayment)))
+            else
             {
-                if (strcmp(username, mup.getUsername()) == 0 && strcmp(password, mup.getPassword()) == 0)
+                int y = 0;
+                foodFound = true;
+                while (file2.read((char *)&fnd, sizeof(fnd)))
                 {
-                    H::drawBoxSingleLineWithBG(35,20,16,1,204);//food id
-                    H::drawBoxSingleLineWithBG(35,24,16,1,204);//qty
-                    H::setcursor(1, 0);
-                    H::foreColor(199);
-                    H::gotoxy(36, 21);
-                    H::inputNumber(foodID, sizeof(foodID));
+                    fnd.output(y);
+                    y++;
+                }
+            }
+            file2.close();
 
-                    H::setcursor(0, 0);
-                    int foodIDInt = atoi(foodID);
-                    
+            if (foodFound == true)
+            {
+                Design::message(6, 0, 0);
 
-                    fstream foodFile(FoodnDrinkFile, ios::in | ios::out | ios::binary);
-                    if (!foodFile.is_open())
+                H::setcolor(7);
+                H::cls();
+                Design::outline();
+                B::BuyFoodnDrinkTxt();
+                B::buyFoodnDrink_Animation(10);
+                B::buyFoodnDrink_Design();
+
+                while (file.read((char *)&mup, sizeof(MgUserPayment)))
+                {
+                    if (strcmp(username, mup.getUsername()) == 0 && strcmp(password, mup.getPassword()) == 0)
                     {
-                        H::foreColor(7);
-                        H::gotoxy(98, 29);
-                        cout << "Food file could not be opened";
-                        Design::message(2, 0, 38);
-                    }
-                    else
-                    {
-                        bool foodFound = false;
-                        while (foodFile.read((char *)&fnd, sizeof(FoodnDrink)))
+                        H::drawBoxSingleLineWithBG(35,20,16,1,204);//food id
+                        H::drawBoxSingleLineWithBG(35,24,16,1,204);//qty
+                        H::setcursor(1, 0);
+                        H::foreColor(199);
+                        H::gotoxy(36, 21);
+                        H::inputNumber(foodID, sizeof(foodID));
+
+                        H::setcursor(0, 0);
+                        int foodIDInt = atoi(foodID);
+
+                        fstream foodFile(FoodnDrinkFile, ios::in | ios::out | ios::binary);
+                        if (!foodFile.is_open())
                         {
-                            if (fnd.getFndID() == foodIDInt)
+                            H::foreColor(7);
+                            H::gotoxy(98, 29);
+                            cout << "Food file could not be opened";
+                            Design::message(2, 0, 38);
+                        }
+                        else
+                        {
+                            bool foodFound = false;
+                            while (foodFile.read((char *)&fnd, sizeof(FoodnDrink)))
                             {
-                                do
+                                if (fnd.getFndID() == foodIDInt)
                                 {
-                                    H::foreColor(199);
-                                    H::gotoxy(36, 25);
-                                    H::inputNumber(quantity, sizeof(quantity));
-                                    // H::clearBox(116, 23, 8, 0, 7);
-                                    // H::drawBoxSingleLine(88, 22, 36, 1, 3);
-                                } while (atoi(quantity) <= 0);
-                                int quantityInt = atoi(quantity);
-                                int availableQty = atoi(fnd.getQty());
-                                if (quantityInt <= availableQty)
-                                {
-                                    int newQty = availableQty - quantityInt;
-                                    char newQtyStr[5];
-                                    sprintf(newQtyStr, "%d", newQty);
-                                    fnd.setQty(newQtyStr);
+                                    do
+                                    {
+                                        H::foreColor(199);
+                                        H::gotoxy(36, 25);
+                                        H::inputNumber(quantity, sizeof(quantity));
+                                        // H::clearBox(116, 23, 8, 0, 7);
+                                        // H::drawBoxSingleLine(88, 22, 36, 1, 3);
+                                    } while (atoi(quantity) <= 0);
 
-                                    foodFile.seekp(-sizeof(FoodnDrink), ios::cur);
-                                    foodFile.write((char *)&fnd, sizeof(FoodnDrink));
+                                    int quantityInt = atoi(quantity);
+                                    int availableQty = atoi(fnd.getQty());
 
-                                    inv.setName(mup.getGuestname());
-                                    inv.setUsername(username);
-                                    inv.setFnd(fnd.getName(), fnd.getPrice(), quantity);
-                                    inv.setBuyedTime(0);
-                                    inv.setTime(mup.getTime());
-                                    //                                inv.setId(mup.getID());
-                                    inv.setId(myInvID);
+                                    if (quantityInt <= availableQty)
+                                    {
+                                        int newQty = availableQty - quantityInt;
+                                        char newQtyStr[5];
+                                        sprintf(newQtyStr, "%d", newQty);
+                                        fnd.setQty(newQtyStr);
 
-                                    H::foreColor(7);
-                                    H::gotoxy(94, 29);
-                                    cout << "\3\3";
-                                    H::setcolor(4);
-                                    cout << " Successfully Purchase";
-                                    H::setcolor(7);
-                                    cout << " \3\3";
+                                        foodFile.seekp(-sizeof(FoodnDrink), ios::cur);
+                                        foodFile.write((char *)&fnd, sizeof(FoodnDrink));
 
-                                    Design::message(2, 0, 38);
+                                        inv.setName(mup.getGuestname());
+                                        inv.setUsername(username);
+                                        inv.setFnd(fnd.getName(), fnd.getPrice(), quantity);
+                                        inv.setBuyedTime(0);
+                                        inv.setTime(mup.getTime());
+                                        inv.setId(myInvID);
+
+                                        H::gotoxy(116, 23);
+                                        H::setcolor(2);
+                                        cout << "...Successfully Purchase...";
+
+                                        Design::message(3, 0, 38);
+                                    }
+                                    else
+                                    {
+                                        H::foreColor(4);
+                                        H::gotoxy(108, 23);
+                                        cout << "...The quantity available is insufficient...";
+
+                                        Design::message(3, 0, 38);
+                                        file.close();
+                                        file3.close();
+                                    }
+                                    foodFound = true;
+                                    break;
                                 }
-                                else
-                                {
-                                    H::foreColor(7);
-                                    H::gotoxy(89, 29);
-                                    cout << "Insufficient quantity are available";
+                            }
+                            foodFile.close();
 
-                                    Design::message(2, 0, 38);
-                                    file.close();
-                                    file3.close();
-                                }
-                                foodFound = true;
+                            if (!foodFound)
+                            {
+                                H::foreColor(4);
+                                H::gotoxy(112, 23);
+                                cout << "...Food or Drink ID is not found...";
+
+                                Design::message(3, 0, 38);
+                                file.close();
+                                file3.close();
                                 break;
                             }
                         }
-                        foodFile.close();
-
-                        if (!foodFound)
-                        {
-                            H::foreColor(4);
-                            H::gotoxy(92, 29);
-                            cout << "Food or Drink ID is not found";
-
-                            Design::message(2, 0, 38);
-                            file.close();
-                            file3.close();
-                        }
+                        file3.write((char *)&inv, sizeof(myInvoice));
                     }
-                    file3.write((char *)&inv, sizeof(myInvoice));
                 }
-                //            file3.write((char *)&inv, sizeof(myInvoice));
+                file.close();
+                file3.close();
             }
-
-            file.close();
-            file3.close();
         }
-    }
-    do
+
+
+    while (1)
     {
         press = getch();
 
@@ -1845,7 +1843,7 @@ void File::buyFood(const char *username, const char *password)
         {
             buyFood(username,password);
         }
-    } while (1);
+    } 
     
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -1994,7 +1992,7 @@ void File::allUserInvoiceToCSV()
     double allTotal = 0;
     double totalTime = 0;
     double fndPrice = 0;
-    int y = 0;
+    // int y = 0;
     file.open(invoiceFile, ios::in | ios::binary);
     fstream file2(UserInfoFile, ios::in | ios::binary);
 
@@ -2085,10 +2083,8 @@ void File::GameMENU()
 {
     H::setConsoleTitle(TEXT("Flappy Bird"));
     H::setcolor(7);
-    H::cls();
-    H::setcursor(0,0);
-    Design::outline();
     PGame::menu();
+    H::setcursor(0,0);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //////////////////////////////////////////

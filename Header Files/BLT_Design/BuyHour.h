@@ -16,10 +16,10 @@ void BLT::BuyHour::buyHourTxt()
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void BLT::BuyHour::buyHour_Design()
 {
-    H::drawBoxDoubleLine(40,11,116,19,8);//box
-    H::HLine(40,12,116,8,205);//topLN
-    H::HLine(45,13,106,8,205);//topLN
-    H::HLine(50,14,96,8,205);//topLN
+    H::drawBoxDoubleLine(40,11,116,19,6);//box
+    H::HLine(40,12,116,2,205);//topLN
+    H::HLine(45,13,106,3,205);//topLN
+    H::HLine(50,14,96,4,205);//topLN
 
     H::gotoxy(14,12); H::foreColor(6); cout<<R"(       _.-"""-._)";
     H::gotoxy(14,13); H::foreColor(6); cout<<R"(  _.-""         ""-._)";
@@ -50,9 +50,9 @@ void BLT::BuyHour::buyHour_Design()
     H::setcolor(151);H::gotoxy(79,23);
     cout << "Debit or Credit  :";
 
-    H::HLine(40,30,116,8,205);//botLN
-    H::HLine(45,29,106,8,205);//botLN
-    H::HLine(50,28,96,8,205);//botLN
+    H::HLine(40,30,116,4,205);//botLN
+    H::HLine(45,29,106,3,205);//botLN
+    H::HLine(50,28,96,2,205);//botLN
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void BLT::BuyHour::buyHour_Animation(int color)

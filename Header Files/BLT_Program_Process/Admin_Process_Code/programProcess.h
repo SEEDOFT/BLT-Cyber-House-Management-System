@@ -180,7 +180,6 @@ void Process::OutputHostName(int x, int y, int color)
 void Process::Admin_And_User()
 {
     H::setcolor(7);
-    Design::LoadingAnimation();
     char press;
     int num;
     H::setcursor(0, 0);
@@ -580,41 +579,39 @@ void Process::AdminProfileInfo()
 
         do
         {
-            H::drawBoxDoubleLineWithBG(105, 11, 30, 1, 183);
-            H::drawBoxDoubleLineWithBG(105, 17, 30, 1, 183);
-            H::drawBoxDoubleLineWithBG(105, 23, 30, 1, 183);
+            H::drawBoxDoubleLineWithBG(105, 11, 30, 1, 3);
+            H::drawBoxDoubleLineWithBG(105, 17, 30, 1, 3);
+            H::drawBoxDoubleLineWithBG(105, 23, 30, 1, 3);
 
+            H::setcolor(7);
             H::gotoxy(116, 12);
-            H::setcolor(185);
             cout << "About Us";
             H::gotoxy(112, 18);
-            H::setcolor(185);
             cout << "A Letter from Us";
             H::gotoxy(114, 24);
-            H::setcolor(185);
             cout << "Back to MENU";
 
             if (y == 1)
             {
-                H::drawBoxDoubleLineWithBG(105, 11, 30, 1, 68);
+                H::drawBoxDoubleLineWithBG(105, 11, 30, 1, 255);
                 H::gotoxy(116, 12);
-                H::setcolor(71);
+                H::setcolor(249);
                 cout << "About Us";
                 choice = 1;
             }
             if (y == 2)
             {
-                H::drawBoxDoubleLineWithBG(105, 17, 30, 1, 68);
+                H::drawBoxDoubleLineWithBG(105, 17, 30, 1, 255);
                 H::gotoxy(112, 18);
-                H::setcolor(71);
+                H::setcolor(249);
                 cout << "A Letter from Us";
                 choice = 2;
             }
             if (y == 3)
             {
-                H::drawBoxDoubleLineWithBG(105, 23, 30, 1, 68);
+                H::drawBoxDoubleLineWithBG(105, 23, 30, 1, 255);
                 H::gotoxy(114, 24);
-                H::setcolor(71);
+                H::setcolor(249);
                 cout << "Back to MENU";
                 choice = 3;
             }
@@ -696,10 +693,6 @@ void Process::AboutUs()
 	    	system(("start " + string(websiteUrl)).c_str());
             break;
         }
-        else
-        {
-            continue;
-        }
     }
 }
 /******************************************************** */
@@ -755,10 +748,6 @@ void Process::A_LetterFromUs()
         if (press == '2')
         {
             openURL("https://mptc.gov.kh/en/");
-        }
-        else
-        {
-            continue;
         }
     }
 }
@@ -959,10 +948,6 @@ void Process::InsertGame()
             InsertGame();
             break;
         }
-        else
-        {
-            continue;
-        }
     }
 }
 /******************************************************** */
@@ -988,10 +973,6 @@ void Process::ViewGame()
         if (press == 27)
         {
             break;
-        }
-        else
-        {
-            continue;
         }
     }
 }
@@ -1025,10 +1006,6 @@ void Process::SearchGame()
             SearchGame();
             break;
         }
-        else
-        {
-            continue;
-        }
     }
 }
 /******************************************************** */
@@ -1061,10 +1038,6 @@ void Process::UpdateGame()
             UpdateGame();
             break;
         }
-        else
-        {
-            continue;
-        }
     }
 }
 /******************************************************** */
@@ -1096,10 +1069,6 @@ void Process::RemoveGame()
         {
             RemoveGame();
             break;
-        }
-        else
-        {
-            continue;
         }
     }
 }
@@ -1302,10 +1271,6 @@ void Process::InsertUser()
             InsertUser();
             break;
         }
-        else
-        {
-            continue;
-        }
     }
 }
 /*********************************************************/
@@ -1331,10 +1296,6 @@ void Process::ViewUser()
         if (press == 27)
         {
             break;
-        }
-        else
-        {
-            continue;
         }
     }
 }
@@ -1369,10 +1330,6 @@ void Process::SearchUserData()
             SearchUserData();
             break;
         }
-        else
-        {
-            continue;
-        }
     }
 }
 /*********************************************************/
@@ -1406,10 +1363,6 @@ void Process::EditUserInfo()
             EditUserInfo();
             break;
         }
-        else
-        {
-            continue;
-        }
     }
 }
 /*********************************************************/
@@ -1442,10 +1395,6 @@ void Process::RemoveUser()
         {
             RemoveUser();
             break;
-        }
-        else
-        {
-            continue;
         }
     }
 }
@@ -1657,10 +1606,6 @@ void Process::InsertFoodDrink()
             InsertFoodDrink();
             break;
         }
-        else
-        {
-            continue;
-        }
     }
 }
 /*********************************************************/
@@ -1686,10 +1631,6 @@ void Process::ViewFoodDrink()
         if (press == 27)
         {
             break;
-        }
-        else
-        {
-            continue;
         }
     }
 }
@@ -1724,10 +1665,6 @@ void Process::SearchFoodDrink()
             SearchFoodDrink();
             break;
         }
-        else
-        {
-            continue;
-        }
     }
 }
 /*********************************************************/
@@ -1761,10 +1698,6 @@ void Process::UpdateFoodDrink()
             UpdateFoodDrink();
             break;
         }
-        else
-        {
-            continue;
-        }
     }
 }
 /*********************************************************/
@@ -1797,10 +1730,6 @@ void Process::RemoveFoodDrink()
         {
             RemoveFoodDrink();
             break;
-        }
-        else
-        {
-            continue;
         }
     }
 }

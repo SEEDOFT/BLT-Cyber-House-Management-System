@@ -6,15 +6,10 @@ int main()
     H::setFont(20, 700);
     H::setcursor(0, 0);
     Process::DisableMaximizeButton();
-    // Process::DisableCloseButton();
+    Process::DisableCloseButton();
 
     Process::BLT_Cyber_House_Management_System();
-    // Process::Admin_And_User();
 
-    // File::userSubMenu("a","a");
-    // File::buyFood("a","a");  
-    // File::buyMoreTime("a","a");  8
-    // File::invoice("a","a");
 
     
     getch(); return 0;

@@ -29,7 +29,11 @@ void BLT::LENG::UserMenu_Design()
 	H::drawBoxDoubleLine(x+16,y+7,101,20,3);
 	H::drawBoxDoubleLine(x+18,y+8,35,18,lineColor);
 
-	H::drawBoxDoubleLineWithBG(x+57,y+9,57,13,179);
+	H::drawBoxDoubleLineWithBG(x+57,y+9,57,13,179);//cyan
+	H::drawBoxDoubleLineWithBG(x+57,y+24,57,1,255);//white
+
+	H::gotoxy(78,30); H::setcolor(249);
+	cout << "___________o-o-o-O-o-o-o___________";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void BLT::LENG::UserMenu_Art(int a)
@@ -107,9 +111,15 @@ void BLT::LENG::UserMenu_Art(int a)
 		tp(1,132,6); cout << R"(  (_) (__)  )";
 		
 		H::drawBoxSingleLineWithBG(x+20,y+12,31,1,230);
-		tp(229,x+22,y+13); cout << "Play Games";
+		tp(229,x+22,y+13); cout << "Play Game";
 		H::clearBox(x+58,y+10,55,13,179);
-		//art
+		H::setcolor(181);
+		H::gotoxy(85,17); cout << R"(	  __     __------)";
+		H::gotoxy(85,18); cout << R"(  __/o `\ ,~   _~~  .)";
+		H::gotoxy(85,19); cout << R"( ~ -.   ,'   _~-----)";
+		H::gotoxy(85,20); cout << R"(     `\     ~~~--_'__)";
+		H::gotoxy(85,21); cout << R"(       `~-==-~~~~~---')";
+		H::gotoxy(93,26); cout << "Play Game";
 	}
 	else if( a == 3)
 	{
@@ -148,7 +158,7 @@ void BLT::LENG::UserMenu_Art(int a)
 		H::gotoxy(x+75,y+14);cout << R"( _  ||     || |^*| _)";
 		H::gotoxy(x+75,y+15);cout << R"(|=| o=,===,=o |__||=|)";
 		H::gotoxy(x+75,y+16);cout << R"(|_|  _______)~`)  |_|)";
-		H::gotoxy(x+75,y+17);cout << R"(    [=======]  ()     )";
+		H::gotoxy(x+75,y+17);cout << R"(    [=======]  ())";
 		H::gotoxy(x+77,y+20);cout << "Buy Hour to Play";
 	}
 	else if( a == 4)

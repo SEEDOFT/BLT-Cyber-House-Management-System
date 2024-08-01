@@ -16,14 +16,14 @@ void BLT::BuyFoodnDrink::BuyFoodnDrinkTxt()
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void  BLT::BuyFoodnDrink::buyFoodnDrink_Design()
 {
-    H::foreColor(4); H::gotoxy(64,15); cout<<R"(/\     __)";
-    H::foreColor(4); H::gotoxy(64,16); cout<<R"(  \ .-':::.)";
-    H::foreColor(4); H::gotoxy(64,17); cout<<R"(   \ :::::|\)";
-    H::foreColor(4); H::gotoxy(64,18); cout<<R"(  |,\:::'/  \)";
-    H::foreColor(4); H::gotoxy(64,19); cout<<R"(  `.:::-'    \)";
-    H::foreColor(4); H::gotoxy(64,20); cout<<R"(    `-.       \   )";H::foreColor(6); cout<<R"(      ___)";
-    H::foreColor(4); H::gotoxy(64,21); cout<<R"(       `-.     |  )";H::foreColor(6); cout<<R"(   .-'';:::.)";
-    H::foreColor(4); H::gotoxy(64,22); cout<<R"(          `-.-'   )";H::foreColor(6); cout<<R"(  / ',''.;;;\)";
+    H::foreColor(2); H::gotoxy(64,15); cout<<R"(/\     __)";
+    H::foreColor(2); H::gotoxy(64,16); cout<<R"(  \ .-':::.)";
+    H::foreColor(2); H::gotoxy(64,17); cout<<R"(   \ :::::|\)";
+    H::foreColor(2); H::gotoxy(64,18); cout<<R"(  |,\:::'/  \)";
+    H::foreColor(2); H::gotoxy(64,19); cout<<R"(  `.:::-'    \)";
+    H::foreColor(2); H::gotoxy(64,20); cout<<R"(    `-.       \   )";H::foreColor(6); cout<<R"(      ___)";
+    H::foreColor(2); H::gotoxy(64,21); cout<<R"(       `-.     |  )";H::foreColor(6); cout<<R"(   .-'';:::.)";
+    H::foreColor(2); H::gotoxy(64,22); cout<<R"(          `-.-'   )";H::foreColor(6); cout<<R"(  / ',''.;;;\)";
     H::foreColor(6); H::gotoxy(64,23); cout<<R"(                   |  ','','.''|)";
     H::foreColor(6); H::gotoxy(64,24); cout<<R"(                   |\  ' ,',' /)";
     H::foreColor(6); H::gotoxy(64,25); cout<<R"(                   `.`-.___.-;')";

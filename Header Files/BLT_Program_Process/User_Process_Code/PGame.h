@@ -2,6 +2,7 @@
 #define __PGAME_H__
 //###################################################################################
 #include "../../ANT_Header/HinsyOOPV2"
+#include "../../BLT_Design/designConsole.h"
 
 using namespace HinsyOOP;
 //###################################################################################
@@ -47,24 +48,33 @@ class PGame
 };
 void PGame::Art()
 {
-	H::setcolor(1); H::gotoxy(10,20); cout << R"( ______)";
-	H::setcolor(1); H::gotoxy(10,20); cout << R"(|      |\)";
-	H::setcolor(1); H::gotoxy(10,20); cout << R"(|      |__\)";
-	H::setcolor(1); H::gotoxy(10,20); cout << R"(|          |)";
-	H::setcolor(1); H::gotoxy(10,20); cout << R"(|          |)";
-	H::setcolor(1); H::gotoxy(10,20); cout << R"(|          |)";
-	H::setcolor(1); H::gotoxy(10,20); cout << R"(|          |)";
-	H::setcolor(1); H::gotoxy(10,20); cout << R"(|          |)";
-	H::setcolor(1); H::gotoxy(10,20); cout << R"(|__________|)";
+	H::setcolor(6); H::gotoxy(61,12); cout << R"( _______________________________)";
+	H::setcolor(6); H::gotoxy(61,13); cout << R"(|                               |\)";
+	H::setcolor(6); H::gotoxy(61,14); cout << R"(|                               |__\)";
+	H::setcolor(6); H::gotoxy(61,15); cout << R"(|                                   |)";
+	H::setcolor(6); H::gotoxy(61,16); cout << R"(|                                   |)";
+	H::setcolor(6); H::gotoxy(61,17); cout << R"(|                                   |)";
+	H::setcolor(6); H::gotoxy(61,18); cout << R"(|                                   |)";
+	H::setcolor(6); H::gotoxy(61,19); cout << R"(|                                   |)";
+	H::setcolor(6); H::gotoxy(61,20); cout << R"(|                                   |)";
+	H::setcolor(6); H::gotoxy(61,21); cout << R"(|                                   |)";
+	H::setcolor(6); H::gotoxy(61,22); cout << R"(|                                   |)";
+	H::setcolor(6); H::gotoxy(61,23); cout << R"(|                                   |)";
+	H::setcolor(6); H::gotoxy(61,24); cout << R"(|                                   |)";
+	H::setcolor(6); H::gotoxy(61,25); cout << R"(|                                   |)";
+	H::setcolor(6); H::gotoxy(61,26); cout << R"(|                                   |)";
+	H::setcolor(6); H::gotoxy(61,27); cout << R"(|                                   |)";
+	H::setcolor(6); H::gotoxy(61,28); cout << R"(|                                   |)";
+	H::setcolor(6); H::gotoxy(61,29); cout << R"(|___________________________________|)";
 }
 void PGame::HeaderTxt()
-{                                       
-	H::setcolor(1); H::gotoxy(10,20); cout << R"( _____ _                    _____ _       _ )";
-	H::setcolor(1); H::gotoxy(10,20); cout << R"(|   __| |___ ___ ___ _ _   | __  |_|___ _| |)";
-	H::setcolor(1); H::gotoxy(10,20); cout << R"(|   __| | .'| . | . | | |  | __ -| |  _| . |)";
-	H::setcolor(1); H::gotoxy(10,20); cout << R"(|__|  |_|__,|  _|  _|_  |  |_____|_|_| |___|)";
-	H::setcolor(1); H::gotoxy(10,20); cout << R"(            |_| |_| |___|                   )";
-
+{                         
+	Design::TxtOutline(10,0,-20,1);              
+	H::setcolor(3); H::gotoxy(58,3); cout << R"( _____ _                    _____ _       _ )";
+	H::setcolor(3); H::gotoxy(58,4); cout << R"(|   __| |___ ___ ___ _ _   | __  |_|___ _| |)";
+	H::setcolor(4); H::gotoxy(58,5); cout << R"(|   __| | .'| . | . | | |  | __ -| |  _| . |)";
+	H::setcolor(4); H::gotoxy(58,6); cout << R"(|__|  |_|__,|  _|  _|_  |  |_____|_|_| |___|)";
+	H::setcolor(4); H::gotoxy(58,7); cout << R"(            |_| |_| |___|                   )";
 }
 //###################################################################################
 int PGame::pipePos[3] = {0,0,0};
@@ -135,7 +145,11 @@ void PGame::play()
 	pipeFlag[1] = 0;
 	pipePos[0] = pipePos[1] = 4;
 
-	system("cls");
+	H::cls();
+	H::setcolor(7);
+	H::setcursor(0,0);
+	Design::outline();
+	
 	drawBorder();
 	genPipe(0);
 	updateScore();
@@ -227,13 +241,29 @@ void PGame::updateScore()
 }
 //###################################################################################
 void PGame::instructions()
-{
-	system("cls");
-	cout << "Instructions";
-	cout << "\n----------------";
-	cout << "\n Press spacebar to make bird fly";
-	cout << "\n\nPress any key to go back to menu";
-	getch();
+{                     
+	H::setcursor(0,0);
+	H::cls();
+	H::setcolor(7);
+	Design::outline();
+
+	H::setcolor(3); H::gotoxy(55,5); cout << R"( _____         _               _   _             )";
+	H::setcolor(3); H::gotoxy(55,6); cout << R"(|     |___ ___| |_ ___ _ _ ___| |_|_|___ ___ ___ )";
+	H::setcolor(4); H::gotoxy(55,7); cout << R"(|-   -|   |_ -|  _|  _| | |  _|  _| | . |   |_ -|)";
+	H::setcolor(4); H::gotoxy(55,8); cout << R"(|_____|_|_|___|_| |_| |___|___|_| |_|___|_|_|___|)";
+
+	Art();
+	H::setcolor(1); H::gotoxy(78,16);
+	cout << "Use";
+	H::setcolor(4); H::gotoxy(74,18);
+	cout << "[SPACEBAR]";
+	H::setcolor(1); H::gotoxy(69,20);
+	cout << "to make the bird fly";  
+	 
+	H::setcolor(1); H::gotoxy(66,28);    
+	cout << "Press"; H::setcolor(4); cout << " [ANY]"; H::setcolor(1); cout << " key to go back";
+
+	getch();                                     
 }
 //###################################################################################
 int PGame::collision()
@@ -249,15 +279,27 @@ int PGame::collision()
 }
 //###################################################################################
 void PGame::gameover()
-{
-	system("cls");
-	cout << endl;
-	cout << "\t\t--------------------------" << endl;
-	cout << "\t\t-------- Game Over -------" << endl;
-	cout << "\t\t--------------------------" << endl
-		 << endl;
-	cout << "\t\tPress any key to go back to menu.";
-	getch();
+{			
+	H::setcursor(0,0);
+	H::cls();
+	H::setcolor(7);
+	Design::outline();
+
+	H::setcolor(4); H::gotoxy(59,5); cout << R"( _____                  _____             )";
+	H::setcolor(4); H::gotoxy(59,6); cout << R"(|   __|___ _____ ___   |     |_ _ ___ ___ )";
+	H::setcolor(4); H::gotoxy(59,7); cout << R"(|  |  | .'|     | -_|  |  |  | | | -_|  _|)";
+	H::setcolor(4); H::gotoxy(59,8); cout << R"(|_____|__,|_|_|_|___|  |_____|\_/|___|_|  )";										
+	
+	Art();
+	H::setcolor(1); H::gotoxy(71,16);
+	cout << "Your Score : ";H::setcolor(4); cout << score;//score
+	H::setcolor(1); H::gotoxy(71,24);
+	cout << "Press "; H::setcolor(4); cout << "[ENTER] "; H::setcolor(1); cout << "key"; 
+	H::setcolor(1); H::gotoxy(70,26);
+	cout << "to continue playing";
+	H::setcolor(4); H::gotoxy(71,28); 
+    cout << "[ESC]"; H::setcolor(1); cout << " to go back"; 
+
 }
 //###################################################################################
 void PGame::drawBird()
@@ -304,32 +346,67 @@ void PGame::erasePipe(int ind)
 //###################################################################################
 void PGame::menu()
 {
+	char press = ' ';
 	while (true)
 	{
-		system("cls");
-		H::gotoxy(10 + offsetX, 5 + offsetY);
-		cout << " ----------------------------";
-		H::gotoxy(10 + offsetX, 6 + offsetY);
-		cout << " |       Flappy Bird        | ";
-		H::gotoxy(10 + offsetX, 7 + offsetY);
-		cout << " ----------------------------";
-		H::gotoxy(10 + offsetX, 9 + offsetY);
+		H::cls();
+		H::setcolor(7);
+    	H::setcursor(0,0);
+		Design::outline();
+		
+		HeaderTxt();
+
+		H::HLine(50,14,60,7,205);
+		H::HLine(50,18,60,7,205);
+		H::HLine(50,22,60,7,205);
+		H::HLine(50,26,60,7,205);
+		H::HLine(50,30,60,7,205);
+
+		H::VLine(60,12,20,7,186);
+		H::VLine(100,12,20,7,186);
+
+		H::setcolor(3);
+		H::gotoxy(68,16);
 		cout << "1. Start Game";
-		H::gotoxy(10 + offsetX, 10 + offsetY);
+		H::gotoxy(68,20);
 		cout << "2. Instructions";
-		H::gotoxy(10 + offsetX, 11 + offsetY);
-		cout << "3. Quit";
-		H::gotoxy(10 + offsetX, 13 + offsetY);
+		H::gotoxy(68,24);
+		cout << "3. Quit Game";
+		H::gotoxy(68,28);
 		cout << "Select option: ";
 
+		H::setcursor(1,0);
+		H::setcolor(4);
 		char op = getche();
+		H::delay(200);
 
 		if (op == '1')
+		{
 			play();
-		else if (op == '2')
+
+			while(1)
+			{
+				press =  getch();
+
+				if(press == 27)
+				{
+					break;
+				}
+				else if(press == 13)
+				{
+					play();
+				}
+			}
+		}
+		else if(op == '2')
+		{
 			instructions();
-		else if (op == '3')
+		}
+		else if(op == '3')
+		{
 			break;
+		}
+			
 	} 
 }
 //###################################################################################

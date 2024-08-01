@@ -41,20 +41,20 @@ void BLT::InputDesign::Input_Design()
     H::drawBoxDoubleLineWithBG(97,30,26,1,183);
 
     //label
-    H::foreColor(183); H::gotoxy(39,19); cout<<"ID    ";
-    H::foreColor(183); H::gotoxy(39,23); cout<<"Name  ";
-    H::foreColor(183); H::gotoxy(39,27); cout<<"QTY   ";
-    H::foreColor(183); H::gotoxy(39,31); cout<<"Price ($) ";
+    H::foreColor(185); H::gotoxy(39,19); cout<<"ID    ";
+    H::foreColor(185); H::gotoxy(39,23); cout<<"Name  ";
+    H::foreColor(185); H::gotoxy(39,27); cout<<"QTY   ";
+    H::foreColor(185); H::gotoxy(39,31); cout<<"Price ($) ";
 
-    H::foreColor(183); H::gotoxy(39,18); cout<<">.<";
-    H::foreColor(183); H::gotoxy(39,22); cout<<">.<";
-    H::foreColor(183); H::gotoxy(39,26); cout<<">.<";
-    H::foreColor(183); H::gotoxy(39,30); cout<<">.<";
+    H::foreColor(185); H::gotoxy(39,18); cout<<">.<";
+    H::foreColor(185); H::gotoxy(39,22); cout<<">.<";
+    H::foreColor(185); H::gotoxy(39,26); cout<<">.<";
+    H::foreColor(185); H::gotoxy(39,30); cout<<">.<";
 
-    H::foreColor(183); H::gotoxy(99,18); cout<<">.<";
-    H::foreColor(183); H::gotoxy(99,22); cout<<">.<";
-    H::foreColor(183); H::gotoxy(99,26); cout<<">.<";
-    H::foreColor(183); H::gotoxy(99,30); cout<<">.<";
+    H::foreColor(185); H::gotoxy(99,18); cout<<">.<";
+    H::foreColor(185); H::gotoxy(99,22); cout<<">.<";
+    H::foreColor(185); H::gotoxy(99,26); cout<<">.<";
+    H::foreColor(185); H::gotoxy(99,30); cout<<">.<";
 
     H::HLine(50,35,60,183,205);
 }
