@@ -8,17 +8,14 @@ int main()
     Process::DisableMaximizeButton();
     // Process::DisableCloseButton();
 
+    Process::BLT_Cyber_House_Management_System();
     // Process::Admin_And_User();
-    Process::ManageUserInfo();
-    // Process::Admin_Option();
-    // Process::GamesLst();
-    // Process::ManageUserPayment();
 
-    // Process::AdminProfileInfo();
+    // File::userSubMenu("a","a");
+    // File::buyFood("a","a");  
+    // File::buyMoreTime("a","a");  8
+    // File::invoice("a","a");
 
-    // Process::FoodOrDrinkLst();
-
-    // Design::AdminProfileInfoTxt();
-
+    
     getch(); return 0;
 }

@@ -79,6 +79,8 @@ public:
     int getYear() const;
 
     void setAllTotal(double allTotal);
+
+    ~MgUserPayment();
 };
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 double MgUserPayment::loginHour = 0;
@@ -301,5 +303,7 @@ void MgUserPayment::userProfile()
     H::setcolor(236); H::gotoxy(71, 32);
     cout << "BLT " << muId;
 }
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+MgUserPayment::~MgUserPayment() {}
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif

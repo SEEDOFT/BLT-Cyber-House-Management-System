@@ -3,19 +3,38 @@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #include"All_Design.h"
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void BLT::FoodMenu::FoodMenu_Design()
+void BLT::FoodMenu::FoodMenu_Design(int color)
 {
-     //box
-    H::drawBoxDoubleLineWithBG(37,10,85,26,71);
-    H::drawBoxDoubleLineWithBG(39,11,81,24,55);
-    H::drawBoxDoubleLineWithBG(41,18,77,10,103);
+    H::drawBoxSingleLine(18,13,34,22,color+2);
+    H::drawBoxSingleLine(20,14,30,20,color++);
 
-    H::HLine(43,19,73,23,178);
-    H::HLine(43,28,73,23,178);
+    H::drawBoxSingleLine(108,13,34,22,color+2);
+    H::drawBoxSingleLine(110,14,30,20,color++);
 
-    H::VLine(43,18,10,23,178);
-    H::VLine(117,18,10,23,178);
-    
+    H::gotoxy(22,22); H::foreColor(color); cout<< R"( _____________,-.___   _)";
+    H::gotoxy(22,23); H::foreColor(color); cout<< R"(|____        { {]_]_] [_])";
+    H::gotoxy(22,24); H::foreColor(color); cout<< R"(|___ `-----.__\ \_]_]_  . `)";
+    H::gotoxy(22,25); H::foreColor(color); cout<< R"(|   `-----.____} }]_]_]_ ,)";
+    H::gotoxy(22,26); H::foreColor(color); cout<< R"(|_____________/ {_]_]_]_] ,)";
+    H::gotoxy(22,27); H::foreColor(color); cout<< R"(                   `-')";
+
+    H::gotoxy(112,16); H::foreColor(color); cout<< R"(     ()      ()    /)"; 
+    H::gotoxy(112,17); H::foreColor(color); cout<< R"(          ()  ()  /)"; 
+    H::gotoxy(112,18); H::foreColor(color); cout<< R"(   ______________/___)"; 
+    H::gotoxy(112,19); H::foreColor(color); cout<< R"(   \            /   /)"; 
+    H::gotoxy(112,20); H::foreColor(color); cout<< R"(    \^^^^^^^^^^/^^^/)";
+    H::gotoxy(112,21); H::foreColor(color); cout<< R"(     \     ___/   /)"; 
+    H::gotoxy(112,22); H::foreColor(color); cout<< R"(      \   (   )  /)"; 
+    H::gotoxy(112,23); H::foreColor(color); cout<< R"(       \  (___) /)"; 
+    H::gotoxy(112,24); H::foreColor(color); cout<< R"(        \ /    /)"; 
+    H::gotoxy(112,25); H::foreColor(color); cout<< R"(         \    /)"; 
+    H::gotoxy(112,26); H::foreColor(color); cout<< R"(          \  /)"; 
+    H::gotoxy(112,27); H::foreColor(color); cout<< R"(           \/)"; 
+    H::gotoxy(112,28); H::foreColor(color); cout<< R"(           ||)"; 
+    H::gotoxy(112,29); H::foreColor(color); cout<< R"(           ||)"; 
+    H::gotoxy(112,30); H::foreColor(color); cout<< R"(           /\)"; 
+    H::gotoxy(112,31); H::foreColor(color); cout<< R"(          /;;\)"; 
+    H::gotoxy(112,32); H::foreColor(color); cout<< R"(     ==============)"; 
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void BLT::FoodMenu::FoodMenuTxt()

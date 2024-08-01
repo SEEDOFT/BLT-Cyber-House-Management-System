@@ -56,8 +56,8 @@ class File
         static bool check_file(const string &fileName);
         static bool checkUsername(const char *username, int x, int y, int color, int clsColor);
         static bool checkUsernameInVector(const char *username, int x, int y, int color);
-        static void viewProfile(const char *username, const char *password);
 
+        static void viewProfile(const char *username, const char *password);
         static void setCurrentFile(int n);
         static void insertToVector(int n, string &fileName);
         static void pushToVector(int n);
@@ -792,7 +792,7 @@ void File::deleteFile(int n)
         {
             H::setcolor(2);
             H::gotoxy(67, 34);
-            cout << "...Delete Successfully...";
+            cout << "...Remove Successfully...";
         }
 
         // write to file
@@ -1148,15 +1148,15 @@ void File::userSubMenu(const char *username, const char *password)
             Design::tp(7, 35, 15);
             cout << "My Information";
             H::gotoxy(35, 18);
-            cout << "Play Game";
+            cout << "Play Games";
             H::gotoxy(35, 21);
-            cout << "Buy Hour to Play";
+            cout << "Buy More Hours";
             H::gotoxy(35, 24);
-            cout << "Buy Food or Drink";
+            cout << "Buy Food or Drinks";
             H::gotoxy(35, 27);
-            cout << "View Spending";
+            cout << "View Spending List";
             H::gotoxy(35, 30);
-            cout << "Log out";
+            cout << "Log Out of Account";
 
             if (num == 1)
             {
@@ -1292,12 +1292,14 @@ void File::userSubMenu(const char *username, const char *password)
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void File::buyMoreTime(const char *username, const char *password)
 {
-    H::setConsoleTitle(TEXT("Add more hours"));
+    H::setConsoleTitle(TEXT("Buy More Hours"));
     H::setcolor(7);
     H::cls();
     H::setcursor(0, 0);
+    Design::outline();
     B::buyHourTxt();
 
+    char press = ' ';
     char hours[5] = "\0";
     char creditCard[17] = "\0";
     int myInvID = getInvoiceID() + 1;
@@ -1309,14 +1311,16 @@ void File::buyMoreTime(const char *username, const char *password)
     if (file.is_open() && tempFile.is_open())
     {
         B::buyHour_Design();
+        B::buyHour_Animation(7);
         do
         {
-            H::clearBox(110, 20, 5, 0, 7);
-            H::drawBoxSingleLine(90, 18, 40, 1, 3);
+            // H::clearBox(110, 20, 5, 0, 7);
+            H::drawBoxSingleLineWithBG(99, 18, 20, 1, 204);//hours
+            H::drawBoxSingleLineWithBG(99, 22, 20, 1, 204);//card
             H::setcursor(1, 0);
-            H::setcolor(1);
-            H::gotoxy(110, 19);
+            H::setcolor(199);H::gotoxy(100, 19);
             H::inputNumber(hours, sizeof(hours));
+
         } while (atoi(hours) <= 0);
 
         while (file.read((char *)&mup, sizeof(MgUserPayment)))
@@ -1340,17 +1344,16 @@ void File::buyMoreTime(const char *username, const char *password)
             tempFile.write((char *)&mup, sizeof(MgUserPayment));
         }
 
-        H::setcolor(1);
-        H::gotoxy(110, 23);
+        H::setcolor(199);H::gotoxy(100, 23);
         H::inputNumber(creditCard, sizeof(creditCard)); // Credit card number
         H::setcursor(0, 0);
 
         if (isfound)
         {
-            H::setcolor(4);
-            H::gotoxy(96, 25);
-            cout << "...Purchase successfully...";
-            Design::message(2, 0, 36);
+            B::buyHour_Animation(5);
+            H::setcolor(2);
+            H::gotoxy(78, 27);
+            cout << "...Hours have been added successfully...";
         }
     }
     else
@@ -1362,6 +1365,22 @@ void File::buyMoreTime(const char *username, const char *password)
     tempFile.close();
     remove(UserInfoFile.c_str());
     rename(Backup.c_str(), UserInfoFile.c_str());
+
+    while(1)
+    {
+        Design::message(3, 21, 35);
+
+        press = getch();
+
+        if(press == 13)
+        {
+            buyMoreTime(username, password);
+        }
+        else if(press == 27)
+        {
+            break;
+        }
+    }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //////////////////////////////////////////
@@ -1376,7 +1395,7 @@ void File::invoice(const char *username, const char *password)
     char bFnD[20] = "\0";
     char fndQty[5] = "\0";
 
-    H::setConsoleTitle(TEXT("My Spending"));
+    H::setConsoleTitle(TEXT("My Spending List"));
     H::setcolor(7);
     H::cls();
     Design::outline();
@@ -1416,7 +1435,6 @@ void File::invoice(const char *username, const char *password)
                             OutputDate(83, 19, 252);
                             H::foreColor(252);
                             H::gotoxy(83, 19);
-                            // cout << mup.getDay() << "/" << mup.getCrtMonth() << "/" << mup.getYear() << endl;
 
                             strcpy(bFnD, inv.getFoodnDrink());
                             strcpy(fndQty, inv.getQty());
@@ -1448,9 +1466,9 @@ void File::invoice(const char *username, const char *password)
                             if (y == 21)
                             {
                                 y = 16;
-                                H::gotoxy(67, 36);
+                                H::gotoxy(66, 36);
                                 H::setcolor(1);
-                                cout << "press any key to view more";
+                                cout << "Press ";H::setcolor(4);cout <<"[ANY]";H::setcolor(1);cout <<" key to view more";
                                 press = getch();
                                 H::clearBox(67, 36, 26, 0, 7);
 
@@ -1656,6 +1674,7 @@ void File::calculateTime(const char *username, const char *password)
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void File::buyFood(const char *username, const char *password)
 {
+    char press(' ');
     H::setConsoleTitle(TEXT("Buy Food or Drink"));
     H::setcolor(7);
     H::cls();
@@ -1707,28 +1726,23 @@ void File::buyFood(const char *username, const char *password)
             H::cls();
             Design::outline();
             B::BuyFoodnDrinkTxt();
+            B::buyFoodnDrink_Animation(15);
             B::buyFoodnDrink_Design();
 
             while (file.read((char *)&mup, sizeof(MgUserPayment)))
             {
                 if (strcmp(username, mup.getUsername()) == 0 && strcmp(password, mup.getPassword()) == 0)
                 {
+                    H::drawBoxSingleLineWithBG(35,20,16,1,204);//food id
+                    H::drawBoxSingleLineWithBG(35,24,16,1,204);//qty
                     H::setcursor(1, 0);
-                    H::foreColor(1);
-                    H::gotoxy(116, 19);
+                    H::foreColor(199);
+                    H::gotoxy(36, 21);
                     H::inputNumber(foodID, sizeof(foodID));
-                    do
-                    {
-                        H::foreColor(1);
-                        H::gotoxy(116, 23);
-                        H::inputNumber(quantity, sizeof(quantity));
-                        H::clearBox(116, 23, 8, 0, 7);
-                        H::drawBoxSingleLine(88, 22, 36, 1, 3);
-                    } while (atoi(quantity) <= 0);
 
                     H::setcursor(0, 0);
                     int foodIDInt = atoi(foodID);
-                    int quantityInt = atoi(quantity);
+                    
 
                     fstream foodFile(FoodnDrinkFile, ios::in | ios::out | ios::binary);
                     if (!foodFile.is_open())
@@ -1745,6 +1759,15 @@ void File::buyFood(const char *username, const char *password)
                         {
                             if (fnd.getFndID() == foodIDInt)
                             {
+                                do
+                                {
+                                    H::foreColor(199);
+                                    H::gotoxy(36, 25);
+                                    H::inputNumber(quantity, sizeof(quantity));
+                                    // H::clearBox(116, 23, 8, 0, 7);
+                                    // H::drawBoxSingleLine(88, 22, 36, 1, 3);
+                                } while (atoi(quantity) <= 0);
+                                int quantityInt = atoi(quantity);
                                 int availableQty = atoi(fnd.getQty());
                                 if (quantityInt <= availableQty)
                                 {
@@ -1810,6 +1833,20 @@ void File::buyFood(const char *username, const char *password)
             file3.close();
         }
     }
+    do
+    {
+        press = getch();
+
+        if (press == 27)
+        {
+            break;
+        }
+        else if(press == 13)
+        {
+            buyFood(username,password);
+        }
+    } while (1);
+    
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //////////////////////////////////////////
@@ -1824,6 +1861,7 @@ void File::viewProfile(const char *username, const char *password)
     H::setcursor(0, 0);
     char press = ' ';
 
+    Design::outline();
     B::ViewProfileTxt();
     B::ViewProfile_Design();
 
@@ -2045,35 +2083,12 @@ void File::allUserInvoiceToCSV()
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void File::GameMENU()
 {
-    H::setConsoleTitle(TEXT("Play Game"));
+    H::setConsoleTitle(TEXT("Flappy Bird"));
     H::setcolor(7);
     H::cls();
     H::setcursor(0,0);
     Design::outline();
-    char press = ' ';
-
-    while(1)
-    {
-        //game one
-        PGame::menu();
-
-        Design::message(3,0,38);
-
-        press = getch();
-
-        if(press == 13)
-        {
-            GameMENU();
-        }
-        else if(press == 27)
-        {
-            break;
-        }
-        else
-        {
-            continue;
-        }
-    }
+    PGame::menu();
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //////////////////////////////////////////

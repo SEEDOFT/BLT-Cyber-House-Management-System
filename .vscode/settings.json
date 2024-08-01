@@ -60,6 +60,11 @@
     "hinsyoopv2": "cpp",
     "fstream": "cpp",
     "iostream": "cpp",
-    "*.tcc": "cpp"
+    "*.tcc": "cpp",
+    "cstdlib": "cpp",
+    "ctime": "cpp",
+    "cmath": "cpp",
+    "vector": "cpp",
+    "sstream": "cpp"
   }
 }

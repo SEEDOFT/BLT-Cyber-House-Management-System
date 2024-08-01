@@ -95,7 +95,7 @@ namespace BLT
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     class FoodMenu{
     public:
-        static void FoodMenu_Design();
+        static void FoodMenu_Design(int color);
         static void FoodMenuTxt();
     };
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -141,12 +141,14 @@ namespace BLT
     public:
         static void BuyFoodnDrinkTxt();
         static void buyFoodnDrink_Design();
+        static void buyFoodnDrink_Animation(int color);
     };
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     class BuyHour{
     public:
         static void buyHourTxt();
         static void buyHour_Design();
+        static void buyHour_Animation(int color);
     };
      //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     class AllInvoice{

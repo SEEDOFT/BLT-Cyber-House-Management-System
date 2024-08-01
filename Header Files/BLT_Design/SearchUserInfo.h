@@ -5,13 +5,12 @@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void BLT::SearchUser::SearchUserTxt()
 {
-    H::foreColor(3); H::gotoxy(42,1); cout<<R"(  _________                           .__       ____ ___                    )";
-    H::foreColor(3); H::gotoxy(42,2); cout<<R"( /   _____/ ____ _____ _______   ____ |  |__   |    |   \______ ___________ )";
-    H::foreColor(3); H::gotoxy(42,3); cout<<R"( \_____  \_/ __ \\__  \\_  __ \_/ ___\|  |  \  |    |   /  ___// __ \_  __ \)";
-    H::foreColor(4); H::gotoxy(42,4); cout<<R"( /        \  ___/ / __ \|  | \/\  \___|   Y  \ |    |  /\___ \\  ___/|  | \/)";
-    H::foreColor(4); H::gotoxy(42,5); cout<<R"(/_______  /\___  >____  /__|    \___  >___|  / |______//____  >\___  >__|  )";
-    H::foreColor(4); H::gotoxy(42,6); cout<<R"(        \/     \/     \/            \/     \/               \/     \/       )";
-    H::HLine(20,8,120,7,196);
+    Design::TxtOutline(-10,0,19,1);
+    H::foreColor(7); H::gotoxy(38,3); cout << R"( __                     _                            _       _____        __       )";
+    H::foreColor(7); H::gotoxy(38,4); cout << R"(/ _\ ___  __ _ _ __ ___| |__    /\ /\  ___  ___ _ __( )__    \_   \_ __  / _| ___  )";
+    H::foreColor(1); H::gotoxy(38,5); cout << R"(\ \ / _ \/ _` | '__/ __| '_ \  / / \ \/ __|/ _ \ '__|/ __|    / /\/ '_ \| |_ / _ \ )";
+    H::foreColor(7); H::gotoxy(38,6); cout << R"(_\ \  __/ (_| | | | (__| | | | \ \_/ /\__ \  __/ |   \__ \ /\/ /_ | | | |  _| (_) |)";
+    H::foreColor(7); H::gotoxy(38,7); cout << R"(\__/\___|\__,_|_|  \___|_| |_|  \___/ |___/\___|_|   |___/ \____/ |_| |_|_|  \___/ )";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void BLT::SearchUser::SearchUser_Animation()
@@ -36,7 +35,8 @@ void BLT::SearchUser::SearchUser_Animation()
     H::drawBoxDoubleLine(20,19,120,15,4);
     H::drawBoxDoubleLine(20,19,120,1,3);
     H::drawBoxDoubleLine(20,33,120,1,3);
-    H::foreColor(3);H::gotoxy(20,20); cout<<"|ID|\t|Name|\t\t|USERNAME|\t\t|PASSWORD|\t    |HOUR|\t   |REMAIN HOUR|   \t|PRICE|";
+    H::foreColor(3);H::gotoxy(20,20); 
+    cout<<"|ID|\t|Name|\t\t|USERNAME|\t\t|PASSWORD|\t    |HOUR|\t   |REMAIN HOUR|   \t|PRICE|";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void BLT::SearchUser::SearchUser_Design()

@@ -19,7 +19,6 @@
 #include"../ViewGameList.h"
 #include"../ViewUserInfoDesign.h"
 #include"../DeleteUserInfo.h"
-#include"../SortDesign.h"
 #include"../UpdateUserInfo.h"
 #include"../BuyFood&drink.h"
 #include"../CalculateIncome.h"
@@ -39,7 +38,7 @@ namespace BLT
     public ViewDesign, public UpdateDesign, public UpdateGameDesign, public GameMenu, 
     public SearchGameDesign, public SearchDesign, public InputDesign, public Invoice, 
     public ManageUserInfo, public DeleteGameDesign,public UserSignUp, public ViewUserInfoDesign, 
-    public DeleteUserInfo, public SortUserDesign, public UpdateUserInfo, public CalculateIncome,
+    public DeleteUserInfo, public UpdateUserInfo, public CalculateIncome,
     public BuyFoodnDrink, public BuyHour, public AllInvoice, public ViewProfile, public ViewAllUserInvoice,
     public SearchUser, public ExitDesign, public LENG
     {

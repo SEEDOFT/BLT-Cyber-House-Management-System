@@ -1,12 +1,13 @@
 #ifndef __PGAME_H__
 #define __PGAME_H__
-
+//###################################################################################
 #include "../../ANT_Header/HinsyOOPV2"
 
 using namespace HinsyOOP;
-
+//###################################################################################
 class PGame
 {
+
 	private:
 
 		#define SCREEN_WIDTH 90
@@ -29,6 +30,8 @@ class PGame
 
 	public:
 		/// Floppy Bird
+		static void Art();
+		static void HeaderTxt();
 		static void drawBorder();
 		static void genPipe(int ind);
 		static void drawPipe(int ind);
@@ -41,20 +44,39 @@ class PGame
 		static void instructions();
 		static void play();
 		static void menu();
-		/// Snake IO
 };
+void PGame::Art()
+{
+	H::setcolor(1); H::gotoxy(10,20); cout << R"( ______)";
+	H::setcolor(1); H::gotoxy(10,20); cout << R"(|      |\)";
+	H::setcolor(1); H::gotoxy(10,20); cout << R"(|      |__\)";
+	H::setcolor(1); H::gotoxy(10,20); cout << R"(|          |)";
+	H::setcolor(1); H::gotoxy(10,20); cout << R"(|          |)";
+	H::setcolor(1); H::gotoxy(10,20); cout << R"(|          |)";
+	H::setcolor(1); H::gotoxy(10,20); cout << R"(|          |)";
+	H::setcolor(1); H::gotoxy(10,20); cout << R"(|          |)";
+	H::setcolor(1); H::gotoxy(10,20); cout << R"(|__________|)";
+}
+void PGame::HeaderTxt()
+{                                       
+	H::setcolor(1); H::gotoxy(10,20); cout << R"( _____ _                    _____ _       _ )";
+	H::setcolor(1); H::gotoxy(10,20); cout << R"(|   __| |___ ___ ___ _ _   | __  |_|___ _| |)";
+	H::setcolor(1); H::gotoxy(10,20); cout << R"(|   __| | .'| . | . | | |  | __ -| |  _| . |)";
+	H::setcolor(1); H::gotoxy(10,20); cout << R"(|__|  |_|__,|  _|  _|_  |  |_____|_|_| |___|)";
+	H::setcolor(1); H::gotoxy(10,20); cout << R"(            |_| |_| |___|                   )";
 
+}
+//###################################################################################
 int PGame::pipePos[3] = {0,0,0};
 int PGame::gapPos[3] = {0,0,0};
 int PGame::pipeFlag[3] = {0,0,0};
 char PGame::bird[2][6] = {'/', '-', '-', 'o', '\\', ' ',
 						'|', '_', '_', '_', ' ', '>'};
-
 int PGame::birdPos = 6;
 int PGame::score = 0;
 int PGame::offsetX = 35;
 int PGame::offsetY = 7;
-
+//###################################################################################
 void PGame::drawPipe(int ind)
 {
 	H::foreColor(162);
@@ -73,12 +95,12 @@ void PGame::drawPipe(int ind)
 	}
 	H::foreColor(7);
 }
-
+//###################################################################################
 void PGame::genPipe(int ind)
 {
 	gapPos[ind] = 3 + rand() % 14;
 }
-
+//###################################################################################
 void PGame::drawBorder()
 {
 	H::foreColor(128);
@@ -104,7 +126,7 @@ void PGame::drawBorder()
 	}
 	H::foreColor(7);
 }
-
+//###################################################################################
 void PGame::play()
 {
 	birdPos = 6;
@@ -197,13 +219,13 @@ void PGame::play()
 		}
 	}
 }
-
+//###################################################################################
 void PGame::updateScore()
 {
 	H::gotoxy(WIN_WIDTH + 7 + offsetX, 5 + offsetY);
 	cout << "Score: " << score << endl;
 }
-
+//###################################################################################
 void PGame::instructions()
 {
 	system("cls");
@@ -213,7 +235,7 @@ void PGame::instructions()
 	cout << "\n\nPress any key to go back to menu";
 	getch();
 }
-
+//###################################################################################
 int PGame::collision()
 {
 	if (pipePos[0] >= 61)
@@ -225,7 +247,7 @@ int PGame::collision()
 	}
 	return 0;
 }
-
+//###################################################################################
 void PGame::gameover()
 {
 	system("cls");
@@ -237,7 +259,7 @@ void PGame::gameover()
 	cout << "\t\tPress any key to go back to menu.";
 	getch();
 }
-
+//###################################################################################
 void PGame::drawBird()
 {
 	for (int i = 0; i < 2; i++)
@@ -249,7 +271,7 @@ void PGame::drawBird()
 		}
 	}
 }
-
+//###################################################################################
 void PGame::eraseBird()
 {
 	for (int i = 0; i < 2; i++)
@@ -261,7 +283,7 @@ void PGame::eraseBird()
 		}
 	}
 }
-
+//###################################################################################
 void PGame::erasePipe(int ind)
 {
 	H::foreColor(7);
@@ -279,7 +301,7 @@ void PGame::erasePipe(int ind)
 		}
 	}
 }
-
+//###################################################################################
 void PGame::menu()
 {
 	while (true)
@@ -310,5 +332,5 @@ void PGame::menu()
 			break;
 	} 
 }
-
+//###################################################################################
 #endif

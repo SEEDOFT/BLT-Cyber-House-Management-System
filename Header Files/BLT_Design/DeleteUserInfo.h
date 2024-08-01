@@ -5,13 +5,12 @@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void BLT::DeleteUserInfo::DeleteUserInfoTxt()
 {
-    H::foreColor(3); H::gotoxy(31,1); cout<<R"(________         .__          __            ____ ___                     .___        _____       )";
-    H::foreColor(3); H::gotoxy(31,2); cout<<R"(\______ \   ____ |  |   _____/  |_  ____   |    |   \______ ___________  |   | _____/ ____\____  )";
-    H::foreColor(3); H::gotoxy(31,3); cout<<R"( |    |  \_/ __ \|  | _/ __ \   __\/ __ \  |    |   /  ___// __ \_  __ \ |   |/    \   __\/  _ \ )";
-    H::foreColor(4); H::gotoxy(31,4); cout<<R"( |    `   \  ___/|  |_\  ___/|  | \  ___/  |    |  /\___ \\  ___/|  | \/ |   |   |  \  | (  <_> ))";
-    H::foreColor(4); H::gotoxy(31,5); cout<<R"(/_______  /\___  >____/\___  >__|  \___  > |______//____  >\___  >__|    |___|___|  /__|  \____/ )";
-    H::foreColor(4); H::gotoxy(31,6); cout<<R"(        \/     \/          \/          \/               \/     \/                 \/             )";
-    H::HLine(20,8,120,7,196);
+    Design::TxtOutline(-19,0,38,1);
+    H::foreColor(7); H::gotoxy(29,3); cout<<R"(   __                                                      _        _                             _   )";
+    H::foreColor(7); H::gotoxy(29,4); cout<<R"(  /__\ ___ _ __ ___   _____   _____   /\ /\  ___  ___ _ __( )__    /_\   ___ ___ ___  _   _ _ __ | |_ )";
+    H::foreColor(1); H::gotoxy(29,5); cout<<R"( / \/// _ \ '_ ` _ \ / _ \ \ / / _ \ / / \ \/ __|/ _ \ '__|/ __|  //_\\ / __/ __/ _ \| | | | '_ \| __|)";
+    H::foreColor(7); H::gotoxy(29,6); cout<<R"(/ _  \  __/ | | | | | (_) \ V /  __/ \ \_/ /\__ \  __/ |   \__ \ /  _  \ (_| (_| (_) | |_| | | | | |_ )";
+    H::foreColor(7); H::gotoxy(29,7); cout<<R"(\/ \_/\___|_| |_| |_|\___/ \_/ \___|  \___/ |___/\___|_|   |___/ \_/ \_/\___\___\___/ \__,_|_| |_|\__|)";                                                                                                                                                                                                              
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void BLT::DeleteUserInfo::DeleteUserInfo_Animation()
@@ -20,7 +19,7 @@ void BLT::DeleteUserInfo::DeleteUserInfo_Animation()
     for(int i=0; i<25; i++)
     {
         H::setcursor(0,0);
-        H::gotoxy(65,20); H::foreColor(3); cout<<"Deleting..."; 
+        H::gotoxy(65,20); H::foreColor(3); cout<<"Removing..."; 
         H::drawBoxSingleLine(65,21,28,1,3);
         H::gotoxy(89,20); H::foreColor(3); cout<<(i*4)+4<<"%";  H::delay(5);
         H::gotoxy(66+i,22); H::foreColor(3); cout<<">"; H::delay(5);
@@ -37,7 +36,8 @@ void BLT::DeleteUserInfo::DeleteUserInfo_Animation()
     H::drawBoxDoubleLine(20,19,120,15,4);
     H::drawBoxDoubleLine(20,19,120,1,3);
     H::drawBoxDoubleLine(20,33,120,1,3);
-    H::foreColor(3);H::gotoxy(20,20); cout<<"|ID|\t|Name|\t\t|USERNAME|\t\t|PASSWORD|\t    |HOUR|\t   |REMAIN HOUR|   \t|PRICE|";
+    H::foreColor(3);H::gotoxy(20,20); 
+    cout<<"|ID|\t|Name|\t\t|USERNAME|\t\t|PASSWORD|\t    |HOUR|\t   |REMAIN HOUR|   \t|PRICE|";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void BLT::DeleteUserInfo::DeleteUserInfo_Design()
@@ -46,7 +46,7 @@ void BLT::DeleteUserInfo::DeleteUserInfo_Design()
     H::VLine(70,12,3,7,221);
     H::VLine(90,12,3,7,221);
     H::drawBoxSingleLineWithBG(65,16,28,1,4);
-    H::foreColor(4); H::gotoxy(70,17); cout<<"Delete By ID : ";
+    H::foreColor(4); H::gotoxy(70,17); cout<<"Remove By ID : ";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif

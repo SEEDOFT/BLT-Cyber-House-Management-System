@@ -107,7 +107,7 @@ void BLT::LENG::UserMenu_Art(int a)
 		tp(1,132,6); cout << R"(  (_) (__)  )";
 		
 		H::drawBoxSingleLineWithBG(x+20,y+12,31,1,230);
-		tp(229,x+22,y+13); cout << "Play Game";
+		tp(229,x+22,y+13); cout << "Play Games";
 		H::clearBox(x+58,y+10,55,13,179);
 		//art
 	}
@@ -139,7 +139,7 @@ void BLT::LENG::UserMenu_Art(int a)
 		tp(1,132,6); cout << R"(  (_) (__)  )";
 		
 		H::drawBoxSingleLineWithBG(x+20,y+15,31,1,230);
-		tp(229,x+22,y+16); cout << "Buy Hour to Play";
+		tp(229,x+22,y+16); cout << "Buy More Hours";
 		H::clearBox(x+58,y+10,55,13,179);
 		H::setcolor(181);
 		H::gotoxy(x+75,y+11);cout << R"(               __)";
@@ -179,7 +179,7 @@ void BLT::LENG::UserMenu_Art(int a)
 		tp(1,132,6); cout << R"(  (_) (__)  )";
 		
 		H::drawBoxSingleLineWithBG(x+20,y+18,31,1,230);
-		tp(229,35,24); cout << "Buy Food or Drink";
+		tp(229,35,24); cout << "Buy Food or Drinks";
 		H::clearBox(x+58,y+10,55,13,179);
 		H::setcolor(181);
 		H::gotoxy(x+60,y+10);cout << R"(                                       .-'''''-. )";
@@ -224,7 +224,7 @@ void BLT::LENG::UserMenu_Art(int a)
 		tp(1,132,6); cout << R"(  (_) (__)  )";
 		
 		H::drawBoxSingleLineWithBG(x+20,y+21,31,1,230);
-		tp(229,x+22,y+22); cout << "View Spending";
+		tp(229,x+22,y+22); cout << "View Spending List";
 		H::clearBox(x+58,y+10,55,13,179);
 		H::setcolor(181);
 		H::gotoxy(x+72,y+10);cout << R"((\ )";
@@ -265,7 +265,7 @@ void BLT::LENG::UserMenu_Art(int a)
 		tp(1,132,6); cout << R"(  (_) (__)  )";
 		
 		H::drawBoxSingleLineWithBG(x+20,y+24,31,1,230);
-		tp(229,x+22,y+25); cout << "Log Out";
+		tp(229,x+22,y+25); cout << "Log Out of Account";
 		H::clearBox(x+58,y+10,55,13,179);
 		H::setcolor(181);
 		H::gotoxy(x+67,y+10);cout << R"(                   ())";

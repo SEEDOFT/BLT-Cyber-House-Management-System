@@ -5,14 +5,13 @@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void BLT::UserSignUp::SignUpTxt()
 {
-    H::foreColor(3); H::gotoxy(40,1); cout<<R"( ____ ___                       _________.__                 ____ ___         )";
-    H::foreColor(3); H::gotoxy(40,2); cout<<R"(|    |   \______ ___________   /   _____/|__| ____   ____   |    |   \______  )";
-    H::foreColor(3); H::gotoxy(40,3); cout<<R"(|    |   /  ___// __ \_  __ \  \_____  \ |  |/ ___\ /    \  |    |   /\____ \ )";
-    H::foreColor(4); H::gotoxy(40,4); cout<<R"(|    |  /\___ \\  ___/|  | \/  /        \|  / /_/  >   |  \ |    |  / |  |_> >)";
-    H::foreColor(4); H::gotoxy(40,5); cout<<R"(|______//____  >\___  >__|    /_______  /|__\___  /|___|  / |______/  |   __/ )";
-    H::foreColor(4); H::gotoxy(40,6); cout<<R"(             \/     \/                \/   /_____/      \/            |__|    )";
-
-    H::HLine(20,8,120,7,196);
+    Design::TxtOutline(4,-1,-9,1);
+    H::foreColor(7); H::gotoxy(52,2); cout<<R"( __ _                                                  )";
+    H::foreColor(7); H::gotoxy(52,3); cout<<R"(/ _(_) __ _ _ __    /\ /\ _ __    /\ /\  ___  ___ _ __ )";
+    H::foreColor(1); H::gotoxy(52,4); cout<<R"(\ \| |/ _` | '_ \  / / \ \ '_ \  / / \ \/ __|/ _ \ '__|)";
+    H::foreColor(7); H::gotoxy(52,5); cout<<R"(_\ \ | (_| | | | | \ \_/ / |_) | \ \_/ /\__ \  __/ |   )";
+    H::foreColor(7); H::gotoxy(52,6); cout<<R"(\__/_|\__, |_| |_|  \___/| .__/   \___/ |___/\___|_|   )";
+    H::foreColor(7); H::gotoxy(52,7); cout<<R"(      |___/              |_|                           )";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void BLT::UserSignUp::SignUp_Design()
@@ -29,7 +28,7 @@ void BLT::UserSignUp::SignUp_Design()
     H::drawBoxDoubleLineWithBG(63,28,35,1,135);
     H::drawBoxDoubleLineWithBG(63,32,35,1,135);
 
-    H::gotoxy(53,10); H::foreColor(22); cout<<"===========>\3\3\3 ";H::setcolor(23);cout<<" SIGN UP USER ACCOUNT ";H::setcolor(22);cout<<"\3\3\3<===========";
+    H::gotoxy(53,10); H::foreColor(23); cout<<"===========>\3\3\3 SIGN UP USER ACCOUNT \3\3\3<===========";
     //label
     H::gotoxy(64,12); H::foreColor(135); cout<<"ID";
     H::gotoxy(64,16); H::foreColor(135); cout<<"NAME";
@@ -38,7 +37,7 @@ void BLT::UserSignUp::SignUp_Design()
     H::gotoxy(64,28); H::foreColor(135); cout<<"HOUR";
     H::gotoxy(64,32); H::foreColor(135); cout<<"TOTAL PRICE";
 
-    H::gotoxy(53,36); H::foreColor(22); cout<<"===========>\3\3\3 ";H::setcolor(23);cout<<"PLEASE FILL THE INFO ";H::setcolor(22);cout<<"\3\3\3<===========";
+    H::gotoxy(53,36); H::foreColor(23); cout<<"===========>\3\3\3 PLEASE FILL THE INFO \3\3\3<===========";
 
     H::VLine(42,12,21,199,219);
     H::VLine(47,12,21,199,219);
