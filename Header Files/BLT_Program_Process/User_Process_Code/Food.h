@@ -80,10 +80,17 @@ void FoodnDrink::input()
     H::gotoxy(99, 23);
     cout << ": ";
     H::inputAll(fdName, sizeof(fdName));
-    H::foreColor(176);
-    H::gotoxy(99, 27);
-    cout << ": ";
-    H::inputNumber(tmpQty, sizeof(tmpQty));
+    do
+    {
+        H::clearBox(98, 28, 25, 0, 179);
+        H::foreColor(185); H::gotoxy(99,26); cout<<">.<";
+        H::drawBoxDoubleLineWithBG(97, 26, 26, 1, 183);
+        H::foreColor(176);
+        H::gotoxy(99, 27);
+        cout << ": ";
+        H::inputNumber(tmpQty, sizeof(tmpQty));
+    } while (atoi(tmpQty) <= 0);
+
     H::foreColor(176);
     H::gotoxy(99, 31);
     cout << ": ";

@@ -659,7 +659,7 @@ void Design::DinosaurAnimation()
         }
         if(color > 15) color = 1;
     }
-
+    getch();
     for(int i = 4 ; i <= 154 ; i ++)
     {
         H::setcolor(7);
