@@ -326,7 +326,7 @@ void Process::LogIn_AsAdmin(int cursor)
 
                 H::clearBox(x + 19, y + 18, 42, 0, 247); // Clear username and password boxes
                 H::clearBox(x + 19, y + 24, 42, 0, 247); // Clear username and password boxes
-                H::clearBox(x + 23, y + 27, 34, 1, 136); // Clear message
+                H::clearBox(x + 18, y + 27, 43, 1, 136); // Clear message
 
                 if (press == 27)
                 {

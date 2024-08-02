@@ -83,8 +83,8 @@ void FoodnDrink::input()
     do
     {
         H::clearBox(98, 28, 25, 0, 179);
-        H::foreColor(185); H::gotoxy(99,26); cout<<">.<";
         H::drawBoxDoubleLineWithBG(97, 26, 26, 1, 183);
+        H::foreColor(185); H::gotoxy(99,26); cout<<">.<";
         H::foreColor(176);
         H::gotoxy(99, 27);
         cout << ": ";

@@ -1064,7 +1064,7 @@ void File::user_login()
 
                         H::clearBox(10 + 19, 5 + 18, 42, 0, 247); // Clear username and password boxes
                         H::clearBox(10 + 19, 5 + 24, 42, 0, 247); // Clear username and password boxes
-                        H::clearBox(10 + 23, 5 + 27, 34, 1, 136); // Clear message
+                        H::clearBox(10 + 18, 5 + 27, 43, 1, 136); // Clear message
                         // break;
                         if (press == 27)
                         {
@@ -1520,6 +1520,9 @@ void File::invoice(const char *username, const char *password)
             file.close();
             file2.close();
 
+            H::setcolor(1); H::gotoxy(60,36); 
+            cout << "To export data into EXCEL, Press ";H::setcolor(4); cout <<"[ENTER]";
+            
             Design::message(2, 0, 38);
 
             press = getch();
@@ -1784,7 +1787,7 @@ void File::buyFood(const char *username, const char *password)
                                     H::foreColor(199);
                                     H::gotoxy(36, 25);
                                     H::inputNumber(quantity, sizeof(quantity));
-                                    // H::clearBox(116, 23, 8, 0, 7);
+                                    H::clearBox(36, 26, 8, 0, 204);
                                     // H::drawBoxSingleLine(88, 22, 36, 1, 3);
                                 } while (atoi(quantity) <= 0);
 

@@ -424,8 +424,8 @@ void Design::loginMsg(int opt)
         {
             H::setcolor(140);H::gotoxy(x+23,y+26);cout<<"Incorrect ";
             H::setcolor(color);cout<<"Username ";H::setcolor(140);cout<<"or ";H::setcolor(color);cout<<"Password";
-            H::setcolor(140);H::gotoxy(x+24,y+28);cout<<"Press any ";
-            H::setcolor(color);cout<<"[key]";H::setcolor(140);cout<<" to continue";
+            H::setcolor(140);H::gotoxy(x+18,y+28);cout<<"Press ";
+            H::setcolor(color);cout<<"[ANY]";H::setcolor(140);cout<<"key to continue, ";H::setcolor(color);cout<<"[ESC]";H::setcolor(140);cout<<" to go back";
 
             H::delay(999);
             

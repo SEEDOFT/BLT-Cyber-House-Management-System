@@ -10,7 +10,5 @@ int main()
 
     Process::BLT_Cyber_House_Management_System();
 
-
-    
-    getch(); return 0;
+    return 0;
 }

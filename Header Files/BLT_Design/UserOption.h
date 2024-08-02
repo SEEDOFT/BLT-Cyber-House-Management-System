@@ -32,7 +32,7 @@ void BLT::LENG::UserMenu_Design()
 	H::drawBoxDoubleLineWithBG(x+57,y+9,57,13,179);//cyan
 	H::drawBoxDoubleLineWithBG(x+57,y+24,57,1,255);//white
 
-	H::gotoxy(78,30); H::setcolor(249);
+	H::gotoxy(81,30); H::setcolor(249);
 	cout << "___________o-o-o-O-o-o-o___________";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
