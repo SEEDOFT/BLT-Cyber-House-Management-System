@@ -24,7 +24,14 @@ const char *OPEN_COMMAND = "xdg-open ";
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 class Process : public Design
 {
+private:
+    static int num;
 public:
+    static void processKeyEvent(KEY_EVENT_RECORD keyEvent, HANDLE hStdOutput, int);
+    static void processMouseEvent(MOUSE_EVENT_RECORD mouseEvent, HANDLE hStdOutput, int);
+    static void processInputEvents(INPUT_RECORD *ir, DWORD nRead, HANDLE hStdOutput, int);
+    static void updateDisplay(int);
+    /////////////////////////////////////////////////////////////////////////////////
     static void BLT_Cyber_House_Management_System();
     static void Admin_And_User();
     /**********************************/
@@ -75,6 +82,7 @@ public:
     static void openURL(const string &url);
     static void GetRealTime();
 };
+int Process::num = 1;
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Process::GetRealTime()
 {
@@ -178,100 +186,687 @@ void Process::OutputHostName(int x, int y, int color)
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //                              Login as Admin or User
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void Process::Admin_And_User()
+void Process::processKeyEvent(KEY_EVENT_RECORD keyEvent, HANDLE hStdOutput, int n)
 {
-    H::setcolor(7);
-    char press = ' ';
-    int num = 1;
-    H::setcursor(0, 0);
-
-    while (1)
+    int choice = 0;
+    if(n == 1)
     {
-        H::setcolor(7);
-        H::cls();
-        outline();
-        Login_Design(); // Design of LOG IN
-        num = 1;
-        press = ' ';
-
-        do
+        if (keyEvent.bKeyDown)
         {
-            // choice box
-            H::drawBoxSingleLineWithBG(x + 84, y + 15, 25, 1, 153);
-            H::drawBoxSingleLineWithBG(x + 84, y + 19, 25, 1, 153);
-
-            H::setcolor(151);
-            H::gotoxy(x + 84, y + 16);
-            cout << "     Administrator     ";
-            H::setcolor(151);
-            H::gotoxy(x + 84, y + 20);
-            cout << "         User          ";
-
-            if (num == 1)
+            if (keyEvent.wVirtualKeyCode == VK_BACK)
             {
-                H::drawBoxSingleLineWithBG(x + 84, y + 15, 25, 1, 204);
-                H::setcolor(201);
-                H::gotoxy(x + 85, y + 16);
-                cout << "  => Administrator <=  ";
-                H::clearBox(x + 24, y + 8, 32, 6, 136); // Cls text
-                LoginAs_Admin_UserTxt(1);
+                ExitTheProgram();
+                // Set event if Backspace is pressed.
             }
-            else if (num == 2)
-            {
-                H::drawBoxSingleLineWithBG(x + 84, y + 19, 25, 1, 204);
-                H::setcolor(201);
-                H::gotoxy(x + 85, y + 20);
-                cout << "  =>     User      <=  ";
-                H::clearBox(x + 24, y + 8, 32, 6, 136); // Cls text
-                LoginAs_Admin_UserTxt(2);
-            }
-
-            press = getch();
-
-            switch (press)
-            {
-            case 72: // up
+            else if (keyEvent.wVirtualKeyCode == VK_UP)
             {
                 num--;
                 if (num < 1)
                 {
                     num = 2;
                 }
-                break;
             }
-
-            case 80: // down
+            else if (keyEvent.wVirtualKeyCode == VK_DOWN)
             {
                 num++;
                 if (num > 2)
                 {
                     num = 1;
                 }
-                break;
             }
-
-            case 8: // delete key
+            else if (keyEvent.wVirtualKeyCode == VK_RETURN)
             {
-                ExitTheProgram(); // exit program method
+                H::clearBox(x + 4, 38, 140, 0, 7);
+                if (num == 1)
+                {
+                    Admin_User_ClsBox(1);
+                    LogIn_AsAdmin(1);
+                }
+                else if (num == 2)
+                {
+                    Admin_User_ClsBox(2);
+                    File::user_login();
+                }
+                // Reset values after action
+                num = 1;
+            }
+
+            updateDisplay(n);
+        }
+    }
+    else if (n == 2)
+    {
+        if (keyEvent.bKeyDown)
+        {
+            switch (keyEvent.wVirtualKeyCode)
+            {
+            case VK_BACK:
+                // Set event if Backspace is pressed.
+                break;
+            case VK_UP:
+                num--;
+                if (num < 1)
+                {
+                    num = 6;
+                }
+                break;
+            case VK_DOWN:
+                num++;
+                if (num > 6)
+                {
+                    num = 1;
+                }
+                break;
+            case VK_RETURN:
+                choice = num;
+                if (choice == 6)
+                {
+                    Design::AdminMenu_Art(7);
+                }
+                adminSelectionOpt(choice);
+                Admin_ChoosingOpt(choice);
                 break;
             }
+            updateDisplay(n);
+        }
+    }
+    else if (n == 3)
+    {
+        if (keyEvent.bKeyDown)
+        {
+            switch (keyEvent.wVirtualKeyCode)
+            {
+            case VK_BACK:
+                // Handle backspace event if needed.
+                break;
+            case VK_UP:
+                num--;
+                if (num < 1)
+                {
+                    num = 3;
+                }
+                updateDisplay(n);
+                break;
+            case VK_DOWN:
+                num++;
+                if (num > 3)
+                {
+                    num = 1;
+                }
+                updateDisplay(n);
+                break;
+            case VK_RETURN:
+                SubAdminProfileInfo(num);
+                break;
+            }
+        }
+    }
+    else if (n == 4)
+    {
+        switch (keyEvent.wVirtualKeyCode)
+            {
+            case VK_BACK:
+                // Set event if Backspace is pressed.
+                break;
+            case VK_UP:
+                num--;
+                if (num < 1)
+                {
+                    num = 6;
+                }
+                break;
+            case VK_DOWN:
+                num++;
+                if (num > 6)
+                {
+                    num = 1;
+                }
+                break;
+            case VK_RETURN:
+                choice = num;
+                SubGameLst(choice);
+                break;
+            }
+            updateDisplay(n);
+    }
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void Process::processMouseEvent(MOUSE_EVENT_RECORD mouseEvent, HANDLE hStdOutput, int n)
+{
+    if(n == 1)
+    {
+        COORD xy = {0, 1};
+        bool updateRequired = false; // Track if display update is needed
+
+        if (mouseEvent.dwMousePosition.X >= x + 84 && mouseEvent.dwMousePosition.X <= x + 109)
+        {
+            if (mouseEvent.dwMousePosition.Y >= y + 15 && mouseEvent.dwMousePosition.Y <= y + 17)
+            {
+                num = 1;
+                updateRequired = true;
+            }
+            else if (mouseEvent.dwMousePosition.Y >= y + 19 && mouseEvent.dwMousePosition.Y <= y + 21)
+            {
+                num = 2;
+                updateRequired = true;
             }
 
-        } while (press != 13);
+            if (mouseEvent.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED)
+            {
+                H::clearBox(x + 4, 38, 140, 0, 7);
+                if (num == 1)
+                {
+                    Admin_User_ClsBox(1);
+                    LogIn_AsAdmin(1);
+                }
+                else if (num == 2)
+                {
+                    Admin_User_ClsBox(2);
+                    File::user_login();
+                }
+                num = 1; // Reset num after action
+            }
+        }
 
-        H::clearBox(x + 4, 38, 140, 0, 7);
-
-        switch (num)
+        if (updateRequired)
         {
-        case 1:
-            Admin_User_ClsBox(1);
-            LogIn_AsAdmin(1);
-            break;
+            updateDisplay(n);
+        }
+    }
+    else if (n == 2)
+    {
+        COORD xy = {0, 1};
+        int x = 0; // Initialize x
+        int y = 0; // Initialize y
+        int choice = 0;
 
-        case 2:
-            Admin_User_ClsBox(2);
-            File::user_login();
+        // Mouse hover detection
+        if (mouseEvent.dwMousePosition.X >= x + 15 && mouseEvent.dwMousePosition.X <= x + 45)
+        {
+            if (mouseEvent.dwMousePosition.Y >= y + 18 && mouseEvent.dwMousePosition.Y <= y + 20)
+            {
+                num = 1;
+            }
+            else if (mouseEvent.dwMousePosition.Y >= y + 21 && mouseEvent.dwMousePosition.Y <= y + 23)
+            {
+                num = 2;
+            }
+            else if (mouseEvent.dwMousePosition.Y >= y + 24 && mouseEvent.dwMousePosition.Y <= y + 26)
+            {
+                num = 3;
+            }
+            else if (mouseEvent.dwMousePosition.Y >= y + 27 && mouseEvent.dwMousePosition.Y <= y + 29)
+            {
+                num = 4;
+            }
+            else if (mouseEvent.dwMousePosition.Y >= y + 30 && mouseEvent.dwMousePosition.Y <= y + 32)
+            {
+                num = 5;
+            }
+            else if (mouseEvent.dwMousePosition.Y >= y + 33 && mouseEvent.dwMousePosition.Y <= y + 35)
+            {
+                num = 6;
+            }
+        }
+
+        // Mouse click action
+        if (mouseEvent.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED)
+        {
+            updateDisplay(n);
+            switch (num)
+            {
+            case 1:
+                choice = 1;
+                AdminMenu_Art(1);
+                break;
+            case 2:
+                choice = 2;
+                AdminMenu_Art(2);
+                break;
+            case 3:
+                choice = 3;
+                AdminMenu_Art(3);
+                break;
+            case 4:
+                choice = 4;
+                AdminMenu_Art(4);
+                break;
+            case 5:
+                choice = 5;
+                AdminMenu_Art(5);
+                break;
+            case 6:
+                choice = 6;
+                AdminMenu_Art(6);
+                break;
+            default:
+                break;
+            }
+            adminSelectionOpt(choice);
+            Admin_ChoosingOpt(choice);
+        }
+        // if (updateRequired)
+        // {
+        //     updateDisplay(n);
+        // }
+    }
+    else if(n == 3)
+    {
+        COORD xy = {0, 1};
+        int x = 0; // Initialize x
+        int y = 0; // Initialize y
+
+        // Mouse hover detection
+        if (mouseEvent.dwMousePosition.X >= x + 105 && mouseEvent.dwMousePosition.X <= x + 135)
+        {
+            if (mouseEvent.dwMousePosition.Y >= y + 11 && mouseEvent.dwMousePosition.Y <= y + 13)
+            {
+                num = 1;
+            }
+            else if (mouseEvent.dwMousePosition.Y >= y + 17 && mouseEvent.dwMousePosition.Y <= y + 19)
+            {
+                num = 2;
+            }
+            else if (mouseEvent.dwMousePosition.Y >= y + 23 && mouseEvent.dwMousePosition.Y <= y + 25)
+            {
+                num = 3;
+            }
+        }
+
+        // Mouse click action
+        if (mouseEvent.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED)
+        {
+            SubAdminProfileInfo(num);
+            H::cls();
+        }
+
+        // if (updateRequired)
+        // {
+        //     updateDisplay(n);
+        // }
+    }
+    else if (n == 4)
+    {
+        int x = 0; // Initialize x
+        int y = 0; // Initialize y
+        int choice = 0;
+        bool updateRequired = false;
+
+        H::drawBoxDoubleLineWithBG(39, 16, 25, 1, 3); // add game
+        H::drawBoxDoubleLineWithBG(39, 22, 25, 1, 3); // view
+        H::drawBoxDoubleLineWithBG(39, 28, 25, 1, 3); // search
+        H::drawBoxDoubleLineWithBG(98, 16, 25, 1, 3); // update
+        H::drawBoxDoubleLineWithBG(98, 22, 25, 1, 3); // delete
+        H::drawBoxDoubleLineWithBG(98, 28, 25, 1, 3); // back
+
+        // Mouse hover detection
+        if (mouseEvent.dwMousePosition.X >= x + 39 && mouseEvent.dwMousePosition.X <= x + 64)
+        {
+            if (mouseEvent.dwMousePosition.Y >= y + 16 && mouseEvent.dwMousePosition.Y <= y + 18)
+            {
+                num = 1;
+                updateRequired = true;
+            }
+            else if (mouseEvent.dwMousePosition.Y >= y + 22 && mouseEvent.dwMousePosition.Y <= y + 24)
+            {
+                num = 2;
+                updateRequired = true;
+            }
+            else if (mouseEvent.dwMousePosition.Y >= y + 28 && mouseEvent.dwMousePosition.Y <= y + 30)
+            {
+                num = 3;
+                updateRequired = true;
+            }
+        }
+        else if (mouseEvent.dwMousePosition.X >= x + 98 && mouseEvent.dwMousePosition.X <= x + 123)
+        {
+            if (mouseEvent.dwMousePosition.Y >= y + 16 && mouseEvent.dwMousePosition.Y <= y + 18)
+            {
+                num = 1;
+                updateRequired = true;
+            }
+            else if (mouseEvent.dwMousePosition.Y >= y + 22 && mouseEvent.dwMousePosition.Y <= y + 24)
+            {
+                num = 2;
+                updateRequired = true;
+            }
+            else if (mouseEvent.dwMousePosition.Y >= y + 28 && mouseEvent.dwMousePosition.Y <= y + 30)
+            {
+                num = 3;
+                updateRequired = true;
+            }
+        }
+
+        // Mouse click action
+        if (mouseEvent.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED)
+        {
+            updateDisplay(n);
+            switch (num)
+            {
+            case 1:
+                choice = 1;
+                break;
+            case 2:
+                choice = 2;
+                break;
+            case 3:
+                choice = 3;
+                break;
+            case 4:
+                choice = 4;
+                break;
+            case 5:
+                choice = 5;
+                break;
+            case 6:
+                choice = 6;
+                break;
+            default:
+                break;
+            }
+            SubGameLst(choice);
+        }
+        if (updateRequired)
+        {
+            updateDisplay(n);
+        }
+    }
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void Process::processInputEvents(INPUT_RECORD *ir, DWORD nRead, HANDLE hStdOutput, int n)
+{
+    for (DWORD i = 0; i < nRead; i++)
+    {
+        switch (ir[i].EventType)
+        {
+        case KEY_EVENT:
+            processKeyEvent(ir[i].Event.KeyEvent, hStdOutput, n);
             break;
+        case MOUSE_EVENT:
+            processMouseEvent(ir[i].Event.MouseEvent, hStdOutput, n);
+            break;
+        }
+    }
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void Process::updateDisplay(int n)
+{
+    if (n == 1)
+    {
+        if (num == 1)
+        {
+            H::drawBoxSingleLineWithBG(x + 84, y + 19, 25, 1, 153);
+            H::setcolor(151);
+            H::gotoxy(x + 84, y + 20);
+            cout << "         User          ";
+
+            H::drawBoxSingleLineWithBG(x + 84, y + 15, 25, 1, 204);
+            H::setcolor(201);
+            H::gotoxy(x + 85, y + 16);
+            cout << "  => Administrator <=  ";
+            H::clearBox(x + 24, y + 8, 32, 6, 136); // Cls text
+            LoginAs_Admin_UserTxt(1);
+        }
+        else if (num == 2)
+        {
+            H::drawBoxSingleLineWithBG(x + 84, y + 15, 25, 1, 153);
+            H::setcolor(151);
+            H::gotoxy(x + 84, y + 16);
+            cout << "     Administrator     ";
+
+            H::drawBoxSingleLineWithBG(x + 84, y + 19, 25, 1, 204);
+            H::setcolor(201);
+            H::gotoxy(x + 85, y + 20);
+            cout << "  =>     User      <=  ";
+            H::clearBox(x + 24, y + 8, 32, 6, 136); // Cls text
+            LoginAs_Admin_UserTxt(2);
+        }
+    }
+    else if (n == 2)
+    {
+        AdminMenuBoxes();
+        H::gotoxy(69, 36);
+        H::setcolor(1);
+        cout << "Use";
+        H::setcolor(4);
+        cout << " [UP] [DOWN]";
+        H::setcolor(1);
+        cout << " arrow key to move between options and ";
+        H::setcolor(4);
+        cout << "[ENTER]";
+        H::setcolor(1);
+        cout << " to select";
+        H::setcolor(7);
+        H::gotoxy(17, 19);
+        cout << "Admin Profile Information";
+        H::gotoxy(25, 22);
+        cout << "Games List";
+        H::gotoxy(19, 25);
+        cout << "Food and Drinks List";
+        H::gotoxy(17, 28);
+        cout << "Manage User's Information";
+        H::gotoxy(19, 31);
+        cout << "Manage User's Payment";
+        H::gotoxy(21, 34);
+        cout << "Log Out of Account";
+        if (num == 1)
+        {
+            H::drawBoxSingleLineWithBG(60, 12, 30, 1, 255);
+            H::gotoxy(62, 13);
+            H::setcolor(252);
+            cout << "Admin Profile Information";
+            H::drawBoxDoubleLineWithBG(15, 18, 30, 1, 255);
+            H::gotoxy(17, 19);
+            H::setcolor(249);
+            cout << "Admin Profile Information";
+            AdminMenu_Art(1);
+        }
+        else if (num == 2)
+        {
+            H::drawBoxSingleLineWithBG(60, 12, 30, 1, 255);
+            H::gotoxy(70, 13);
+            H::setcolor(252);
+            cout << "Games List";
+            H::drawBoxDoubleLineWithBG(15, 21, 30, 1, 255);
+            H::gotoxy(25, 22);
+            H::setcolor(249);
+            cout << "Games List";
+            AdminMenu_Art(2);
+        }
+        else if (num == 3)
+        {
+            H::drawBoxSingleLineWithBG(60, 12, 30, 1, 255);
+            H::gotoxy(64, 13);
+            H::setcolor(252);
+            cout << "Food and Drinks List";
+            H::drawBoxDoubleLineWithBG(15, 24, 30, 1, 255);
+            H::gotoxy(19, 25);
+            H::setcolor(249);
+            cout << "Food and Drinks List";
+            AdminMenu_Art(3);
+        }
+        else if (num == 4)
+        {
+            H::drawBoxSingleLineWithBG(60, 12, 30, 1, 255);
+            H::gotoxy(62, 13);
+            H::setcolor(252);
+            cout << "Manage User's Information";
+            H::drawBoxDoubleLineWithBG(15, 27, 30, 1, 255);
+            H::gotoxy(17, 28);
+            H::setcolor(249);
+            cout << "Manage User's Information";
+            AdminMenu_Art(4);
+        }
+        else if (num == 5)
+        {
+            H::drawBoxSingleLineWithBG(60, 12, 30, 1, 255);
+            H::gotoxy(64, 13);
+            H::setcolor(252);
+            cout << "Manage User's Payment";
+            H::drawBoxDoubleLineWithBG(15, 30, 30, 1, 255);
+            H::gotoxy(19, 31);
+            H::setcolor(249);
+            cout << "Manage User's Payment";
+            AdminMenu_Art(5);
+        }
+        else if (num == 6)
+        {
+            H::drawBoxSingleLineWithBG(60, 12, 30, 1, 255);
+            H::gotoxy(66, 13);
+            H::setcolor(252);
+            cout << "Log Out of Account";
+            H::drawBoxDoubleLineWithBG(15, 33, 30, 1, 255);
+            H::gotoxy(21, 34);
+            H::setcolor(249);
+            cout << "Log Out of Account";
+            AdminMenu_Art(6);
+        }
+    }
+    else if(n == 3)
+    {
+        AdminProfileInfoTxt();
+        AdminProfileInfo_Design();
+
+        H::drawBoxDoubleLineWithBG(105, 11, 30, 1, 183);
+        H::drawBoxDoubleLineWithBG(105, 17, 30, 1, 183);
+        H::drawBoxDoubleLineWithBG(105, 23, 30, 1, 183);
+
+        H::gotoxy(116, 12);
+        H::setcolor(185);
+        cout << "About Us";
+        H::gotoxy(112, 18);
+        H::setcolor(185);
+        cout << "A Letter from Us";
+        H::gotoxy(114, 24);
+        H::setcolor(185);
+        cout << "Back to MENU";
+
+        if (num == 1)
+        {
+            H::drawBoxDoubleLineWithBG(105, 11, 30, 1, 68);
+            H::gotoxy(116, 12);
+            H::setcolor(71);
+            cout << "About Us";
+        }
+        else if (num == 2)
+        {
+            H::drawBoxDoubleLineWithBG(105, 17, 30, 1, 68);
+            H::gotoxy(112, 18);
+            H::setcolor(71);
+            cout << "A Letter from Us";
+        }
+        else if (num == 3)
+        {
+            H::drawBoxDoubleLineWithBG(105, 23, 30, 1, 68);
+            H::gotoxy(114, 24);
+            H::setcolor(71);
+            cout << "Back to MENU";
+        }
+    }
+    else if (n == 4)
+    {
+        int x = 1;
+        int y = 1;
+
+        H::drawBoxDoubleLineWithBG(39, 16, 25, 1, 3); // add game
+        H::drawBoxDoubleLineWithBG(39, 22, 25, 1, 3); // view
+        H::drawBoxDoubleLineWithBG(39, 28, 25, 1, 3); // search
+        H::drawBoxDoubleLineWithBG(98, 16, 25, 1, 3); // update
+        H::drawBoxDoubleLineWithBG(98, 22, 25, 1, 3); // delete
+        H::drawBoxDoubleLineWithBG(98, 28, 25, 1, 3); // back
+
+        H::foreColor(7);
+        H::gotoxy(45, 17);
+        cout << "Add Game Data";
+        H::gotoxy(44, 23);
+        cout << "View Games Data";
+        H::gotoxy(43, 29);
+        cout << "Search Game Data";
+        H::gotoxy(102, 17);
+        cout << "Update Game Data";
+        H::gotoxy(102, 23);
+        cout << "Delete Game Data";
+        H::gotoxy(104, 29);
+        cout << "Back to MENU";
+
+        if (y == 1)
+        {
+            H::drawBoxDoubleLineWithBG(39, 16, 25, 1, 255);
+            H::foreColor(249);
+            H::gotoxy(45, 17);
+            cout << "Add Game Data";
+            x = 1;
+        }
+        else if (y == 2)
+        {
+            H::drawBoxDoubleLineWithBG(39, 22, 25, 1, 255);
+            H::foreColor(249);
+            H::gotoxy(44, 23);
+            cout << "View Games Data";
+            x = 2;
+        }
+        else if (y == 3)
+        {
+            H::drawBoxDoubleLineWithBG(39, 28, 25, 1, 255);
+            H::foreColor(249);
+            H::gotoxy(43, 29);
+            cout << "Search Game Data";
+            x = 3;
+        }
+        else if (y == 4)
+        {
+            H::drawBoxDoubleLineWithBG(98, 16, 25, 1, 255);
+            H::foreColor(249);
+            H::gotoxy(102, 17);
+            cout << "Update Game Data";
+            x = 4;
+        }
+        else if (y == 5)
+        {
+            H::drawBoxDoubleLineWithBG(98, 22, 25, 1, 255);
+            H::foreColor(249);
+            H::gotoxy(102, 23);
+            cout << "Delete Game Data";
+            x = 5;
+        }
+        else if (y == 6)
+        {
+            H::drawBoxDoubleLineWithBG(98, 28, 25, 1, 255);
+            H::foreColor(249);
+            H::gotoxy(104, 29);
+            cout << "Back to MENU";
+            x = 6;
+        }
+    }
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void Process::Admin_And_User()
+{
+    while (1)
+    {
+        H::setcursor(0, 0);
+        H::setcolor(7);
+        H::cls();
+        outline();
+        Login_Design();
+
+        num = 1;
+        updateDisplay(1);
+
+        INPUT_RECORD ir[128];
+        HANDLE hStdInput = GetStdHandle(STD_INPUT_HANDLE);
+        HANDLE hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+        HANDLE hEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
+        HANDLE handles[2] = {hEvent, hStdInput};
+        DWORD nRead;
+
+        SetConsoleMode(hStdInput, ENABLE_ECHO_INPUT | ENABLE_LINE_INPUT | ENABLE_MOUSE_INPUT | ENABLE_EXTENDED_FLAGS);
+        FlushConsoleInputBuffer(hStdInput);
+
+        while (WaitForMultipleObjects(2, handles, FALSE, INFINITE))
+        {
+            ReadConsoleInput(hStdInput, ir, 128, &nRead);
+            processInputEvents(ir, nRead, hStdOutput, 1);
         }
     }
 }
@@ -370,170 +965,60 @@ void Process::LogIn_AsAdmin(int cursor)
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Process::Admin_Option()
 {
+    num = 1;
     H::setConsoleTitle(TEXT("Admin MENU"));
     H::setcursor(0, 0);
     Design::LoadingAnimation();
+    H::setcolor(7);
+    H::cls();
 
-    while (true)
+    AdminMenuBoxes();
+    outline();
+    AdminMenuTxt();
+    AdminMenu_Design();
+    AdminMenu_Art(1);
+
+    H::gotoxy(69, 36);
+    H::setcolor(1);
+    cout << "Use";
+    H::setcolor(4);
+    cout << " [UP] [DOWN]";
+    H::setcolor(1);
+    cout << " arrow key to move between options and ";
+    H::setcolor(4);
+    cout << "[ENTER]";
+    H::setcolor(1);
+    cout << " to select";
+    H::setcolor(7);
+    H::gotoxy(17, 19);
+    cout << "Admin Profile Information";
+    H::gotoxy(25, 22);
+    cout << "Games List";
+    H::gotoxy(19, 25);
+    cout << "Food and Drinks List";
+    H::gotoxy(17, 28);
+    cout << "Manage User's Information";
+    H::gotoxy(19, 31);
+    cout << "Manage User's Payment";
+    H::gotoxy(21, 34);
+    cout << "Log Out of Account";
+
+    updateDisplay(2);
+
+    INPUT_RECORD ir[128];
+    HANDLE hStdInput = GetStdHandle(STD_INPUT_HANDLE);
+    HANDLE hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+    HANDLE hEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
+    HANDLE handles[2] = {hEvent, hStdInput};
+    DWORD nRead;
+
+    SetConsoleMode(hStdInput, ENABLE_ECHO_INPUT | ENABLE_LINE_INPUT | ENABLE_MOUSE_INPUT | ENABLE_EXTENDED_FLAGS);
+    FlushConsoleInputBuffer(hStdInput);
+
+    while (WaitForMultipleObjects(2, handles, FALSE, INFINITE))
     {
-        H::setcolor(7);
-        H::cls();
-
-        outline();
-        AdminMenuTxt();
-        AdminMenu_Design();
-
-        H::gotoxy(69, 36);
-        H::setcolor(1);
-        cout << "Use";
-        H::setcolor(4);
-        cout << " [UP] [DOWN]";
-        H::setcolor(1);
-        cout << " arrow key to move between options and ";
-        H::setcolor(4);
-        cout << "[ENTER]";
-        H::setcolor(1);
-        cout << " to select";
-
-        char press;
-        int num = 1;
-        int choice = 0;
-
-        do
-        {
-            AdminMenuBoxes();
-
-            H::setcolor(7);
-            H::gotoxy(17, 19);
-            cout << "Admin Profile Information";
-            H::gotoxy(25, 22);
-            cout << "Games List";
-            H::gotoxy(19, 25);
-            cout << "Food and Drinks List";
-            H::gotoxy(17, 28);
-            cout << "Manage User's Information";
-            H::gotoxy(19, 31);
-            cout << "Manage User's Payment";
-            H::gotoxy(21, 34);
-            cout << "Log Out of Account";
-
-            if (num == 1)
-            {
-                H::drawBoxSingleLineWithBG(60, 12, 30, 1, 255);
-                H::gotoxy(62, 13);
-                H::setcolor(252);
-                cout << "Admin Profile Information"; // switch box
-
-                H::drawBoxDoubleLineWithBG(15, 18, 30, 1, 255);
-                H::gotoxy(17, 19);
-                H::setcolor(249);
-                cout << "Admin Profile Information";
-                AdminMenu_Art(1);
-                choice = 1;
-            }
-            else if (num == 2)
-            {
-                H::drawBoxSingleLineWithBG(60, 12, 30, 1, 255);
-                H::gotoxy(70, 13);
-                H::setcolor(252);
-                cout << "Games List"; // switch box
-
-                H::drawBoxDoubleLineWithBG(15, 21, 30, 1, 255);
-                H::gotoxy(25, 22);
-                H::setcolor(249);
-                cout << "Games List";
-                AdminMenu_Art(2);
-                choice = 2;
-            }
-            else if (num == 3)
-            {
-                H::drawBoxSingleLineWithBG(60, 12, 30, 1, 255);
-                H::gotoxy(64, 13);
-                H::setcolor(252);
-                cout << "Food and Drinks List"; // switch box
-
-                H::drawBoxDoubleLineWithBG(15, 24, 30, 1, 255);
-                H::gotoxy(19, 25);
-                H::setcolor(249);
-                cout << "Food and Drinks List";
-                AdminMenu_Art(3);
-                choice = 3;
-            }
-            else if (num == 4)
-            {
-                H::drawBoxSingleLineWithBG(60, 12, 30, 1, 255);
-                H::gotoxy(62, 13);
-                H::setcolor(252);
-                cout << "Manage User's Information"; // switch box
-
-                H::drawBoxDoubleLineWithBG(15, 27, 30, 1, 255);
-                H::gotoxy(17, 28);
-                H::setcolor(249);
-                cout << "Manage User's Information";
-                AdminMenu_Art(4);
-                choice = 4;
-            }
-            else if (num == 5)
-            {
-                H::drawBoxSingleLineWithBG(60, 12, 30, 1, 255);
-                H::gotoxy(64, 13);
-                H::setcolor(252);
-                cout << "Manage User's Payment"; // switch box
-
-                H::drawBoxDoubleLineWithBG(15, 30, 30, 1, 255);
-                H::gotoxy(19, 31);
-                H::setcolor(249);
-                cout << "Manage User's Payment";
-                AdminMenu_Art(5);
-                choice = 5;
-            }
-            else if (num == 6)
-            {
-                H::drawBoxSingleLineWithBG(60, 12, 30, 1, 255);
-                H::gotoxy(66, 13);
-                H::setcolor(252);
-                cout << "Log Out of Account"; // switch box
-
-                H::drawBoxDoubleLineWithBG(15, 33, 30, 1, 255);
-                H::gotoxy(21, 34);
-                H::setcolor(249);
-                cout << "Log Out of Account";
-                AdminMenu_Art(6);
-                choice = 6;
-            }
-
-            press = getch();
-
-            switch (press)
-            {
-            case 72: // up
-            {
-                num--;
-                if (num < 1)
-                {
-                    num = 6;
-                }
-                break;
-            }
-
-            case 80: // down
-            {
-                num++;
-                if (num > 6)
-                {
-                    num = 1;
-                }
-                break;
-            }
-            }
-        } while (press != 13);
-        if (choice == 6)
-        {
-            Design::AdminMenu_Art(7);
-            // art of leaving the program
-        }
-        adminSelectionOpt(choice);
-        Admin_ChoosingOpt(choice);
+        ReadConsoleInput(hStdInput, ir, 128, &nRead);
+        processInputEvents(ir, nRead, hStdOutput, 2);
     }
 }
 /******************************************************** */
@@ -578,90 +1063,25 @@ void Process::AdminProfileInfo()
 {
     H::setConsoleTitle(TEXT("Admin Profile Information"));
     H::setcolor(7);
-    H::cls();
     H::setcursor(0, 0);
     outline();
 
-    while (true)
+    updateDisplay(3);
+
+    INPUT_RECORD ir[128];
+    HANDLE hStdInput = GetStdHandle(STD_INPUT_HANDLE);
+    HANDLE hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+    HANDLE hEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
+    HANDLE handles[2] = {hEvent, hStdInput};
+    DWORD nRead;
+
+    SetConsoleMode(hStdInput, ENABLE_ECHO_INPUT | ENABLE_LINE_INPUT | ENABLE_MOUSE_INPUT | ENABLE_EXTENDED_FLAGS);
+    FlushConsoleInputBuffer(hStdInput);
+
+    while (WaitForMultipleObjects(2, handles, FALSE, INFINITE))
     {
-        H::setcolor(7);
-        H::cls();
-        H::setcursor(0, 0);
-        outline();
-
-        AdminProfileInfoTxt();
-        AdminProfileInfo_Design();
-
-        int y = 1;
-        int choice = 0;
-        char press;
-
-        do
-        {
-            H::drawBoxDoubleLineWithBG(105, 11, 30, 1, 3);
-            H::drawBoxDoubleLineWithBG(105, 17, 30, 1, 3);
-            H::drawBoxDoubleLineWithBG(105, 23, 30, 1, 3);
-
-            H::setcolor(7);
-            H::gotoxy(116, 12);
-            cout << "About Us";
-            H::gotoxy(112, 18);
-            cout << "A Letter from Us";
-            H::gotoxy(114, 24);
-            cout << "Back to MENU";
-
-            if (y == 1)
-            {
-                H::drawBoxDoubleLineWithBG(105, 11, 30, 1, 255);
-                H::gotoxy(116, 12);
-                H::setcolor(249);
-                cout << "About Us";
-                choice = 1;
-            }
-            if (y == 2)
-            {
-                H::drawBoxDoubleLineWithBG(105, 17, 30, 1, 255);
-                H::gotoxy(112, 18);
-                H::setcolor(249);
-                cout << "A Letter from Us";
-                choice = 2;
-            }
-            if (y == 3)
-            {
-                H::drawBoxDoubleLineWithBG(105, 23, 30, 1, 255);
-                H::gotoxy(114, 24);
-                H::setcolor(249);
-                cout << "Back to MENU";
-                choice = 3;
-            }
-
-            press = getch();
-
-            switch (press)
-            {
-            case 72:
-                y--;
-                {
-                    if (y < 1)
-                    {
-                        y = 3;
-                    }
-                }
-                break;
-
-            case 80:
-                y++;
-                {
-                    if (y > 3)
-                    {
-                        y = 1;
-                    }
-                }
-                break;
-            }
-
-        } while (press != 13);
-        SubAdminProfileInfo(choice);
+        ReadConsoleInput(hStdInput, ir, 128, &nRead);
+        processInputEvents(ir, nRead, hStdOutput,3);
     }
 }
 /******************************************************** */
@@ -713,6 +1133,8 @@ void Process::AboutUs()
             break;
         }
     }
+    H::cls();
+    AdminProfileInfo();
 }
 /******************************************************** */
 void Process::A_LetterFromUs()
@@ -769,6 +1191,8 @@ void Process::A_LetterFromUs()
             openURL("https://mptc.gov.kh/en/");
         }
     }
+    H::cls();
+    AdminProfileInfo();
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -777,125 +1201,163 @@ void Process::GamesLst()
 {
     H::setConsoleTitle(TEXT("Games List Menu"));
 
-    while (true)
+    H::setcolor(7);
+    H::cls();
+    H::setcursor(0, 0);
+    outline();
+
+    B::GameMenuTxt();
+    B::GameMenu_Design();
+
+    // H::gotoxy(44, 36);
+    // H::setcolor(1);
+    // cout << "Use ";
+    // H::setcolor(4);
+    // cout << "[UP] [DOWN]";
+    // H::setcolor(1);
+    // cout << " arrow key to move between options and ";
+    // H::setcolor(4);
+    // cout << "[ENTER]";
+    // H::setcolor(1);
+    // cout << " to select";
+
+    updateDisplay(4);
+
+    INPUT_RECORD ir[128];
+    HANDLE hStdInput = GetStdHandle(STD_INPUT_HANDLE);
+    HANDLE hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+    HANDLE hEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
+    HANDLE handles[2] = {hEvent, hStdInput};
+    DWORD nRead;
+
+    SetConsoleMode(hStdInput, ENABLE_ECHO_INPUT | ENABLE_LINE_INPUT | ENABLE_MOUSE_INPUT | ENABLE_EXTENDED_FLAGS);
+    FlushConsoleInputBuffer(hStdInput);
+
+    while (WaitForMultipleObjects(2, handles, FALSE, INFINITE))
     {
-        H::setcolor(7);
-        H::cls();
-        H::setcursor(0, 0);
-        outline();
-
-        int y = 1;
-        int x = 0;
-        char press;
-
-        B::GameMenuTxt();
-        B::GameMenu_Design();
-
-        H::gotoxy(44, 36);
-        H::setcolor(1);
-        cout << "Use ";
-        H::setcolor(4);
-        cout << "[UP] [DOWN]";
-        H::setcolor(1);
-        cout << " arrow key to move between options and ";
-        H::setcolor(4);
-        cout << "[ENTER]";
-        H::setcolor(1);
-        cout << " to select";
-
-        do
-        {
-            H::drawBoxDoubleLineWithBG(39, 16, 25, 1, 3); // add game
-            H::drawBoxDoubleLineWithBG(39, 22, 25, 1, 3); // view
-            H::drawBoxDoubleLineWithBG(39, 28, 25, 1, 3); // search
-            H::drawBoxDoubleLineWithBG(98, 16, 25, 1, 3); // update
-            H::drawBoxDoubleLineWithBG(98, 22, 25, 1, 3); // delete
-            H::drawBoxDoubleLineWithBG(98, 28, 25, 1, 3); // back
-
-            H::foreColor(7);
-            H::gotoxy(45, 17);
-            cout << "Add Game Data";
-            H::gotoxy(44, 23);
-            cout << "View Games Data";
-            H::gotoxy(43, 29);
-            cout << "Search Game Data";
-            H::gotoxy(102, 17);
-            cout << "Update Game Data";
-            H::gotoxy(102, 23);
-            cout << "Delete Game Data";
-            H::gotoxy(104, 29);
-            cout << "Back to MENU";
-
-            if (y == 1)
-            {
-                H::drawBoxDoubleLineWithBG(39, 16, 25, 1, 255);
-                H::foreColor(249);
-                H::gotoxy(45, 17);
-                cout << "Add Game Data";
-                x = 1;
-            }
-            else if (y == 2)
-            {
-                H::drawBoxDoubleLineWithBG(39, 22, 25, 1, 255);
-                H::foreColor(249);
-                H::gotoxy(44, 23);
-                cout << "View Games Data";
-                x = 2;
-            }
-            else if (y == 3)
-            {
-                H::drawBoxDoubleLineWithBG(39, 28, 25, 1, 255);
-                H::foreColor(249);
-                H::gotoxy(43, 29);
-                cout << "Search Game Data";
-                x = 3;
-            }
-            else if (y == 4)
-            {
-                H::drawBoxDoubleLineWithBG(98, 16, 25, 1, 255);
-                H::foreColor(249);
-                H::gotoxy(102, 17);
-                cout << "Update Game Data";
-                x = 4;
-            }
-            else if (y == 5)
-            {
-                H::drawBoxDoubleLineWithBG(98, 22, 25, 1, 255);
-                H::foreColor(249);
-                H::gotoxy(102, 23);
-                cout << "Delete Game Data";
-                x = 5;
-            }
-            else if (y == 6)
-            {
-                H::drawBoxDoubleLineWithBG(98, 28, 25, 1, 255);
-                H::foreColor(249);
-                H::gotoxy(104, 29);
-                cout << "Back to MENU";
-                x = 6;
-            }
-            press = getch();
-
-            switch (press)
-            {
-            case 72:
-                y--;
-                if (y < 1)
-                {
-                    y = 6;
-                }
-                break;
-            case 80:
-                y++;
-                if (y > 6)
-                {
-                    y = 1;
-                }
-                break;
-            }
-        } while (press != 13);
-        SubGameLst(x);
+        ReadConsoleInput(hStdInput, ir, 128, &nRead);
+        processInputEvents(ir, nRead, hStdOutput,4);
     }
+
+    // while (true)
+    // {
+        // H::setcolor(7);
+        // H::cls();
+        // H::setcursor(0, 0);
+        // outline();
+
+        // int y = 1;
+        // int x = 0;
+        // char press;
+
+        // B::GameMenuTxt();
+        // B::GameMenu_Design();
+
+        // H::gotoxy(44, 36);
+        // H::setcolor(1);
+        // cout << "Use ";
+        // H::setcolor(4);
+        // cout << "[UP] [DOWN]";
+        // H::setcolor(1);
+        // cout << " arrow key to move between options and ";
+        // H::setcolor(4);
+        // cout << "[ENTER]";
+        // H::setcolor(1);
+        // cout << " to select";
+
+    //     do
+    //     {
+            // H::drawBoxDoubleLineWithBG(39, 16, 25, 1, 3); // add game
+            // H::drawBoxDoubleLineWithBG(39, 22, 25, 1, 3); // view
+            // H::drawBoxDoubleLineWithBG(39, 28, 25, 1, 3); // search
+            // H::drawBoxDoubleLineWithBG(98, 16, 25, 1, 3); // update
+            // H::drawBoxDoubleLineWithBG(98, 22, 25, 1, 3); // delete
+            // H::drawBoxDoubleLineWithBG(98, 28, 25, 1, 3); // back
+
+            // H::foreColor(7);
+            // H::gotoxy(45, 17);
+            // cout << "Add Game Data";
+            // H::gotoxy(44, 23);
+            // cout << "View Games Data";
+            // H::gotoxy(43, 29);
+            // cout << "Search Game Data";
+            // H::gotoxy(102, 17);
+            // cout << "Update Game Data";
+            // H::gotoxy(102, 23);
+            // cout << "Delete Game Data";
+            // H::gotoxy(104, 29);
+            // cout << "Back to MENU";
+
+            // if (y == 1)
+            // {
+            //     H::drawBoxDoubleLineWithBG(39, 16, 25, 1, 255);
+            //     H::foreColor(249);
+            //     H::gotoxy(45, 17);
+            //     cout << "Add Game Data";
+            //     x = 1;
+            // }
+            // else if (y == 2)
+            // {
+            //     H::drawBoxDoubleLineWithBG(39, 22, 25, 1, 255);
+            //     H::foreColor(249);
+            //     H::gotoxy(44, 23);
+            //     cout << "View Games Data";
+            //     x = 2;
+            // }
+            // else if (y == 3)
+            // {
+            //     H::drawBoxDoubleLineWithBG(39, 28, 25, 1, 255);
+            //     H::foreColor(249);
+            //     H::gotoxy(43, 29);
+            //     cout << "Search Game Data";
+            //     x = 3;
+            // }
+            // else if (y == 4)
+            // {
+            //     H::drawBoxDoubleLineWithBG(98, 16, 25, 1, 255);
+            //     H::foreColor(249);
+            //     H::gotoxy(102, 17);
+            //     cout << "Update Game Data";
+            //     x = 4;
+            // }
+            // else if (y == 5)
+            // {
+            //     H::drawBoxDoubleLineWithBG(98, 22, 25, 1, 255);
+            //     H::foreColor(249);
+            //     H::gotoxy(102, 23);
+            //     cout << "Delete Game Data";
+            //     x = 5;
+            // }
+            // else if (y == 6)
+            // {
+            //     H::drawBoxDoubleLineWithBG(98, 28, 25, 1, 255);
+            //     H::foreColor(249);
+            //     H::gotoxy(104, 29);
+            //     cout << "Back to MENU";
+            //     x = 6;
+            // }
+    //         press = getch();
+
+    //         switch (press)
+    //         {
+    //         case 72:
+    //             y--;
+    //             if (y < 1)
+    //             {
+    //                 y = 6;
+    //             }
+    //             break;
+    //         case 80:
+    //             y++;
+    //             if (y > 6)
+    //             {
+    //                 y = 1;
+    //             }
+    //             break;
+    //         }
+    //     } while (press != 13);
+    //     SubGameLst(x);
+    // }
 }
 /******************************************************** */
 void Process::SubGameLst(int num)

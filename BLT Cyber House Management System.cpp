@@ -8,7 +8,9 @@ int main()
     Process::DisableMaximizeButton();
     Process::DisableCloseButton();
 
-    Process::BLT_Cyber_House_Management_System();
+    Process::GamesLst();
+    // Process::Admin_Option();
+    // Process::BLT_Cyber_House_Management_System();
 
     return 0;
 }
