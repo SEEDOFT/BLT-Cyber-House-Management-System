@@ -19,12 +19,14 @@ class File
 {
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 private:
+    static int number;
+
     static string dir;
     static string subDir;
     static string FoodnDrinkFile;
     static string Backup;
     static string GameFile;
-    static string UserInfoFile;
+    // static string UserInfoFile;
     static string MgUserPaymentFile;
     static string invoiceFile;
 
@@ -32,13 +34,13 @@ private:
 
     static vector<FoodnDrink> fndVector;
     static vector<Game> gameVector;
-    static vector<MgUserPayment> mupVector;
+    // static vector<MgUserPayment> mupVector;
     static vector<myInvoice> invVector;
 
     static FoodnDrink fnd;
     static Game game;
     static MgUserInfo mui;
-    static MgUserPayment mup;
+    // static MgUserPayment mup;
     static myInvoice inv;
 
     static fstream file;
@@ -46,6 +48,16 @@ private:
 
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 public:
+    static vector<MgUserPayment> mupVector;
+
+    static MgUserPayment mup;
+
+    static string UserInfoFile;
+    // static bool KeyEvent(KEY_EVENT_RECORD keyEvent, HANDLE hStdOutput, int, const char *, const char *);
+    // static bool MouseEvent(MOUSE_EVENT_RECORD mouseEvent, HANDLE hStdOutput, int, const char *, const char *);
+    // static bool InputEvents(INPUT_RECORD *ir, DWORD nRead, HANDLE hStdOutput, int, const char *, const char *);
+    // static void updateUserDisplay(int);
+
     static void insertFile(int n);
     static void viewFile(int n);
     static void searchFile(int n);
@@ -61,8 +73,8 @@ public:
     static void pushToVector(int n);
     static void loginTimeToFile(const char *username, const char *password);
     static void logoutTimeToFile(const char *username, const char *password);
-    static void user_login();
-    static void userSubMenu(const char *username, const char *password);
+    // static void user_login();
+    // static void userSubMenu(const char *username, const char *password);
     static void buyMoreTime(const char *username, const char *password);
     static void invoice(const char *username, const char *password);
     static void calculateTime(const char *username, const char *password);
@@ -82,6 +94,8 @@ public:
 };
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+int File::number = 1;
+
 vector<FoodnDrink> File::fndVector;
 vector<Game> File::gameVector;
 vector<MgUserPayment> File::mupVector;
@@ -107,6 +121,225 @@ string File::invoiceFile = dir + "/Invoice.ant";
 string File::currentFile = "";
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// bool File::KeyEvent(KEY_EVENT_RECORD keyEvent, HANDLE hStdOutput, int n, const char *username, const char *password)
+// {
+//     int choice = 0;
+
+//     if (n == 1 && keyEvent.bKeyDown) // Ensure it's a key press event
+//     {
+//         switch (keyEvent.wVirtualKeyCode)
+//         {
+//         case VK_BACK:
+//             // Set event if Backspace is pressed.
+//             break;
+//         case VK_UP:
+//             number--;
+//             if (number < 1)
+//             {
+//                 number = 6;
+//             }
+//             break;
+//         case VK_DOWN:
+//             number++;
+//             if (number > 6)
+//             {
+//                 number = 1;
+//             }
+//             break;
+//         case VK_RETURN:
+//             choice = number;
+//             if (choice == 1)
+//             {
+//                 Design::LoadingAnimation();
+//                 viewProfile(username, password);
+//             }
+//             else if (choice == 2)
+//             {
+//                 Design::LoadingAnimation();
+//                 GameMENU();
+//             }
+//             else if (choice == 3)
+//             {
+//                 Design::LoadingAnimation();
+//                 buyMoreTime(username, password);
+//             }
+//             else if (choice == 4)
+//             {
+//                 Design::LoadingAnimation();
+//                 buyFood(username, password);
+//             }
+//             else if (choice == 5)
+//             {
+//                 Design::LoadingAnimation();
+//                 invoice(username, password);
+//             }
+//             else if (choice == 6)
+//             {
+//                 Design::LoadingAnimation();
+//                 logoutTimeToFile(username, password);
+//                 calculateTime(username, password);
+//                 return false;
+//             }
+//             userSubMenu(username, password);
+//             break;
+//         }
+//         updateUserDisplay(n);
+//     }
+//     return true;
+// }
+// bool File::MouseEvent(MOUSE_EVENT_RECORD mouseEvent, HANDLE hStdOutput, int n, const char *username, const char *password)
+// {
+//     if (n == 1)
+//     {
+//         int x = 0; // Initialize x
+//         int y = 0; // Initialize y
+//         int choice = 0;
+
+//         if (mouseEvent.dwMousePosition.X >= x + 33 && mouseEvent.dwMousePosition.X <= x + 64)
+//         {
+//             if (mouseEvent.dwMousePosition.Y >= y + 14 && mouseEvent.dwMousePosition.Y <= y + 16)
+//             {
+//                 number = 1;
+//             }
+//             else if (mouseEvent.dwMousePosition.Y >= y + 17 && mouseEvent.dwMousePosition.Y <= y + 19)
+//             {
+//                 number = 2;
+//             }
+//             else if (mouseEvent.dwMousePosition.Y >= y + 20 && mouseEvent.dwMousePosition.Y <= y + 22)
+//             {
+//                 number = 3;
+//             }
+//             else if (mouseEvent.dwMousePosition.Y >= y + 23 && mouseEvent.dwMousePosition.Y <= y + 25)
+//             {
+//                 number = 4;
+//             }
+//             else if (mouseEvent.dwMousePosition.Y >= y + 26 && mouseEvent.dwMousePosition.Y <= y + 28)
+//             {
+//                 number = 5;
+//             }
+//             else if (mouseEvent.dwMousePosition.Y >= y + 29 && mouseEvent.dwMousePosition.Y <= y + 31)
+//             {
+//                 number = 6;
+//             }
+//         }
+
+//         // Mouse click action
+//         if (mouseEvent.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED)
+//         {
+//             // updateDisplay(n);
+//             if (number == 1)
+//             {
+//                 Design::LoadingAnimation();
+//                 viewProfile(username, password);
+//             }
+//             else if (number == 2)
+//             {
+//                 Design::LoadingAnimation();
+//                 GameMENU();
+//             }
+//             else if (number == 3)
+//             {
+//                 Design::LoadingAnimation();
+//                 buyMoreTime(username, password);
+//             }
+//             else if (number == 4)
+//             {
+//                 Design::LoadingAnimation();
+//                 buyFood(username, password);
+//             }
+//             else if (number == 5)
+//             {
+//                 Design::LoadingAnimation();
+//                 invoice(username, password);
+//             }
+//             else if (number == 6)
+//             {
+//                 Design::LoadingAnimation();
+//                 logoutTimeToFile(username, password);
+//                 calculateTime(username, password);
+//                 return false;
+//             }
+//             userSubMenu(username, password);
+//         }
+//     }
+//     return true;
+// }
+// bool File::InputEvents(INPUT_RECORD *ir, DWORD nRead, HANDLE hStdOutput, int n, const char *username, const char *password)
+// {
+//     for (DWORD i = 0; i < nRead; i++)
+//     {
+//         switch (ir[i].EventType)
+//         {
+//         case KEY_EVENT:
+//             if (!KeyEvent(ir[i].Event.KeyEvent, hStdOutput, n, username, password))
+//             {
+//                 return false;
+//             }
+//             break;
+//         case MOUSE_EVENT:
+//             if (!MouseEvent(ir[i].Event.MouseEvent, hStdOutput, n, username, password))
+//             {
+//                 return false;
+//             }
+//             break;
+//         }
+//     }
+//     return true; // Continue the loop otherwise
+// }
+
+// // void File::updateUserDisplay(int n)
+// // {
+// //     if (n == 1)
+// //     {
+// //         // int pocision = 10 + 22;
+
+// //         H::drawBoxSingleLineWithBG(33, 14, 31, 1, 1); // info
+// //         H::drawBoxSingleLineWithBG(33, 17, 31, 1, 1); // play game
+// //         H::drawBoxSingleLineWithBG(33, 20, 31, 1, 1); // buy hour
+// //         H::drawBoxSingleLineWithBG(33, 23, 31, 1, 1); // buy foodndrink
+// //         H::drawBoxSingleLineWithBG(33, 26, 31, 1, 1); // invoice
+// //         H::drawBoxSingleLineWithBG(33, 29, 31, 1, 1); // log out
+
+// //         Design::tp(7, 35, 15);
+// //         cout << "My Information";
+// //         H::gotoxy(35, 18);
+// //         cout << "Play Games";
+// //         H::gotoxy(35, 21);
+// //         cout << "Buy More Hours";
+// //         H::gotoxy(35, 24);
+// //         cout << "Buy Food or Drinks";
+// //         H::gotoxy(35, 27);
+// //         cout << "View Spending List";
+// //         H::gotoxy(35, 30);
+// //         cout << "Log Out of Account";
+
+// //         if (number == 1)
+// //         {
+// //             LENG::UserMenu_Art(number);
+// //         }
+// //         else if (number == 2)
+// //         {
+// //             LENG::UserMenu_Art(number);
+// //         }
+// //         else if (number == 3)
+// //         {
+// //             LENG::UserMenu_Art(number);
+// //         }
+// //         else if (number == 4)
+// //         {
+// //             LENG::UserMenu_Art(number);
+// //         }
+// //         else if (number == 5)
+// //         {
+// //             LENG::UserMenu_Art(number);
+// //         }
+// //         else if (number == 6)
+// //         {
+// //             LENG::UserMenu_Art(number);
+// //         }
+// //     }
+// // }
+
 void File::OutputHostName(int x, int y, int color)
 {
     DWORD size = MAX_COMPUTERNAME_LENGTH + 1;
@@ -123,7 +356,7 @@ void File::OutputHostName(int x, int y, int color)
         cerr << "Error: Could not retrieve hostname." << endl;
     }
 }
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void File::OutputDate(int x, int y, int color)
 {
     time_t t = time(nullptr);
@@ -273,11 +506,11 @@ bool File::checkUsernameInVector(const char *username, int x, int y, int color)
     }
     return false;
 }
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//////////////////////////////////////////
-// ADD DATA TO VECTOR
-//////////////////////////////////////////
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// //////////////////////////////////////////
+// // ADD DATA TO VECTOR
+// //////////////////////////////////////////
+// //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void File::insertToVector(int n, string &currentFile)
 {
     time_t t = time(nullptr);
@@ -973,335 +1206,375 @@ void File::logoutTimeToFile(const char *username, const char *password)
     }
     file.close();
 }
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//////////////////////////////////////////
-// USER LOGIN
-//////////////////////////////////////////
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void File::user_login()
-{
-    char username[20];
-    char password[20];
-    bool islogin = false;
-    char press = ' ';
+// //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// //////////////////////////////////////////
+// // USER LOGIN
+// //////////////////////////////////////////
+// //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// void File::user_login()
+// {
+//     char username[20];
+//     char password[20];
+//     bool islogin = false;
+//     char press = ' ';
 
-    file.open(UserInfoFile, ios::in | ios::binary);
-    if (!file.is_open())
-    {
-        H::setcolor(135);
-        H::gotoxy(42, 32);
-        cout << "Register First!!";
-        H::delay(999);
-        H::clearBox(42, 32, 25, 0, 136);
-    }
-    else
-    {
-        if (check_file(UserInfoFile))
-        {
-            H::setcolor(135);
-            H::gotoxy(42, 32);
-            cout << "Register First!!";
-            H::delay(999);
-            H::clearBox(42, 32, 25, 0, 136);
-        }
-        else
-        {
-            mupVector.clear();
+//     file.open(UserInfoFile, ios::in | ios::binary);
+//     if (!file.is_open())
+//     {
+//         H::setcolor(135);
+//         H::gotoxy(42, 32);
+//         cout << "Register First!!";
+//         H::delay(999);
+//         H::clearBox(42, 32, 25, 0, 136);
+//     }
+//     else
+//     {
+//         if (check_file(UserInfoFile))
+//         {
+//             H::setcolor(135);
+//             H::gotoxy(42, 32);
+//             cout << "Register First!!";
+//             H::delay(999);
+//             H::clearBox(42, 32, 25, 0, 136);
+//         }
+//         else
+//         {
+//             mupVector.clear();
 
-            while (file.read((char *)&mup, sizeof(MgUserPayment)))
-            {
-                mupVector.push_back(mup);
-            }
+//             while (file.read((char *)&mup, sizeof(MgUserPayment)))
+//             {
+//                 mupVector.push_back(mup);
+//             }
 
-            file.close();
+//             file.close();
 
-            while (1)
-            {
-                int chance = 3;
+//             while (1)
+//             {
+//                 int chance = 3;
 
-                while (chance != 0)
-                {
-                    H::setcursor(1, 0);
-                    H::setcolor(249);
-                    H::gotoxy(30, 22);
-                    H::inputAll(username, sizeof(username)); // username
+//                 while (chance != 0)
+//                 {
+//                     H::setcursor(1, 0);
+//                     H::setcolor(249);
+//                     H::gotoxy(30, 22);
+//                     H::inputAll(username, sizeof(username)); // username
 
-                    H::setcolor(249);
-                    H::gotoxy(30, 28);
-                    H::hidePassword(password, sizeof(password));
-                    H::setcursor(0, 0);
+//                     H::setcolor(249);
+//                     H::gotoxy(30, 28);
+//                     H::hidePassword(password, sizeof(password));
+//                     H::setcursor(0, 0);
 
-                    for (const auto &user : mupVector)
-                    {
-                        if (strcmp(username, user.getUsername()) == 0 && strcmp(password, user.getPassword()) == 0)
-                        {
-                            islogin = true;
-                            break;
-                        }
-                    }
-                    if (islogin == true)
-                    {
-                        Design::loginMsg(3);
-                        loginTimeToFile(username, password);
-                        userSubMenu(username, password);
-                        break;
-                    }
-                    else
-                    {
-                        islogin = false;
-                        H::setcursor(0, 0);
-                        H::setcolor(140);
-                        H::gotoxy(10 + 29, 5 + 27);
-                        cout << "You have ";
-                        H::setcolor(137);
-                        cout << --chance;
-                        H::setcolor(140);
-                        cout << " left";
+//                     for (const auto &user : mupVector)
+//                     {
+//                         if (strcmp(username, user.getUsername()) == 0 && strcmp(password, user.getPassword()) == 0)
+//                         {
+//                             islogin = true;
+//                             break;
+//                         }
+//                     }
+//                     if (islogin == true)
+//                     {
+//                         Design::loginMsg(3);
+//                         loginTimeToFile(username, password);
+//                         userSubMenu(username, password);
+//                         break;
+//                     }
+//                     else
+//                     {
+//                         islogin = false;
+//                         H::setcursor(0, 0);
+//                         H::setcolor(140);
+//                         H::gotoxy(10 + 29, 5 + 27);
+//                         cout << "You have ";
+//                         H::setcolor(137);
+//                         cout << --chance;
+//                         H::setcolor(140);
+//                         cout << " left";
 
-                        Design::loginMsg(1); // input msg
+//                         Design::loginMsg(1); // input msg
 
-                        press = getch(); // press ESC to back
+//                         press = getch(); // press ESC to back
 
-                        H::clearBox(10 + 19, 5 + 18, 42, 0, 247); // Clear username and password boxes
-                        H::clearBox(10 + 19, 5 + 24, 42, 0, 247); // Clear username and password boxes
-                        H::clearBox(10 + 18, 5 + 27, 43, 1, 136); // Clear message
-                        // break;
-                        if (press == 27)
-                        {
-                            break;
-                        }
-                    }
-                }
-                if (chance == 0)
-                {
-                    press = ' ';
-                    for (int i = 1; i <= 6; i++)
-                    {
-                        H::setcursor(0, 0);
-                        H::setcolor(140);
-                        H::gotoxy(27, 32);
-                        cout << "You ran out chances! Please wait for   seconds";
-                        H::setcolor(137);
-                        H::gotoxy(10 + 54, 32);
-                        cout << 6 - i;
-                        H::delay(999);
+//                         H::clearBox(10 + 19, 5 + 18, 42, 0, 247); // Clear username and password boxes
+//                         H::clearBox(10 + 19, 5 + 24, 42, 0, 247); // Clear username and password boxes
+//                         H::clearBox(10 + 18, 5 + 27, 43, 1, 136); // Clear message
+//                         // break;
+//                         if (press == 27)
+//                         {
+//                             break;
+//                         }
+//                     }
+//                 }
+//                 if (chance == 0)
+//                 {
+//                     press = ' ';
+//                     for (int i = 1; i <= 6; i++)
+//                     {
+//                         H::setcursor(0, 0);
+//                         H::setcolor(140);
+//                         H::gotoxy(27, 32);
+//                         cout << "You ran out chances! Please wait for   seconds";
+//                         H::setcolor(137);
+//                         H::gotoxy(10 + 54, 32);
+//                         cout << 6 - i;
+//                         H::delay(999);
 
-                        H::clearBox(27, 32, 45, 0, 136); // cls chance msg
-                        H::setcolor(7);
-                    }
+//                         H::clearBox(27, 32, 45, 0, 136); // cls chance msg
+//                         H::setcolor(7);
+//                     }
 
-                    Design::loginMsg(2); // esc or continue
+//                     Design::loginMsg(2); // esc or continue
 
-                    press = getch();
+//                     press = getch();
 
-                    H::clearBox(10 + 38, 38, 61, 0, 7); // cls msg
+//                     H::clearBox(10 + 38, 38, 61, 0, 7); // cls msg
 
-                    if (press == 27)
-                    {
-                        break;
-                    }
-                }
-                if (islogin == true)
-                {
-                    break;
-                }
-                if (press == 27)
-                {
-                    break;
-                }
-            }
-        }
-    }
-}
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//////////////////////////////////////////
-// USER MENU
-//////////////////////////////////////////
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void File::userSubMenu(const char *username, const char *password)
-{
-    H::setConsoleTitle(TEXT("User MENU"));
-    H::setcursor(0, 0);
-    Design::LoadingAnimation();
+//                     if (press == 27)
+//                     {
+//                         break;
+//                     }
+//                 }
+//                 if (islogin == true)
+//                 {
+//                     break;
+//                 }
+//                 if (press == 27)
+//                 {
+//                     break;
+//                 }
+//             }
+//         }
+//     }
+// }
+// //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// //////////////////////////////////////////
+// // USER MENU
+// //////////////////////////////////////////
+// //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// void File::userSubMenu(const char *username, const char *password)
+// {
+//     H::setConsoleTitle(TEXT("User MENU"));
+//     H::setcursor(0, 0);
+//     Design::LoadingAnimation();
 
-    int choice = 0;
-    do
-    {
-        H::setcolor(7);
-        H::cls();
+//     H::setcolor(7);
+//     H::cls();
+//     Design::outline();
+//     Design::UserMenuTxt();
+//     LENG::UserMenu_Design();
+//     number = 1;
 
-        Design::outline();
-        Design::UserMenuTxt();
-        LENG::UserMenu_Design();
+//     updateUserDisplay(1);
 
-        char press;
-        int num = 1;
-        choice = 0;
-        int posistion = 10 + 22;
+//     INPUT_RECORD ir[128];
+//     HANDLE hStdInput = GetStdHandle(STD_INPUT_HANDLE);
+//     HANDLE hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+//     HANDLE hEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
+//     HANDLE handles[2] = {hEvent, hStdInput};
+//     DWORD nRead;
 
-        do
-        {
-            H::drawBoxSingleLineWithBG(33, 14, 31, 1, 1); // info
-            H::drawBoxSingleLineWithBG(33, 17, 31, 1, 1); // play game
-            H::drawBoxSingleLineWithBG(33, 20, 31, 1, 1); // buy hour
-            H::drawBoxSingleLineWithBG(33, 23, 31, 1, 1); // buy foodndrink
-            H::drawBoxSingleLineWithBG(33, 26, 31, 1, 1); // invoice
-            H::drawBoxSingleLineWithBG(33, 29, 31, 1, 1); // log out
+//     SetConsoleMode(hStdInput, ENABLE_ECHO_INPUT | ENABLE_LINE_INPUT | ENABLE_MOUSE_INPUT | ENABLE_EXTENDED_FLAGS);
+//     FlushConsoleInputBuffer(hStdInput);
 
-            Design::tp(7, 35, 15);
-            cout << "My Information";
-            H::gotoxy(35, 18);
-            cout << "Play Games";
-            H::gotoxy(35, 21);
-            cout << "Buy More Hours";
-            H::gotoxy(35, 24);
-            cout << "Buy Food or Drinks";
-            H::gotoxy(35, 27);
-            cout << "View Spending List";
-            H::gotoxy(35, 30);
-            cout << "Log Out of Account";
+//     while (WaitForMultipleObjects(2, handles, FALSE, INFINITE))
+//     {
+//         ReadConsoleInput(hStdInput, ir, 128, &nRead);
+//         if (!InputEvents(ir, nRead, hStdOutput, 1, username, password))
+//         {
+//             number = 1;
+//             break;
+//         }
+//     }
+//     // H::setcolor(1);
+//     // H::gotoxy(48, 36);
+//     // cout << "Press ";
+//     // H::setcolor(4);
+//     // cout << "[ALL]";
+//     // H::setcolor(1);
+//     // cout << " arrow key to move between option, ";
+//     // H::setcolor(4);
+//     // cout << "[ENTER]";
+//     // H::setcolor(1);
+//     // cout << " to select";
 
-            if (num == 1)
-            {
-                LENG::UserMenu_Art(num);
-                choice = 1;
-            }
-            else if (num == 2)
-            {
-                LENG::UserMenu_Art(num);
-                choice = 2;
-            }
-            else if (num == 3)
-            {
-                LENG::UserMenu_Art(num);
-                choice = 3;
-            }
-            else if (num == 4)
-            {
-                LENG::UserMenu_Art(num);
-                choice = 4;
-            }
-            else if (num == 5)
-            {
-                LENG::UserMenu_Art(num);
-                choice = 5;
-            }
-            else if (num == 6)
-            {
-                LENG::UserMenu_Art(num);
-                choice = 6;
-            }
+//     // int choice = 0;
+//     // do
+//     // {
+//     //     H::setcolor(7);
+//     //     H::cls();
 
-            H::setcolor(1);
-            H::gotoxy(48, 36);
-            cout << "Press ";
-            H::setcolor(4);
-            cout << "[ALL]";
-            H::setcolor(1);
-            cout << " arrow key to move between option, ";
-            H::setcolor(4);
-            cout << "[ENTER]";
-            H::setcolor(1);
-            cout << " to select";
+//     //     Design::outline();
+//     //     Design::UserMenuTxt();
+//     //     LENG::UserMenu_Design();
 
-            press = getch();
+//     //     char press;
+//     //     int num = 1;
+//     //     choice = 0;
+//     //     int pocision = 10 + 22;
 
-            switch (press)
-            {
-            case 75:
-                num--;
-                if (num < 1)
-                {
-                    num = 5;
-                }
-                posistion -= 10;
-                if (posistion < (10 + 22))
-                {
-                    posistion = 10 + 22;
-                }
-                break;
+//     //     do
+//     //     {
+//     //         H::drawBoxSingleLineWithBG(33, 14, 31, 1, 1); // info
+//     //         H::drawBoxSingleLineWithBG(33, 17, 31, 1, 1); // play game
+//     //         H::drawBoxSingleLineWithBG(33, 20, 31, 1, 1); // buy hour
+//     //         H::drawBoxSingleLineWithBG(33, 23, 31, 1, 1); // buy foodndrink
+//     //         H::drawBoxSingleLineWithBG(33, 26, 31, 1, 1); // invoice
+//     //         H::drawBoxSingleLineWithBG(33, 29, 31, 1, 1); // log out
 
-            case 72:
-                num--;
-                if (num < 1)
-                {
-                    num = 6;
-                }
-                break;
+//     //         Design::tp(7, 35, 15);
+//     //         cout << "My Information";
+//     //         H::gotoxy(35, 18);
+//     //         cout << "Play Games";
+//     //         H::gotoxy(35, 21);
+//     //         cout << "Buy More Hours";
+//     //         H::gotoxy(35, 24);
+//     //         cout << "Buy Food or Drinks";
+//     //         H::gotoxy(35, 27);
+//     //         cout << "View Spending List";
+//     //         H::gotoxy(35, 30);
+//     //         cout << "Log Out of Account";
 
-            case 77:
-                num++;
-                if (num > 6)
-                {
-                    num = 1;
-                }
-                if (posistion < 32)
-                {
-                    posistion = 32;
-                }
-                break;
+//     //         if (num == 1)
+//     //         {
+//     //             LENG::UserMenu_Art(num);
+//     //             choice = 1;
+//     //         }
+//     //         else if (num == 2)
+//     //         {
+//     //             LENG::UserMenu_Art(num);
+//     //             choice = 2;
+//     //         }
+//     //         else if (num == 3)
+//     //         {
+//     //             LENG::UserMenu_Art(num);
+//     //             choice = 3;
+//     //         }
+//     //         else if (num == 4)
+//     //         {
+//     //             LENG::UserMenu_Art(num);
+//     //             choice = 4;
+//     //         }
+//     //         else if (num == 5)
+//     //         {
+//     //             LENG::UserMenu_Art(num);
+//     //             choice = 5;
+//     //         }
+//     //         else if (num == 6)
+//     //         {
+//     //             LENG::UserMenu_Art(num);
+//     //             choice = 6;
+//     //         }
 
-            case 80:
-                num++;
-                if (num > 6)
-                {
-                    num = 1;
-                }
-                break;
-            }
-        }
+//     //         H::setcolor(1);
+//     //         H::gotoxy(48, 36);
+//     //         cout << "Press ";
+//     //         H::setcolor(4);
+//     //         cout << "[ALL]";
+//     //         H::setcolor(1);
+//     //         cout << " arrow key to move between option, ";
+//     //         H::setcolor(4);
+//     //         cout << "[ENTER]";
+//     //         H::setcolor(1);
+//     //         cout << " to select";
 
-        while (press != 13);
+//     //         press = getch();
 
-        if (choice == 1)
-        {
-            Design::LoadingAnimation();
-            viewProfile(username, password);
-        }
-        else if (choice == 2)
-        {
-            Design::LoadingAnimation();
-            GameMENU();
-        }
-        else if (choice == 3)
-        {
-            Design::LoadingAnimation();
-            buyMoreTime(username, password);
-        }
-        else if (choice == 4)
-        {
-            char gg = 13;
-            // Design::LoadingAnimation();
-            // buyFood(username, password);
-            while (1)
-            {
-                if (gg == 27)
-                {
-                    break;
-                }
-                else if (gg == 13)
-                {
-                    Design::LoadingAnimation();
-                    buyFood(username, password);
-                }
-                gg = getch();
-            }
-        }
-        else if (choice == 5)
-        {
-            Design::LoadingAnimation();
-            invoice(username, password);
-        }
-        else if (choice == 6)
-        {
-            Design::LoadingAnimation();
-            logoutTimeToFile(username, password);
-            calculateTime(username, password);
-            break;
-        }
+//     //         switch (press)
+//     //         {
+//     //         case 75:
+//     //             num--;
+//     //             if (num < 1)
+//     //             {
+//     //                 num = 5;
+//     //             }
+//     //             posistion -= 10;
+//     //             if (posistion < (10 + 22))
+//     //             {
+//     //                 posistion = 10 + 22;
+//     //             }
+//     //             break;
 
-    } while (choice != 6);
-}
+//     //         case 72:
+//     //             num--;
+//     //             if (num < 1)
+//     //             {
+//     //                 num = 6;
+//     //             }
+//     //             break;
+
+//     //         case 77:
+//     //             num++;
+//     //             if (num > 6)
+//     //             {
+//     //                 num = 1;
+//     //             }
+//     //             if (posistion < 32)
+//     //             {
+//     //                 posistion = 32;
+//     //             }
+//     //             break;
+
+//     //         case 80:
+//     //             num++;
+//     //             if (num > 6)
+//     //             {
+//     //                 num = 1;
+//     //             }
+//     //             break;
+//     //         }
+//     //     }
+
+//     //     while (press != 13);
+
+//     //     if (choice == 1)
+//     //     {
+//     //         Design::LoadingAnimation();
+//     //         viewProfile(username, password);
+//     //     }
+//     //     else if (choice == 2)
+//     //     {
+//     //         Design::LoadingAnimation();
+//     //         GameMENU();
+//     //     }
+//     //     else if (choice == 3)
+//     //     {
+//     //         Design::LoadingAnimation();
+//     //         buyMoreTime(username, password);
+//     //     }
+//     //     else if (choice == 4)
+//     //     {
+//     //         char gg = 13;
+//     //         // Design::LoadingAnimation();
+//     //         // buyFood(username, password);
+//     //         while (1)
+//     //         {
+//     //             if (gg == 27)
+//     //             {
+//     //                 break;
+//     //             }
+//     //             else if (gg == 13)
+//     //             {
+//     //                 Design::LoadingAnimation();
+//     //                 buyFood(username, password);
+//     //             }
+//     //             gg = getch();
+//     //         }
+//     //     }
+//     //     else if (choice == 5)
+//     //     {
+//     //         Design::LoadingAnimation();
+//     //         invoice(username, password);
+//     //     }
+//     //     else if (choice == 6)
+//     //     {
+//     //         Design::LoadingAnimation();
+//     //         logoutTimeToFile(username, password);
+//     //         calculateTime(username, password);
+//     //         break;
+//     //     }
+
+//     // } while (choice != 6);
+// }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //////////////////////////////////////////
 // USER BUY MORE TIME
@@ -1520,9 +1793,12 @@ void File::invoice(const char *username, const char *password)
             file.close();
             file2.close();
 
-            H::setcolor(1); H::gotoxy(60,36); 
-            cout << "To export data into EXCEL, Press ";H::setcolor(4); cout <<"[ENTER]";
-            
+            H::setcolor(1);
+            H::gotoxy(60, 36);
+            cout << "To export data into EXCEL, Press ";
+            H::setcolor(4);
+            cout << "[ENTER]";
+
             Design::message(2, 0, 38);
 
             press = getch();

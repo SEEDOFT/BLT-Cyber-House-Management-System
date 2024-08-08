@@ -26,10 +26,18 @@ class Process : public Design
 {
 private:
     static int num;
+
 public:
     static void processKeyEvent(KEY_EVENT_RECORD keyEvent, HANDLE hStdOutput, int);
     static void processMouseEvent(MOUSE_EVENT_RECORD mouseEvent, HANDLE hStdOutput, int);
     static void processInputEvents(INPUT_RECORD *ir, DWORD nRead, HANDLE hStdOutput, int);
+    //////////////
+    static void KeyEvent(KEY_EVENT_RECORD keyEvent, HANDLE hStdOutput, const char *, const char *);
+    static void MouseEvent(MOUSE_EVENT_RECORD mouseEvent, HANDLE hStdOutput, const char *, const char *);
+    static void InputEvents(INPUT_RECORD *ir, DWORD nRead, HANDLE hStdOutput, const char *, const char *);
+    static void user_login();
+    static void userSubMenu(const char *username, const char *password);
+    ///////////////
     static void updateDisplay(int);
     /////////////////////////////////////////////////////////////////////////////////
     static void BLT_Cyber_House_Management_System();
@@ -189,7 +197,7 @@ void Process::OutputHostName(int x, int y, int color)
 void Process::processKeyEvent(KEY_EVENT_RECORD keyEvent, HANDLE hStdOutput, int n)
 {
     int choice = 0;
-    if(n == 1)
+    if (n == 1)
     {
         if (keyEvent.bKeyDown)
         {
@@ -225,7 +233,7 @@ void Process::processKeyEvent(KEY_EVENT_RECORD keyEvent, HANDLE hStdOutput, int 
                 else if (num == 2)
                 {
                     Admin_User_ClsBox(2);
-                    File::user_login();
+                    user_login();
                 }
                 // Reset values after action
                 num = 1;
@@ -233,6 +241,7 @@ void Process::processKeyEvent(KEY_EVENT_RECORD keyEvent, HANDLE hStdOutput, int 
 
             updateDisplay(n);
         }
+        // Admin_And_User();
     }
     else if (n == 2)
     {
@@ -301,39 +310,98 @@ void Process::processKeyEvent(KEY_EVENT_RECORD keyEvent, HANDLE hStdOutput, int 
             }
         }
     }
-    else if (n == 4)
+    else if (n == 4 && keyEvent.bKeyDown) // Ensure it's a key press event
     {
         switch (keyEvent.wVirtualKeyCode)
+        {
+        case VK_BACK:
+            // Set event if Backspace is pressed.
+            break;
+        case VK_UP:
+            num--;
+            if (num < 1)
             {
-            case VK_BACK:
-                // Set event if Backspace is pressed.
-                break;
-            case VK_UP:
-                num--;
-                if (num < 1)
-                {
-                    num = 6;
-                }
-                break;
-            case VK_DOWN:
-                num++;
-                if (num > 6)
-                {
-                    num = 1;
-                }
-                break;
-            case VK_RETURN:
-                choice = num;
-                SubGameLst(choice);
-                break;
+                num = 6;
             }
-            updateDisplay(n);
+            break;
+        case VK_DOWN:
+            num++;
+            if (num > 6)
+            {
+                num = 1;
+            }
+            break;
+        case VK_RETURN:
+            choice = num;
+            SubGameLst(choice);
+            GamesLst();
+            break;
+        }
+        updateDisplay(n);
+    }
+    else if (n == 5 && keyEvent.bKeyDown) // Ensure it's a key press event
+    {
+        switch (keyEvent.wVirtualKeyCode)
+        {
+        case VK_BACK:
+            // Set event if Backspace is pressed.
+            break;
+        case VK_UP:
+            num--;
+            if (num < 1)
+            {
+                num = 6;
+            }
+            break;
+        case VK_DOWN:
+            num++;
+            if (num > 6)
+            {
+                num = 1;
+            }
+            break;
+        case VK_RETURN:
+            choice = num;
+            SubManageUserInfo(choice);
+            ManageUserInfo();
+            break;
+        }
+        updateDisplay(n);
+    }
+    else if (n == 6 && keyEvent.bKeyDown) // Ensure it's a key press event
+    {
+        switch (keyEvent.wVirtualKeyCode)
+        {
+        case VK_BACK:
+            // Set event if Backspace is pressed.
+            break;
+        case VK_UP:
+            num--;
+            if (num < 1)
+            {
+                num = 6;
+            }
+            break;
+        case VK_DOWN:
+            num++;
+            if (num > 6)
+            {
+                num = 1;
+            }
+            break;
+        case VK_RETURN:
+            choice = num;
+            SubFoodAndDrink(choice);
+            FoodOrDrinkLst();
+            break;
+        }
+        updateDisplay(n);
     }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Process::processMouseEvent(MOUSE_EVENT_RECORD mouseEvent, HANDLE hStdOutput, int n)
 {
-    if(n == 1)
+    if (n == 1)
     {
         COORD xy = {0, 1};
         bool updateRequired = false; // Track if display update is needed
@@ -362,7 +430,7 @@ void Process::processMouseEvent(MOUSE_EVENT_RECORD mouseEvent, HANDLE hStdOutput
                 else if (num == 2)
                 {
                     Admin_User_ClsBox(2);
-                    File::user_login();
+                    user_login();
                 }
                 num = 1; // Reset num after action
             }
@@ -450,7 +518,7 @@ void Process::processMouseEvent(MOUSE_EVENT_RECORD mouseEvent, HANDLE hStdOutput
         //     updateDisplay(n);
         // }
     }
-    else if(n == 3)
+    else if (n == 3)
     {
         COORD xy = {0, 1};
         int x = 0; // Initialize x
@@ -492,13 +560,6 @@ void Process::processMouseEvent(MOUSE_EVENT_RECORD mouseEvent, HANDLE hStdOutput
         int choice = 0;
         bool updateRequired = false;
 
-        H::drawBoxDoubleLineWithBG(39, 16, 25, 1, 3); // add game
-        H::drawBoxDoubleLineWithBG(39, 22, 25, 1, 3); // view
-        H::drawBoxDoubleLineWithBG(39, 28, 25, 1, 3); // search
-        H::drawBoxDoubleLineWithBG(98, 16, 25, 1, 3); // update
-        H::drawBoxDoubleLineWithBG(98, 22, 25, 1, 3); // delete
-        H::drawBoxDoubleLineWithBG(98, 28, 25, 1, 3); // back
-
         // Mouse hover detection
         if (mouseEvent.dwMousePosition.X >= x + 39 && mouseEvent.dwMousePosition.X <= x + 64)
         {
@@ -518,21 +579,21 @@ void Process::processMouseEvent(MOUSE_EVENT_RECORD mouseEvent, HANDLE hStdOutput
                 updateRequired = true;
             }
         }
-        else if (mouseEvent.dwMousePosition.X >= x + 98 && mouseEvent.dwMousePosition.X <= x + 123)
+        if (mouseEvent.dwMousePosition.X >= x + 98 && mouseEvent.dwMousePosition.X <= x + 123)
         {
             if (mouseEvent.dwMousePosition.Y >= y + 16 && mouseEvent.dwMousePosition.Y <= y + 18)
             {
-                num = 1;
+                num = 4;
                 updateRequired = true;
             }
             else if (mouseEvent.dwMousePosition.Y >= y + 22 && mouseEvent.dwMousePosition.Y <= y + 24)
             {
-                num = 2;
+                num = 5;
                 updateRequired = true;
             }
             else if (mouseEvent.dwMousePosition.Y >= y + 28 && mouseEvent.dwMousePosition.Y <= y + 30)
             {
-                num = 3;
+                num = 6;
                 updateRequired = true;
             }
         }
@@ -540,7 +601,7 @@ void Process::processMouseEvent(MOUSE_EVENT_RECORD mouseEvent, HANDLE hStdOutput
         // Mouse click action
         if (mouseEvent.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED)
         {
-            updateDisplay(n);
+            // updateDisplay(n);
             switch (num)
             {
             case 1:
@@ -564,11 +625,154 @@ void Process::processMouseEvent(MOUSE_EVENT_RECORD mouseEvent, HANDLE hStdOutput
             default:
                 break;
             }
-            SubGameLst(choice);
-        }
-        if (updateRequired)
-        {
             updateDisplay(n);
+            SubGameLst(choice);
+            GamesLst();
+        }
+        // if (updateRequired)
+        // {
+        //     updateDisplay(n);
+        // }
+    }
+    else if (n == 5)
+    {
+        int x = 0; // Initialize x
+        int y = 0; // Initialize y
+        int choice = 0;
+
+        // Mouse hover detection
+        if (mouseEvent.dwMousePosition.X >= x + 10 && mouseEvent.dwMousePosition.X <= x + 40)
+        {
+            if (mouseEvent.dwMousePosition.Y >= y + 19 && mouseEvent.dwMousePosition.Y <= y + 21)
+            {
+                num = 1;
+            }
+            else if (mouseEvent.dwMousePosition.Y >= y + 23 && mouseEvent.dwMousePosition.Y <= y + 25)
+            {
+                num = 2;
+            }
+            else if (mouseEvent.dwMousePosition.Y >= y + 27 && mouseEvent.dwMousePosition.Y <= y + 29)
+            {
+                num = 3;
+            }
+        }
+        if (mouseEvent.dwMousePosition.X >= x + 46 && mouseEvent.dwMousePosition.X <= x + 76)
+        {
+            if (mouseEvent.dwMousePosition.Y >= y + 19 && mouseEvent.dwMousePosition.Y <= y + 21)
+            {
+                num = 4;
+            }
+            else if (mouseEvent.dwMousePosition.Y >= y + 23 && mouseEvent.dwMousePosition.Y <= y + 25)
+            {
+                num = 5;
+            }
+            else if (mouseEvent.dwMousePosition.Y >= y + 27 && mouseEvent.dwMousePosition.Y <= y + 29)
+            {
+                num = 6;
+            }
+        }
+
+        // Mouse click action
+        if (mouseEvent.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED)
+        {
+            // updateDisplay(n);
+            switch (num)
+            {
+            case 1:
+                choice = 1;
+                break;
+            case 2:
+                choice = 2;
+                break;
+            case 3:
+                choice = 3;
+                break;
+            case 4:
+                choice = 4;
+                break;
+            case 5:
+                choice = 5;
+                break;
+            case 6:
+                choice = 6;
+                break;
+            default:
+                break;
+            }
+            updateDisplay(n);
+            SubManageUserInfo(choice);
+            ManageUserInfo();
+        }
+    }
+    else if (n == 6)
+    {
+        int x = 0; // Initialize x
+        int y = 0; // Initialize y
+        int choice = 0;
+
+        // Mouse hover detection
+        if (mouseEvent.dwMousePosition.X >= x + 55 && mouseEvent.dwMousePosition.X <= x + 78)
+        {
+            if (mouseEvent.dwMousePosition.Y >= y + 17 && mouseEvent.dwMousePosition.Y <= y + 19)
+            {
+                num = 1;
+            }
+            else if (mouseEvent.dwMousePosition.Y >= y + 24 && mouseEvent.dwMousePosition.Y <= y + 26)
+            {
+                num = 2;
+            }
+            else if (mouseEvent.dwMousePosition.Y >= y + 31 && mouseEvent.dwMousePosition.Y <= y + 33)
+            {
+                num = 3;
+            }
+        }
+        if (mouseEvent.dwMousePosition.X >= x + 82 && mouseEvent.dwMousePosition.X <= x + 105)
+        {
+            if (mouseEvent.dwMousePosition.Y >= y + 17 && mouseEvent.dwMousePosition.Y <= y + 19)
+            {
+                num = 4;
+            }
+            else if (mouseEvent.dwMousePosition.Y >= y + 24 && mouseEvent.dwMousePosition.Y <= y + 26)
+            {
+                num = 5;
+            }
+            else if (mouseEvent.dwMousePosition.Y >= y + 31 && mouseEvent.dwMousePosition.Y <= y + 33)
+            {
+                num = 6;
+            }
+        }
+
+        // Mouse click action
+        if (mouseEvent.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED)
+        {
+            // updateDisplay(n);
+            switch (num)
+            {
+            case 1:
+                choice = 1;
+                break;
+            case 2:
+                choice = 2;
+                break;
+            case 3:
+                choice = 3;
+                break;
+            case 4:
+                choice = 4;
+                break;
+            case 5:
+                choice = 5;
+                break;
+            case 6:
+                choice = 6;
+                break;
+            default:
+                break;
+            }
+            updateDisplay(n);
+            SubFoodAndDrink(choice);
+            H::cls();
+            FoodOrDrinkLst();
         }
     }
 }
@@ -587,6 +791,7 @@ void Process::processInputEvents(INPUT_RECORD *ir, DWORD nRead, HANDLE hStdOutpu
             break;
         }
     }
+    //    Admin_And_User();
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Process::updateDisplay(int n)
@@ -722,7 +927,7 @@ void Process::updateDisplay(int n)
             AdminMenu_Art(6);
         }
     }
-    else if(n == 3)
+    else if (n == 3)
     {
         AdminProfileInfoTxt();
         AdminProfileInfo_Design();
@@ -765,9 +970,6 @@ void Process::updateDisplay(int n)
     }
     else if (n == 4)
     {
-        int x = 1;
-        int y = 1;
-
         H::drawBoxDoubleLineWithBG(39, 16, 25, 1, 3); // add game
         H::drawBoxDoubleLineWithBG(39, 22, 25, 1, 3); // view
         H::drawBoxDoubleLineWithBG(39, 28, 25, 1, 3); // search
@@ -789,86 +991,448 @@ void Process::updateDisplay(int n)
         H::gotoxy(104, 29);
         cout << "Back to MENU";
 
-        if (y == 1)
+        if (num == 1)
         {
             H::drawBoxDoubleLineWithBG(39, 16, 25, 1, 255);
             H::foreColor(249);
             H::gotoxy(45, 17);
             cout << "Add Game Data";
-            x = 1;
         }
-        else if (y == 2)
+        else if (num == 2)
         {
             H::drawBoxDoubleLineWithBG(39, 22, 25, 1, 255);
             H::foreColor(249);
             H::gotoxy(44, 23);
             cout << "View Games Data";
-            x = 2;
         }
-        else if (y == 3)
+        else if (num == 3)
         {
             H::drawBoxDoubleLineWithBG(39, 28, 25, 1, 255);
             H::foreColor(249);
             H::gotoxy(43, 29);
             cout << "Search Game Data";
-            x = 3;
         }
-        else if (y == 4)
+        else if (num == 4)
         {
             H::drawBoxDoubleLineWithBG(98, 16, 25, 1, 255);
             H::foreColor(249);
             H::gotoxy(102, 17);
             cout << "Update Game Data";
-            x = 4;
         }
-        else if (y == 5)
+        else if (num == 5)
         {
             H::drawBoxDoubleLineWithBG(98, 22, 25, 1, 255);
             H::foreColor(249);
             H::gotoxy(102, 23);
             cout << "Delete Game Data";
-            x = 5;
         }
-        else if (y == 6)
+        else if (num == 6)
         {
             H::drawBoxDoubleLineWithBG(98, 28, 25, 1, 255);
             H::foreColor(249);
             H::gotoxy(104, 29);
             cout << "Back to MENU";
-            x = 6;
+        }
+    }
+    else if (n == 5)
+    {
+        H::drawBoxDoubleLineWithBG(10, 15 + 4, 30, 1, 3);  // sign
+        H::drawBoxDoubleLineWithBG(10, 15 + 8, 30, 1, 3);  // view
+        H::drawBoxDoubleLineWithBG(10, 15 + 12, 30, 1, 3); // search
+        H::drawBoxDoubleLineWithBG(46, 15 + 4, 30, 1, 3);  // edit
+        H::drawBoxDoubleLineWithBG(46, 15 + 8, 30, 1, 3);  // remove
+        H::drawBoxDoubleLineWithBG(46, 15 + 12, 30, 1, 3); // back
+
+        H::foreColor(7);
+        H::gotoxy(19, 20);
+        cout << "Sign Up User";
+        H::gotoxy(17, 24);
+        cout << "View Users Info";
+        H::gotoxy(16, 28);
+        cout << "Search User's Info";
+        H::gotoxy(53, 20);
+        cout << "Edit User's Info";
+        H::gotoxy(50, 24);
+        cout << "Remove User's Account";
+        H::gotoxy(55, 28);
+        cout << "Back to MENU";
+
+        if (num == 1)
+        {
+            H::drawBoxDoubleLineWithBG(10, 15 + 4, 30, 1, 255); // sign
+            H::foreColor(249);
+            H::gotoxy(19, 20);
+            cout << "Sign Up User";
+        }
+        else if (num == 2)
+        {
+            H::drawBoxDoubleLineWithBG(10, 15 + 8, 30, 1, 255); // view
+            H::foreColor(249);
+            H::gotoxy(17, 24);
+            cout << "View Users Info";
+        }
+        else if (num == 3)
+        {
+            H::drawBoxDoubleLineWithBG(10, 15 + 12, 30, 1, 255); // search
+            H::foreColor(249);
+            H::gotoxy(16, 28);
+            cout << "Search User's Info";
+        }
+        else if (num == 4)
+        {
+            H::drawBoxDoubleLineWithBG(46, 15 + 4, 30, 1, 255); // edit
+            H::foreColor(249);
+            H::gotoxy(53, 20);
+            cout << "Edit User's Info";
+        }
+        else if (num == 5)
+        {
+            H::drawBoxDoubleLineWithBG(46, 15 + 8, 30, 1, 255); // remove
+            H::foreColor(249);
+            H::gotoxy(50, 24);
+            cout << "Remove User's Account";
+        }
+        else if (num == 6)
+        {
+            H::drawBoxDoubleLineWithBG(46, 15 + 12, 30, 1, 255); // back
+            H::foreColor(249);
+            H::gotoxy(55, 28);
+            cout << "Back to MENU";
+        }
+    }
+    else if (n == 6)
+    {
+        B::FoodMenuTxt();
+        H::drawBoxDoubleLineWithBG(55, 17, 23, 1, 3); // add
+        H::drawBoxDoubleLineWithBG(55, 24, 23, 1, 3); // view
+        H::drawBoxDoubleLineWithBG(55, 31, 23, 1, 3); // search
+        H::drawBoxDoubleLineWithBG(82, 17, 23, 1, 3); // update
+        H::drawBoxDoubleLineWithBG(82, 24, 23, 1, 3); // delete
+        H::drawBoxDoubleLineWithBG(82, 31, 23, 1, 3); // back
+        // label
+        H::foreColor(7);
+        H::gotoxy(56, 18);
+        cout << "Input Food or Drink";
+        H::gotoxy(57, 25);
+        cout << "View Food & Drinks";
+        H::gotoxy(56, 32);
+        cout << "Search Food or Drink";
+        H::gotoxy(83, 18);
+        cout << "Update Food or Drink";
+        H::gotoxy(83, 25);
+        cout << "Delete Food or Drink";
+        H::gotoxy(87, 32);
+        cout << "Back to MENU";
+
+        if (num == 1)
+        {
+            H::drawBoxDoubleLineWithBG(55, 17, 23, 1, 255); // add
+            H::gotoxy(56, 18);
+            H::foreColor(249);
+            cout << "Input Food or Drink";
+            B::FoodMenu_Design(1);
+        }
+        else if (num == 2)
+        {
+            H::drawBoxDoubleLineWithBG(55, 24, 23, 1, 255); // add
+            H::gotoxy(57, 25);
+            H::foreColor(249);
+            cout << "View Food & Drinks";
+            B::FoodMenu_Design(3);
+        }
+        else if (num == 3)
+        {
+            H::drawBoxDoubleLineWithBG(55, 31, 23, 1, 255); // add
+            H::gotoxy(56, 32);
+            H::foreColor(249);
+            cout << "Search Food or Drink";
+            B::FoodMenu_Design(5);
+        }
+        else if (num == 4)
+        {
+            H::drawBoxDoubleLineWithBG(82, 17, 23, 1, 255); // update
+            H::gotoxy(83, 18);
+            H::foreColor(249);
+            cout << "Update Food or Drink";
+            B::FoodMenu_Design(7);
+        }
+        else if (num == 5)
+        {
+            H::drawBoxDoubleLineWithBG(82, 24, 23, 1, 255); // update
+            H::gotoxy(83, 25);
+            H::foreColor(249);
+            cout << "Delete Food or Drink";
+            B::FoodMenu_Design(9);
+        }
+        else if (num == 6)
+        {
+            H::drawBoxDoubleLineWithBG(82, 31, 23, 1, 255); // update
+            H::gotoxy(87, 32);
+            H::foreColor(249);
+            cout << "Back to MENU";
+            B::FoodMenu_Design(11);
+        }
+    }
+    else if (n == 7)
+    {
+        // int pocision = 10 + 22;
+
+        H::drawBoxSingleLineWithBG(33, 14, 31, 1, 1); // info
+        H::drawBoxSingleLineWithBG(33, 17, 31, 1, 1); // play game
+        H::drawBoxSingleLineWithBG(33, 20, 31, 1, 1); // buy hour
+        H::drawBoxSingleLineWithBG(33, 23, 31, 1, 1); // buy foodndrink
+        H::drawBoxSingleLineWithBG(33, 26, 31, 1, 1); // invoice
+        H::drawBoxSingleLineWithBG(33, 29, 31, 1, 1); // log out
+
+        Design::tp(7, 35, 15);
+        cout << "My Information";
+        H::gotoxy(35, 18);
+        cout << "Play Games";
+        H::gotoxy(35, 21);
+        cout << "Buy More Hours";
+        H::gotoxy(35, 24);
+        cout << "Buy Food or Drinks";
+        H::gotoxy(35, 27);
+        cout << "View Spending List";
+        H::gotoxy(35, 30);
+        cout << "Log Out of Account";
+
+        if (num == 1)
+        {
+            LENG::UserMenu_Art(num);
+        }
+        else if (num == 2)
+        {
+            LENG::UserMenu_Art(num);
+        }
+        else if (num == 3)
+        {
+            LENG::UserMenu_Art(num);
+        }
+        else if (num == 4)
+        {
+            LENG::UserMenu_Art(num);
+        }
+        else if (num == 5)
+        {
+            LENG::UserMenu_Art(num);
+        }
+        else if (num == 6)
+        {
+            LENG::UserMenu_Art(num);
         }
     }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-void Process::Admin_And_User()
+void Process::KeyEvent(KEY_EVENT_RECORD keyEvent, HANDLE hStdOutput, const char *username, const char *password)
 {
-    while (1)
+    int choice = 0;
+
+    if (keyEvent.bKeyDown)
     {
-        H::setcursor(0, 0);
-        H::setcolor(7);
-        H::cls();
-        outline();
-        Login_Design();
-
-        num = 1;
-        updateDisplay(1);
-
-        INPUT_RECORD ir[128];
-        HANDLE hStdInput = GetStdHandle(STD_INPUT_HANDLE);
-        HANDLE hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);
-        HANDLE hEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
-        HANDLE handles[2] = {hEvent, hStdInput};
-        DWORD nRead;
-
-        SetConsoleMode(hStdInput, ENABLE_ECHO_INPUT | ENABLE_LINE_INPUT | ENABLE_MOUSE_INPUT | ENABLE_EXTENDED_FLAGS);
-        FlushConsoleInputBuffer(hStdInput);
-
-        while (WaitForMultipleObjects(2, handles, FALSE, INFINITE))
+        switch (keyEvent.wVirtualKeyCode)
         {
-            ReadConsoleInput(hStdInput, ir, 128, &nRead);
-            processInputEvents(ir, nRead, hStdOutput, 1);
+        case VK_BACK:
+            // Set event if Backspace is pressed.
+            break;
+        case VK_UP:
+            num--;
+            if (num < 1)
+            {
+                num = 6;
+            }
+            break;
+        case VK_DOWN:
+            num++;
+            if (num > 6)
+            {
+                num = 1;
+            }
+            break;
+        case VK_RETURN:
+            choice = num;
+            if (choice == 1)
+            {
+                Design::LoadingAnimation();
+                File::viewProfile(username, password);
+            }
+            else if (choice == 2)
+            {
+                Design::LoadingAnimation();
+                File::GameMENU();
+            }
+            else if (choice == 3)
+            {
+                Design::LoadingAnimation();
+                File::buyMoreTime(username, password);
+            }
+            else if (choice == 4)
+            {
+                Design::LoadingAnimation();
+                File::buyFood(username, password);
+            }
+            else if (choice == 5)
+            {
+                Design::LoadingAnimation();
+                File::invoice(username, password);
+            }
+            else if (choice == 6)
+            {
+                Design::LoadingAnimation();
+                File::logoutTimeToFile(username, password);
+                File::calculateTime(username, password);
+                Admin_And_User();
+            }
+            userSubMenu(username, password);
+            break;
+        }
+        updateDisplay(7);
+    }
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void Process::MouseEvent(MOUSE_EVENT_RECORD mouseEvent, HANDLE hStdOutput, const char *username, const char *password)
+{
+    int x = 0; // Initialize x
+    int y = 0; // Initialize y
+    int choice = 0;
+
+    if (mouseEvent.dwMousePosition.X >= x + 33 && mouseEvent.dwMousePosition.X <= x + 64)
+    {
+        if (mouseEvent.dwMousePosition.Y >= y + 14 && mouseEvent.dwMousePosition.Y <= y + 16)
+        {
+            num = 1;
+        }
+        else if (mouseEvent.dwMousePosition.Y >= y + 17 && mouseEvent.dwMousePosition.Y <= y + 19)
+        {
+            num = 2;
+        }
+        else if (mouseEvent.dwMousePosition.Y >= y + 20 && mouseEvent.dwMousePosition.Y <= y + 22)
+        {
+            num = 3;
+        }
+        else if (mouseEvent.dwMousePosition.Y >= y + 23 && mouseEvent.dwMousePosition.Y <= y + 25)
+        {
+            num = 4;
+        }
+        else if (mouseEvent.dwMousePosition.Y >= y + 26 && mouseEvent.dwMousePosition.Y <= y + 28)
+        {
+            num = 5;
+        }
+        else if (mouseEvent.dwMousePosition.Y >= y + 29 && mouseEvent.dwMousePosition.Y <= y + 31)
+        {
+            num = 6;
         }
     }
+
+    // Mouse click action
+    if (mouseEvent.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED)
+    {
+        // updateDisplay(n);
+        if (num == 1)
+        {
+            Design::LoadingAnimation();
+            File::viewProfile(username, password);
+        }
+        else if (num == 2)
+        {
+            Design::LoadingAnimation();
+            File::GameMENU();
+        }
+        else if (num == 3)
+        {
+            Design::LoadingAnimation();
+            File::buyMoreTime(username, password);
+        }
+        else if (num == 4)
+        {
+            Design::LoadingAnimation();
+            File::buyFood(username, password);
+        }
+        else if (num == 5)
+        {
+            Design::LoadingAnimation();
+            File::invoice(username, password);
+        }
+        else if (num == 6)
+        {
+            Design::LoadingAnimation();
+            File::logoutTimeToFile(username, password);
+            File::calculateTime(username, password);
+            Admin_And_User();
+        }
+        userSubMenu(username, password);
+    }
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void Process::InputEvents(INPUT_RECORD *ir, DWORD nRead, HANDLE hStdOutput, const char *username, const char *password)
+{
+    for (DWORD i = 0; i < nRead; i++)
+    {
+        switch (ir[i].EventType)
+        {
+        case KEY_EVENT:
+            KeyEvent(ir[i].Event.KeyEvent, hStdOutput, username, password);
+            break;
+        case MOUSE_EVENT:
+            MouseEvent(ir[i].Event.MouseEvent, hStdOutput, username, password);
+            break;
+        }
+    } // Continue the loop otherwise
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void Process::Admin_And_User()
+{
+    H::setcursor(0, 0);
+    H::setcolor(7);
+    H::cls();
+    outline();
+    Login_Design();
+
+    num = 1;
+    updateDisplay(1);
+
+    INPUT_RECORD ir[128];
+    HANDLE hStdInput = GetStdHandle(STD_INPUT_HANDLE);
+    HANDLE hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+    HANDLE hEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
+    HANDLE handles[2] = {hEvent, hStdInput};
+    DWORD nRead;
+
+    SetConsoleMode(hStdInput, ENABLE_ECHO_INPUT | ENABLE_LINE_INPUT | ENABLE_MOUSE_INPUT | ENABLE_EXTENDED_FLAGS);
+    FlushConsoleInputBuffer(hStdInput);
+
+    while (WaitForMultipleObjects(2, handles, FALSE, INFINITE))
+    {
+        ReadConsoleInput(hStdInput, ir, 128, &nRead);
+        processInputEvents(ir, nRead, hStdOutput, 1);
+    }
+    //    while (1)
+    //    {
+    //        H::setcursor(0, 0);
+    //        H::setcolor(7);
+    //        H::cls();
+    //        outline();
+    //        Login_Design();
+    //
+    //        num = 1;
+    //        updateDisplay(1);
+    //
+    //        INPUT_RECORD ir[128];
+    //        HANDLE hStdInput = GetStdHandle(STD_INPUT_HANDLE);
+    //        HANDLE hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+    //        HANDLE hEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
+    //        HANDLE handles[2] = {hEvent, hStdInput};
+    //        DWORD nRead;
+    //
+    //        SetConsoleMode(hStdInput, ENABLE_ECHO_INPUT | ENABLE_LINE_INPUT | ENABLE_MOUSE_INPUT | ENABLE_EXTENDED_FLAGS);
+    //        FlushConsoleInputBuffer(hStdInput);
+    //
+    //        while (WaitForMultipleObjects(2, handles, FALSE, INFINITE))
+    //        {
+    //            ReadConsoleInput(hStdInput, ir, 128, &nRead);
+    //            processInputEvents(ir, nRead, hStdOutput, 1);
+    //        }
+    //    }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //                          Login As Administrator
@@ -1081,7 +1645,7 @@ void Process::AdminProfileInfo()
     while (WaitForMultipleObjects(2, handles, FALSE, INFINITE))
     {
         ReadConsoleInput(hStdInput, ir, 128, &nRead);
-        processInputEvents(ir, nRead, hStdOutput,3);
+        processInputEvents(ir, nRead, hStdOutput, 3);
     }
 }
 /******************************************************** */
@@ -1201,6 +1765,7 @@ void Process::GamesLst()
 {
     H::setConsoleTitle(TEXT("Games List Menu"));
 
+    num = 1;
     H::setcolor(7);
     H::cls();
     H::setcursor(0, 0);
@@ -1208,18 +1773,6 @@ void Process::GamesLst()
 
     B::GameMenuTxt();
     B::GameMenu_Design();
-
-    // H::gotoxy(44, 36);
-    // H::setcolor(1);
-    // cout << "Use ";
-    // H::setcolor(4);
-    // cout << "[UP] [DOWN]";
-    // H::setcolor(1);
-    // cout << " arrow key to move between options and ";
-    // H::setcolor(4);
-    // cout << "[ENTER]";
-    // H::setcolor(1);
-    // cout << " to select";
 
     updateDisplay(4);
 
@@ -1233,131 +1786,11 @@ void Process::GamesLst()
     SetConsoleMode(hStdInput, ENABLE_ECHO_INPUT | ENABLE_LINE_INPUT | ENABLE_MOUSE_INPUT | ENABLE_EXTENDED_FLAGS);
     FlushConsoleInputBuffer(hStdInput);
 
-    while (WaitForMultipleObjects(2, handles, FALSE, INFINITE))
+    while (WaitForMultipleObjects(2, handles, FALSE, INFINITE) != WAIT_OBJECT_0)
     {
         ReadConsoleInput(hStdInput, ir, 128, &nRead);
-        processInputEvents(ir, nRead, hStdOutput,4);
+        processInputEvents(ir, nRead, hStdOutput, 4);
     }
-
-    // while (true)
-    // {
-        // H::setcolor(7);
-        // H::cls();
-        // H::setcursor(0, 0);
-        // outline();
-
-        // int y = 1;
-        // int x = 0;
-        // char press;
-
-        // B::GameMenuTxt();
-        // B::GameMenu_Design();
-
-        // H::gotoxy(44, 36);
-        // H::setcolor(1);
-        // cout << "Use ";
-        // H::setcolor(4);
-        // cout << "[UP] [DOWN]";
-        // H::setcolor(1);
-        // cout << " arrow key to move between options and ";
-        // H::setcolor(4);
-        // cout << "[ENTER]";
-        // H::setcolor(1);
-        // cout << " to select";
-
-    //     do
-    //     {
-            // H::drawBoxDoubleLineWithBG(39, 16, 25, 1, 3); // add game
-            // H::drawBoxDoubleLineWithBG(39, 22, 25, 1, 3); // view
-            // H::drawBoxDoubleLineWithBG(39, 28, 25, 1, 3); // search
-            // H::drawBoxDoubleLineWithBG(98, 16, 25, 1, 3); // update
-            // H::drawBoxDoubleLineWithBG(98, 22, 25, 1, 3); // delete
-            // H::drawBoxDoubleLineWithBG(98, 28, 25, 1, 3); // back
-
-            // H::foreColor(7);
-            // H::gotoxy(45, 17);
-            // cout << "Add Game Data";
-            // H::gotoxy(44, 23);
-            // cout << "View Games Data";
-            // H::gotoxy(43, 29);
-            // cout << "Search Game Data";
-            // H::gotoxy(102, 17);
-            // cout << "Update Game Data";
-            // H::gotoxy(102, 23);
-            // cout << "Delete Game Data";
-            // H::gotoxy(104, 29);
-            // cout << "Back to MENU";
-
-            // if (y == 1)
-            // {
-            //     H::drawBoxDoubleLineWithBG(39, 16, 25, 1, 255);
-            //     H::foreColor(249);
-            //     H::gotoxy(45, 17);
-            //     cout << "Add Game Data";
-            //     x = 1;
-            // }
-            // else if (y == 2)
-            // {
-            //     H::drawBoxDoubleLineWithBG(39, 22, 25, 1, 255);
-            //     H::foreColor(249);
-            //     H::gotoxy(44, 23);
-            //     cout << "View Games Data";
-            //     x = 2;
-            // }
-            // else if (y == 3)
-            // {
-            //     H::drawBoxDoubleLineWithBG(39, 28, 25, 1, 255);
-            //     H::foreColor(249);
-            //     H::gotoxy(43, 29);
-            //     cout << "Search Game Data";
-            //     x = 3;
-            // }
-            // else if (y == 4)
-            // {
-            //     H::drawBoxDoubleLineWithBG(98, 16, 25, 1, 255);
-            //     H::foreColor(249);
-            //     H::gotoxy(102, 17);
-            //     cout << "Update Game Data";
-            //     x = 4;
-            // }
-            // else if (y == 5)
-            // {
-            //     H::drawBoxDoubleLineWithBG(98, 22, 25, 1, 255);
-            //     H::foreColor(249);
-            //     H::gotoxy(102, 23);
-            //     cout << "Delete Game Data";
-            //     x = 5;
-            // }
-            // else if (y == 6)
-            // {
-            //     H::drawBoxDoubleLineWithBG(98, 28, 25, 1, 255);
-            //     H::foreColor(249);
-            //     H::gotoxy(104, 29);
-            //     cout << "Back to MENU";
-            //     x = 6;
-            // }
-    //         press = getch();
-
-    //         switch (press)
-    //         {
-    //         case 72:
-    //             y--;
-    //             if (y < 1)
-    //             {
-    //                 y = 6;
-    //             }
-    //             break;
-    //         case 80:
-    //             y++;
-    //             if (y > 6)
-    //             {
-    //                 y = 1;
-    //             }
-    //             break;
-    //         }
-    //     } while (press != 13);
-    //     SubGameLst(x);
-    // }
 }
 /******************************************************** */
 void Process::SubGameLst(int num)
@@ -1565,127 +1998,44 @@ void Process::ManageUserInfo()
 {
     H::setConsoleTitle(TEXT("Manage User Information"));
 
-    while (true)
+    H::setcolor(7);
+    H::cls();
+    H::setcursor(0, 0);
+    outline();
+
+    num = 1;
+
+    B::ManageUserInfoTxt();
+    B::ManageUserInfo_Design();
+
+    H::gotoxy(8, 36);
+    H::setcolor(1);
+    cout << "Use ";
+    H::setcolor(4);
+    cout << "[UP] [DOWN]";
+    H::setcolor(1);
+    cout << " arrow key to move between options and ";
+    H::setcolor(4);
+    cout << "[ENTER]";
+    H::setcolor(1);
+    cout << " to select";
+
+    updateDisplay(5);
+
+    INPUT_RECORD ir[128];
+    HANDLE hStdInput = GetStdHandle(STD_INPUT_HANDLE);
+    HANDLE hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+    HANDLE hEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
+    HANDLE handles[2] = {hEvent, hStdInput};
+    DWORD nRead;
+
+    SetConsoleMode(hStdInput, ENABLE_ECHO_INPUT | ENABLE_LINE_INPUT | ENABLE_MOUSE_INPUT | ENABLE_EXTENDED_FLAGS);
+    FlushConsoleInputBuffer(hStdInput);
+
+    while (WaitForMultipleObjects(2, handles, FALSE, INFINITE))
     {
-        H::setcolor(7);
-        H::cls();
-        H::setcursor(0, 0);
-        outline();
-
-        B::ManageUserInfoTxt();
-        B::ManageUserInfo_Design();
-
-        int y = 1;
-        char press;
-        int choice = 0;
-
-        H::gotoxy(8, 36);
-        H::setcolor(1);
-        cout << "Use ";
-        H::setcolor(4);
-        cout << "[UP] [DOWN]";
-        H::setcolor(1);
-        cout << " arrow key to move between options and ";
-        H::setcolor(4);
-        cout << "[ENTER]";
-        H::setcolor(1);
-        cout << " to select";
-
-        do
-        {
-            H::drawBoxDoubleLineWithBG(10, 15 + 4, 30, 1, 3);  // sign
-            H::drawBoxDoubleLineWithBG(10, 15 + 8, 30, 1, 3);  // view
-            H::drawBoxDoubleLineWithBG(10, 15 + 12, 30, 1, 3); // search
-            H::drawBoxDoubleLineWithBG(46, 15 + 4, 30, 1, 3);  // edit
-            H::drawBoxDoubleLineWithBG(46, 15 + 8, 30, 1, 3);  // remove
-            H::drawBoxDoubleLineWithBG(46, 15 + 12, 30, 1, 3); // back
-
-            H::foreColor(7);
-            H::gotoxy(19, 20);
-            cout << "Sign Up User";
-            H::gotoxy(17, 24);
-            cout << "View Users Info";
-            H::gotoxy(16, 28);
-            cout << "Search User's Info";
-            H::gotoxy(53, 20);
-            cout << "Edit User's Info";
-            H::gotoxy(50, 24);
-            cout << "Remove User's Account";
-            H::gotoxy(55, 28);
-            cout << "Back to MENU";
-
-            if (y == 1)
-            {
-                H::drawBoxDoubleLineWithBG(10, 15 + 4, 30, 1, 255); // sign
-                H::foreColor(249);
-                H::gotoxy(19, 20);
-                cout << "Sign Up User";
-                choice = 1;
-            }
-            if (y == 2)
-            {
-                H::drawBoxDoubleLineWithBG(10, 15 + 8, 30, 1, 255); // view
-                H::foreColor(249);
-                H::gotoxy(17, 24);
-                cout << "View Users Info";
-                choice = 2;
-            }
-            if (y == 3)
-            {
-                H::drawBoxDoubleLineWithBG(10, 15 + 12, 30, 1, 255); // search
-                H::foreColor(249);
-                H::gotoxy(16, 28);
-                cout << "Search User's Info";
-                choice = 3;
-            }
-            if (y == 4)
-            {
-                H::drawBoxDoubleLineWithBG(46, 15 + 4, 30, 1, 255); // edit
-                H::foreColor(249);
-                H::gotoxy(53, 20);
-                cout << "Edit User's Info";
-                choice = 4;
-            }
-            if (y == 5)
-            {
-                H::drawBoxDoubleLineWithBG(46, 15 + 8, 30, 1, 255); // remove
-                H::foreColor(249);
-                H::gotoxy(50, 24);
-                cout << "Remove User's Account";
-                choice = 5;
-            }
-            if (y == 6)
-            {
-                H::drawBoxDoubleLineWithBG(46, 15 + 12, 30, 1, 255); // back
-                H::foreColor(249);
-                H::gotoxy(55, 28);
-                cout << "Back to MENU";
-                choice = 6;
-            }
-
-            press = getch();
-
-            switch (press)
-            {
-            case 72:
-                y--;
-                if (y < 1)
-                {
-
-                    y = 6;
-                }
-                break;
-            case 80:
-                y++;
-                if (y > 6)
-                {
-                    y = 1;
-                }
-                break;
-            }
-        } while (press != 13);
-
-        SubManageUserInfo(choice);
+        ReadConsoleInput(hStdInput, ir, 128, &nRead);
+        processInputEvents(ir, nRead, hStdOutput, 5);
     }
 }
 /*********************************************************/
@@ -1904,6 +2254,7 @@ void Process::ManageUserPayment()
     B::AllInvoicesTxt();
     B::AllInvoices_Design();
     File::viewAllUserInvoice();
+    Admin_Option();
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -1911,129 +2262,42 @@ void Process::FoodOrDrinkLst()
 {
     H::setConsoleTitle(TEXT("Food and Drinks Menu"));
 
-    while (true)
+    H::setcolor(7);
+    H::cls();
+    H::setcursor(0, 0);
+    outline();
+    num = 1;
+
+    // B::FoodMenuTxt(); // txt
+
+    H::gotoxy(44, 37);
+    H::setcolor(1);
+    cout << "Use ";
+    H::setcolor(4);
+    cout << "[UP] [DOWN]";
+    H::setcolor(1);
+    cout << " arrow key to move between options and ";
+    H::setcolor(4);
+    cout << "[ENTER]";
+    H::setcolor(1);
+    cout << " to select";
+
+    updateDisplay(6);
+
+    INPUT_RECORD ir[128];
+    HANDLE hStdInput = GetStdHandle(STD_INPUT_HANDLE);
+    HANDLE hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+    HANDLE hEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
+    HANDLE handles[2] = {hEvent, hStdInput};
+    DWORD nRead;
+
+    SetConsoleMode(hStdInput, ENABLE_ECHO_INPUT | ENABLE_LINE_INPUT | ENABLE_MOUSE_INPUT | ENABLE_EXTENDED_FLAGS);
+    FlushConsoleInputBuffer(hStdInput);
+
+    while (WaitForMultipleObjects(2, handles, FALSE, INFINITE))
     {
-        H::setcolor(7);
-        H::cls();
-        H::setcursor(0, 0);
-        outline();
-
-        B::FoodMenuTxt(); // txt
-
-        H::gotoxy(44, 37);
-        H::setcolor(1);
-        cout << "Use ";
-        H::setcolor(4);
-        cout << "[UP] [DOWN]";
-        H::setcolor(1);
-        cout << " arrow key to move between options and ";
-        H::setcolor(4);
-        cout << "[ENTER]";
-        H::setcolor(1);
-        cout << " to select";
-
-        int y = 1;
-        int choice = 0;
-        char press;
-
-        do
-        {
-            H::drawBoxDoubleLineWithBG(55, 17, 23, 1, 3); // add
-            H::drawBoxDoubleLineWithBG(55, 24, 23, 1, 3); // view
-            H::drawBoxDoubleLineWithBG(55, 31, 23, 1, 3); // search
-            H::drawBoxDoubleLineWithBG(82, 17, 23, 1, 3); // update
-            H::drawBoxDoubleLineWithBG(82, 24, 23, 1, 3); // delete
-            H::drawBoxDoubleLineWithBG(82, 31, 23, 1, 3); // back
-            // label
-            H::foreColor(7);
-            H::gotoxy(56, 18);
-            cout << "Input Food or Drink";
-            H::gotoxy(57, 25);
-            cout << "View Food & Drinks";
-            H::gotoxy(56, 32);
-            cout << "Search Food or Drink";
-            H::gotoxy(83, 18);
-            cout << "Update Food or Drink";
-            H::gotoxy(83, 25);
-            cout << "Delete Food or Drink";
-            H::gotoxy(87, 32);
-            cout << "Back to MENU";
-
-            if (y == 1)
-            {
-                H::drawBoxDoubleLineWithBG(55, 17, 23, 1, 255); // add
-                H::gotoxy(56, 18);
-                H::foreColor(249);
-                cout << "Input Food or Drink";
-                B::FoodMenu_Design(1);
-                choice = 1;
-            }
-            else if (y == 2)
-            {
-                H::drawBoxDoubleLineWithBG(55, 24, 23, 1, 255); // add
-                H::gotoxy(57, 25);
-                H::foreColor(249);
-                cout << "View Food & Drinks";
-                B::FoodMenu_Design(3);
-                choice = 2;
-            }
-            else if (y == 3)
-            {
-                H::drawBoxDoubleLineWithBG(55, 31, 23, 1, 255); // add
-                H::gotoxy(56, 32);
-                H::foreColor(249);
-                cout << "Search Food or Drink";
-                B::FoodMenu_Design(5);
-                choice = 3;
-            }
-            else if (y == 4)
-            {
-                H::drawBoxDoubleLineWithBG(82, 17, 23, 1, 255); // update
-                H::gotoxy(83, 18);
-                H::foreColor(249);
-                cout << "Update Food or Drink";
-                B::FoodMenu_Design(7);
-                choice = 4;
-            }
-            else if (y == 5)
-            {
-                H::drawBoxDoubleLineWithBG(82, 24, 23, 1, 255); // update
-                H::gotoxy(83, 25);
-                H::foreColor(249);
-                cout << "Delete Food or Drink";
-                B::FoodMenu_Design(9);
-                choice = 5;
-            }
-            else if (y == 6)
-            {
-                H::drawBoxDoubleLineWithBG(82, 31, 23, 1, 255); // update
-                H::gotoxy(87, 32);
-                H::foreColor(249);
-                cout << "Back to MENU";
-                B::FoodMenu_Design(11);
-                choice = 6;
-            }
-            press = getch();
-
-            switch (press)
-            {
-            case 72:
-                y--;
-                if (y < 1)
-                {
-                    y = 6;
-                }
-                break;
-            case 80:
-                y++;
-                if (y > 6)
-                {
-                    y = 1;
-                }
-                break;
-            }
-        } while (press != 13);
-        SubFoodAndDrink(choice);
+        ReadConsoleInput(hStdInput, ir, 128, &nRead);
+        processInputEvents(ir, nRead, hStdOutput, 6);
     }
 }
 /*********************************************************/
@@ -2236,6 +2500,182 @@ void Process::RemoveFoodDrink()
             RemoveFoodDrink();
             break;
         }
+    }
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//////////////////////////////////////////
+// USER LOGIN
+//////////////////////////////////////////
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void Process::user_login()
+{
+    char username[20];
+    char password[20];
+    bool islogin = false;
+    char press = ' ';
+
+    fstream file(File::UserInfoFile, ios::in | ios::binary);
+    if (!file.is_open())
+    {
+        H::setcolor(135);
+        H::gotoxy(42, 32);
+        cout << "Register First!!";
+        H::delay(999);
+        H::clearBox(42, 32, 25, 0, 136);
+    }
+    else
+    {
+        if (File::check_file(File::UserInfoFile))
+        {
+            H::setcolor(135);
+            H::gotoxy(42, 32);
+            cout << "Register First!!";
+            H::delay(999);
+            H::clearBox(42, 32, 25, 0, 136);
+        }
+        else
+        {
+            File::mupVector.clear();
+
+            while (file.read((char *)&File::mup, sizeof(MgUserPayment)))
+            {
+                File::mupVector.push_back(File::mup);
+            }
+
+            file.close();
+
+            while (1)
+            {
+                int chance = 3;
+
+                while (chance != 0)
+                {
+                    H::setcursor(1, 0);
+                    H::setcolor(249);
+                    H::gotoxy(30, 22);
+                    H::inputAll(username, sizeof(username)); // username
+
+                    H::setcolor(249);
+                    H::gotoxy(30, 28);
+                    H::hidePassword(password, sizeof(password));
+                    H::setcursor(0, 0);
+
+                    for (const auto &user : File::mupVector)
+                    {
+                        if (strcmp(username, user.getUsername()) == 0 && strcmp(password, user.getPassword()) == 0)
+                        {
+                            islogin = true;
+                            break;
+                        }
+                    }
+                    if (islogin == true)
+                    {
+                        Design::loginMsg(3);
+                        File::loginTimeToFile(username, password);
+                        userSubMenu(username, password);
+                        break;
+                    }
+                    else
+                    {
+                        islogin = false;
+                        H::setcursor(0, 0);
+                        H::setcolor(140);
+                        H::gotoxy(10 + 29, 5 + 27);
+                        cout << "You have ";
+                        H::setcolor(137);
+                        cout << --chance;
+                        H::setcolor(140);
+                        cout << " left";
+
+                        Design::loginMsg(1); // input msg
+
+                        press = getch(); // press ESC to back
+
+                        H::clearBox(10 + 19, 5 + 18, 42, 0, 247); // Clear username and password boxes
+                        H::clearBox(10 + 19, 5 + 24, 42, 0, 247); // Clear username and password boxes
+                        H::clearBox(10 + 18, 5 + 27, 43, 1, 136); // Clear message
+                        // break;
+                        if (press == 27)
+                        {
+                            break;
+                        }
+                    }
+                }
+                if (chance == 0)
+                {
+                    press = ' ';
+                    for (int i = 1; i <= 6; i++)
+                    {
+                        H::setcursor(0, 0);
+                        H::setcolor(140);
+                        H::gotoxy(27, 32);
+                        cout << "You ran out chances! Please wait for   seconds";
+                        H::setcolor(137);
+                        H::gotoxy(10 + 54, 32);
+                        cout << 6 - i;
+                        H::delay(999);
+
+                        H::clearBox(27, 32, 45, 0, 136); // cls chance msg
+                        H::setcolor(7);
+                    }
+
+                    Design::loginMsg(2); // esc or continue
+
+                    press = getch();
+
+                    H::clearBox(10 + 38, 38, 61, 0, 7); // cls msg
+
+                    if (press == 27)
+                    {
+                        break;
+                    }
+                }
+                if (islogin == true)
+                {
+                    break;
+                }
+                if (press == 27)
+                {
+                    break;
+                }
+            }
+        }
+    }
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//////////////////////////////////////////
+// USER MENU
+//////////////////////////////////////////
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+void Process::userSubMenu(const char *username, const char *password)
+{
+    H::setConsoleTitle(TEXT("User MENU"));
+    H::setcursor(0, 0);
+    Design::LoadingAnimation();
+
+    H::setcolor(7);
+    H::cls();
+    Design::outline();
+    Design::UserMenuTxt();
+    LENG::UserMenu_Design();
+    num = 1;
+
+    updateDisplay(7);
+
+    INPUT_RECORD ir[128];
+    HANDLE hStdInput = GetStdHandle(STD_INPUT_HANDLE);
+    HANDLE hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+    HANDLE hEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
+    HANDLE handles[2] = {hEvent, hStdInput};
+    DWORD nRead;
+
+    SetConsoleMode(hStdInput, ENABLE_ECHO_INPUT | ENABLE_LINE_INPUT | ENABLE_MOUSE_INPUT | ENABLE_EXTENDED_FLAGS);
+    FlushConsoleInputBuffer(hStdInput);
+
+    while (WaitForMultipleObjects(2, handles, FALSE, INFINITE))
+    {
+        ReadConsoleInput(hStdInput, ir, 128, &nRead);
+        InputEvents(ir, nRead, hStdOutput, username, password);
     }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
