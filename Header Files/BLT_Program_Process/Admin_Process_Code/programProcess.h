@@ -901,12 +901,10 @@ void Process::updateDisplay(int n)
     }
     else if (n == 3)
     {
-        AdminProfileInfoTxt();
-        AdminProfileInfo_Design();
 
-        H::drawBoxDoubleLine(105, 11, 30, 1, 3);
-        H::drawBoxDoubleLine(105, 17, 30, 1, 3);
-        H::drawBoxDoubleLine(105, 23, 30, 1, 3);
+        H::drawBoxDoubleLineWithBG(105, 11, 30, 1, 3);
+        H::drawBoxDoubleLineWithBG(105, 17, 30, 1, 3);
+        H::drawBoxDoubleLineWithBG(105, 23, 30, 1, 3);
 
         H::gotoxy(116, 12);
         H::setcolor(7);
@@ -1618,6 +1616,9 @@ void Process::AdminProfileInfo()
     H::setcolor(7);
     H::setcursor(0, 0);
     outline();
+
+    AdminProfileInfoTxt();
+    AdminProfileInfo_Design();
 
     updateDisplay(3);
 
@@ -2678,8 +2679,6 @@ void Process::ExitTheProgram()
 
     B::ExitTxt();
     B::Exit_Design();
-
-    message(6, 0, 0);
 
     H::gotoxy(0, 41);
     exit(0);

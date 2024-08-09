@@ -1667,6 +1667,7 @@ void File::buyMoreTime(const char *username, const char *password)
         if (press == 13)
         {
             buyMoreTime(username, password);
+            break;
         }
         else if (press == 27)
         {
@@ -2129,19 +2130,20 @@ void File::buyFood(const char *username, const char *password)
         }
     }
 
-    // while (1)
-    // {
-    //     press = getch();
+    while (1)
+    {
+        press = getch();
 
-    //     if (press == 27)
-    //     {
-    //         break;
-    //     }
-    //     else if (press == 13)
-    //     {
-    //         buyFood(username, password);
-    //     }
-    // }
+        if (press == 27)
+        {
+            break;
+        }
+        else if (press == 13)
+        {
+            buyFood(username, password);
+            break;
+        }
+    }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //////////////////////////////////////////
