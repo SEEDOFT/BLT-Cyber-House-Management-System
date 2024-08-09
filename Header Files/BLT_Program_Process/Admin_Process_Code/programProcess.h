@@ -401,10 +401,15 @@ void Process::processKeyEvent(KEY_EVENT_RECORD keyEvent, HANDLE hStdOutput, int 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Process::processMouseEvent(MOUSE_EVENT_RECORD mouseEvent, HANDLE hStdOutput, int n)
 {
+    // int x = 0; // Initialize x
+    // int y = 0; // Initialize y
+    // int choice = 0;
+    // num = 0;
+
     if (n == 1)
     {
+        bool updateRequired = false;
         COORD xy = {0, 1};
-        bool updateRequired = false; // Track if display update is needed
 
         if (mouseEvent.dwMousePosition.X >= x + 84 && mouseEvent.dwMousePosition.X <= x + 109)
         {
@@ -443,10 +448,11 @@ void Process::processMouseEvent(MOUSE_EVENT_RECORD mouseEvent, HANDLE hStdOutput
     }
     else if (n == 2)
     {
-        // COORD xy = {0, 1};
+        bool updateRequired = false;
         int x = 0; // Initialize x
         int y = 0; // Initialize y
         int choice = 0;
+        num = 0; // Reset num to an invalid value
 
         // Mouse hover detection
         if (mouseEvent.dwMousePosition.X >= x + 15 && mouseEvent.dwMousePosition.X <= x + 45)
@@ -454,31 +460,37 @@ void Process::processMouseEvent(MOUSE_EVENT_RECORD mouseEvent, HANDLE hStdOutput
             if (mouseEvent.dwMousePosition.Y >= y + 18 && mouseEvent.dwMousePosition.Y <= y + 20)
             {
                 num = 1;
+                updateRequired = true;
             }
             else if (mouseEvent.dwMousePosition.Y >= y + 21 && mouseEvent.dwMousePosition.Y <= y + 23)
             {
                 num = 2;
+                updateRequired = true;
             }
             else if (mouseEvent.dwMousePosition.Y >= y + 24 && mouseEvent.dwMousePosition.Y <= y + 26)
             {
                 num = 3;
+                updateRequired = true;
             }
             else if (mouseEvent.dwMousePosition.Y >= y + 27 && mouseEvent.dwMousePosition.Y <= y + 29)
             {
                 num = 4;
+                updateRequired = true;
             }
             else if (mouseEvent.dwMousePosition.Y >= y + 30 && mouseEvent.dwMousePosition.Y <= y + 32)
             {
                 num = 5;
+                updateRequired = true;
             }
             else if (mouseEvent.dwMousePosition.Y >= y + 33 && mouseEvent.dwMousePosition.Y <= y + 35)
             {
                 num = 6;
+                updateRequired = true;
             }
         }
 
         // Mouse click action
-        if (mouseEvent.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED)
+        if ((mouseEvent.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED) && num != 0)
         {
             updateDisplay(n);
             switch (num)
@@ -505,7 +517,7 @@ void Process::processMouseEvent(MOUSE_EVENT_RECORD mouseEvent, HANDLE hStdOutput
                 break;
             case 6:
                 choice = 6;
-                AdminMenu_Art(6);
+                AdminMenu_Art(7);
                 break;
             default:
                 break;
@@ -513,16 +525,18 @@ void Process::processMouseEvent(MOUSE_EVENT_RECORD mouseEvent, HANDLE hStdOutput
             adminSelectionOpt(choice);
             Admin_ChoosingOpt(choice);
         }
-        // if (updateRequired)
-        // {
-        //     updateDisplay(n);
-        // }
+        if (updateRequired)
+        {
+            updateDisplay(n);
+        }
     }
     else if (n == 3)
     {
         COORD xy = {0, 1};
         int x = 0; // Initialize x
         int y = 0; // Initialize y
+        num = 0;   // Reset num to an invalid value
+        bool updateRequired = false;
 
         // Mouse hover detection
         if (mouseEvent.dwMousePosition.X >= x + 105 && mouseEvent.dwMousePosition.X <= x + 135)
@@ -530,115 +544,97 @@ void Process::processMouseEvent(MOUSE_EVENT_RECORD mouseEvent, HANDLE hStdOutput
             if (mouseEvent.dwMousePosition.Y >= y + 11 && mouseEvent.dwMousePosition.Y <= y + 13)
             {
                 num = 1;
+                updateRequired = true;
             }
             else if (mouseEvent.dwMousePosition.Y >= y + 17 && mouseEvent.dwMousePosition.Y <= y + 19)
             {
                 num = 2;
+                updateRequired = true;
             }
             else if (mouseEvent.dwMousePosition.Y >= y + 23 && mouseEvent.dwMousePosition.Y <= y + 25)
             {
                 num = 3;
+                updateRequired = true;
             }
         }
 
         // Mouse click action
-        if (mouseEvent.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED)
+        if (num != 0 && (mouseEvent.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED))
         {
             SubAdminProfileInfo(num);
             H::cls();
         }
-
-        // if (updateRequired)
-        // {
-        //     updateDisplay(n);
-        // }
+        if (updateRequired)
+        {
+            updateDisplay(n);
+        }
     }
     else if (n == 4)
     {
+        bool updateRequired = false;
         int x = 0; // Initialize x
         int y = 0; // Initialize y
         int choice = 0;
-        bool updateRequired = false;
+        num = 0; // Reset num to an invalid value
 
         // Mouse hover detection
         if (mouseEvent.dwMousePosition.X >= x + 39 && mouseEvent.dwMousePosition.X <= x + 64)
         {
             if (mouseEvent.dwMousePosition.Y >= y + 16 && mouseEvent.dwMousePosition.Y <= y + 18)
             {
-                num = 1;
                 updateRequired = true;
+                num = 1;
             }
             else if (mouseEvent.dwMousePosition.Y >= y + 22 && mouseEvent.dwMousePosition.Y <= y + 24)
             {
-                num = 2;
                 updateRequired = true;
+                num = 2;
             }
             else if (mouseEvent.dwMousePosition.Y >= y + 28 && mouseEvent.dwMousePosition.Y <= y + 30)
             {
-                num = 3;
                 updateRequired = true;
+                num = 3;
             }
         }
         if (mouseEvent.dwMousePosition.X >= x + 98 && mouseEvent.dwMousePosition.X <= x + 123)
         {
             if (mouseEvent.dwMousePosition.Y >= y + 16 && mouseEvent.dwMousePosition.Y <= y + 18)
             {
-                num = 4;
                 updateRequired = true;
+                num = 4;
             }
             else if (mouseEvent.dwMousePosition.Y >= y + 22 && mouseEvent.dwMousePosition.Y <= y + 24)
             {
-                num = 5;
                 updateRequired = true;
+                num = 5;
             }
             else if (mouseEvent.dwMousePosition.Y >= y + 28 && mouseEvent.dwMousePosition.Y <= y + 30)
             {
-                num = 6;
                 updateRequired = true;
+                num = 6;
             }
         }
 
         // Mouse click action
-        if (mouseEvent.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED)
+        if (num != 0 && (mouseEvent.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED))
         {
-            // updateDisplay(n);
-            switch (num)
-            {
-            case 1:
-                choice = 1;
-                break;
-            case 2:
-                choice = 2;
-                break;
-            case 3:
-                choice = 3;
-                break;
-            case 4:
-                choice = 4;
-                break;
-            case 5:
-                choice = 5;
-                break;
-            case 6:
-                choice = 6;
-                break;
-            default:
-                break;
-            }
+            choice = num;
             updateDisplay(n);
             SubGameLst(choice);
             GamesLst();
         }
-        // if (updateRequired)
-        // {
-        //     updateDisplay(n);
-        // }
+        if (updateRequired)
+        {
+            updateDisplay(n);
+        }
     }
     else if (n == 5)
     {
+        bool updateRequired = false;
         int x = 0; // Initialize x
         int y = 0; // Initialize y
         int choice = 0;
+        num = 0; // Reset num to an invalid value
 
         // Mouse hover detection
         if (mouseEvent.dwMousePosition.X >= x + 10 && mouseEvent.dwMousePosition.X <= x + 40)
@@ -646,14 +642,17 @@ void Process::processMouseEvent(MOUSE_EVENT_RECORD mouseEvent, HANDLE hStdOutput
             if (mouseEvent.dwMousePosition.Y >= y + 19 && mouseEvent.dwMousePosition.Y <= y + 21)
             {
                 num = 1;
+                updateRequired = true;
             }
             else if (mouseEvent.dwMousePosition.Y >= y + 23 && mouseEvent.dwMousePosition.Y <= y + 25)
             {
                 num = 2;
+                updateRequired = true;
             }
             else if (mouseEvent.dwMousePosition.Y >= y + 27 && mouseEvent.dwMousePosition.Y <= y + 29)
             {
                 num = 3;
+                updateRequired = true;
             }
         }
         if (mouseEvent.dwMousePosition.X >= x + 46 && mouseEvent.dwMousePosition.X <= x + 76)
@@ -661,54 +660,40 @@ void Process::processMouseEvent(MOUSE_EVENT_RECORD mouseEvent, HANDLE hStdOutput
             if (mouseEvent.dwMousePosition.Y >= y + 19 && mouseEvent.dwMousePosition.Y <= y + 21)
             {
                 num = 4;
+                updateRequired = true;
             }
             else if (mouseEvent.dwMousePosition.Y >= y + 23 && mouseEvent.dwMousePosition.Y <= y + 25)
             {
                 num = 5;
+                updateRequired = true;
             }
             else if (mouseEvent.dwMousePosition.Y >= y + 27 && mouseEvent.dwMousePosition.Y <= y + 29)
             {
                 num = 6;
+                updateRequired = true;
             }
         }
 
         // Mouse click action
-        if (mouseEvent.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED)
+        if (num != 0 && (mouseEvent.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED))
         {
-            // updateDisplay(n);
-            switch (num)
-            {
-            case 1:
-                choice = 1;
-                break;
-            case 2:
-                choice = 2;
-                break;
-            case 3:
-                choice = 3;
-                break;
-            case 4:
-                choice = 4;
-                break;
-            case 5:
-                choice = 5;
-                break;
-            case 6:
-                choice = 6;
-                break;
-            default:
-                break;
-            }
+            choice = num;
             updateDisplay(n);
             SubManageUserInfo(choice);
             ManageUserInfo();
         }
+        if (updateRequired)
+        {
+            updateDisplay(n);
+        }
     }
     else if (n == 6)
     {
+        bool updateRequired = false;
         int x = 0; // Initialize x
         int y = 0; // Initialize y
         int choice = 0;
+        num = 0; // Reset num to an invalid value
 
         // Mouse hover detection
         if (mouseEvent.dwMousePosition.X >= x + 55 && mouseEvent.dwMousePosition.X <= x + 78)
@@ -716,14 +701,17 @@ void Process::processMouseEvent(MOUSE_EVENT_RECORD mouseEvent, HANDLE hStdOutput
             if (mouseEvent.dwMousePosition.Y >= y + 17 && mouseEvent.dwMousePosition.Y <= y + 19)
             {
                 num = 1;
+                updateRequired = true;
             }
             else if (mouseEvent.dwMousePosition.Y >= y + 24 && mouseEvent.dwMousePosition.Y <= y + 26)
             {
                 num = 2;
+                updateRequired = true;
             }
             else if (mouseEvent.dwMousePosition.Y >= y + 31 && mouseEvent.dwMousePosition.Y <= y + 33)
             {
                 num = 3;
+                updateRequired = true;
             }
         }
         if (mouseEvent.dwMousePosition.X >= x + 82 && mouseEvent.dwMousePosition.X <= x + 105)
@@ -731,48 +719,32 @@ void Process::processMouseEvent(MOUSE_EVENT_RECORD mouseEvent, HANDLE hStdOutput
             if (mouseEvent.dwMousePosition.Y >= y + 17 && mouseEvent.dwMousePosition.Y <= y + 19)
             {
                 num = 4;
+                updateRequired = true;
             }
             else if (mouseEvent.dwMousePosition.Y >= y + 24 && mouseEvent.dwMousePosition.Y <= y + 26)
             {
                 num = 5;
+                updateRequired = true;
             }
             else if (mouseEvent.dwMousePosition.Y >= y + 31 && mouseEvent.dwMousePosition.Y <= y + 33)
             {
                 num = 6;
+                updateRequired = true;
             }
         }
 
         // Mouse click action
-        if (mouseEvent.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED)
+        if (num != 0 && (mouseEvent.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED))
         {
-            // updateDisplay(n);
-            switch (num)
-            {
-            case 1:
-                choice = 1;
-                break;
-            case 2:
-                choice = 2;
-                break;
-            case 3:
-                choice = 3;
-                break;
-            case 4:
-                choice = 4;
-                break;
-            case 5:
-                choice = 5;
-                break;
-            case 6:
-                choice = 6;
-                break;
-            default:
-                break;
-            }
+            choice = num;
             updateDisplay(n);
             SubFoodAndDrink(choice);
             H::cls();
             FoodOrDrinkLst();
+        }
+        if (updateRequired)
+        {
+            updateDisplay(n);
         }
     }
 }
@@ -1304,77 +1276,82 @@ void Process::KeyEvent(KEY_EVENT_RECORD keyEvent, HANDLE hStdOutput, const char 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Process::MouseEvent(MOUSE_EVENT_RECORD mouseEvent, HANDLE hStdOutput, const char *username, const char *password)
 {
+    bool updateRequired = false;
     int x = 0; // Initialize x
     int y = 0; // Initialize y
-    // int choice = 0;
+    num = 0;   // Reset num to an invalid value
 
+    // Mouse hover detection
     if (mouseEvent.dwMousePosition.X >= x + 33 && mouseEvent.dwMousePosition.X <= x + 64)
     {
         if (mouseEvent.dwMousePosition.Y >= y + 14 && mouseEvent.dwMousePosition.Y <= y + 16)
         {
             num = 1;
+            updateRequired = true;
         }
         else if (mouseEvent.dwMousePosition.Y >= y + 17 && mouseEvent.dwMousePosition.Y <= y + 19)
         {
             num = 2;
+            updateRequired = true;
         }
         else if (mouseEvent.dwMousePosition.Y >= y + 20 && mouseEvent.dwMousePosition.Y <= y + 22)
         {
             num = 3;
+            updateRequired = true;
         }
         else if (mouseEvent.dwMousePosition.Y >= y + 23 && mouseEvent.dwMousePosition.Y <= y + 25)
         {
             num = 4;
+            updateRequired = true;
         }
         else if (mouseEvent.dwMousePosition.Y >= y + 26 && mouseEvent.dwMousePosition.Y <= y + 28)
         {
             num = 5;
+            updateRequired = true;
         }
         else if (mouseEvent.dwMousePosition.Y >= y + 29 && mouseEvent.dwMousePosition.Y <= y + 31)
         {
             num = 6;
+            updateRequired = true;
         }
     }
 
     // Mouse click action
-    if (mouseEvent.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED)
+    if (num != 0 && (mouseEvent.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED))
     {
-        // updateDisplay(n);
-        if (num == 1)
+        // Execute actions based on the value of num
+        Design::LoadingAnimation();
+        switch (num)
         {
-            Design::LoadingAnimation();
+        case 1:
             File::viewProfile(username, password);
-        }
-        else if (num == 2)
-        {
-            Design::LoadingAnimation();
+            break;
+        case 2:
             File::GameMENU();
-        }
-        else if (num == 3)
-        {
-            Design::LoadingAnimation();
+            break;
+        case 3:
             File::buyMoreTime(username, password);
-        }
-        else if (num == 4)
-        {
-            Design::LoadingAnimation();
+            break;
+        case 4:
             File::buyFood(username, password);
-        }
-        else if (num == 5)
-        {
-            Design::LoadingAnimation();
+            break;
+        case 5:
             File::invoice(username, password);
-        }
-        else if (num == 6)
-        {
-            Design::LoadingAnimation();
+            break;
+        case 6:
             File::logoutTimeToFile(username, password);
             File::calculateTime(username, password);
             Admin_And_User();
+            break;
         }
         userSubMenu(username, password);
     }
+    if (updateRequired)
+    {
+        updateDisplay(7);
+    }
 }
+
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Process::InputEvents(INPUT_RECORD *ir, DWORD nRead, HANDLE hStdOutput, const char *username, const char *password)
 {
