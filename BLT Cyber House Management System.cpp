@@ -6,13 +6,13 @@ int main()
     H::setFont(20, 700);
     H::setcursor(0, 0);
     Process::DisableMaximizeButton();
-    Process::DisableCloseButton();
+    // Process::DisableCloseButton();
 
 //	File::user_login();
 //	Process::FoodOrDrinkLst();
 //	Process::ManageUserInfo();
 //    Process::GamesLst();
-//    Process::Admin_Option();
+   Process::Admin_Option();
     Process::BLT_Cyber_House_Management_System();
 
     return 0;

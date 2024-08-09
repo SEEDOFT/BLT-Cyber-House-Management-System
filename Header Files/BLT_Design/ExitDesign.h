@@ -24,25 +24,25 @@ void BLT::ExitDesign::Exit_Design()
         H::HLine(10+130-i,5+5,1,7,205);
 
         //bot
-        H::HLine(10+10,5+19,i,7,205);
-        H::HLine(10+130-i,5+19,1,7,205);
+        H::HLine(10+10,5+16,i,7,205);
+        H::HLine(10+130-i,5+16,1,7,205);
     }
 
     //connect ascii code
     H::gotoxy(10+10,5+5);cout<<char(201);//left to down
-    H::gotoxy(10+10,5+19);cout<<char(200);//down to right
+    H::gotoxy(10+10,5+16);cout<<char(200);//down to right
     H::gotoxy(10+130,5+5);cout<<char(187);//right to down
-    H::gotoxy(10+130,5+19);cout<<char(188);//down to left
+    H::gotoxy(10+130,5+16);cout<<char(188);//down to left
 
-    for(int i = 1 ; i <= 7 ; i ++)
+    for(int i = 1 ; i <= 5 ; i ++)
     {
         //left
         H::VLine(10+11,5+5,i,7,186);H::delay(10);
-        H::VLine(10+11,5+18-i,1,7,186);H::delay(10);
+        H::VLine(10+11,5+15-i,1,7,186);H::delay(10);
 
         //right
         H::VLine(10+131,5+5,i,7,186);H::delay(10);
-        H::VLine(10+131,5+18-i,1,7,186);H::delay(10);
+        H::VLine(10+131,5+15-i,1,7,186);H::delay(10);
     }
 
     char exit1[] = "Thank you for using our application.";
@@ -53,6 +53,47 @@ void BLT::ExitDesign::Exit_Design()
     Design::charLoop(sizeof(exit2), 56, 15, 4, exit2, 5);
     Design::charLoop(sizeof(exit3), 37, 17, 23, exit3, 5);
 
+    int i = 100;
+
+    while(!kbhit())
+    {
+        H::setcolor(6); H::gotoxy(i, 26); cout << R"(      \ | / )"; H::setcolor(7); cout << " ";
+        H::setcolor(6); H::gotoxy(i, 27); cout << R"(     -- o -- )"; H::setcolor(7); cout << " ";
+        H::setcolor(6); H::gotoxy(i, 28); cout << R"(      / | \ )"; H::setcolor(7); cout << " ";
+        H::setcolor(6); H::gotoxy(i, 29); cout << R"(   _      _      _      _      _      _      _ )"; H::setcolor(7); cout << " ";
+        H::setcolor(6); H::gotoxy(i, 30); cout << R"(\/'-'\/\/'-'\/\/'-'\/\/'-'\/\/'_'\/\/'-'\/\/'-'\/ )"; H::setcolor(7); cout << " ";
+        H::setcolor(6); H::gotoxy(i, 31); cout << R"( \_;_/  \_;_/  \_;_/  \_;_/  \_;_/  \_;_/  \_;_/ )"; H::setcolor(7); cout << " ";
+        H::setcolor(6); H::gotoxy(i, 32); cout << R"(  / \    / \    / \    / \    / \    / \    / \ )"; H::setcolor(7); cout << " ";
+        H::delay(200);
+
+        H::setcolor(6); H::gotoxy(i, 26); cout << R"(      \ | / )"; H::setcolor(7); cout << " ";
+        H::setcolor(6); H::gotoxy(i, 27); cout << R"(     -- o -- )"; H::setcolor(7); cout << " ";
+        H::setcolor(6); H::gotoxy(i, 28); cout << R"(      / | \ )"; H::setcolor(7); cout << " ";
+        H::setcolor(6); H::gotoxy(i, 29); cout << R"(   _      _      _      _      _      _      _ )"; H::setcolor(7); cout << " ";
+        H::setcolor(6); H::gotoxy(i, 30); cout << R"(\/'-'\/\/'-'\/\/'-'\/\/'-'\/\/'_'\/\/'-'\/\/'-'\/ )"; H::setcolor(7); cout << " ";
+        H::setcolor(6); H::gotoxy(i, 31); cout << R"( \_;_/  \_;_/  \_;_/  \_;_/  \_;_/  \_;_/  \_;_/ )"; H::setcolor(7); cout << " ";
+        H::setcolor(6); H::gotoxy(i, 32); cout << R"(  | \    | \    | \    | \    | \    | \    | \ )"; H::setcolor(7); cout << " ";
+        H::delay(200);
+        H::setcolor(6); H::gotoxy(i, 26); cout << R"(      \ | / )"; H::setcolor(7); cout << " ";
+        H::setcolor(6); H::gotoxy(i, 27); cout << R"(     -- o -- )"; H::setcolor(7); cout << " ";
+        H::setcolor(6); H::gotoxy(i, 28); cout << R"(      / | \ )"; H::setcolor(7); cout << " ";
+        H::setcolor(6); H::gotoxy(i, 29); cout << R"(   _      _      _      _      _      _      _ )"; H::setcolor(7); cout << " ";
+        H::setcolor(6); H::gotoxy(i, 30); cout << R"(\/'-'\/\/'-'\/\/'-'\/\/'-'\/\/'_'\/\/'-'\/\/'-'\/ )"; H::setcolor(7); cout << " ";
+        H::setcolor(6); H::gotoxy(i, 31); cout << R"( \_;_/  \_;_/  \_;_/  \_;_/  \_;_/  \_;_/  \_;_/ )"; H::setcolor(7); cout << " ";
+        H::setcolor(6); H::gotoxy(i, 32); cout << R"(  | |    | |    | |    | |    | |    | |    | | )"; H::setcolor(7); cout << " ";
+        H::delay(200);
+        H::setcolor(6); H::gotoxy(i, 26); cout << R"(      \ | / )"; H::setcolor(7); cout << " ";
+        H::setcolor(6); H::gotoxy(i, 27); cout << R"(     -- o -- )"; H::setcolor(7); cout << " ";
+        H::setcolor(6); H::gotoxy(i, 28); cout << R"(      / | \ )"; H::setcolor(7); cout << " ";
+        H::setcolor(6); H::gotoxy(i, 29); cout << R"(   _      _      _      _      _      _      _ )"; H::setcolor(7); cout << " ";
+        H::setcolor(6); H::gotoxy(i, 30); cout << R"(\/'-'\/\/'-'\/\/'-'\/\/'-'\/\/'_'\/\/'-'\/\/'-'\/ )"; H::setcolor(7); cout << " ";
+        H::setcolor(6); H::gotoxy(i, 31); cout << R"( \_;_/  \_;_/  \_;_/  \_;_/  \_;_/  \_;_/  \_;_/ )"; H::setcolor(7); cout << " ";
+        H::setcolor(6); H::gotoxy(i, 32); cout << R"(  / |    / |    / |    / |    / |    / |    / | )"; H::setcolor(7); cout << " ";
+        H::delay(200);
+
+        i-=3; 
+        if(i < 10 ) i = 100;
+    }
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif

@@ -443,7 +443,7 @@ void Process::processMouseEvent(MOUSE_EVENT_RECORD mouseEvent, HANDLE hStdOutput
     }
     else if (n == 2)
     {
-        COORD xy = {0, 1};
+        // COORD xy = {0, 1};
         int x = 0; // Initialize x
         int y = 0; // Initialize y
         int choice = 0;
@@ -932,44 +932,56 @@ void Process::updateDisplay(int n)
         AdminProfileInfoTxt();
         AdminProfileInfo_Design();
 
-        H::drawBoxDoubleLineWithBG(105, 11, 30, 1, 183);
-        H::drawBoxDoubleLineWithBG(105, 17, 30, 1, 183);
-        H::drawBoxDoubleLineWithBG(105, 23, 30, 1, 183);
+        H::drawBoxDoubleLine(105, 11, 30, 1, 3);
+        H::drawBoxDoubleLine(105, 17, 30, 1, 3);
+        H::drawBoxDoubleLine(105, 23, 30, 1, 3);
 
         H::gotoxy(116, 12);
-        H::setcolor(185);
+        H::setcolor(7);
         cout << "About Us";
         H::gotoxy(112, 18);
-        H::setcolor(185);
+        H::setcolor(7);
         cout << "A Letter from Us";
         H::gotoxy(114, 24);
-        H::setcolor(185);
+        H::setcolor(7);
         cout << "Back to MENU";
 
         if (num == 1)
         {
-            H::drawBoxDoubleLineWithBG(105, 11, 30, 1, 68);
+            H::drawBoxDoubleLineWithBG(105, 11, 30, 1, 255);
             H::gotoxy(116, 12);
-            H::setcolor(71);
+            H::setcolor(249);
             cout << "About Us";
         }
         else if (num == 2)
         {
-            H::drawBoxDoubleLineWithBG(105, 17, 30, 1, 68);
+            H::drawBoxDoubleLineWithBG(105, 17, 30, 1, 255);
             H::gotoxy(112, 18);
-            H::setcolor(71);
+            H::setcolor(249);
             cout << "A Letter from Us";
         }
         else if (num == 3)
         {
-            H::drawBoxDoubleLineWithBG(105, 23, 30, 1, 68);
+            H::drawBoxDoubleLineWithBG(105, 23, 30, 1, 255);
             H::gotoxy(114, 24);
-            H::setcolor(71);
+            H::setcolor(249);
             cout << "Back to MENU";
         }
     }
     else if (n == 4)
     {
+        H::gotoxy(44, 36);
+        H::setcolor(1);
+        cout << "Use";
+        H::setcolor(4);
+        cout << " [UP] [DOWN]";
+        H::setcolor(1);
+        cout << " arrow key to move between options and ";
+        H::setcolor(4);
+        cout << "[ENTER]";
+        H::setcolor(1);
+        cout << " to select";
+
         H::drawBoxDoubleLineWithBG(39, 16, 25, 1, 3); // add game
         H::drawBoxDoubleLineWithBG(39, 22, 25, 1, 3); // view
         H::drawBoxDoubleLineWithBG(39, 28, 25, 1, 3); // search
@@ -1294,7 +1306,7 @@ void Process::MouseEvent(MOUSE_EVENT_RECORD mouseEvent, HANDLE hStdOutput, const
 {
     int x = 0; // Initialize x
     int y = 0; // Initialize y
-    int choice = 0;
+    // int choice = 0;
 
     if (mouseEvent.dwMousePosition.X >= x + 33 && mouseEvent.dwMousePosition.X <= x + 64)
     {
@@ -2678,7 +2690,7 @@ void Process::userSubMenu(const char *username, const char *password)
         InputEvents(ir, nRead, hStdOutput, username, password);
     }
 }
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@3
 void Process::ExitTheProgram()
 {
     H::setConsoleTitle(TEXT("Exit the program"));
