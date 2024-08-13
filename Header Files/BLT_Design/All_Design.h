@@ -141,7 +141,7 @@ namespace BLT
     public:
         static void BuyFoodnDrinkTxt();
         static void buyFoodnDrink_Design();
-        static void buyFoodnDrink_Animation(int color);
+        static void buyFoodnDrink_Animation(int color,int n);
     };
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     class BuyHour{

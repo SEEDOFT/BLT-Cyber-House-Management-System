@@ -7,8 +7,8 @@ int main()
     H::setcursor(0, 0);
     Process::DisableMaximizeButton();
     Process::DisableCloseButton();
-
+    
     Process::BLT_Cyber_House_Management_System();
 
     return 0;
-}
+}   

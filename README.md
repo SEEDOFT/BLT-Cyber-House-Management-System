@@ -1,15 +1,16 @@
 # ------------------------------------------------------------------
 # ------------------------------------------------------------------
 # Note
-# Date: 26/July/2024
+-- Date: 13/August/2024
 
 
-# Console Type: Window Console Host
-# Width       : 160 spaces
-# Height      : 40 lines
-# Font Size   : 20
-# Font Weight : 700
-# Font Name   : Consolas
+# Project Details 
+-- Console Type: Windows Console Host
+-- Width       : 160
+-- Height      : 40
+-- Font Size   : 20
+-- Font Weight : 700
+-- Font Name   : Consolas
 
 
 # ------------------------------------------------------------------

@@ -96,28 +96,21 @@ void Process::GetRealTime()
 {
     while (true)
     {
-        // Get the current time
         auto now = chrono::system_clock::now();
 
-        // Convert to time_t to get the time in a readable format
         time_t currentTime = chrono::system_clock::to_time_t(now);
 
-        // Convert to tm structure for local timezone
         tm *localTime = localtime(&currentTime);
 
-        // Determine AM/PM
         string period = (localTime->tm_hour < 12) ? "AM" : "PM";
 
         // Convert to 12-hour format
         int hour = localTime->tm_hour % 12;
         if (hour == 0)
-            hour = 12; // Handle midnight and noon
+            hour = 12;
 
-        // Clear the console (this works on Unix-like systems; for Windows, you may need to use system("CLS"))
-        // cout << "\033[2J\033[1;1H";
         H::clearBox(14, 1, 20, 0, 7);
 
-        // Print the time in a readable format with AM/PM
         cout << "Current time: "
              << setw(2) << setfill('0') << hour << ":"
              << setw(2) << setfill('0') << localTime->tm_min << ":"
@@ -821,9 +814,9 @@ void Process::updateDisplay(int n)
         H::gotoxy(19, 25);
         cout << "Food and Drinks List";
         H::gotoxy(17, 28);
-        cout << "Manage User's Information";
+        cout << "Manage Users' Information";
         H::gotoxy(19, 31);
-        cout << "Manage User's Payment";
+        cout << "Manage Users' Payment";
         H::gotoxy(21, 34);
         cout << "Log Out of Account";
         if (num == 1)
@@ -867,11 +860,11 @@ void Process::updateDisplay(int n)
             H::drawBoxSingleLineWithBG(60, 12, 30, 1, 255);
             H::gotoxy(62, 13);
             H::setcolor(252);
-            cout << "Manage User's Information";
+            cout << "Manage Users' Information";
             H::drawBoxDoubleLineWithBG(15, 27, 30, 1, 255);
             H::gotoxy(17, 28);
             H::setcolor(249);
-            cout << "Manage User's Information";
+            cout << "Manage Users' Information";
             AdminMenu_Art(4);
         }
         else if (num == 5)
@@ -879,11 +872,11 @@ void Process::updateDisplay(int n)
             H::drawBoxSingleLineWithBG(60, 12, 30, 1, 255);
             H::gotoxy(64, 13);
             H::setcolor(252);
-            cout << "Manage User's Payment";
+            cout << "Manage Users' Payment";
             H::drawBoxDoubleLineWithBG(15, 30, 30, 1, 255);
             H::gotoxy(19, 31);
             H::setcolor(249);
-            cout << "Manage User's Payment";
+            cout << "Manage Users' Payment";
             AdminMenu_Art(5);
         }
         else if (num == 6)
@@ -1157,6 +1150,17 @@ void Process::updateDisplay(int n)
     }
     else if (n == 7)
     {
+        H::gotoxy(44, 36);
+        H::setcolor(1);
+        cout << "Use";
+        H::setcolor(4);
+        cout << " [UP] [DOWN]";
+        H::setcolor(1);
+        cout << " arrow key to move between options and ";
+        H::setcolor(4);
+        cout << "[ENTER]";
+        H::setcolor(1);
+        cout << " to select";
         // int pocision = 10 + 22;
 
         H::drawBoxSingleLineWithBG(33, 14, 31, 1, 1); // info
@@ -1548,9 +1552,9 @@ void Process::Admin_Option()
     H::gotoxy(19, 25);
     cout << "Food and Drinks List";
     H::gotoxy(17, 28);
-    cout << "Manage User's Information";
+    cout << "Manage Users' Information";
     H::gotoxy(19, 31);
-    cout << "Manage User's Payment";
+    cout << "Manage Users' Payment";
     H::gotoxy(21, 34);
     cout << "Log Out of Account";
 
@@ -1986,7 +1990,7 @@ void Process::RemoveGame()
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Process::ManageUserInfo()
 {
-    H::setConsoleTitle(TEXT("Manage User Information"));
+    H::setConsoleTitle(TEXT("Manage Users' Information"));
 
     H::setcolor(7);
     H::cls();
@@ -2072,7 +2076,7 @@ void Process::SubManageUserInfo(int num)
 /*********************************************************/
 void Process::InsertUser()
 {
-    H::setConsoleTitle(TEXT("Insert User Data"));
+    H::setConsoleTitle(TEXT("Insert User's Data"));
     H::setcolor(7);
     H::cls();
     H::setcursor(0, 0);
@@ -2109,7 +2113,7 @@ void Process::InsertUser()
 /*********************************************************/
 void Process::ViewUser()
 {
-    H::setConsoleTitle(TEXT("View User Data"));
+    H::setConsoleTitle(TEXT("View Users Data"));
     H::setcolor(7);
     H::cls();
     H::setcursor(0, 0);
@@ -2135,7 +2139,7 @@ void Process::ViewUser()
 /*********************************************************/
 void Process::SearchUserData()
 {
-    H::setConsoleTitle(TEXT("Search User Data"));
+    H::setConsoleTitle(TEXT("Search User's Data"));
     H::setcolor(7);
     H::cls();
     H::setcursor(0, 0);
@@ -2168,7 +2172,7 @@ void Process::SearchUserData()
 /*********************************************************/
 void Process::EditUserInfo()
 {
-    H::setConsoleTitle(TEXT("Edit User Data"));
+    H::setConsoleTitle(TEXT("Edit User's Data"));
     H::setcolor(7);
     H::cls();
     H::setcursor(0, 0);
@@ -2201,7 +2205,7 @@ void Process::EditUserInfo()
 /*********************************************************/
 void Process::RemoveUser()
 {
-    H::setConsoleTitle(TEXT("Remove User Data"));
+    H::setConsoleTitle(TEXT("Remove User's Account"));
     H::setcolor(7);
     H::cls();
     H::setcursor(0, 0);
@@ -2235,7 +2239,7 @@ void Process::RemoveUser()
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void Process::ManageUserPayment()
 {
-    H::setConsoleTitle(TEXT("Manage User Payment"));
+    H::setConsoleTitle(TEXT("Manage Users' Payment"));
     H::setcolor(7);
     H::cls();
     H::setcursor(0, 0);
@@ -2370,7 +2374,7 @@ void Process::InsertFoodDrink()
 /*********************************************************/
 void Process::ViewFoodDrink()
 {
-    H::setConsoleTitle(TEXT("View Food and Drink Data"));
+    H::setConsoleTitle(TEXT("View Food and Drinks Data"));
     H::setcolor(7);
     H::cls();
     H::setcursor(0, 0);
@@ -2671,7 +2675,7 @@ void Process::userSubMenu(const char *username, const char *password)
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@3
 void Process::ExitTheProgram()
 {
-    H::setConsoleTitle(TEXT("Exit the program"));
+    H::setConsoleTitle(TEXT("Exit The Program"));
     H::setcolor(7);
     H::cls();
     outline();

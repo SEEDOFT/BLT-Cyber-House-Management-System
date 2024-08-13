@@ -19,54 +19,29 @@ void BLT::ManageUserInfo::ManageUserInfoTxt()
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 void BLT::ManageUserInfo::ManageUserInfo_Design()
 {
-    static int x = 10;
-	static int y = 15;
-
-    H::gotoxy(x+72,y);    cout << R"(        |\)";
-	H::gotoxy(x+72,y+1);  cout << R"(        | | /|)";
-	H::gotoxy(x+72,y+2);  cout << R"(        |  V |)";
-	H::gotoxy(x+72,y+3);  cout << R"(        |    |)";
-	H::gotoxy(x+72,y+4);  cout << R"(1       |    |       1)";
-	H::gotoxy(x+72,y+5);  cout << R"(8b      |    |      d8)";
-	H::gotoxy(x+72,y+6);  cout << R"(88b   ,%|    |%,   d88)";
-	H::gotoxy(x+72,y+7);  cout << R"(888b%%%%|    |%%%%d888)";
-	H::gotoxy(x+72,y+8);  cout << R"( "Y88888[[[]]]88888Y")";
-	H::gotoxy(x+72,y+9);  cout << R"(        [[[]]])";
-	H::gotoxy(x+72,y+10); cout << R"(        [[[]]]-.)";
-	H::gotoxy(x+72,y+11); cout << R"(       _[[[]]]> "\   _____)";
-	H::gotoxy(x+72,y+12); cout << R"(      (_______    "-( * * )----)";
-	H::gotoxy(x+72,y+13); cout << R"(     (________       | Y |)";
-	H::gotoxy(x+72,y+14); cout << R"(     (_________    _(_____)____)";
-	H::gotoxy(x+72,y+15); cout << R"(      (________,_/")";
-	H::gotoxy(x+72,y+16); cout << R"(        ||||||)";
-	H::gotoxy(x+72,y+17); cout << R"(        {{{}}})";
-	H::gotoxy(x+72,y+18); cout << R"(       {{{{}}}})";
-	H::gotoxy(x+72,y+19); cout << R"(        {{{}}})";
-	H::gotoxy(x+72,y+20); cout << R"(          ())";
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	H::gotoxy(x+100,y-6);    cout << R"(    XXXXXXXXXXXXXXXXXXXXXXXXXXXXX)";
-	H::gotoxy(x+100,y-5);    cout << R"(  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX)";
-	H::gotoxy(x+100,y-4);    cout << R"( XXXXXXXXXXXXXXXXXX         XXXXXXXX)";
-	H::gotoxy(x+100,y-3);    cout << R"(XXXXXXXXXXXXXXXX              XXXXXXX)";
-	H::gotoxy(x+100,y-2);    cout << R"(XXXXXXXXXXXXX                   XXXXX)";
-	H::gotoxy(x+100,y-1);    cout << R"( XXX     _________ _________     XXX)";
-	H::gotoxy(x+100,y  );    cout << R"(  XX    I  _xxxxx I xxxxx_  I    XX)";
-	H::gotoxy(x+100,y+1);    cout << R"( ( X----I         I         I----X ))";
-	H::gotoxy(x+100,y+2);    cout << R"(( +I    I      00 I 00      I    I+ ))";
-	H::gotoxy(x+100,y+3);    cout << R"( ( I    I    __0  I  0__    I    I ))";
-	H::gotoxy(x+100,y+4);    cout << R"(  (I    I______ /   \_______I    I))";
-	H::gotoxy(x+100,y+5);    cout << R"(   I           ( ___ )           I)";
-	H::gotoxy(x+100,y+6);    cout << R"(   I    _  :::::::::::::::  _    i)";
-	H::gotoxy(x+100,y+7);    cout << R"(    \    \___ ::::::::: ___/    /)";
-	H::gotoxy(x+100,y+8);    cout << R"(     \_      \_________/      _/)";
-	H::gotoxy(x+100,y+9);    cout << R"(       \        \___,        /)";
-	H::gotoxy(x+100,y+10);    cout << R"(         \                 /)";
-	H::gotoxy(x+100,y+11);    cout << R"(          |\             /|)";
-	H::gotoxy(x+100,y+12);    cout << R"(          |  \_________/  |)";
-	H::gotoxy(x+100,y+13);    cout << R"(                  ||)";
-	H::gotoxy(x+100,y+14);    cout << R"(                  ||)";
-	H::gotoxy(x+100,y+15);    cout << R"(                 /  \)";
-   
+	H::setcolor(6); H::gotoxy(80,14); cout << R"(                                                              __)),)";
+	H::setcolor(3); H::gotoxy(80,15); cout << R"(               .........                       )"; H::setcolor(6); cout << R"(              //_ _))";
+	H::setcolor(3); H::gotoxy(80,16); cout << R"(            .'------.' |                       )"; H::setcolor(6); cout << R"(              ( "\")";
+	H::setcolor(3); H::gotoxy(80,17); cout << R"(           | .-----. | |                       )"; H::setcolor(6); cout << R"(               \_-/)";
+	H::setcolor(3); H::gotoxy(80,18); cout << R"(           | |     | | |                       )"; H::setcolor(6); cout << R"(         ,---/  '---.)";
+	H::setcolor(7); H::gotoxy(80,19); cout << R"(         __)"; H::setcolor(3); cout << R"(| |     | | |;. )"; H::setcolor(7); cout << R"(_______________     )"; H::setcolor(6); cout << R"(        /     - -    \)";
+	H::setcolor(7); H::gotoxy(80,20); cout << R"(        /  )"; H::setcolor(3); cout << R"(|*`-----'.|.' `;)"; H::setcolor(7); cout << R"(              //    )"; H::setcolor(6); cout << R"(       /  \_. _|__,/  \)";
+	H::setcolor(7); H::gotoxy(80,21); cout << R"(       /   )"; H::setcolor(3); cout << R"(`---------' .;')"; H::setcolor(7); cout << R"(              //     )"; H::setcolor(6); cout << R"(      /  )\        )\_ \)";
+	H::setcolor(7); H::gotoxy(80,22); cout << R"(      /  )"; H::setcolor(3); cout << R"(.''''////////;')"; H::setcolor(7); cout << R"(               //      )"; H::setcolor(6); cout << R"(     / _/  (   '  ) /  /)";
+	H::setcolor(7); H::gotoxy(80,23); cout << R"(     /   )"; H::setcolor(3); cout << R"(######### /;/ )"; H::setcolor(7); cout << R"(               //|      )"; H::setcolor(6); cout << R"(    / |     (_____) | /)";
+	H::setcolor(7); H::gotoxy(80,24); cout << R"(    /  )"; H::setcolor(3); cout << R"(/ ######### // )"; H::setcolor(7); cout << R"(               //||      )"; H::setcolor(6); cout << R"(   /,'      /     \/ /,)";
+	H::setcolor(7); H::gotoxy(80,25); cout << R"(   /   )"; H::setcolor(3); cout << R"(`-----------' )"; H::setcolor(7); cout << R"(               // ||      )"; H::setcolor(6); cout << R"( _/(_      (   ._, )-')";
+	H::setcolor(7); H::gotoxy(80,26); cout << R"(  /________________________________//| ||      )"; H::setcolor(6); cout << R"(`--,/      |____|__|)";
+	H::setcolor(7); H::gotoxy(80,27); cout << R"(  `--------------------------------' | ||      )"; H::setcolor(6); cout << R"(           |    )  |)";
+	H::setcolor(7); H::gotoxy(80,28); cout << R"(   : | ||      | || |__LL__|| ||     | ||      )"; H::setcolor(6); cout << R"(           |   /   |)";
+	H::setcolor(7); H::gotoxy(80,29); cout << R"(   : | ||      | ||         | ||     `""'      )"; H::setcolor(6); cout << R"(           |  / \  |)";
+	H::setcolor(7); H::gotoxy(80,30); cout << R"(   n | ||      `""'         | ||               )"; H::setcolor(6); cout << R"(          / `|  | _))";
+	H::setcolor(7); H::gotoxy(80,31); cout << R"(   M | ||                   | ||               )"; H::setcolor(6); cout << R"(          |  |  |  |)";
+	H::setcolor(7); H::gotoxy(80,32); cout << R"(     | ||                   | ||               )"; H::setcolor(6); cout << R"(          |  /  \  |)";
+	H::setcolor(7); H::gotoxy(80,33); cout << R"(     `""'                   `""'               )"; H::setcolor(6); cout << R"(          | |    \ |)";
+	H::setcolor(6); H::gotoxy(80,34); cout << R"(                                                         | \    | \_)";
+	H::setcolor(6); H::gotoxy(80,35); cout << R"(                                                        /__(    '-._`,)";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif

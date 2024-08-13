@@ -2026,8 +2026,9 @@ void File::buyFood(const char *username, const char *password)
             H::cls();
             Design::outline();
             B::BuyFoodnDrinkTxt();
-            B::buyFoodnDrink_Animation(10);
+            B::buyFoodnDrink_Animation(10,1);
             B::buyFoodnDrink_Design();
+            B::buyFoodnDrink_Animation(6,2);
 
             while (file.read((char *)&mup, sizeof(MgUserPayment)))
             {
@@ -2060,11 +2061,12 @@ void File::buyFood(const char *username, const char *password)
                             {
                                 do
                                 {
+                                    H::clearBox(36, 26, 8, 0, 204);
                                     H::setcursor(1, 0);
                                     H::foreColor(199);
                                     H::gotoxy(36, 25);
                                     H::inputNumber(quantity, sizeof(quantity));
-                                    H::clearBox(36, 26, 8, 0, 204);
+                                    // H::clearBox(36, 26, 8, 0, 204);
                                     // H::drawBoxSingleLine(88, 22, 36, 1, 3);
                                 } while (atoi(quantity) <= 0);
 
@@ -2073,6 +2075,7 @@ void File::buyFood(const char *username, const char *password)
                                 H::setcursor(0, 0);
                                 if (quantityInt <= availableQty)
                                 {
+                                    B::buyFoodnDrink_Animation(10,2);
                                     int newQty = availableQty - quantityInt;
                                     char newQtyStr[5];
                                     sprintf(newQtyStr, "%d", newQty);
@@ -2112,6 +2115,7 @@ void File::buyFood(const char *username, const char *password)
 
                         if (!idFound)
                         {
+                            B::buyFoodnDrink_Animation(7,2);
                             H::foreColor(4);
                             H::gotoxy(112, 23);
                             cout << "...Food or Drink ID is not found...";
