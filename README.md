@@ -1,44 +1,45 @@
+# BLT Cyber House Management System
 
-# Note
--- Date: 13/August/2024
+## Last Updated: August 13, 2024
 
+---
 
-# Project Details 
--- Console Type: Windows Console Host
--- Width       : 160
--- Height      : 40
--- Font Size   : 20
--- Font Weight : 700
--- Font Name   : Consolas
+## Project Details
+- **Console Type:** Windows Console Host
+- **Dimensions:** 160 x 40
+- **Font Settings:**
+  - **Size:** 20
+  - **Weight:** 700
+  - **Name:** Consolas
 
- -> WELCOME TO GROUP ONE -(BLT CYBER HOUSE MANAGEMENT SYSTEM)
+## Welcome to Group One - BLT Cyber House Management System
+This system is designed to efficiently manage cyber house operations with administrative and user access levels.
 
-# Team Memebers:
- ->> Koy Yotraboth
- ->> Yong Bunleng
- ->> Sam Sokunthea
+## Team Members
+- Koy Yotraboth
+- Yong Bunleng
+- Sam Sokunthea
 
-# Log in as Administrator
- ->> Username: Cyber
- ->> Password: 168
+## Login Credentials
+### Administrator Access
+- **Username:** Cyber
+- **Password:** 168
 
-# Log in as User (Demo account)
- ->> Username: leng
- --> Password: 168
+### User Access (Demo Account)
+- **Username:** leng
+- **Password:** 168
 
+### User Login Guidelines
+To log in as a user, verify the username and password stored in the Administrator functions (View User Information) or register a new user account via the Admin panel.
 
-# to login as User
-check Username and Password that contains in Admin functions 
-(View User Information) or Sign up via Admin (Sign Up User)
+## Important Notes
+- The **Search, Update, and Delete** functions require at least one existing record in the file to execute properly.
+- The program **cannot be exited** without logging out of the active account.
 
-# NOTE**
-Search, Update, Delete function may need at least one data in file
-to perform the process
+---
 
-Cannot leave the program unless you log out of account...
+## Thank You for Using Our Software
+**Best of Luck!**
 
+---
 
-# ------------------------------------------------------------------
-# THANKS FOR USING OUR SOFTWARE
-# BEST OF LUCK
-# ------------------------------------------------------------------
