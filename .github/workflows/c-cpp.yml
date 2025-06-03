@@ -1,0 +1,50 @@
+# GitHub Actions workflow for C/C++ CI targeting Windows
+
+name: C/C++ CI (Windows)
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    # Specify that the job should run on the latest version of Windows
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # The following steps assume your build system (configure, make)
+    # is compatible with Windows, possibly through an environment like MSYS2/MinGW
+    # or a cross-platform build tool that generates Makefiles.
+    # If you are using a different build system for Windows (e.g., MSBuild, CMake with Visual Studio),
+    # you will need to replace these commands with the appropriate ones.
+
+    - name: Configure
+      run: ./configure
+      # Example for CMake:
+      # run: cmake . -B build -G "Visual Studio 17 2022" # Adjust generator as needed
+      shell: bash # Explicitly use bash if ./configure is a shell script
+
+    - name: Make (Build)
+      run: make
+      # Example for MSBuild (if using Visual Studio solution in 'build' directory):
+      # run: msbuild build\YourSolution.sln /p:Configuration=Release
+      # Example for CMake:
+      # run: cmake --build build --config Release
+      shell: bash # Explicitly use bash if 'make' is from MinGW/MSYS2
+
+    - name: Make Check (Run Tests)
+      run: make check
+      # Example for CTest (if using CMake):
+      # run: |
+      #   cd build
+      #   ctest -C Release
+      shell: bash # Explicitly use bash
+
+    - name: Make Distcheck (Create Distribution Package and Check)
+      run: make distcheck
+      shell: bash # Explicitly use bash
