@@ -75,7 +75,8 @@ The BLT Cyber House Management System provides a secure login flow for administr
 
 ## License
 
-This project is distributed for **educational purposes**. You are free to modify and use it for learning or demonstration. Consider adding a formal `LICENSE` file (such as MIT) if you intend for it to be open-source.
+This project is distributed for **educational purposes**. 
+<!--You are free to modify and use it for learning or demonstration. Consider adding a formal `LICENSE` file (such as MIT) if you intend for it to be open-source.-->
 
 ---
 
